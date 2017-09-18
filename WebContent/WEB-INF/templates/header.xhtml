@@ -1,0 +1,46 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<h:head />
+<h:body>
+	<div class="ui-g" style="background-color: #459e00;">
+		<div class="ui-g-12 ui-md-6 ui-lg-2">
+			<p:graphicImage value="/images/logo.png" />
+		</div>
+		<div class="ui-g-12 ui-md-6 ui-lg-8" style="width: 50%;margin: auto;">
+			<h:form>
+				<p:menubar>
+					<p:submenu label="Inicio" icon="ui-icon-document">
+						<p:menuitem value="Test" url="#" />
+						<p:separator />
+						<p:menuitem value="Salir" url="#" />
+					</p:submenu>
+					<p:submenu label="Reglamento" icon="ui-icon-gear">
+						<p:submenu label="Año" icon="ui-icon-refresh">
+							<p:menuitem value="2017" icon="ui-icon-disk" />
+							<p:menuitem value="2016" icon="ui-icon-arrowrefresh-1-w" />
+						</p:submenu>
+					</p:submenu>
+					<f:facet name="options">
+						<p:inputText style="margin-right:10px" placeholder="Search" />
+						<p:commandButton type="button" value="Logout"
+							icon="ui-icon-extlink" />
+					</f:facet>
+
+				</p:menubar>
+			</h:form>
+		</div>
+	<div class="ui-g-12 ui-md-6 ui-lg-2">
+			<p:graphicImage value="/images/logo2.png" style="width:105px;" />
+		</div>
+	</div>
+<!-- 	<h:outputText value="&#160;" /> -->
+	<!-- Espaciador -->
+
+</h:body>
+
+</html>

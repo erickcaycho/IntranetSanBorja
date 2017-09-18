@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
+	<ui:define name="content">
+		<div class="ui-g" style="margin-top: 20px;">
+			<div class="ui-g-12 ui-md-2">
+				<h:form>
+					<p:panel header="Módulo de Licencias">
+						<p:menu>
+							<p:submenu label="Solicitud">
+								<p:menuitem value="Registrar Solicitud"
+									outcome="/pages/licencias/addSolicitud" icon="ui-icon-disk" />
+								<p:menuitem value="Solicitudes"
+									outcome="/pages/licencias/manteSolicitud" icon="ui-icon-disk" />
+							</p:submenu>
+							<p:submenu label="Licencia">
+								<p:menuitem value="Generar"
+									outcome="/pages/licencias/manteSolicitud" icon="ui-icon-close" />
+								<p:menuitem value="Licencias"
+									outcome="/pages/licencias/manteSolicitud" icon="ui-icon-close" />
+							</p:submenu>
+						</p:menu>
+					</p:panel>
+				</h:form>
+			</div>
+			<div class="ui-g-12 ui-md-10 ui-g-nopad">
+				<div class="ui-g-12 ui-g-nopad">
+					<div class="ui-g">
+						<p:panel header="Regitrar Solicitud de Licencia"
+							style="width:100%">
+							<h:form>
+								<p:fieldset legend="Tipo de Licencia" style="margin-bottom:20px">
+									<h:panelGrid columns="6" cellpadding="5" style="width:100%">
+
+										<h:outputText for="tlicencia" value="Tipo Licencia:" />
+										<p:selectOneMenu id="console" value="" style="width:125px">
+											<f:selectItem itemLabel="--Seleccionar--" itemValue="" />
+											<f:selectItem itemLabel="Funcionamiento" itemValue="1" />
+											<f:selectItem itemLabel="Edificación" itemValue="2" />
+										</p:selectOneMenu>
+									</h:panelGrid>
+									<h:panelGrid columns="6" cellpadding="5" style="width:100%">
+									</h:panelGrid>
+								</p:fieldset>
+
+								<p:fieldset legend="Datos Solicitante"
+									style="margin-bottom:20px">
+									<h:panelGrid columns="6" cellpadding="5" style="width:100%">
+										<h:outputText for="dsolicitante" value="Tipo:" />
+										<p:selectOneMenu id="dsolicitante" value=""
+											style="width:120px">
+											<f:selectItem itemLabel="--Seleccionar--" itemValue="" />
+											<f:selectItem itemLabel="Juridica" itemValue="1" />
+											<f:selectItem itemLabel="Natural" itemValue="2" />
+										</p:selectOneMenu>
+
+										<h:outputText value="Correo:" />
+										<p:inputText value="" />
+
+										<h:outputText value="Telefóno:" />
+										<p:inputText value="" />
+										<h:outputText for="dtipodoc" value="Tipo Doc:" />
+										<p:selectOneMenu id="dtipodoc" value="" style="width:120px">
+											<f:selectItem itemLabel="--Seleccionar--" itemValue="" />
+											<f:selectItem itemLabel="DNI" itemValue="1" />
+											<f:selectItem itemLabel="CE" itemValue="2" />
+										</p:selectOneMenu>
+										<h:outputText value="Número Documento" />
+										<p:inputText value="" />
+									</h:panelGrid>
+									<h:panelGrid columns="6" cellpadding="5" style="width:100%">
+										<h:outputText value="Nombres:" />
+										<p:inputText value=""/>
+										<h:outputText value="Apellido Paterno:" />
+										<p:inputText value="" />
+										<h:outputText value="Apellido Materno:" />
+										<p:inputText value="" />
+										<h:outputText value="Dirección" />
+										<p:inputText value="" />
+									</h:panelGrid>
+								</p:fieldset>
+
+
+							</h:form>
+						</p:panel>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
+	<ui:define name="content">
+		<div class="ui-g" style="margin-top: 20px;">
+			<div class="ui-g-12 ui-md-2">
+				<h:form>
+					<p:panel header="Módulo de Licencias">
+						<p:menu>
+							<p:submenu label="Solicitud">
+								<p:menuitem value="Registrar Solicitud"
+									outcome="/pages/licencias/addSolicitud.xhtml"
+									icon="ui-icon-disk" />
+								<p:menuitem value="Solicitudes"
+									outcome="/pages/licencias/manteSolicitud" icon="ui-icon-disk" />
+							</p:submenu>
+							<p:submenu label="Licencia">
+								<p:menuitem value="Generar"
+									outcome="/pages/licencias/manteSolicitud" icon="ui-icon-close" />
+								<p:menuitem value="Licencias"
+									outcome="/pages/licencias/manteSolicitud" icon="ui-icon-close" />
+							</p:submenu>
+						</p:menu>
+					</p:panel>
+				</h:form>
+			</div>
+			<div class="ui-g-12 ui-md-10 ui-g-nopad">
+				<div class="ui-g-12 ui-g-nopad">
+					<div class="ui-g">
+						<p:panel header="Solicitud de Licencia" style="width:100%">
+							<h:form>
+								<!-- 					    <p:growl id="msgs" showDetail="true" /> -->
+
+								<p:fieldset legend="Busqueda de Solicitud de Licencia"
+									style="margin-bottom:20px">
+									<h:panelGrid columns="6" cellpadding="5" style="width:100%">
+										<h:outputText value="Código de Solicitud:" />
+										<p:inputText value="" />
+
+										<h:outputText value="Fecha Inicio:" />
+										<p:calendar value="#{solicitud.date1}" />
+
+										<h:outputText value="Fecha Fin:" />
+										<p:calendar value="#{solicitud.date2}" />
+										<h:outputText for="console" value="Estado:" />
+										<p:selectOneMenu id="console" value="" style="width:105px">
+											<f:selectItem itemLabel="--Seleccionar--" itemValue="" />
+											<f:selectItem itemLabel="Registrado" itemValue="1" />
+											<f:selectItem itemLabel="Rechazado" itemValue="2" />
+											<f:selectItem itemLabel="Pendiente" itemValue="3" />
+											<f:selectItem itemLabel="Aprobado" itemValue="4" />
+											<f:selectItem itemLabel="Anulado" itemValue="5" />
+										</p:selectOneMenu>
+										<h:outputText value="Nombre Representante:" />
+										<p:inputText value="" size="50" />
+									</h:panelGrid>
+									<h:panelGrid columns="6" cellpadding="5" style="width:100%">
+										<p:commandButton value="Buscar"></p:commandButton>
+									</h:panelGrid>
+								</p:fieldset>
+
+								<p:fieldset legend="Lista de Solicitud de Licencia"
+									style="margin-bottom:20px">
+									<h:panelGrid columns="2" cellpadding="5">
+										<p:dataTable var="sol" value="#{solJSF.listSolicitudes}"
+											rows="4" paginator="true"
+											paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+											rowsPerPageTemplate="4,8,12">
+											<p:column headerText="Codigo"
+												style="width:32px;text-align: center">
+												<h:outputText value="#{sol.codigo}" />
+											</p:column>
+											<p:column headerText="Nombre Representante"
+												style="width:220px;text-align: center">
+												<h:outputText
+													value="#{sol.nombre} #{sol.apellido} #{sol.apellido1}" />
+											</p:column>
+											<p:column headerText="Fecha Generación"
+												style="width:100px;text-align: center">
+												<h:outputText value="#{sol.fecha}">
+													<f:convertDateTime pattern="dd-MM-yyyy" />
+												</h:outputText>
+											</p:column>
+											<p:column headerText="Estado"
+												style="width:80px;text-align: center">
+												<h:outputText value="Registrado"
+													rendered="#{sol.estado == 1}" />
+												<h:outputText value="Rechazado"
+													rendered="#{sol.estado == 2}" />
+												<h:outputText value="Pendiente"
+													rendered="#{sol.estado == 3}" />
+												<h:outputText value="Aprobado" rendered="#{sol.estado == 4}" />
+												<h:outputText value="Anulado" rendered="#{sol.estado == 5}" />
+											</p:column>
+											<p:column headerText="Check"
+												style="width:15px;text-align: center">
+												<p:selectOneRadio id="console" value="">
+													<f:selectItem itemLabel="" itemValue="1" />
+												</p:selectOneRadio>
+											</p:column>
+										</p:dataTable>
+									</h:panelGrid>
+								</p:fieldset>
+
+
+							</h:form>
+						</p:panel>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+	</ui:define>
+</ui:composition>
+</html>
