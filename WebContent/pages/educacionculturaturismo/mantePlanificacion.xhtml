@@ -5,7 +5,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
 <ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
 	<ui:define name="content">
 		
@@ -13,18 +14,95 @@
 				<div class="ui-g-12 ui-g-nopad">
 					<div class="ui-g">
 						<p:panel header="Registrar Planificación de Actividad por Periodo" style="text-align:center; width:100%">
-						<div class="ui-g" style="margin-top: 20px;">
-							<div class="ui-g-12 ui-md-2">
+							<p:fieldset legend="Búsqueda" style="margin-bottom:20px">
 								<h:form>
-								<h:outputLabel>Seleccione Periodo</h:outputLabel>
-								<h:selectOneMenu value="#{periodoBean.periodo.idPeriodo}">
-									<f:selectItem itemLabel="-- Seleccione --" itemValue="" />
-									<f:selectItems value="#{periodoBean.listaPeriodos}"/>
-								</h:selectOneMenu>
+									<div class="ui-g bl-busqueda">
+										<div class="ui-g-12">
+											<div class="ui-g">
+											    <div class="ui-g-6">
+											    	<h:outputLabel>Seleccione Periodo</h:outputLabel>
+											    	<h:selectOneMenu value="#{periodoBean.periodo.idPeriodo}">
+														<f:selectItem itemLabel="-- Seleccione --" itemValue="" />
+														<f:selectItems value="#{periodoBean.listaPeriodos}"/>
+													</h:selectOneMenu>
+											    </div>
+											    <div class="ui-g-6">
+											    	<h:outputLabel>Seleccione Estado</h:outputLabel>
+											    </div>
+											</div>
+										</div>
+										<div class="ui-g-12 bl-consultar">
+											<p:button value="Consultar" icon="fa fa-search">
+											</p:button>
+										</div>
+									</div>
 								</h:form>
+							</p:fieldset>
+							
+							<div class="ui-g-12">
+							<p:dataTable var="car" value="#{dtBasicView.cars}">
+							    <p:column headerText="Código Planificación" style="text-align:center;">
+							        <h:outputText value="#{car.id}" />
+							    </p:column>
+							 
+							    <p:column headerText="Periodo" style="text-align:center;">
+							        <h:outputText value="#{car.year}" />
+							    </p:column>
+							 
+							    <p:column headerText="Fecha Creación" style="text-align:center;">
+							        <h:outputText value="#{car.brand}" />
+							    </p:column>
+							 
+							    <p:column headerText="Fecha Planificación" style="text-align:center;">
+							        <h:outputText value="#{car.color}" />
+							    </p:column>
+							    <p:column headerText="Fecha Rechazo" style="text-align:center;">
+							        <h:outputText value="#{car.color}" />
+							    </p:column>
+							    <p:column headerText="Tipo Actividad" style="text-align:center;">
+							        <h:outputText value="#{car.color}" />
+							    </p:column>
+							    <p:column headerText="Actividad" style="text-align:center;">
+							        <h:outputText value="#{car.color}" />
+							    </p:column>
+							    <p:column headerText="Estado" style="text-align:center;">
+							        <h:outputText value="#{car.color}" />
+							    </p:column>
+							    <p:column headerText="Seleccionar" style="text-align:center;">
+							        
+							    </p:column>
+							</p:dataTable>
 							</div>
-						</div>
+							<div class="ui-g-12 bl-consultar">
+								<p:commandButton value="Nuevo" icon="fa fa-plus" onclick="PF('crearPlanificacion').show()">
+								</p:commandButton>
+								<p:button value="Planificar" icon="fa fa-check-circle">
+								</p:button>
+								<p:button value="Eliminar" icon="fa fa-trash">
+								</p:button>
+							</div>
 						</p:panel>
+						
+							<p:dialog modal="true" height="400" width="600" widgetVar="crearPlanificacion">
+								<h:form>
+									<p:fieldset legend="Crear Planificación Actividad" style="margin-bottom:20px">
+										<div class="ui-g-12">
+											<div class="ui-g">
+											    <div class="ui-g-4">
+											    	<h:outputLabel>Seleccione Periodo</h:outputLabel>
+											    </div>
+											    <div class="ui-g-4">
+											    	<h:outputLabel>Seleccione Tipo Actividad</h:outputLabel>
+											    	
+											    </div>
+											    <div class="ui-g-4">
+											    	<h:outputLabel>Seleccione Actividad</h:outputLabel>
+											    </div>
+											</div>
+										</div>    
+									</p:fieldset>
+								</h:form>
+							</p:dialog>
 					</div>
 				</div>
 		</div>

@@ -1,16 +1,39 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
 
 <h:head>
 <title><ui:insert name="title">San Borja</ui:insert></title>
 <STYLE type="text/css">
 body {
-	/* The image used */
+	/* The image used
 	background: url("images/fondo2.jpg") no-repeat center center fixed;
+	 */
 	background-size: cover;
 }
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:active{
+	text-align: left;
+}
+
+.ui-g.bl-busqueda{
+	height: 130px;
+}
+
+label{
+padding: 10px;
+}
+
+.bl-consultar{
+	text-align: right;
+}
+
+.tb-titulo{
+text-align:center;
+}
+
 </STYLE>
 </h:head>
 

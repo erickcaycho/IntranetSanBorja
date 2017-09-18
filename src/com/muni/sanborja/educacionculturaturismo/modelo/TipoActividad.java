@@ -1,5 +1,6 @@
 package com.muni.sanborja.educacionculturaturismo.modelo;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -11,8 +12,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "TIPOACTIVIDAD")
-public class TipoActividad {
+@Table(name = "TipoActividad")
+public class TipoActividad implements Serializable  {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
  	@GeneratedValue

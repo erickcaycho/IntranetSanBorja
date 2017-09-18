@@ -32,7 +32,7 @@ public class PeriodoDaoImpl implements Serializable,PeriodoDao{
 			listaDePeriodos  =session.createQuery(hql).list();
 			
 			if (listaDePeriodos == null) {
-				log.info("No hay solicitudes");
+				log.info("No hay Periodo");
 				
 			} else {
 				log.info("Se encontro " + listaDePeriodos.size());
