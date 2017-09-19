@@ -10,7 +10,7 @@ import org.hibernate.Transaction;
 
 import com.muni.sanborja.educacionculturaturismo.dao.PlanificacionDao;
 import com.muni.sanborja.educacionculturaturismo.modelo.Planificacion;
-import com.muni.sanborja.educacionculturaturismo.modelo.TipoActividad;
+import com.muni.sanborja.educacionculturaturismo.modelo.PlanificacionPeriodoActividad;
 import com.muni.sanborja.educacionculturaturismo.util.HibernateSessionFactory;
 
 public class PlanificacionDaoImpl implements PlanificacionDao, Serializable {
@@ -49,22 +49,24 @@ public class PlanificacionDaoImpl implements PlanificacionDao, Serializable {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Planificacion> listarPlanificacionPeriodoActividad() {
-		List<Planificacion> listaPlanificacionActividadPeriodo = null;
+	public List<PlanificacionPeriodoActividad> listarPlanificacionPeriodoActividad() {
+		
+		List<PlanificacionPeriodoActividad> listaPlanificacionActividadPeriodo = null;
 		
 		Session session = HibernateSessionFactory.getSessionFactory().openSession();
 		Transaction ts = session.beginTransaction();
-		String hql=" CALL obtenerPlanificacionXPeriodoXActividad()";
 		
 		try {
-			Query query = session.createSQLQuery(hql).addEntity(Planificacion.class);
+			log.info("inicia");
+			Query query = session.createSQLQuery("CALL obtenerPlanificacionXPeriodoXActividad()");
+			log.info("0");
 			listaPlanificacionActividadPeriodo = query.list();
+			log.info("Registros encontrados: "  + listaPlanificacionActividadPeriodo.size());
 			
-			if (listaPlanificacionActividadPeriodo == null) {
-				log.info("No hay Planificacion x Periodo x Actividad");
+			for(int i=0; i<listaPlanificacionActividadPeriodo.size(); i++){
 				
-			} else {
-				log.info("Se encontro un error en " + listaPlanificacionActividadPeriodo.size());
+				PlanificacionPeriodoActividad p = (PlanificacionPeriodoActividad)listaPlanificacionActividadPeriodo.get(i);
+				
 			}
 			
 			ts.commit();

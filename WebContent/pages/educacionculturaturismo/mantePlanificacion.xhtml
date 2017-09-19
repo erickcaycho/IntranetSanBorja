@@ -50,9 +50,14 @@
 							</p:fieldset>
 							
 							<div class="ui-g-12">
-							<p:dataTable var="car" value="#{dtBasicView.cars}">
-							    <p:column headerText="Código Planificación" style="text-align:center;">
-							        <h:outputText value="#{car.id}" />
+							
+							<h:form>
+							<p:dataTable var="plan" value="#{planificacionBean.planificacion}" 
+							paginator="true"
+							rowsPerPageTemplate="5,10,15"
+							>
+							<p:column headerText="Código Planificación" style="text-align:center;">
+							        <h:outputText value="#{car.year}" />
 							    </p:column>
 							 
 							    <p:column headerText="Periodo" style="text-align:center;">
@@ -66,10 +71,16 @@
 							    <p:column headerText="Fecha Planificación" style="text-align:center;">
 							        <h:outputText value="#{car.color}" />
 							    </p:column>
+							    <p:column headerText="Fecha Aprobación" style="text-align:center;">
+							        <h:outputText value="#{car.color}" />
+							    </p:column>
 							    <p:column headerText="Fecha Rechazo" style="text-align:center;">
 							        <h:outputText value="#{car.color}" />
 							    </p:column>
 							    <p:column headerText="Fecha Anulacion" style="text-align:center;">
+							        <h:outputText value="#{car.color}" />
+							    </p:column>
+							    <p:column headerText="Fecha Ejecucion" style="text-align:center;">
 							        <h:outputText value="#{car.color}" />
 							    </p:column>
 							    <p:column headerText="Tipo Actividad" style="text-align:center;">
@@ -85,6 +96,8 @@
 							        
 							    </p:column>
 							</p:dataTable>
+							
+							</h:form>
 							</div>
 							<div class="ui-g-12 bl-consultar">
 								<p:commandButton value="Nuevo" icon="fa fa-plus" onclick="PF('crearPlanificacion').show()">

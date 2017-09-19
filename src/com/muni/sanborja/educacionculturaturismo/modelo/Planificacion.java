@@ -1,8 +1,6 @@
 package com.muni.sanborja.educacionculturaturismo.modelo;
 
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -38,6 +36,9 @@ public class Planificacion  implements Serializable{
 	
 	@Column(name = "fechaanulacion")
 	private Date fechaAnulacion;
+	
+	@Column(name = "fechaejecucion")
+	private Date fechaEjecucion;
 	
 	@Column(name = "estado")
 	private int estado;
@@ -99,6 +100,14 @@ public class Planificacion  implements Serializable{
 
 	public void setFechaAnulacion(Date fechaAnulacion) {
 		this.fechaAnulacion = fechaAnulacion;
+	}
+	
+	public Date getFechaEjecucion() {
+		return fechaEjecucion;
+	}
+
+	public void setFechaEjecucion(Date fechaEjecucion) {
+		this.fechaEjecucion = fechaEjecucion;
 	}
 
 	public int getEstado() {

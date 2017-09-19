@@ -15,5 +15,6 @@
 		<mapping class="com.muni.sanborja.educacionculturaturismo.modelo.TipoActividad" />
 		<mapping class="com.muni.sanborja.educacionculturaturismo.modelo.Actividad" />
 		<mapping class="com.muni.sanborja.educacionculturaturismo.modelo.Planificacion" />
+		<mapping class="com.muni.sanborja.educacionculturaturismo.modelo.PlanificacionPeriodoActividad" />
 	</session-factory>
 </hibernate-configuration>
