@@ -12,6 +12,8 @@
 		<property name="hibernate.show_sql">true</property>
 
 		<mapping class="com.muni.sanborja.educacionculturaturismo.modelo.Periodo" />
-		
+		<mapping class="com.muni.sanborja.educacionculturaturismo.modelo.TipoActividad" />
+		<mapping class="com.muni.sanborja.educacionculturaturismo.modelo.Actividad" />
+		<mapping class="com.muni.sanborja.educacionculturaturismo.modelo.Planificacion" />
 	</session-factory>
 </hibernate-configuration>

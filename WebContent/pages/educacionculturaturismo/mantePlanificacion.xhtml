@@ -21,13 +21,23 @@
 											<div class="ui-g">
 											    <div class="ui-g-6">
 											    	<h:outputLabel>Seleccione Periodo</h:outputLabel>
-											    	<h:selectOneMenu value="#{periodoBean.periodo.idPeriodo}">
+											    	<p:selectOneMenu value="#{periodoBean.periodo.idPeriodo}">
 														<f:selectItem itemLabel="-- Seleccione --" itemValue="" />
 														<f:selectItems value="#{periodoBean.listaPeriodos}"/>
-													</h:selectOneMenu>
+													</p:selectOneMenu>
 											    </div>
 											    <div class="ui-g-6">
 											    	<h:outputLabel>Seleccione Estado</h:outputLabel>
+											    	<p:selectOneMenu>
+											    		<f:selectItem itemLabel="-- Seleccione --" itemValue=""/>
+											    		<f:selectItem itemLabel="PENDIENTE" itemValue="1"/>
+											    		<f:selectItem itemLabel="PENDIENTE" itemValue="2"/>
+											    		<f:selectItem itemLabel="PENDIENTE" itemValue="3"/>
+											    		<f:selectItem itemLabel="PENDIENTE" itemValue="4"/>
+											    		<f:selectItem itemLabel="PENDIENTE" itemValue="5"/>
+											    		
+											    	</p:selectOneMenu>
+											    	
 											    </div>
 											</div>
 										</div>
@@ -59,6 +69,9 @@
 							    <p:column headerText="Fecha Rechazo" style="text-align:center;">
 							        <h:outputText value="#{car.color}" />
 							    </p:column>
+							    <p:column headerText="Fecha Anulacion" style="text-align:center;">
+							        <h:outputText value="#{car.color}" />
+							    </p:column>
 							    <p:column headerText="Tipo Actividad" style="text-align:center;">
 							        <h:outputText value="#{car.color}" />
 							    </p:column>
@@ -83,26 +96,40 @@
 							</div>
 						</p:panel>
 						
-							<p:dialog modal="true" height="400" width="600" widgetVar="crearPlanificacion">
-								<h:form>
-									<p:fieldset legend="Crear Planificación Actividad" style="margin-bottom:20px">
+								<p:dialog modal="true" header="Crear Planificación Actividad" height="400" width="60%" widgetVar="crearPlanificacion">
+									<p:growl id="msg" showDetail="true"/>
+									<h:form>
 										<div class="ui-g-12">
 											<div class="ui-g">
-											    <div class="ui-g-4">
-											    	<h:outputLabel>Seleccione Periodo</h:outputLabel>
+											    <div class="ui-g-6">
+											    <h:outputLabel>Seleccione Periodo</h:outputLabel>
+											    	<p:selectOneMenu value="#{tipoActividadBean.planificacion.periodo.idPeriodo}">
+														<f:selectItem itemLabel="-- Seleccione --" itemValue="" />
+														<f:selectItems value="#{periodoBean.listaPeriodos}" var="p" itemValue="#{p.idPeriodo}"/>
+													</p:selectOneMenu>
 											    </div>
-											    <div class="ui-g-4">
+											    <div class="ui-g-6">
 											    	<h:outputLabel>Seleccione Tipo Actividad</h:outputLabel>
-											    	
-											    </div>
-											    <div class="ui-g-4">
-											    	<h:outputLabel>Seleccione Actividad</h:outputLabel>
+											    	<p:selectOneMenu id="tipoactividad" value="#{tipoActividadBean.idtipoactividad}">
+														<f:selectItem itemLabel="-- Seleccione --" itemValue="" />
+														<f:selectItems value="#{tipoActividadBean.listaTipoActividades}"/>
+														<p:ajax update="actividad"/>
+													</p:selectOneMenu>
 											    </div>
 											</div>
+										</div>
+										<div class="ui-g-12">
+											<h:outputLabel>Seleccione Actividad</h:outputLabel>
+											<p:selectOneMenu id="actividad" value="#{tipoActividadBean.planificacion.actividad.idActividad}">
+												<f:selectItem itemLabel="-- Seleccione --" itemValue="" />
+											    <f:selectItems value="#{tipoActividadBean.listaActividades}" var="c" itemValue="#{c.idActividad}"/>
+											</p:selectOneMenu>
+										</div>   
+										<div class="ui-g-12">
+											<p:commandButton actionListener="#{tipoActividadBean.crearPlanificacion}" value="Guardar" update=":msg" icon="fa fa-plus"></p:commandButton>
 										</div>    
-									</p:fieldset>
-								</h:form>
-							</p:dialog>
+									</h:form>
+								</p:dialog>
 					</div>
 				</div>
 		</div>

@@ -6,6 +6,6 @@ import com.muni.sanborja.educacionculturaturismo.modelo.Actividad;
 
 public interface ActividadDao {
 
-	public List<Actividad>listarActividad();
+	public List<Actividad>listarActividad(int idtipoactividad);
 	
 }

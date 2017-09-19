@@ -1,11 +1,12 @@
 package com.muni.sanborja.educacionculturaturismo.modelo;
 
 import java.io.Serializable;
-
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -25,6 +26,9 @@ public class Periodo implements Serializable {
 	
 	@Column(name = "nomperiodo")
 	private String nomPeriodo;
+	
+	@OneToMany
+	private Set<Planificacion> planificacion;
 
 	public int getIdPeriodo() {
 		return idPeriodo;
@@ -40,6 +44,14 @@ public class Periodo implements Serializable {
 
 	public void setNomPeriodo(String nomPeriodo) {
 		this.nomPeriodo = nomPeriodo;
+	}
+
+	public Set<Planificacion> getPlanificacion() {
+		return planificacion;
+	}
+
+	public void setPlanificacion(Set<Planificacion> planificacion) {
+		this.planificacion = planificacion;
 	}
 	
 	

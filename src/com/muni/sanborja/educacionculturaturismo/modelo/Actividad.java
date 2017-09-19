@@ -1,6 +1,7 @@
 package com.muni.sanborja.educacionculturaturismo.modelo;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,10 +9,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "actividad")
+@Table(name = "Actividad")
 public class Actividad implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -37,6 +39,8 @@ public class Actividad implements Serializable{
 	@JoinColumn(name="idtipoactividad")
 	private TipoActividad tipoActividad;
 	
+	@OneToMany
+	private Set<Planificacion> planificacion;
 	
 	public int getIdActividad() {
 		return idActividad;
@@ -75,5 +79,13 @@ public class Actividad implements Serializable{
 	public void setTipoActividad(TipoActividad tipoActividad) {
 		this.tipoActividad = tipoActividad;
 	}
+	public Set<Planificacion> getPlanificacion() {
+		return planificacion;
+	}
+	public void setPlanificacion(Set<Planificacion> planificacion) {
+		this.planificacion = planificacion;
+	}
+	
+	
 	
 }

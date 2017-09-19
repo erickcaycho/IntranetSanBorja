@@ -3,7 +3,6 @@ package com.muni.sanborja.educacionculturaturismo.modelo;
 import java.io.Serializable;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,7 +27,8 @@ public class TipoActividad implements Serializable  {
 	@Column(name = "descripcion")	
 	private String descripcion;
 
-	private Set<Actividad> actividades;
+	@OneToMany
+	private Set<Actividad> actividad;
 	
 	public TipoActividad(){
 	}
@@ -56,15 +56,13 @@ public class TipoActividad implements Serializable  {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	
-	@OneToMany(mappedBy = "tipoactividad", cascade = CascadeType.ALL)
-	public Set<Actividad> getActividades() {
-		return actividades;
+
+	public Set<Actividad> getActividad() {
+		return actividad;
 	}
- 
-	public void setActividades(Set<Actividad> actividades) {
-		this.actividades = actividades;
+
+	public void setActividad(Set<Actividad> actividad) {
+		this.actividad = actividad;
 	}
-	
 	
 }
