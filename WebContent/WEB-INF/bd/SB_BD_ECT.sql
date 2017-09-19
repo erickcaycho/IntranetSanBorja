@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `educacionculturaturismosb` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `educacionculturaturismosb`;
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
 -- Host: localhost    Database: educacionculturaturismosb
@@ -88,12 +86,13 @@ CREATE TABLE `planificacion` (
   `idactividad` int(11) NOT NULL,
   `fechaanulacion` date DEFAULT NULL,
   `estado` int(11) DEFAULT NULL,
+  `fechaejecucion` date DEFAULT NULL,
   PRIMARY KEY (`idplanificacion`),
   KEY `fk_planificacion_periodo1_idx` (`idperiodo`),
   KEY `fk_planificacion_actividad1_idx` (`idactividad`),
   CONSTRAINT `fk_planificacion_actividad1` FOREIGN KEY (`idactividad`) REFERENCES `actividad` (`idactividad`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_planificacion_periodo1` FOREIGN KEY (`idperiodo`) REFERENCES `periodo` (`idperiodo`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -102,7 +101,7 @@ CREATE TABLE `planificacion` (
 
 LOCK TABLES `planificacion` WRITE;
 /*!40000 ALTER TABLE `planificacion` DISABLE KEYS */;
-INSERT INTO `planificacion` VALUES (1,'2017-09-19',NULL,NULL,NULL,2,63,NULL,1),(2,'2017-09-19',NULL,NULL,NULL,3,66,NULL,1),(3,'2017-09-19',NULL,NULL,NULL,1,6,NULL,1),(4,'2017-09-19',NULL,NULL,NULL,1,3,NULL,1),(5,'2017-09-19',NULL,NULL,NULL,1,13,NULL,1),(6,'2017-09-19',NULL,NULL,NULL,1,38,NULL,1),(7,'2017-09-19',NULL,NULL,NULL,1,48,NULL,1),(8,'2017-09-19',NULL,NULL,NULL,1,63,NULL,1);
+INSERT INTO `planificacion` VALUES (1,'2017-09-19',NULL,NULL,NULL,1,4,NULL,1,NULL),(2,'2017-09-19',NULL,NULL,NULL,2,6,NULL,1,NULL),(3,'2017-09-19',NULL,NULL,NULL,1,66,NULL,1,NULL),(4,'2017-09-19',NULL,NULL,NULL,1,66,NULL,1,NULL),(5,'2017-09-19',NULL,NULL,NULL,2,51,NULL,1,NULL);
 /*!40000 ALTER TABLE `planificacion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -140,4 +139,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-19  8:19:59
+-- Dump completed on 2017-09-19 13:18:10
