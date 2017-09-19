@@ -30,11 +30,12 @@
 											    	<h:outputLabel>Seleccione Estado</h:outputLabel>
 											    	<p:selectOneMenu>
 											    		<f:selectItem itemLabel="-- Seleccione --" itemValue=""/>
-											    		<f:selectItem itemLabel="PENDIENTE" itemValue="1"/>
-											    		<f:selectItem itemLabel="PENDIENTE" itemValue="2"/>
-											    		<f:selectItem itemLabel="PENDIENTE" itemValue="3"/>
-											    		<f:selectItem itemLabel="PENDIENTE" itemValue="4"/>
-											    		<f:selectItem itemLabel="PENDIENTE" itemValue="5"/>
+											    		<f:selectItem itemLabel="Pendiente" itemValue="1"/>
+											    		<f:selectItem itemLabel="Planificado" itemValue="2"/>
+											    		<f:selectItem itemLabel="Aprobado" itemValue="3"/>
+											    		<f:selectItem itemLabel="Rechazado" itemValue="4"/>
+											    		<f:selectItem itemLabel="Ejecutado" itemValue="5"/>
+											    		<f:selectItem itemLabel="Anulado" itemValue="6"/>
 											    		
 											    	</p:selectOneMenu>
 											    	
@@ -52,63 +53,84 @@
 							<div class="ui-g-12">
 							
 							<h:form>
-							<p:dataTable var="plan" value="#{planificacionBean.planificacion}" 
-							paginator="true"
-							rowsPerPageTemplate="5,10,15"
-							>
+							<p:dataTable
+								id="tbPlanificacion" 
+								var="plan" 
+								value="#{planificacionBean.planificacion}" 
+								paginator="true"
+								rows="10"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								resizableColumns="true"
+								rowsPerPageTemplate="5,10,15"
+								selection="#{dtSelectionView.selectedCar}"
+								rowKey="#{plan.idPlanificacion}">
+								
 							<p:column headerText="Código Planificación" style="text-align:center;">
-							        <h:outputText value="#{car.year}" />
+							        <h:outputText value="#{plan.idPlanificacion}" />
 							    </p:column>
 							 
 							    <p:column headerText="Periodo" style="text-align:center;">
-							        <h:outputText value="#{car.year}" />
+							        <h:outputText value="#{plan.nomPeriodo}" />
 							    </p:column>
 							 
 							    <p:column headerText="Fecha Creación" style="text-align:center;">
-							        <h:outputText value="#{car.brand}" />
+							        <h:outputText value="#{plan.fechaCreacion}" />
 							    </p:column>
 							 
 							    <p:column headerText="Fecha Planificación" style="text-align:center;">
-							        <h:outputText value="#{car.color}" />
+							        <h:outputText value="#{plan.fechaPlanificacion}" />
 							    </p:column>
 							    <p:column headerText="Fecha Aprobación" style="text-align:center;">
-							        <h:outputText value="#{car.color}" />
+							        <h:outputText value="#{plan.fechaAprobacion}" />
 							    </p:column>
 							    <p:column headerText="Fecha Rechazo" style="text-align:center;">
-							        <h:outputText value="#{car.color}" />
+							        <h:outputText value="#{plan.fechaRechazo}" />
 							    </p:column>
 							    <p:column headerText="Fecha Anulacion" style="text-align:center;">
-							        <h:outputText value="#{car.color}" />
+							        <h:outputText value="#{plan.fechaAnulacion}" />
 							    </p:column>
 							    <p:column headerText="Fecha Ejecucion" style="text-align:center;">
-							        <h:outputText value="#{car.color}" />
+							        <h:outputText value="#{plan.fechaEjecucion}" />
 							    </p:column>
 							    <p:column headerText="Tipo Actividad" style="text-align:center;">
-							        <h:outputText value="#{car.color}" />
+							        <h:outputText value="#{plan.nomTipoActividad}" />
 							    </p:column>
 							    <p:column headerText="Actividad" style="text-align:center;">
-							        <h:outputText value="#{car.color}" />
+							        <h:outputText value="#{plan.nomActividad}" />
 							    </p:column>
 							    <p:column headerText="Estado" style="text-align:center;">
-							        <h:outputText value="#{car.color}" />
+							        <h:outputText value="#{plan.estado}" />
 							    </p:column>
-							    <p:column headerText="Seleccionar" style="text-align:center;">
-							        
-							    </p:column>
+							    <p:column  headerText="Seleccionar" selectionMode="single" style="text-align:center"/>
 							</p:dataTable>
 							
 							</h:form>
 							</div>
 							<div class="ui-g-12 bl-consultar">
+								
 								<p:commandButton value="Nuevo" icon="fa fa-plus" onclick="PF('crearPlanificacion').show()">
+								</p:commandButton>
+								<p:commandButton value="Eliminar" icon="fa fa-trash" onclick="PF('eliminarPlanificacion').show()">
 								</p:commandButton>
 								<p:button value="Planificar" icon="fa fa-check-circle">
 								</p:button>
-								<p:button value="Eliminar" icon="fa fa-trash">
-								</p:button>
 							</div>
 						</p:panel>
-						
+								
+								<p:dialog modal="true" header="Eliminar Planificación Actividad" height="250" width="30%" widgetVar="eliminarPlanificacion">
+									<p:growl id="msgEliminar" showDetail="true"/>
+									<h:form>
+										<div class="ui-g-12">
+											<div class="ui-g">
+												<h:outputLabel>¿Está seguro de eliminar la planificación?</h:outputLabel>
+													<p:commandButton actionListener="#{planificacionBean.eliminarPlanificacion}" update=":msgEliminar" value="Si"/>
+												<p:button value="No"/>
+											</div>
+										</div>
+									</h:form>
+									
+								</p:dialog>
+								
 								<p:dialog modal="true" header="Crear Planificación Actividad" height="400" width="60%" widgetVar="crearPlanificacion">
 									<p:growl id="msg" showDetail="true"/>
 									<h:form>

@@ -15,18 +15,8 @@
 			<h:form>
 				<p:menubar>
 					<p:submenu label="Inicio" icon="ui-icon-document">
-						<p:menuitem value="Test" url="#" />
-						<p:separator />
-						<p:menuitem value="Salir" url="#" />
-					</p:submenu>
-					<p:submenu label="Reglamento" icon="ui-icon-gear">
-						<p:submenu label="Año" icon="ui-icon-refresh">
-							<p:menuitem value="2017" icon="ui-icon-disk" />
-							<p:menuitem value="2016" icon="ui-icon-arrowrefresh-1-w" />
-						</p:submenu>
 					</p:submenu>
 					<f:facet name="options">
-						<p:inputText style="margin-right:10px" placeholder="Search" />
 						<p:commandButton type="button" value="Logout"
 							icon="ui-icon-extlink" />
 					</f:facet>
@@ -38,9 +28,15 @@
 			<p:graphicImage value="/images/logo2.png" style="width:105px;" />
 		</div>
 	</div>
-<!-- 	<h:outputText value="&#160;" /> -->
-	<!-- Espaciador -->
-
+ 
+	<div class="ui-g">
+		<div class="bienvenida">
+			<p:outputLabel>Bienvenido: Erick Caycho Ponce - Coordinador </p:outputLabel>	
+		</div>
+		
+	</div>
+	
+	
 </h:body>
 
 </html>
