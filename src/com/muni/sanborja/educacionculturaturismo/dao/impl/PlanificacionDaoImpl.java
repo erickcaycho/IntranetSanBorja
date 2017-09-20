@@ -61,9 +61,8 @@ public class PlanificacionDaoImpl implements PlanificacionDao, Serializable {
 		Transaction ts = session.beginTransaction();
 		
 		try {
-			log.info("inicia");
+			log.info("inicia PlanificacionPeriodoActividad");
 			Query query = session.createSQLQuery("CALL obtenerPlanificacionXPeriodoXActividad(:val_idperiodo,:val_estado)").setParameter("val_idperiodo", idperiodo).setParameter("val_estado", estado);
-			log.info("0");
 			List<Object[]> objs  = query.list();
 			
 			
@@ -87,7 +86,7 @@ public class PlanificacionDaoImpl implements PlanificacionDao, Serializable {
 				plan.add(p);
 			}
 			
-			log.info("Registros encontrados: "  + plan.size());
+			log.info("Registros encontrados PlanificacionPeriodoActividad: "  + plan.size());
 			
 			
 			ts.commit();
@@ -97,7 +96,6 @@ public class PlanificacionDaoImpl implements PlanificacionDao, Serializable {
 			log.error("error " +e.getMessage());
 			  e.getMessage();
 		}
-		
 		
 		return plan;
 	}

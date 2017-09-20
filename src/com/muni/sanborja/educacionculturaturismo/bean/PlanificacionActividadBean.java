@@ -55,6 +55,7 @@ public class PlanificacionActividadBean implements Serializable {
 	    
 	    planificacion.setPeriodo(new Periodo());
 	    planificacion.setActividad(new Actividad());
+	    
 	}
 	
 	public int getIdactividad() {
@@ -164,7 +165,8 @@ public class PlanificacionActividadBean implements Serializable {
 	public List<PlanificacionPeriodoActividad> getListaPlanificacion() {
 		
 		PlanificacionDao planificacionDao = new PlanificacionDaoImpl();
-		listaPlanificacion = planificacionDao.listarPlanificacionPeriodoActividad(0,0);
+				
+		listaPlanificacion = planificacionDao.listarPlanificacionPeriodoActividad(planificacion.getPeriodo().getIdPeriodo(),planificacion.getEstado());
 		
 		return listaPlanificacion;
 	}
@@ -212,6 +214,11 @@ public class PlanificacionActividadBean implements Serializable {
 		log.info("---CONSULTAR ---");
 		log.info("idPeriodo_capturado: " +planificacion.getPeriodo().getIdPeriodo());
 		log.info("Estado_capturado: " +planificacion.getEstado());
+		
+		PlanificacionDao planificacionDao = new PlanificacionDaoImpl();
+		planificacionDao.listarPlanificacionPeriodoActividad(planificacion.getPeriodo().getIdPeriodo(),planificacion.getEstado());
+		
+		log.info("Tam actual: " + listaPlanificacion.size());
 		
 	}
 	
