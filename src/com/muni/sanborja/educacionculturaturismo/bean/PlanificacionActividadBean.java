@@ -1,8 +1,6 @@
 package com.muni.sanborja.educacionculturaturismo.bean;
 
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -27,18 +25,21 @@ import com.muni.sanborja.educacionculturaturismo.dao.impl.TipoActividadDaoImpl;
 import com.muni.sanborja.educacionculturaturismo.modelo.Actividad;
 import com.muni.sanborja.educacionculturaturismo.modelo.Periodo;
 import com.muni.sanborja.educacionculturaturismo.modelo.Planificacion;
+import com.muni.sanborja.educacionculturaturismo.modelo.PlanificacionPeriodoActividad;
 import com.muni.sanborja.educacionculturaturismo.modelo.TipoActividad;
 
-@ManagedBean(name = "tipoActividadBean")
+@ManagedBean(name = "planificacionActividadBean")
 @SessionScoped 
-public class TipoActividadBean implements Serializable {
+public class PlanificacionActividadBean implements Serializable {
 	
-	public static Logger log = Logger.getLogger(TipoActividadBean.class);
+	public static Logger log = Logger.getLogger(PlanificacionActividadBean.class);
 	private static final long serialVersionUID = 1L;
 	
 	private List<SelectItem> listaPeriodos;
 	private List<SelectItem> listaTipoActividades;
 	private List<SelectItem> listaActividades;
+	private List<PlanificacionPeriodoActividad> listaPlanificacion;
+	
 	private TipoActividad tipoActividad;
 
 	private Planificacion planificacion = new Planificacion();
@@ -46,6 +47,7 @@ public class TipoActividadBean implements Serializable {
 	private int idperiodo;
 	private int idtipoactividad;
 	private int idactividad;
+	private int estado;
 	
 	@PostConstruct
 	public void init() {
@@ -79,6 +81,14 @@ public class TipoActividadBean implements Serializable {
 		this.idtipoactividad = idtipoactividad;
 	}
 	
+	public int getEstado() {
+		return estado;
+	}
+
+	public void setEstado(int estado) {
+		this.estado = estado;
+	}
+
 	public List<SelectItem> getListaPeriodos() {
 		this.listaPeriodos = new ArrayList<SelectItem>();
 		PeriodoDao periodoDao = new PeriodoDaoImpl();
@@ -150,6 +160,19 @@ public class TipoActividadBean implements Serializable {
 		this.planificacion = planificacion;
 	}
 
+	
+	public List<PlanificacionPeriodoActividad> getListaPlanificacion() {
+		
+		PlanificacionDao planificacionDao = new PlanificacionDaoImpl();
+		listaPlanificacion = planificacionDao.listarPlanificacionPeriodoActividad(0,0);
+		
+		return listaPlanificacion;
+	}
+
+	public void setListaPlanificacion(List<PlanificacionPeriodoActividad> listaPlanificacion) {
+		this.listaPlanificacion = listaPlanificacion;
+	}
+
 	public void crearPlanificacion(){
 		try {
 			
@@ -181,6 +204,14 @@ public class TipoActividadBean implements Serializable {
 			log.error("Error:" + e.getMessage());
 			log.error(e.getStackTrace());
 		}
+	}
+	
+	
+	
+	public void consultarPlanificacion(){
+		log.info("---CONSULTAR ---");
+		log.info("idPeriodo_capturado: " +planificacion.getPeriodo().getIdPeriodo());
+		log.info("Estado_capturado: " +planificacion.getEstado());
 		
 	}
 	
