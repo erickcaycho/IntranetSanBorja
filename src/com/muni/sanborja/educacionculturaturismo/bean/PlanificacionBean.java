@@ -29,7 +29,7 @@ public class PlanificacionBean implements Serializable{
 	
 	public List<PlanificacionPeriodoActividad> getPlanificacion() {
 		PlanificacionDao planificacionDao = new PlanificacionDaoImpl();
-		planificacion = planificacionDao.listarPlanificacionPeriodoActividad();
+		planificacion = planificacionDao.listarPlanificacionPeriodoActividad(0,0);
 		
 		return planificacion;
 	}
@@ -45,14 +45,17 @@ public class PlanificacionBean implements Serializable{
 		SelectedPlanificacion = selectedPlanificacion;
 	}
 	
-	public void eliminarPlanificacion(){
-		log.info("Ingreso de eliminar Planificacion[]");
+	public void consultarPlanificacion(){
+		log.info("Ingreso consultar Planificacion[]");
 		String msg;
-		msg ="Se eliminó correctamente la planificación";
+		msg ="Actividades del periodo ";
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,msg,null);
 		FacesContext.getCurrentInstance().addMessage(null, message);
 		
-		log.info("Eliminado correctamente");
+		
+		log.info("Consulta ");
 	}
+	
+	
 	
 }

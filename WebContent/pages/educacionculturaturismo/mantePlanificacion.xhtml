@@ -43,8 +43,7 @@
 											</div>
 										</div>
 										<div class="ui-g-12 bl-consultar">
-											<p:button value="Consultar" icon="fa fa-search">
-											</p:button>
+											<p:commandButton actionListener="#{planificacionBean.consultarPlanificacion}" value="Consultar" icon="fa fa-search"></p:commandButton>
 										</div>
 									</div>
 								</h:form>
@@ -110,27 +109,10 @@
 								
 								<p:commandButton value="Nuevo" icon="fa fa-plus" onclick="PF('crearPlanificacion').show()">
 								</p:commandButton>
-								<p:commandButton value="Eliminar" icon="fa fa-trash" onclick="PF('eliminarPlanificacion').show()">
-								</p:commandButton>
 								<p:button value="Planificar" icon="fa fa-check-circle">
 								</p:button>
 							</div>
 						</p:panel>
-								
-								<p:dialog modal="true" header="Eliminar Planificación Actividad" height="250" width="30%" widgetVar="eliminarPlanificacion">
-									<p:growl id="msgEliminar" showDetail="true"/>
-									<h:form>
-										<div class="ui-g-12">
-											<div class="ui-g">
-												<h:outputLabel>¿Está seguro de eliminar la planificación?</h:outputLabel>
-													<p:commandButton actionListener="#{planificacionBean.eliminarPlanificacion}" update=":msgEliminar" value="Si"/>
-												<p:button value="No"/>
-											</div>
-										</div>
-									</h:form>
-									
-								</p:dialog>
-								
 								<p:dialog modal="true" header="Crear Planificación Actividad" height="400" width="60%" widgetVar="crearPlanificacion">
 									<p:growl id="msg" showDetail="true"/>
 									<h:form>

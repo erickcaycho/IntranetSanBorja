@@ -8,6 +8,6 @@ import com.muni.sanborja.educacionculturaturismo.modelo.PlanificacionPeriodoActi
 public interface PlanificacionDao {
 
 	public boolean create(Planificacion planificacion);
-	public List<PlanificacionPeriodoActividad> listarPlanificacionPeriodoActividad();
+	public List<PlanificacionPeriodoActividad> listarPlanificacionPeriodoActividad(int idperiodo, int estado);
 	
 }

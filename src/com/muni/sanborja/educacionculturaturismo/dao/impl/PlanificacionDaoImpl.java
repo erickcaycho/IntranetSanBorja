@@ -54,7 +54,7 @@ public class PlanificacionDaoImpl implements PlanificacionDao, Serializable {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<PlanificacionPeriodoActividad> listarPlanificacionPeriodoActividad() {
+	public List<PlanificacionPeriodoActividad> listarPlanificacionPeriodoActividad(int idperiodo, int estado) {
 		List<PlanificacionPeriodoActividad> plan  = null;
 		
 		Session session = HibernateSessionFactory.getSessionFactory().openSession();
@@ -62,7 +62,7 @@ public class PlanificacionDaoImpl implements PlanificacionDao, Serializable {
 		
 		try {
 			log.info("inicia");
-			Query query = session.createSQLQuery("CALL obtenerPlanificacionXPeriodoXActividad()");
+			Query query = session.createSQLQuery("CALL obtenerPlanificacionXPeriodoXActividad(:val_idperiodo,:val_estado)").setParameter("val_idperiodo", idperiodo).setParameter("val_estado", estado);
 			log.info("0");
 			List<Object[]> objs  = query.list();
 			
