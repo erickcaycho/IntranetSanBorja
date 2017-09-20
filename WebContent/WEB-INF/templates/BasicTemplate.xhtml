@@ -6,35 +6,42 @@
 	xmlns:pe="http://primefaces.org/ui/extensions">
 
 <h:head>
-<title><ui:insert name="title">San Borja</ui:insert></title>
-<STYLE type="text/css">
+	<title><ui:insert name="title">San Borja</ui:insert></title>
+	<STYLE type="text/css">
 body {
 	/* The image used
 	background: url("images/fondo2.jpg") no-repeat center center fixed;
 	 */
 	background-size: cover;
 }
-.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:active{
+
+.ui-state-default, .ui-widget-content .ui-state-default,
+	.ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover,
+	html .ui-button.ui-state-disabled:active {
 	text-align: left;
 }
 
-.ui-g.bl-busqueda{
+.ui-g.bl-busqueda {
 	height: 130px;
 }
 
-label{
-padding: 10px;
+label {
+	padding: 10px;
 }
 
-.bl-consultar{
+.bl-consultar {
 	text-align: right;
 }
 
-.tb-titulo{
-text-align:center;
+.tb-titulo {
+	text-align: center;
 }
-.bienvenida{
-padding: 20px;
+
+.bienvenida {
+	padding: 20px;
+}
+.ui-menu{
+	width: 95%;
 }
 </STYLE>
 </h:head>
@@ -45,15 +52,38 @@ padding: 20px;
 			<ui:include src="header.xhtml" />
 		</ui:insert>
 	</div>
-	<div id="content">
-		<ui:insert name="content">
-		</ui:insert>
+	<div class="ui-g-12">
+		<div class="ui-g">
+			<div class="ui-g-12 ui-md-2">
+				<h:form>
+					<p:panel header="Módulo de Educación, Cultura y Turismo">
+						<p:menu>
+							<p:submenu label="Planificación de Actividades">
+								<p:menuitem value="Registrar Planificación"
+									outcome="/pages/educacionculturaturismo/mantePlanificacion.xhtml"
+									icon="ui-icon-disk" />
+								<p:menuitem value="Salir"
+									outcome="/pages/educacionculturaturismo/mantePlanificacion.xhtml"
+									icon="ui-icon-disk" />
+							</p:submenu>
+						</p:menu>
+					</p:panel>
+				</h:form>
+			</div>
+			<div class="ui-g-12 ui-md-10">
+				<div id="content">
+					<ui:insert name="content">
+					</ui:insert>
+				</div>
+			</div>
+		</div>
 	</div>
-  	<div id="footer"> 
- 		<ui:insert name="footer">  
-  			<ui:include src="footer.xhtml" />  
- 		</ui:insert>  
-  	</div>  
+
+	<div id="footer">
+		<!-- <ui:insert name="footer"> -->
+		<!-- <ui:include src="footer.xhtml" /> -->
+		<!-- </ui:insert>   -->
+	</div>
 
 </body>
 

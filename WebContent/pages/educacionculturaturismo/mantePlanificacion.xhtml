@@ -9,146 +9,159 @@
 	xmlns:pe="http://primefaces.org/ui/extensions">
 <ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
 	<ui:define name="content">
-		
-		<div class="ui-g-12 ui-md-12 ui-g-nopad">
-				<div class="ui-g-12 ui-g-nopad">
-					<div class="ui-g">
-						<p:panel header="Registrar Planificación de Actividad por Periodo" style="text-align:center; width:100%">
-							<p:fieldset legend="Búsqueda" style="margin-bottom:20px">
-								<h:form>
-									<div class="ui-g bl-busqueda">
-										<div class="ui-g-12">
-											<div class="ui-g">
-											    <div class="ui-g-6">
-											    	<h:outputLabel>Seleccione Periodo</h:outputLabel>
-											    	<p:selectOneMenu value="#{periodoBean.periodo.idPeriodo}">
-														<f:selectItem itemLabel="-- Seleccione --" itemValue="" />
-														<f:selectItems value="#{periodoBean.listaPeriodos}"/>
-													</p:selectOneMenu>
-											    </div>
-											    <div class="ui-g-6">
-											    	<h:outputLabel>Seleccione Estado</h:outputLabel>
-											    	<p:selectOneMenu>
-											    		<f:selectItem itemLabel="-- Seleccione --" itemValue=""/>
-											    		<f:selectItem itemLabel="Pendiente" itemValue="1"/>
-											    		<f:selectItem itemLabel="Planificado" itemValue="2"/>
-											    		<f:selectItem itemLabel="Aprobado" itemValue="3"/>
-											    		<f:selectItem itemLabel="Rechazado" itemValue="4"/>
-											    		<f:selectItem itemLabel="Ejecutado" itemValue="5"/>
-											    		<f:selectItem itemLabel="Anulado" itemValue="6"/>
-											    		
-											    	</p:selectOneMenu>
-											    	
-											    </div>
-											</div>
+		<div class="ui-g-12 ui-g-nopad">
+			<div class="ui-g">
+				<p:panel header="Registrar Planificación de Actividad por Periodo"
+					style="text-align:center; width:100%">
+					<p:fieldset legend="Búsqueda" style="margin-bottom:20px">
+						<h:form>
+							<div class="ui-g bl-busqueda">
+								<div class="ui-g-12">
+									<div class="ui-g">
+										<div class="ui-g-6">
+											<h:outputLabel>Seleccione Periodo</h:outputLabel>
+											<p:selectOneMenu value="#{periodoBean.periodo.idPeriodo}">
+												<f:selectItem itemLabel="-- Seleccione --" itemValue="" />
+												<f:selectItems value="#{periodoBean.listaPeriodos}" />
+											</p:selectOneMenu>
 										</div>
-										<div class="ui-g-12 bl-consultar">
-											<p:commandButton actionListener="#{planificacionBean.consultarPlanificacion}" value="Consultar" icon="fa fa-search"></p:commandButton>
+										<div class="ui-g-6">
+											<h:outputLabel>Seleccione Estado</h:outputLabel>
+											<p:selectOneMenu value="">
+												<f:selectItem itemLabel="-- Seleccione --" itemValue="" />
+												<f:selectItem itemLabel="Pendiente" itemValue="1" />
+												<f:selectItem itemLabel="Planificado" itemValue="2" />
+												<f:selectItem itemLabel="Aprobado" itemValue="3" />
+												<f:selectItem itemLabel="Rechazado" itemValue="4" />
+												<f:selectItem itemLabel="Ejecutado" itemValue="5" />
+												<f:selectItem itemLabel="Anulado" itemValue="6" />
+
+											</p:selectOneMenu>
+
 										</div>
 									</div>
-								</h:form>
-							</p:fieldset>
-							
-							<div class="ui-g-12">
-							
-							<h:form>
-							<p:dataTable
-								id="tbPlanificacion" 
-								var="plan" 
-								value="#{planificacionBean.planificacion}" 
-								paginator="true"
+								</div>
+								<div class="ui-g-12 bl-consultar">
+									<p:commandButton
+										actionListener="#{planificacionBean.consultarPlanificacion}"
+										value="Consultar" icon="fa fa-search"></p:commandButton>
+								</div>
+							</div>
+						</h:form>
+					</p:fieldset>
+
+					<div class="ui-g-12">
+
+						<h:form>
+							<p:dataTable id="tbPlanificacion" var="plan"
+								value="#{planificacionBean.planificacion}" paginator="true"
 								rows="10"
 								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-								resizableColumns="true"
-								rowsPerPageTemplate="5,10,15"
+								resizableColumns="true" rowsPerPageTemplate="5,10,15"
 								selection="#{dtSelectionView.selectedCar}"
 								rowKey="#{plan.idPlanificacion}">
-								
-							<p:column headerText="Código Planificación" style="text-align:center;">
-							        <h:outputText value="#{plan.idPlanificacion}" />
-							    </p:column>
-							 
-							    <p:column headerText="Periodo" style="text-align:center;">
-							        <h:outputText value="#{plan.nomPeriodo}" />
-							    </p:column>
-							 
-							    <p:column headerText="Fecha Creación" style="text-align:center;">
-							        <h:outputText value="#{plan.fechaCreacion}" />
-							    </p:column>
-							 
-							    <p:column headerText="Fecha Planificación" style="text-align:center;">
-							        <h:outputText value="#{plan.fechaPlanificacion}" />
-							    </p:column>
-							    <p:column headerText="Fecha Aprobación" style="text-align:center;">
-							        <h:outputText value="#{plan.fechaAprobacion}" />
-							    </p:column>
-							    <p:column headerText="Fecha Rechazo" style="text-align:center;">
-							        <h:outputText value="#{plan.fechaRechazo}" />
-							    </p:column>
-							    <p:column headerText="Fecha Anulacion" style="text-align:center;">
-							        <h:outputText value="#{plan.fechaAnulacion}" />
-							    </p:column>
-							    <p:column headerText="Fecha Ejecucion" style="text-align:center;">
-							        <h:outputText value="#{plan.fechaEjecucion}" />
-							    </p:column>
-							    <p:column headerText="Tipo Actividad" style="text-align:center;">
-							        <h:outputText value="#{plan.nomTipoActividad}" />
-							    </p:column>
-							    <p:column headerText="Actividad" style="text-align:center;">
-							        <h:outputText value="#{plan.nomActividad}" />
-							    </p:column>
-							    <p:column headerText="Estado" style="text-align:center;">
-							        <h:outputText value="#{plan.estado}" />
-							    </p:column>
-							    <p:column  headerText="Seleccionar" selectionMode="single" style="text-align:center"/>
+
+								<p:column headerText="Código Planificación"
+									style="text-align:center;">
+									<h:outputText value="#{plan.idPlanificacion}" />
+								</p:column>
+
+								<p:column headerText="Periodo" style="text-align:center;">
+									<h:outputText value="#{plan.nomPeriodo}" />
+								</p:column>
+
+								<p:column headerText="Fecha Creación" style="text-align:center;">
+									<h:outputText value="#{plan.fechaCreacion}" />
+								</p:column>
+
+								<p:column headerText="Fecha Planificación"
+									style="text-align:center;">
+									<h:outputText value="#{plan.fechaPlanificacion}" />
+								</p:column>
+								<p:column headerText="Fecha Aprobación"
+									style="text-align:center;">
+									<h:outputText value="#{plan.fechaAprobacion}" />
+								</p:column>
+								<p:column headerText="Fecha Rechazo" style="text-align:center;">
+									<h:outputText value="#{plan.fechaRechazo}" />
+								</p:column>
+								<p:column headerText="Fecha Anulacion"
+									style="text-align:center;">
+									<h:outputText value="#{plan.fechaAnulacion}" />
+								</p:column>
+								<p:column headerText="Fecha Ejecucion"
+									style="text-align:center;">
+									<h:outputText value="#{plan.fechaEjecucion}" />
+								</p:column>
+								<p:column headerText="Tipo Actividad" style="text-align:center;">
+									<h:outputText value="#{plan.nomTipoActividad}" />
+								</p:column>
+								<p:column headerText="Actividad" style="text-align:center;">
+									<h:outputText value="#{plan.nomActividad}" />
+								</p:column>
+								<p:column headerText="Estado" style="text-align:center;">
+									<h:outputText value="#{plan.estado}" />
+								</p:column>
+								<p:column headerText="Seleccionar" selectionMode="single"
+									style="text-align:center" />
 							</p:dataTable>
-							
-							</h:form>
-							</div>
-							<div class="ui-g-12 bl-consultar">
-								
-								<p:commandButton value="Nuevo" icon="fa fa-plus" onclick="PF('crearPlanificacion').show()">
-								</p:commandButton>
-								<p:button value="Planificar" icon="fa fa-check-circle">
-								</p:button>
-							</div>
-						</p:panel>
-								<p:dialog modal="true" header="Crear Planificación Actividad" height="400" width="60%" widgetVar="crearPlanificacion">
-									<p:growl id="msg" showDetail="true"/>
-									<h:form>
-										<div class="ui-g-12">
-											<div class="ui-g">
-											    <div class="ui-g-6">
-											    <h:outputLabel>Seleccione Periodo</h:outputLabel>
-											    	<p:selectOneMenu value="#{tipoActividadBean.planificacion.periodo.idPeriodo}">
-														<f:selectItem itemLabel="-- Seleccione --" itemValue="" />
-														<f:selectItems value="#{periodoBean.listaPeriodos}" var="p" itemValue="#{p.idPeriodo}"/>
-													</p:selectOneMenu>
-											    </div>
-											    <div class="ui-g-6">
-											    	<h:outputLabel>Seleccione Tipo Actividad</h:outputLabel>
-											    	<p:selectOneMenu id="tipoactividad" value="#{tipoActividadBean.idtipoactividad}">
-														<f:selectItem itemLabel="-- Seleccione --" itemValue="" />
-														<f:selectItems value="#{tipoActividadBean.listaTipoActividades}"/>
-														<p:ajax update="actividad"/>
-													</p:selectOneMenu>
-											    </div>
-											</div>
-										</div>
-										<div class="ui-g-12">
-											<h:outputLabel>Seleccione Actividad</h:outputLabel>
-											<p:selectOneMenu id="actividad" value="#{tipoActividadBean.planificacion.actividad.idActividad}">
-												<f:selectItem itemLabel="-- Seleccione --" itemValue="" />
-											    <f:selectItems value="#{tipoActividadBean.listaActividades}" var="c" itemValue="#{c.idActividad}"/>
-											</p:selectOneMenu>
-										</div>   
-										<div class="ui-g-12">
-											<p:commandButton actionListener="#{tipoActividadBean.crearPlanificacion}" value="Guardar" update=":msg" icon="fa fa-plus"></p:commandButton>
-										</div>    
-									</h:form>
-								</p:dialog>
+
+						</h:form>
 					</div>
-				</div>
+					<div class="ui-g-12 bl-consultar">
+
+						<p:commandButton value="Nuevo" icon="fa fa-plus"
+							onclick="PF('crearPlanificacion').show()">
+						</p:commandButton>
+						<p:button value="Planificar" icon="fa fa-check-circle">
+						</p:button>
+					</div>
+				</p:panel>
+
+				<p:dialog modal="true" header="Crear Planificación Actividad"
+					height="400" width="60%" widgetVar="crearPlanificacion">
+					<p:growl id="msg" showDetail="true" />
+					<h:form>
+						<div class="ui-g-12">
+							<div class="ui-g">
+								<div class="ui-g-6">
+									<h:outputLabel>Seleccione Periodo</h:outputLabel>
+									<p:selectOneMenu
+										value="#{tipoActividadBean.planificacion.periodo.idPeriodo}">
+										<f:selectItem itemLabel="-- Seleccione --" itemValue="" />
+										<f:selectItems value="#{periodoBean.listaPeriodos}" var="p"
+											itemValue="#{p.idPeriodo}" />
+									</p:selectOneMenu>
+								</div>
+								<div class="ui-g-6">
+									<h:outputLabel>Seleccione Tipo Actividad</h:outputLabel>
+									<p:selectOneMenu id="tipoactividad"
+										value="#{tipoActividadBean.idtipoactividad}">
+										<f:selectItem itemLabel="-- Seleccione --" itemValue="" />
+										<f:selectItems
+											value="#{tipoActividadBean.listaTipoActividades}" />
+										<p:ajax update="actividad" />
+									</p:selectOneMenu>
+								</div>
+							</div>
+						</div>
+						<div class="ui-g-12">
+							<h:outputLabel>Seleccione Actividad</h:outputLabel>
+							<p:selectOneMenu id="actividad"
+								value="#{tipoActividadBean.planificacion.actividad.idActividad}">
+								<f:selectItem itemLabel="-- Seleccione --" itemValue="" />
+								<f:selectItems value="#{tipoActividadBean.listaActividades}"
+									var="c" itemValue="#{c.idActividad}" />
+							</p:selectOneMenu>
+						</div>
+						<div class="ui-g-12">
+							<p:commandButton
+								actionListener="#{tipoActividadBean.crearPlanificacion}"
+								value="Guardar" update=":msg" icon="fa fa-plus"></p:commandButton>
+						</div>
+					</h:form>
+				</p:dialog>
+			</div>
 		</div>
 	</ui:define>
 </ui:composition>
