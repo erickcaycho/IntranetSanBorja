@@ -20,14 +20,14 @@
 									<div class="ui-g">
 										<div class="ui-g-6">
 											<h:outputLabel>Seleccione Periodo</h:outputLabel>
-											<p:selectOneMenu value="#{planificacionActividadBean.planificacion.periodo.idPeriodo}">
+											<p:selectOneMenu value="#{planificacionActividadBean.planificacion.periodo.idPeriodo}" required="true">
 												<f:selectItem itemLabel="-- Seleccione --" itemValue="" />
 												<f:selectItems value="#{periodoBean.listaPeriodos}"  var="p" itemValue="#{p.idPeriodo}"  />
 											</p:selectOneMenu>
 										</div>
 										<div class="ui-g-6">
 											<h:outputLabel>Seleccione Estado</h:outputLabel>
-											<p:selectOneMenu value="#{planificacionActividadBean.planificacion.estado}">
+											<p:selectOneMenu value="#{planificacionActividadBean.planificacion.estado}" required="true">
 												<f:selectItem itemLabel="-- Seleccione --" itemValue="" />
 												<f:selectItem itemLabel="Pendiente" itemValue="1" />
 												<f:selectItem itemLabel="Planificado" itemValue="2" />
@@ -53,6 +53,7 @@
 					<div class="ui-g-12">
 
 						<h:form>
+						<p:outputPanel id="planificacionContainer">
 							<p:dataTable id="tbPlanificacion" var="plan"
 								value="#{planificacionActividadBean.listaPlanificacion}" paginator="true"
 								rows="10"
@@ -106,7 +107,7 @@
 								<p:column headerText="Seleccionar" selectionMode="single"
 									style="text-align:center" />
 							</p:dataTable>
-
+						</p:outputPanel>
 						</h:form>
 					</div>
 					<div class="ui-g-12 bl-consultar">
