@@ -113,7 +113,7 @@
 					</div>
 					<div class="ui-g-12 bl-consultar">
 
-						<p:commandButton value="Nuevo" icon="fa fa-plus"
+						<p:commandButton id="btnNuevo" value="Nuevo" icon="fa fa-plus"
 							onclick="PF('crearPlanificacion').show()">
 						</p:commandButton>
 						<p:button value="Planificar" icon="fa fa-check-circle">
@@ -124,12 +124,12 @@
 				<p:dialog modal="true" header="Crear Planificación Actividad"
 					height="400" width="60%" widgetVar="crearPlanificacion">
 					<p:growl id="msg" showDetail="true" />
-					<h:form>
+					<h:form id="formCrear">
 						<div class="ui-g-12">
 							<div class="ui-g">
 								<div class="ui-g-6">
-									<h:outputLabel>Seleccione Periodo</h:outputLabel>
-									<p:selectOneMenu
+									<h:outputLabel>Periodo Seleccionado</h:outputLabel>
+									<p:selectOneMenu disabled="true"
 										value="#{planificacionActividadBean.planificacion.periodo.idPeriodo}">
 										<f:selectItem itemLabel="-- Seleccione --" itemValue="" />
 										<f:selectItems value="#{periodoBean.listaPeriodos}" var="p"

@@ -7,11 +7,11 @@
 
 <h:head>
 	<title><ui:insert name="title">San Borja</ui:insert></title>
+	<h:outputScript library="js" name="planificacion.js"></h:outputScript>
 	<STYLE type="text/css">
 body {
-	/* The image used
-	background: url("images/fondo2.jpg") no-repeat center center fixed;
-	 */
+	font-size:11px;	 
+	background: url("#{facesContext.externalContext.requestContextPath}/images/fondo2.jpg") no-repeat center center fixed;
 	background-size: cover;
 }
 
@@ -44,6 +44,8 @@ label {
 	width: 95%;
 }
 </STYLE>
+
+
 </h:head>
 
 <body>
@@ -61,10 +63,10 @@ label {
 							<p:submenu label="Planificación de Actividades">
 								<p:menuitem value="Registrar Planificación"
 									outcome="/pages/educacionculturaturismo/mantePlanificacion.xhtml"
-									icon="ui-icon-disk" />
+									 />
 								<p:menuitem value="Salir"
 									outcome="/pages/educacionculturaturismo/mantePlanificacion.xhtml"
-									icon="ui-icon-disk" />
+									 />
 							</p:submenu>
 						</p:menu>
 					</p:panel>

@@ -5,13 +5,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.xml.transform.Transformer;
-
 import org.apache.log4j.Logger;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.transform.Transformers;
 
 import com.muni.sanborja.educacionculturaturismo.dao.PlanificacionDao;
 import com.muni.sanborja.educacionculturaturismo.modelo.Planificacion;
@@ -26,7 +24,6 @@ public class PlanificacionDaoImpl implements PlanificacionDao, Serializable {
 	@Override
 	public boolean create(Planificacion planificacion) {
 		boolean flag;
-		
 		Session session = HibernateSessionFactory.getSessionFactory().openSession();
 		
 		try {
@@ -98,6 +95,42 @@ public class PlanificacionDaoImpl implements PlanificacionDao, Serializable {
 		}
 		
 		return plan;
+	}
+
+	@Override
+	public boolean validarActividadPorPeriodo(int idPeriodo, int idTipoActividad, int idActividad) {
+		
+		boolean flag;
+		Session session = HibernateSessionFactory.getSessionFactory().openSession();
+		SQLQuery query = null;
+		
+		try {
+			query = session.createSQLQuery("CALL validarActividadPorPeriodo(:idperiodo, :idtipoactividad, :idactividad)");
+			query.setParameter("idperiodo", idPeriodo);
+			query.setParameter("idtipoactividad", idTipoActividad);
+			query.setParameter("idactividad", idActividad);
+			
+			Object resultado = query.uniqueResult();
+			
+			int numResultado = Integer.parseInt(resultado.toString());
+			
+			if(numResultado == 0){
+				flag=true;
+			}else{
+				flag=false;
+			}
+			
+			log.info("Resultado de validarActividadPorPeriodo: " + resultado.toString() + "- Flag: "+ flag);
+			
+			
+		} catch (Exception e) {
+			log.error("Error Resultado de validarActividadPorPeriodo " +e.getMessage());
+			  e.getMessage();
+			  
+			  flag=false;
+		}
+		
+		return flag;
 	}
 
 }

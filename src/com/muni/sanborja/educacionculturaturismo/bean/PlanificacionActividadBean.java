@@ -184,30 +184,44 @@ public class PlanificacionActividadBean implements Serializable {
 			
 			PlanificacionDao planificacionDao = new PlanificacionDaoImpl();
 			
+			log.info("Captura id_actividad: " +planificacion.getActividad().getIdActividad());
+			log.info("Captura id_tipoactividad: " + idtipoactividad);
+			log.info("Captura id_periodo: " + planificacion.getPeriodo().getIdPeriodo());
+			
+			log.info(" CAPTURA REAL: " + planificacionDao.validarActividadPorPeriodo(planificacion.getPeriodo().getIdPeriodo(), idtipoactividad, planificacion.getActividad().getIdActividad()));
+			
 			String msg;
-			if(planificacionDao.create(planificacion)){
-				msg ="Se creó correctamente la planificación";
-				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,msg,null);
-				FacesContext.getCurrentInstance().addMessage(null, message);
+			
+			if(planificacionDao.validarActividadPorPeriodo(planificacion.getPeriodo().getIdPeriodo(), idtipoactividad, planificacion.getActividad().getIdActividad())){
 				
-				log.info("Creado correctamente");
-				
+				if(planificacionDao.create(planificacion)){
+					msg ="Se creó correctamente la planificación";
+					FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,msg,null);
+					FacesContext.getCurrentInstance().addMessage(null, message);
+					
+					log.info("Creado correctamente");
+					
+				}else{
+					msg ="Ha ocurrido un inconveniente con la creación de la planificación. Si el problema persiste, reportar el error al siguiente correo: soporte.sanborja@munisanborja.edu.pe";
+					FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,msg,null);
+					FacesContext.getCurrentInstance().addMessage(null, message);
+					
+					log.error("Error al crear");
+				}
 				
 			}else{
-				msg ="Ha ocurrido un inconveniente con la creación de la planificación. Si el problema persiste, reportar el error al siguiente correo: soporte.sanborja@munisanborja.edu.pe";
+				msg ="Ya existe la actividad en el Periodo seleccionado";
 				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,msg,null);
 				FacesContext.getCurrentInstance().addMessage(null, message);
 				
 				log.error("Error al crear");
 			}
 			
-			
 		} catch (Exception e) {
 			log.error("Error:" + e.getMessage());
 			log.error(e.getStackTrace());
 		}
 	}
-	
 	
 	
 	public void consultarPlanificacion(){
