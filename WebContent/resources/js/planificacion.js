@@ -3,11 +3,8 @@ $(document).ready(function(){
 	
 	$( "#btnNuevo" ).click(function() {
 		
-	    var nodeName = document
-	       .getElementById('form:tipoactividad_input').nodeName;
-	       alert(nodeName);
+	    var nodeName = document.getElementById('form:tipoactividad_input');
 	       
-	       console.log(nodeName);
 
 		
 	});

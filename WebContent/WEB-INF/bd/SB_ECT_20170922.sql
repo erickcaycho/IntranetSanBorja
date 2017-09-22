@@ -92,7 +92,7 @@ CREATE TABLE `planificacion` (
   KEY `fk_planificacion_actividad1_idx` (`idactividad`),
   CONSTRAINT `fk_planificacion_actividad1` FOREIGN KEY (`idactividad`) REFERENCES `actividad` (`idactividad`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_planificacion_periodo1` FOREIGN KEY (`idperiodo`) REFERENCES `periodo` (`idperiodo`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=141 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -101,7 +101,7 @@ CREATE TABLE `planificacion` (
 
 LOCK TABLES `planificacion` WRITE;
 /*!40000 ALTER TABLE `planificacion` DISABLE KEYS */;
-INSERT INTO `planificacion` VALUES (1,'2017-09-19',NULL,NULL,NULL,1,4,NULL,1,NULL),(2,'2017-09-19',NULL,NULL,NULL,2,6,NULL,1,NULL),(3,'2017-09-19',NULL,NULL,NULL,1,66,NULL,1,NULL),(4,'2017-09-19',NULL,NULL,NULL,1,66,NULL,1,NULL),(5,'2017-09-19',NULL,NULL,NULL,2,51,NULL,1,NULL);
+INSERT INTO `planificacion` VALUES (1,'2017-09-19',NULL,NULL,NULL,1,4,NULL,1,NULL),(2,'2017-09-19',NULL,NULL,NULL,2,6,NULL,1,NULL),(3,'2017-09-19',NULL,NULL,NULL,1,66,NULL,1,NULL),(4,'2017-09-19',NULL,NULL,NULL,1,66,NULL,1,NULL),(5,'2017-09-19',NULL,NULL,NULL,2,51,NULL,1,NULL),(6,'2017-09-19',NULL,NULL,NULL,4,53,NULL,1,NULL),(7,'2017-09-19',NULL,NULL,NULL,2,66,NULL,1,NULL),(8,'2017-09-19',NULL,NULL,NULL,3,2,NULL,1,NULL),(9,'2017-09-19',NULL,NULL,NULL,4,45,NULL,1,NULL),(10,'2017-09-19',NULL,NULL,NULL,4,43,NULL,1,NULL),(11,'2017-09-19',NULL,NULL,NULL,4,43,NULL,1,NULL),(12,'2017-09-19',NULL,NULL,NULL,4,43,NULL,1,NULL),(13,'2017-09-20',NULL,NULL,NULL,2,3,NULL,1,NULL),(14,'2017-09-20',NULL,NULL,NULL,2,3,NULL,1,NULL),(15,'2017-09-20',NULL,NULL,NULL,2,3,NULL,1,NULL),(16,'2017-09-20',NULL,NULL,NULL,2,3,NULL,1,NULL),(17,'2017-09-20',NULL,NULL,NULL,2,3,NULL,1,NULL),(18,'2017-09-20',NULL,NULL,NULL,2,3,NULL,1,NULL),(19,'2017-09-20',NULL,NULL,NULL,2,3,NULL,1,NULL),(20,'2017-09-20',NULL,NULL,NULL,2,3,NULL,1,NULL),(21,'2017-09-20',NULL,NULL,NULL,2,3,NULL,1,NULL),(22,'2017-09-20',NULL,NULL,NULL,2,3,NULL,1,NULL),(23,'2017-09-20',NULL,NULL,NULL,2,3,NULL,1,NULL),(24,'2017-09-20',NULL,NULL,NULL,2,3,NULL,1,NULL),(25,'2017-09-20',NULL,NULL,NULL,2,3,NULL,1,NULL),(26,'2017-09-20',NULL,NULL,NULL,2,3,NULL,1,NULL),(27,'2017-09-20',NULL,NULL,NULL,2,3,NULL,1,NULL),(28,'2017-09-20',NULL,NULL,NULL,2,3,NULL,1,NULL),(29,'2017-09-20',NULL,NULL,NULL,2,3,NULL,1,NULL),(30,'2017-09-20',NULL,NULL,NULL,2,3,NULL,1,NULL),(31,'2017-09-20',NULL,NULL,NULL,2,3,NULL,1,NULL),(32,'2017-09-20',NULL,NULL,NULL,2,3,NULL,1,NULL),(33,'2017-09-20',NULL,NULL,NULL,2,3,NULL,1,NULL),(34,'2017-09-20',NULL,NULL,NULL,2,3,NULL,1,NULL),(35,'2017-09-21',NULL,NULL,NULL,1,50,NULL,1,NULL),(36,'2017-09-22',NULL,NULL,NULL,2,1,NULL,1,NULL),(37,'2017-09-22',NULL,NULL,NULL,2,1,NULL,1,NULL),(38,'2017-09-22',NULL,NULL,NULL,2,1,NULL,1,NULL),(39,'2017-09-22',NULL,NULL,NULL,2,1,NULL,1,NULL),(40,'2017-09-22',NULL,NULL,NULL,2,1,NULL,1,NULL),(41,'2017-09-22',NULL,NULL,NULL,2,1,NULL,1,NULL),(42,'2017-09-22',NULL,NULL,NULL,2,1,NULL,1,NULL),(43,'2017-09-22',NULL,NULL,NULL,2,1,NULL,1,NULL),(44,'2017-09-22',NULL,NULL,NULL,2,1,NULL,1,NULL),(45,'2017-09-22',NULL,NULL,NULL,2,1,NULL,1,NULL),(46,'2017-09-22',NULL,NULL,NULL,2,1,NULL,1,NULL),(47,'2017-09-22',NULL,NULL,NULL,2,1,NULL,1,NULL),(48,'2017-09-22',NULL,NULL,NULL,2,1,NULL,1,NULL),(49,'2017-09-22',NULL,NULL,NULL,2,4,NULL,1,NULL),(50,'2017-09-22',NULL,NULL,NULL,2,56,NULL,1,NULL),(51,'2017-09-22',NULL,NULL,NULL,2,1,NULL,1,NULL),(52,'2017-09-22',NULL,NULL,NULL,2,1,NULL,1,NULL),(53,'2017-09-22',NULL,NULL,NULL,2,33,NULL,1,NULL),(54,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(55,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(56,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(57,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(58,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(59,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(60,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(61,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(62,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(63,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(64,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(65,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(66,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(67,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(68,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(69,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(70,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(71,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(72,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(73,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(74,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(75,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(76,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(77,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(78,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(79,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(80,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(81,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(82,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(83,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(84,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(85,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(86,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(87,'2017-09-22',NULL,NULL,NULL,2,51,NULL,1,NULL),(88,'2017-09-22',NULL,NULL,NULL,2,54,NULL,1,NULL),(89,'2017-09-22',NULL,NULL,NULL,1,1,NULL,1,NULL),(90,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(91,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(92,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(93,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(94,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(95,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(96,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(97,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(98,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(99,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(100,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(101,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(102,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(103,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(104,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(105,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(106,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(107,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(108,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(109,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(110,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(111,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(112,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(113,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(114,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(115,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(116,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(117,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(118,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(119,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(120,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(121,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(122,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(123,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(124,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(125,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(126,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(127,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(128,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(129,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(130,'2017-09-22',NULL,NULL,NULL,1,59,NULL,1,NULL),(131,'2017-09-22',NULL,NULL,NULL,1,59,NULL,1,NULL),(132,'2017-09-22',NULL,NULL,NULL,1,59,NULL,1,NULL),(133,'2017-09-22',NULL,NULL,NULL,1,66,NULL,1,NULL),(134,'2017-09-22',NULL,NULL,NULL,1,66,NULL,1,NULL),(135,'2017-09-22',NULL,NULL,NULL,1,66,NULL,1,NULL),(136,'2017-09-22',NULL,NULL,NULL,1,26,NULL,1,NULL),(137,'2017-09-22',NULL,NULL,NULL,1,24,NULL,1,NULL),(138,'2017-09-22',NULL,NULL,NULL,1,27,NULL,1,NULL),(139,'2017-09-22',NULL,NULL,NULL,1,51,NULL,1,NULL),(140,'2017-09-22',NULL,NULL,NULL,1,53,NULL,1,NULL);
 /*!40000 ALTER TABLE `planificacion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -129,6 +129,105 @@ LOCK TABLES `tipoactividad` WRITE;
 INSERT INTO `tipoactividad` VALUES (1,'Taller','Posicionarnos en la comunidad como la mejor opción de talleres artísticos y culturales, obteniendo un crecimiento sostenido con el tiempo'),(2,'Visita Turística','El objetivo de los circuitos es promocionar los atractivos turísticos con los que cuenta el distrito de San Borja, lograr que el distrito no solo sea conocido por sus parques verdes sino también porque tiene turismo para ofrecer y apoyar.'),(3,'Charla','Fomentar la cultura a los vecinos de San Borja'),(4,'Programa Extensión Bibliotecaria','Fomentar la educación, arte y cultura a los vecinos de San Borja'),(5,'Evento cultural','Fomentar la educación, arte y cultura a los vecinos de San Borja');
 /*!40000 ALTER TABLE `tipoactividad` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping routines for database 'educacionculturaturismosb'
+--
+/*!50003 DROP PROCEDURE IF EXISTS `obtenerPlanificacionXPeriodoXActividad` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerPlanificacionXPeriodoXActividad`(IN Val_idperiodo INT, IN Val_estado INT)
+    DETERMINISTIC
+BEGIN
+			IF (Val_idperiodo !=0) AND (Val_estado !=0)  THEN
+			
+				Select pl.idplanificacion as idplanificacion,
+					p.nomperiodo as nomperiodo,
+					pl.fechacreacion as fechacreacion,
+					pl.fechaplanificacion as fechaplanificacion,
+					pl.fechaaprobacion as fechaaprobacion,
+					pl.fecharechazo as fecharechazo,
+					pl.fechaanulacion as fechaanulacion,
+					pl.fechaejecucion as fechaejecucion,
+					a.nomactividad as nomactividad,
+					ta.nomtipoactividad as nomtipoactividad, 
+					case pl.estado 
+					when 1 then "Pendiente" 
+					when 2 then "Planificado"
+					when 3 then "Aprobado"
+					when 4 then "Rechazado"
+					when 5 then "Ejecutado"
+					when 6 then "Anulado"
+					end  as estado
+					
+					from planificacion pl inner join periodo p on pl.idperiodo=p.idperiodo
+					inner join actividad a on pl.idactividad=a.idactividad
+					inner join tipoactividad ta on a.idtipoactividad = ta.idtipoactividad
+					
+					 WHERE p.idperiodo=Val_idperiodo and pl.estado=Val_estado;
+			ELSE 
+				  
+					Select pl.idplanificacion as idplanificacion,
+					p.nomperiodo as nomperiodo,
+					pl.fechacreacion as fechacreacion,
+					pl.fechaplanificacion as fechaplanificacion,
+					pl.fechaaprobacion as fechaaprobacion,
+					pl.fecharechazo as fecharechazo,
+					pl.fechaanulacion as fechaanulacion,
+					pl.fechaejecucion as fechaejecucion,
+					a.nomactividad as nomactividad,
+					ta.nomtipoactividad as nomtipoactividad, 
+					case pl.estado 
+					when 1 then "Pendiente" 
+					when 2 then "Planificado"
+					when 3 then "Aprobado"
+					when 4 then "Rechazado"
+					when 5 then "Ejecutado"
+					when 6 then "Anulado"
+					end  as estado
+					
+					from planificacion pl inner join periodo p on pl.idperiodo=p.idperiodo
+					inner join actividad a on pl.idactividad=a.idactividad
+					inner join tipoactividad ta on a.idtipoactividad = ta.idtipoactividad;
+					
+			END IF;
+        END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `validarActividadPorPeriodo` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `validarActividadPorPeriodo`(IN Val_idperiodo INT, IN Val_idtipoactividad INT, IN Val_idactividad INT)
+    DETERMINISTIC
+BEGIN
+			Select count(pl.idplanificacion) as flagactividadperiodo
+			from planificacion pl inner join periodo p on pl.idperiodo=p.idperiodo and p.idperiodo=Val_idperiodo
+			inner join actividad a on pl.idactividad=a.idactividad and a.idactividad=Val_idactividad
+			inner join tipoactividad ta on a.idtipoactividad = ta.idtipoactividad and ta.idtipoactividad=Val_idtipoactividad;
+			 
+        END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -139,4 +238,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-19 13:18:10
+-- Dump completed on 2017-09-22 11:43:46
