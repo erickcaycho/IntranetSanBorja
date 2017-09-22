@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+<ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
+	<ui:define name="content">
+		<div class="ui-g-12 ui-g-nopad">
+			<div class="ui-g">
+				<p:panel header="Registrar Planificación de Actividad por Periodo"
+					style="text-align:center; width:100%">
+					<p:fieldset legend="Crear Plan" style="margin-bottom:20px">
+						<h:form>
+							<div class="ui-g bl-creada">
+								<div class="ui-g-12">
+									<div class="ui-g">
+										<div class="ui-g-12">
+											<h:panelGrid columns="10" cellpadding="5">
+												<p:outputLabel value="Seleccione Periodo" />
+												<p:selectOneMenu value="#{planificacionActividadBean.planificacion.periodo.idPeriodo}" required="true">
+													<f:selectItem itemLabel="-- Seleccione --" itemValue="" />
+													<f:selectItems value="#{periodoBean.listaPeriodos}"  var="p" itemValue="#{p.idPeriodo}"  />
+												</p:selectOneMenu>
+												
+												<p:outputLabel value="Seleccione Tipo Actividad"/>
+												<p:selectOneMenu id="tipoactividad" value="#{planificacionActividadBean.idtipoactividad}">
+													<f:selectItem itemLabel="-- Seleccione --" itemValue="" />
+													<f:selectItems
+														value="#{planificacionActividadBean.listaTipoActividades}" />
+													<p:ajax update="actividad" />
+												</p:selectOneMenu>
+												<p:commandButton actionListener="#{planificacionActividadBean.crearPlan}" value="Guardar" update=":msg" icon="fa fa-plus">
+												</p:commandButton>
+											</h:panelGrid>
+											
+											<h:panelGrid columns="10" cellpadding="5">
+												<p:outputLabel value="Seleccione Actividad" />
+												<p:selectOneMenu id="actividad" value="#{planificacionActividadBean.planificacion.actividad.idActividad}">
+													<f:selectItem itemLabel="-- Seleccione --" itemValue="" />
+													<f:selectItems value="#{planificacionActividadBean.listaActividades}"
+														var="c" itemValue="#{c.idActividad}" />
+												</p:selectOneMenu>
+											</h:panelGrid>
+										</div>
+									</div>
+								</div>
+							</div>
+						</h:form>
+					</p:fieldset>
+					 
+				</p:panel>
+
+				<p:dialog modal="true" header="Crear Planificación Actividad"
+					height="400" width="60%" widgetVar="crearPlanificacion">
+					<p:growl id="msg" showDetail="true" />
+					<h:form id="formCrear">
+						<div class="ui-g-12">
+							<div class="ui-g">
+								<div class="ui-g-10">
+									<h:panelGrid columns="2" cellpadding="5">
+										<p:outputLabel value="Seleccione Periodo"/>
+										<p:selectOneMenu disabled="false"
+											value="#{planificacionActividadBean.planificacion.periodo.idPeriodo}">
+											<f:selectItem itemLabel="-- Seleccione --" itemValue="" />
+											<f:selectItems value="#{periodoBean.listaPeriodos}" var="p"
+												itemValue="#{p.idPeriodo}" />
+										</p:selectOneMenu>
+										
+										<p:outputLabel value="Seleccione Tipo Actividad"/>
+									
+									</h:panelGrid>
+									<h:outputLabel>Periodo Seleccionado</h:outputLabel>
+									<p:selectOneMenu disabled="true"
+										value="#{planificacionActividadBean.planificacion.periodo.idPeriodo}">
+										<f:selectItem itemLabel="-- Seleccione --" itemValue="" />
+										<f:selectItems value="#{periodoBean.listaPeriodos}" var="p"
+											itemValue="#{p.idPeriodo}" />
+									</p:selectOneMenu>
+								</div>
+								<div class="ui-g-6">
+									<h:outputLabel>Seleccione Tipo Actividad</h:outputLabel>
+									
+								</div>
+							</div>
+						</div>
+						<div class="ui-g-12">
+							<h:outputLabel>Seleccione Actividad</h:outputLabel>
+							
+						</div>
+						<div class="ui-g-12">
+							<p:commandButton
+								actionListener="#{planificacionActividadBean.crearPlan}"
+								value="Guardar" update=":msg" icon="fa fa-plus"></p:commandButton>
+						</div>
+					</h:form>
+				</p:dialog>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

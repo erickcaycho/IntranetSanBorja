@@ -28,5 +28,9 @@
 	<listener>
 		<listener-class>com.sun.faces.config.ConfigureListener</listener-class>
 	</listener>
+	<session-config>
+      <!-- Session idle timeout in min. -->
+      <session-timeout>30</session-timeout>
+    </session-config>
 	
 </web-app>

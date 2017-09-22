@@ -174,8 +174,11 @@ public class PlanificacionActividadBean implements Serializable {
 	public void setListaPlanificacion(List<PlanificacionPeriodoActividad> listaPlanificacion) {
 		this.listaPlanificacion = listaPlanificacion;
 	}
+	
+	
+	
 
-	public void crearPlanificacion(){
+	public void crearPlan(){
 		try {
 			
 			Date date = new Date();
@@ -195,6 +198,9 @@ public class PlanificacionActividadBean implements Serializable {
 			if(planificacionDao.validarActividadPorPeriodo(planificacion.getPeriodo().getIdPeriodo(), idtipoactividad, planificacion.getActividad().getIdActividad())){
 				
 				if(planificacionDao.create(planificacion)){
+					
+					planificacionDao.listarPlanificacionPeriodoActividad(planificacion.getPeriodo().getIdPeriodo(),planificacion.getEstado());
+					
 					msg ="Se creó correctamente la planificación";
 					FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,msg,null);
 					FacesContext.getCurrentInstance().addMessage(null, message);
@@ -224,7 +230,7 @@ public class PlanificacionActividadBean implements Serializable {
 	}
 	
 	
-	public void consultarPlanificacion(){
+	public void consultarPlan(){
 		log.info("---CONSULTAR ---");
 		log.info("idPeriodo_capturado: " +planificacion.getPeriodo().getIdPeriodo());
 		log.info("Estado_capturado: " +planificacion.getEstado());

@@ -21,8 +21,12 @@ body {
 	text-align: left;
 }
 
+.ui-g.bl-creada {
+	height: 100px;
+}
+
 .ui-g.bl-busqueda {
-	height: 130px;
+	height: 80px;
 }
 
 label {
@@ -60,8 +64,11 @@ label {
 				<h:form>
 					<p:panel header="Módulo de Educación, Cultura y Turismo">
 						<p:menu>
-							<p:submenu label="Planificación de Actividades">
-								<p:menuitem value="Registrar Planificación"
+							<p:submenu label="Plan de Actividades">
+								<p:menuitem value="Registrar Plan"
+									outcome="/pages/educacionculturaturismo/crearPlanificacion.xhtml"
+									 />
+								<p:menuitem value="Consultar Plan"
 									outcome="/pages/educacionculturaturismo/mantePlanificacion.xhtml"
 									 />
 								<p:menuitem value="Salir"
