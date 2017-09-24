@@ -10,4 +10,5 @@ public interface PlanificacionDao {
 	public boolean create(Planificacion planificacion);
 	public List<PlanificacionPeriodoActividad> listarPlanificacionPeriodoActividad(int idperiodo, int estado);
 	public boolean validarActividadPorPeriodo(int idPeriodo, int idTipoActividad, int idActividad);
+	public boolean delete(Planificacion planificacion);
 }

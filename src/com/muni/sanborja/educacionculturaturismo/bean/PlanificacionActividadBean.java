@@ -8,7 +8,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 
@@ -29,7 +29,7 @@ import com.muni.sanborja.educacionculturaturismo.modelo.PlanificacionPeriodoActi
 import com.muni.sanborja.educacionculturaturismo.modelo.TipoActividad;
 
 @ManagedBean(name = "planificacionActividadBean")
-@SessionScoped
+@ViewScoped
 public class PlanificacionActividadBean implements Serializable {
 	
 	public static Logger log = Logger.getLogger(PlanificacionActividadBean.class);
@@ -43,7 +43,7 @@ public class PlanificacionActividadBean implements Serializable {
 	private TipoActividad tipoActividad;
 
 	private Planificacion planificacion = new Planificacion();
-	private PlanificacionPeriodoActividad plan = new PlanificacionPeriodoActividad();
+	private PlanificacionPeriodoActividad selectedPlan;
 	
 	private int idperiodo;
 	private int idtipoactividad;
@@ -53,8 +53,6 @@ public class PlanificacionActividadBean implements Serializable {
 	@PostConstruct
 	public void init() {
 	    planificacion = new Planificacion();
-	    plan = new PlanificacionPeriodoActividad();
-	    
 	    planificacion.setPeriodo(new Periodo());
 	    planificacion.setActividad(new Actividad());
 	    
@@ -92,12 +90,12 @@ public class PlanificacionActividadBean implements Serializable {
 		this.estado = estado;
 	}
 	
-	public PlanificacionPeriodoActividad getPlan() {
-		return plan;
+	public PlanificacionPeriodoActividad getSelectedPlan() {
+		return selectedPlan;
 	}
 
-	public void setPlan(PlanificacionPeriodoActividad plan) {
-		this.plan = plan;
+	public void setSelectedPlan(PlanificacionPeriodoActividad selectedPlan) {
+		this.selectedPlan = selectedPlan;
 	}
 
 	public List<SelectItem> getListaPeriodos() {
@@ -170,7 +168,7 @@ public class PlanificacionActividadBean implements Serializable {
 	public void setPlanificacion(Planificacion planificacion) {
 		this.planificacion = planificacion;
 	}
-
+	
 	
 	public List<PlanificacionPeriodoActividad> getListaPlanificacion() {
 		
@@ -252,10 +250,39 @@ public class PlanificacionActividadBean implements Serializable {
 		
 	}
 	
-	public void eliminarPlan(PlanificacionPeriodoActividad plan) {
-		log.info("---ELIMINAR PLAN SELECCIONADO PARTE 2---");
-		
-		log.info("obtengoID 4: " + plan.getIdPlanificacion());
+	public void eliminarPlan() {
+		try {
+			log.info("---ELIMINAR PLAN SELECCIONADO---");
+			
+			PlanificacionDao planificacionDao = new PlanificacionDaoImpl();
+			log.info("Captura id_Planificacion: " +selectedPlan.getIdPlanificacion());
+			Planificacion objPlanificacion = new Planificacion();
+			objPlanificacion.setIdPlanificacion(selectedPlan.getIdPlanificacion());			
+	
+			String msg;
+				
+			if(planificacionDao.delete(objPlanificacion)){
+				
+				planificacionDao.listarPlanificacionPeriodoActividad(planificacion.getPeriodo().getIdPeriodo(),planificacion.getEstado());
+				
+				msg ="Se eliminó correctamente la planificación";
+				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,msg,null);
+				FacesContext.getCurrentInstance().addMessage(null, message);
+				
+				log.info("Eliminiado correctamente");
+				
+			}else{
+				msg ="Ha ocurrido un inconveniente con la eliminación de la planificación. Si el problema persiste, reportar el error al siguiente correo: soporte.sanborja@munisanborja.edu.pe";
+				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,msg,null);
+				FacesContext.getCurrentInstance().addMessage(null, message);
+				
+				log.error("Error al eliminar");
+			}
+			
+		} catch (Exception e) {
+			log.error("Error:" + e.getMessage());
+			log.error(e.getStackTrace());
+		}
 	}
 	
 }

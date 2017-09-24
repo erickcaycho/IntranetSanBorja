@@ -133,4 +133,32 @@ public class PlanificacionDaoImpl implements PlanificacionDao, Serializable {
 		return flag;
 	}
 
+	public boolean delete(Planificacion planificacion) {
+		
+		boolean flag;
+		Session session = HibernateSessionFactory.getSessionFactory().openSession();
+		
+		try {
+			session.beginTransaction();
+			if(planificacion == null)
+				log.info("Id de Planificación is null");
+			
+			session.delete(planificacion);
+			session.beginTransaction().commit();
+			log.info("Eliminado correctamente");
+			session.close();
+			
+			flag=true;
+			
+		} catch (Exception e) {
+			flag=false;
+			session.beginTransaction().rollback();
+			
+			log.error("error " +e.getMessage());
+			  e.getMessage();
+		}
+		
+		return flag;
+	}
+
 }

@@ -53,7 +53,7 @@
 							<p:dataTable id="tbPlanificacion" 
 								var="plan" 
 								value="#{planificacionActividadBean.listaPlanificacion}"  
-								selection="#{planificacionActividadBean.planificacion}" 
+								selection="#{planificacionActividadBean.selectedPlan}" 
 								rowKey="#{plan.idPlanificacion}" 
 								
 								paginator="true"
@@ -106,14 +106,15 @@
 								<p:column headerText="Seleccionar" selectionMode="single" style="text-align:center" />
 							</p:dataTable>
 						</p:outputPanel>
-						
-						</h:form>
-					</div>
 						<div class="ui-g-12 bl-consultar">
 							<p:button value="Planificar" icon="fa fa-check-circle">
 							</p:button>
-							<p:commandButton value="Eliminar 10" actionListener="#{planificacionActividadBean.eliminarPlan(plan)}" update=":frmLista:tbPlanificacion" />
+							<p:commandButton value="Eliminar 10" actionListener="#{planificacionActividadBean.eliminarPlan}"  update=":frmLista:tbPlanificacion">
+							</p:commandButton>
 						</div>
+						
+						</h:form>
+					</div>
 				</p:panel>
 				
 			</div>
