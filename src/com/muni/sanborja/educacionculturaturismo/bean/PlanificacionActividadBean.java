@@ -29,7 +29,7 @@ import com.muni.sanborja.educacionculturaturismo.modelo.PlanificacionPeriodoActi
 import com.muni.sanborja.educacionculturaturismo.modelo.TipoActividad;
 
 @ManagedBean(name = "planificacionActividadBean")
-@SessionScoped 
+@SessionScoped
 public class PlanificacionActividadBean implements Serializable {
 	
 	public static Logger log = Logger.getLogger(PlanificacionActividadBean.class);
@@ -43,6 +43,7 @@ public class PlanificacionActividadBean implements Serializable {
 	private TipoActividad tipoActividad;
 
 	private Planificacion planificacion = new Planificacion();
+	private PlanificacionPeriodoActividad plan = new PlanificacionPeriodoActividad();
 	
 	private int idperiodo;
 	private int idtipoactividad;
@@ -52,6 +53,7 @@ public class PlanificacionActividadBean implements Serializable {
 	@PostConstruct
 	public void init() {
 	    planificacion = new Planificacion();
+	    plan = new PlanificacionPeriodoActividad();
 	    
 	    planificacion.setPeriodo(new Periodo());
 	    planificacion.setActividad(new Actividad());
@@ -88,6 +90,14 @@ public class PlanificacionActividadBean implements Serializable {
 
 	public void setEstado(int estado) {
 		this.estado = estado;
+	}
+	
+	public PlanificacionPeriodoActividad getPlan() {
+		return plan;
+	}
+
+	public void setPlan(PlanificacionPeriodoActividad plan) {
+		this.plan = plan;
 	}
 
 	public List<SelectItem> getListaPeriodos() {
@@ -242,4 +252,11 @@ public class PlanificacionActividadBean implements Serializable {
 		
 	}
 	
+	public void eliminarPlan(PlanificacionPeriodoActividad plan) {
+		log.info("---ELIMINAR PLAN SELECCIONADO PARTE 2---");
+		
+		log.info("obtengoID 4: " + plan.getIdPlanificacion());
+	}
+	
 }
+ 

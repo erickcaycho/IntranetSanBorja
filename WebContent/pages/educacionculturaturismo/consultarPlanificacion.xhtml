@@ -48,17 +48,19 @@
 
 					<div class="ui-g-12">
 
-						<h:form>
+						<h:form id="frmLista">
 						<p:outputPanel id="planificacionContainer">
-							<p:dataTable id="tbPlanificacion" var="plan"
-								value="#{planificacionActividadBean.listaPlanificacion}" 
+							<p:dataTable id="tbPlanificacion" 
+								var="plan" 
+								value="#{planificacionActividadBean.listaPlanificacion}"  
+								selection="#{planificacionActividadBean.planificacion}" 
+								rowKey="#{plan.idPlanificacion}" 
+								
 								paginator="true"
 								rows="5" 
 								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 								resizableColumns="true" rowsPerPageTemplate="5,10,15"
-								selection="#{dtSelectionView.selectedCar}"
-								emptyMessage="No se encontraron registros"
-								rowKey="#{plan.idPlanificacion}">
+								emptyMessage="No se encontraron registros">
 
 								<p:column headerText="Código Planificación"
 									style="text-align:center;">
@@ -101,53 +103,19 @@
 								<p:column headerText="Estado" style="text-align:center;">
 									<h:outputText value="#{plan.estado}" />
 								</p:column>
-								<p:column headerText="Seleccionar" selectionMode="single"
-									style="text-align:center" />
+								<p:column headerText="Seleccionar" selectionMode="single" style="text-align:center" />
 							</p:dataTable>
 						</p:outputPanel>
+						
 						</h:form>
 					</div>
-					<div class="ui-g-12 bl-consultar">
-
-						
-						<p:button value="Planificar" icon="fa fa-check-circle">
-						</p:button>
-					</div>
+						<div class="ui-g-12 bl-consultar">
+							<p:button value="Planificar" icon="fa fa-check-circle">
+							</p:button>
+							<p:commandButton value="Eliminar 10" actionListener="#{planificacionActividadBean.eliminarPlan(plan)}" update=":frmLista:tbPlanificacion" />
+						</div>
 				</p:panel>
-
-				<p:dialog modal="true" header="Crear Planificación Actividad"
-					height="400" width="60%" widgetVar="crearPlanificacion">
-					<p:growl id="msg" showDetail="true" />
-					<h:form id="formCrear">
-						<div class="ui-g-12">
-							<div class="ui-g">
-								<div class="ui-g-6">
-									<h:outputLabel value="#{planificacionActividadBean.planificacion.periodo.idPeriodo}"></h:outputLabel>
-									<h:outputLabel>Periodo Seleccionado</h:outputLabel>
-									<p:selectOneMenu disabled="true"
-										value="#{planificacionActividadBean.planificacion.periodo.idPeriodo}">
-										<f:selectItem itemLabel="-- Seleccione --" itemValue="" />
-										<f:selectItems value="#{periodoBean.listaPeriodos}" var="p"
-											itemValue="#{p.idPeriodo}" />
-									</p:selectOneMenu>
-								</div>
-								<div class="ui-g-6">
-									<h:outputLabel>Seleccione Tipo Actividad</h:outputLabel>
-									
-								</div>
-							</div>
-						</div>
-						<div class="ui-g-12">
-							<h:outputLabel>Seleccione Actividad</h:outputLabel>
-							
-						</div>
-						<div class="ui-g-12">
-							<p:commandButton
-								actionListener="#{planificacionActividadBean.crearPlanificacion}"
-								value="Guardar" update=":msg" icon="fa fa-plus"></p:commandButton>
-						</div>
-					</h:form>
-				</p:dialog>
+				
 			</div>
 		</div>
 	</ui:define>
