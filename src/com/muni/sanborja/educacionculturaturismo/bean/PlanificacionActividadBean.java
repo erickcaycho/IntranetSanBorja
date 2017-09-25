@@ -252,10 +252,13 @@ public class PlanificacionActividadBean implements Serializable {
 	
 	public void eliminarPlan() {
 		try {
+			
 			log.info("---ELIMINAR PLAN SELECCIONADO---");
 			
 			PlanificacionDao planificacionDao = new PlanificacionDaoImpl();
 			log.info("Captura id_Planificacion: " +selectedPlan.getIdPlanificacion());
+			
+			
 			Planificacion objPlanificacion = new Planificacion();
 			objPlanificacion.setIdPlanificacion(selectedPlan.getIdPlanificacion());			
 	
@@ -283,6 +286,20 @@ public class PlanificacionActividadBean implements Serializable {
 			log.error("Error:" + e.getMessage());
 			log.error(e.getStackTrace());
 		}
+	}
+	
+	public String planificarPlan(){
+		
+		log.info("INICIA CON LA ASIGNACIÓN DE PLANIFICACIÓN [*].....");
+		log.info("Captura id_Planificacion: " +selectedPlan.getIdPlanificacion());
+		
+		Planificacion objPlanificacion = new Planificacion();
+		objPlanificacion.setIdPlanificacion(selectedPlan.getIdPlanificacion());	
+				
+		
+		
+		return "planificarPlanActividad?faces-redirect=true";
+		
 	}
 	
 }

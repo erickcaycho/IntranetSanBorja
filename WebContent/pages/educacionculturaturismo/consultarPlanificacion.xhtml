@@ -107,9 +107,8 @@
 							</p:dataTable>
 						</p:outputPanel>
 						<div class="ui-g-12 bl-consultar">
-							<p:button value="Planificar" icon="fa fa-check-circle">
-							</p:button>
-							<p:commandButton value="Eliminar 10" actionListener="#{planificacionActividadBean.eliminarPlan}"  update=":frmLista:tbPlanificacion">
+							<p:commandButton value="Planificar" action="#{planificacionActividadBean.planificarPlan}" icon="fa fa-check-circle"/>
+							<p:commandButton value="Eliminar" actionListener="#{planificacionActividadBean.eliminarPlan}"  update=":frmLista:tbPlanificacion" icon="fa fa-trash">
 							</p:commandButton>
 						</div>
 						

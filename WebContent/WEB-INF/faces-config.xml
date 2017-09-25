@@ -4,11 +4,12 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
     version="2.2">
-	<application>
-		<message-bundle>resources.application</message-bundle>
-		<locale-config>
-			<default-locale>es</default-locale>
-		</locale-config>
-	</application>
-
+	<navigation-rule>
+		<from-view-id>/pages/educacionculturaturismo/consultarPlanificacion.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{planificacionActividadBean.planificarPlan}</from-action>
+			<from-outcome>planificarPlanActividad</from-outcome>
+			<to-view-id>/pages/educacionculturaturismo/planificarPlanActividad.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 </faces-config>
