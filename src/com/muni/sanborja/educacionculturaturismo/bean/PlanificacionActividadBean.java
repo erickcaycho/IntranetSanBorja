@@ -17,15 +17,18 @@ import org.apache.log4j.Logger;
 import com.muni.sanborja.educacionculturaturismo.dao.ActividadDao;
 import com.muni.sanborja.educacionculturaturismo.dao.PeriodoDao;
 import com.muni.sanborja.educacionculturaturismo.dao.PlanificacionDao;
+import com.muni.sanborja.educacionculturaturismo.dao.SedeDao;
 import com.muni.sanborja.educacionculturaturismo.dao.TipoActividadDao;
 import com.muni.sanborja.educacionculturaturismo.dao.impl.ActividadDaoImpl;
 import com.muni.sanborja.educacionculturaturismo.dao.impl.PeriodoDaoImpl;
 import com.muni.sanborja.educacionculturaturismo.dao.impl.PlanificacionDaoImpl;
+import com.muni.sanborja.educacionculturaturismo.dao.impl.SedeDaoImpl;
 import com.muni.sanborja.educacionculturaturismo.dao.impl.TipoActividadDaoImpl;
 import com.muni.sanborja.educacionculturaturismo.modelo.Actividad;
 import com.muni.sanborja.educacionculturaturismo.modelo.Periodo;
 import com.muni.sanborja.educacionculturaturismo.modelo.Planificacion;
 import com.muni.sanborja.educacionculturaturismo.modelo.PlanificacionPeriodoActividad;
+import com.muni.sanborja.educacionculturaturismo.modelo.Sede;
 import com.muni.sanborja.educacionculturaturismo.modelo.TipoActividad;
 
 @ManagedBean(name = "planificacionActividadBean")
@@ -49,6 +52,8 @@ public class PlanificacionActividadBean implements Serializable {
 	private int idtipoactividad;
 	private int idactividad;
 	private int estado;
+	
+	private List<SelectItem> listaSedes;
 	
 	@PostConstruct
 	public void init() {
@@ -286,6 +291,23 @@ public class PlanificacionActividadBean implements Serializable {
 			log.error("Error:" + e.getMessage());
 			log.error(e.getStackTrace());
 		}
+	}
+	
+	public List<SelectItem> getListaSedes() {
+		log.info("*---OBTENER SEDES---*");
+		SedeDao sedeDao = new SedeDaoImpl();
+		List<Sede> s = sedeDao.listarSede();
+		
+		for(Sede sede : s){
+			SelectItem sedeItem = new SelectItem(sede.getIdSede(), sede.getNombreSede());
+			this.listaSedes.add(sedeItem);
+		}
+		
+		return listaSedes;
+	}
+
+	public void setListaSedes(List<SelectItem> listaSedes) {
+		this.listaSedes = listaSedes;
 	}
 	
 	public String planificarPlan(){

@@ -23,6 +23,16 @@
 							<div class="ui-g bl-busqueda">
 								<div class="ui-g-12">
 									<div class="ui-g">
+											<h:panelGrid columns="6" cellpadding="5">
+												<p:outputLabel value="Seleccione Sede" />
+												<p:selectOneMenu required="true">
+													<f:selectItem itemLabel="-- Seleccione --" itemValue="" />
+													<f:selectItems value="#{sedeBean.listaSede}"  var="p" itemValue="#{p.idSede}"  />
+												</p:selectOneMenu>
+												
+												<p:commandButton ajax="false"  
+														value="Agregar" icon="fa fa-search"></p:commandButton>
+											</h:panelGrid>
 									</div>
 								</div>
 							</div>
