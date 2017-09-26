@@ -2,12 +2,14 @@ package com.muni.sanborja.educacionculturaturismo.bean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
@@ -32,7 +34,7 @@ import com.muni.sanborja.educacionculturaturismo.modelo.Sede;
 import com.muni.sanborja.educacionculturaturismo.modelo.TipoActividad;
 
 @ManagedBean(name = "planificacionActividadBean")
-@ViewScoped
+@SessionScoped
 public class PlanificacionActividadBean implements Serializable {
 	
 	public static Logger log = Logger.getLogger(PlanificacionActividadBean.class);
@@ -55,12 +57,21 @@ public class PlanificacionActividadBean implements Serializable {
 	
 	private List<SelectItem> listaSedes;
 	
+	private Date todayDate = new Date();
+	
 	@PostConstruct
 	public void init() {
 	    planificacion = new Planificacion();
 	    planificacion.setPeriodo(new Periodo());
 	    planificacion.setActividad(new Actividad());
 	    
+	}
+	public Date getTodayDate() {
+	    return todayDate;
+	}
+	public Date getToday() {
+		   Calendar c = Calendar.getInstance(); 
+		   return c.getTime();
 	}
 	
 	public int getIdactividad() {
