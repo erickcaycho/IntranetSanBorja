@@ -40,8 +40,6 @@
 												<p:outputLabel value="Seleccione Sede" />
 												
 												<p:selectOneMenu style="width:165px!important" required="true" value="#{sedeBean.idsede}">
-												<p:selectOneMenu style="width:165px!important" required="true">
-												
 													<f:selectItem itemLabel="-- Seleccione --" itemValue="" />
 													<f:selectItems value="#{sedeBean.listaSede}"  var="p" itemValue="#{p.idSede}"  />
 													<p:ajax update="ambiente" />
@@ -52,9 +50,7 @@
 													<f:selectItem itemLabel="-- Seleccione --" itemValue="" />
 													<f:selectItems value="#{sedeBean.listaAmbiente}"  var="p" itemValue="#{p.idAmbiente}"  />
 												<p:selectOneMenu style="width:165px!important" required="true">
-													<f:selectItem itemLabel="-- Seleccione --" itemValue="" />
-													<f:selectItems value="#{sedeBean.listaSede}"  var="p" itemValue="#{p.idSede}"  />
-												</p:selectOneMenu>
+												
 												
 												<p:outputLabel value="Dirigido desde "></p:outputLabel>
 												<p:selectOneMenu style="width:165px!important" required="true">
