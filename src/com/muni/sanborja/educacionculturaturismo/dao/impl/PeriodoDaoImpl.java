@@ -28,7 +28,7 @@ public class PeriodoDaoImpl implements Serializable,PeriodoDao{
 		String hql="FROM Periodo";
 		
 		try {
-			
+			log.info("Ingresando al listar: ");
 			listaDePeriodos  =session.createQuery(hql).list();
 			
 			if (listaDePeriodos == null) {
