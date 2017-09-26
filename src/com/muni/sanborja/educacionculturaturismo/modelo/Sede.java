@@ -28,7 +28,10 @@ public class Sede implements Serializable {
 	
 	@OneToMany
 	private Set<Ambiente> ambiente;
-
+	
+	@Column(name = "direccion")
+	private String direccion;
+	
 	public int getIdSede() {
 		return idSede;
 	}
@@ -53,5 +56,12 @@ public class Sede implements Serializable {
 		this.nombreSede = nombreSede;
 	}
 
+	public String getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
 	
 }

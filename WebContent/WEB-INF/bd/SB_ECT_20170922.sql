@@ -120,6 +120,46 @@ CREATE TABLE `tipoactividad` (
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+
+
+CREATE TABLE `sede` (
+  `idsede` int(11) NOT NULL AUTO_INCREMENT,
+  `nombresede` varchar(250) DEFAULT NULL,
+  `direccion` varchar(250) DEFAULT NULL,
+  PRIMARY KEY (`idsede`)
+) ;
+
+CREATE TABLE `ambiente` (
+  `idambiente` int(11) NOT NULL AUTO_INCREMENT,
+  `nombreambiente` varchar(250) DEFAULT NULL,
+  `capacidad` int(11) DEFAULT NULL,
+  `idsede` int(11) NOT NULL,
+  PRIMARY KEY (`idambiente` ),
+  KEY `fk_ambiente_sede_idx` (`idsede`),
+  CONSTRAINT `fk_ambiente_sede` FOREIGN KEY (`idsede`) REFERENCES `sede` (`idsede`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ;
+
+INSERT INTO `sede` VALUES (1,'Sede 1',''),(2,'Sede 2','');
+INSERT INTO `ambiente` VALUES (1,'Ambiente 1',20,1),(2,'Ambiente 2',20, 2);
+
+CREATE TABLE `horario` (
+  `idhorario` int(11) NOT NULL AUTO_INCREMENT,
+  `fechainicio` date DEFAULT NULL,
+  `fechafin` date DEFAULT NULL,
+  `edadmin` int(11) DEFAULT NULL,
+  `edadmax` int(11) DEFAULT NULL,
+  `cantsesion` int(11) DEFAULT NULL,
+  `horassesion` int(11) DEFAULT NULL,
+  `vacantemin` int(11) DEFAULT NULL,
+  `vacantemax` int(11) DEFAULT NULL,
+  `precio` decimal(11,2) DEFAULT NULL,
+  `idambiente` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idhorario`),
+  KEY `fk_ambiente_horario_idx` (`idambiente`),
+  CONSTRAINT `fk_ambiente_horario` FOREIGN KEY (`idambiente`) REFERENCES `ambiente` (`idambiente`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ;
+
+
 --
 -- Dumping data for table `tipoactividad`
 --

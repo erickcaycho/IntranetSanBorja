@@ -28,6 +28,9 @@ public class Ambiente  implements Serializable{
 	@JoinColumn(name="idsede")
 	private Sede sede;
 	
+	@Column(name = "capacidad")
+	private int capacidad;
+	
 	public int getIdAmbiente() {
 		return idAmbiente;
 	}
@@ -50,6 +53,14 @@ public class Ambiente  implements Serializable{
 
 	public void setSede(Sede sede) {
 		this.sede = sede;
+	}
+	
+	public int getCapacidad() {
+		return capacidad;
+	}
+
+	public void setCapacidad(int capacidad) {
+		this.capacidad = capacidad;
 	}
 
 	public Ambiente(){

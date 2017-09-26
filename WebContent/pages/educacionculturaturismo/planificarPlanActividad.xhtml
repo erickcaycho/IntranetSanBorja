@@ -26,13 +26,22 @@
 										<h:form>	
 											<h:panelGrid columns="4" cellpadding="5">
 												<p:outputLabel value="Fecha Inicio" />
+												
         										<p:calendar id="fecinicio" value="#{calendarView.date3}" showOn="button" mindate="{planificacionActividadBean.todayDate}"/>
         										
         										<p:outputLabel value="Fecha Fin" />
         										<p:calendar id="fecfin" value="#{calendarView.date3}" showOn="button" mindate="{planificacionActividadBean.todayDate}"/>
         										
+        										<p:calendar id="fecinicio" value="#{calendarView.date3}" showOn="button" />
+        										
+        										<p:outputLabel value="Fecha Fin" />
+        										<p:calendar id="fecfin" value="#{calendarView.date3}" showOn="button" />
+        																		
 												<p:outputLabel value="Seleccione Sede" />
+												
 												<p:selectOneMenu style="width:165px!important" required="true" value="#{sedeBean.idsede}">
+												<p:selectOneMenu style="width:165px!important" required="true">
+												
 													<f:selectItem itemLabel="-- Seleccione --" itemValue="" />
 													<f:selectItems value="#{sedeBean.listaSede}"  var="p" itemValue="#{p.idSede}"  />
 													<p:ajax update="ambiente" />
@@ -42,6 +51,9 @@
 												<p:selectOneMenu id="ambiente" style="width:165px!important" required="true" value="#{sedeBean.idambiente}">
 													<f:selectItem itemLabel="-- Seleccione --" itemValue="" />
 													<f:selectItems value="#{sedeBean.listaAmbiente}"  var="p" itemValue="#{p.idAmbiente}"  />
+												<p:selectOneMenu style="width:165px!important" required="true">
+													<f:selectItem itemLabel="-- Seleccione --" itemValue="" />
+													<f:selectItems value="#{sedeBean.listaSede}"  var="p" itemValue="#{p.idSede}"  />
 												</p:selectOneMenu>
 												
 												<p:outputLabel value="Dirigido desde "></p:outputLabel>
