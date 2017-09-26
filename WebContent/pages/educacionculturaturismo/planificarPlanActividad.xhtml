@@ -20,19 +20,63 @@
 					
 					<p:fieldset legend="Horario" style="margin-bottom:20px">
 						<h:form>
-							<div class="ui-g bl-busqueda">
+							<div class="ui-g bl-horario">
 								<div class="ui-g-12">
 									<div class="ui-g">
-											<h:panelGrid columns="6" cellpadding="5">
+										<h:form>	
+											<h:panelGrid columns="4" cellpadding="5">
+												<p:outputLabel value="Fecha Inicio" />
+        										<p:calendar id="fecinicio" value="#{calendarView.date3}" showOn="button" />
+        										
+        										<p:outputLabel value="Fecha Fin" />
+        										<p:calendar id="fecfin" value="#{calendarView.date3}" showOn="button" />
+        										
 												<p:outputLabel value="Seleccione Sede" />
-												<p:selectOneMenu required="true">
+												<p:selectOneMenu style="width:165px!important" required="true">
 													<f:selectItem itemLabel="-- Seleccione --" itemValue="" />
-													
+													<f:selectItems value="#{sedeBean.listaSede}"  var="p" itemValue="#{p.idSede}"  />
 												</p:selectOneMenu>
 												
-												<p:commandButton ajax="false"  
-														value="Agregar" icon="fa fa-search"></p:commandButton>
+												<p:outputLabel value="Seleccione Ambiente" />
+												<p:selectOneMenu style="width:165px!important" required="true">
+													<f:selectItem itemLabel="-- Seleccione --" itemValue="" />
+													<f:selectItems value="#{sedeBean.listaSede}"  var="p" itemValue="#{p.idSede}"  />
+												</p:selectOneMenu>
+												
+												<p:outputLabel value="Dirigido desde "></p:outputLabel>
+												<p:selectOneMenu style="width:165px!important" required="true">
+												</p:selectOneMenu>
+												
+												<p:outputLabel value="hasta "></p:outputLabel>
+												<p:selectOneMenu style="width:165px!important" required="true">
+												</p:selectOneMenu>
+												
+												<p:outputLabel value="Cant. de sesiones"></p:outputLabel>
+												<p:inputText type="number" required="true" style="width:180px!important;">
+													<f:validateLongRange minimum="0" maximum="10"/>
+												</p:inputText>
+												
+												<p:outputLabel value="Horas/Sesión"></p:outputLabel>
+												<p:inputText type="number" required="true" style="width:180px!important;">
+													<f:validateLongRange minimum="0" maximum="10"/>
+												</p:inputText>
+												
+												<p:outputLabel value="Vacantes mínimas:"></p:outputLabel>
+												<p:inputText type="number" required="true" style="width:180px!important;">
+													<f:validateLongRange minimum="0" maximum="10"/>
+												</p:inputText>
+												
+												<p:outputLabel value="Vacantes máximas:"></p:outputLabel>
+												<p:inputText type="number" required="true" style="width:180px!important;">
+													<f:validateLongRange minimum="0" maximum="10"/>
+												</p:inputText>
+												
+												<p:outputLabel value="Precio"></p:outputLabel>
+												<p:inputNumber required="true" decimalPlaces="2" style="width:180px!important;" />
+												
+												<p:commandButton ajax="false" value="Agregar" icon="fa fa-search"></p:commandButton>
 											</h:panelGrid>
+										</h:form>
 									</div>
 								</div>
 							</div>
