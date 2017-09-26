@@ -8,6 +8,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
@@ -32,7 +33,7 @@ import com.muni.sanborja.educacionculturaturismo.modelo.Sede;
 import com.muni.sanborja.educacionculturaturismo.modelo.TipoActividad;
 
 @ManagedBean(name = "planificacionActividadBean")
-@ViewScoped
+@SessionScoped
 public class PlanificacionActividadBean implements Serializable {
 	
 	public static Logger log = Logger.getLogger(PlanificacionActividadBean.class);
