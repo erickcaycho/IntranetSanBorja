@@ -9,7 +9,6 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 
@@ -316,8 +315,8 @@ public class PlanificacionActividadBean implements Serializable {
 		log.info("INICIA CON LA ASIGNACIÓN DE PLANIFICACIÓN [*].....");
 		log.info("Captura id_Planificacion: " +selectedPlan.getIdPlanificacion());
 		
-		Planificacion objPlanificacion = new Planificacion();
-		objPlanificacion.setIdPlanificacion(selectedPlan.getIdPlanificacion());	
+
+		planificacion.setIdPlanificacion(selectedPlan.getIdPlanificacion());	
 				
 		
 		
