@@ -21,7 +21,7 @@ public class Ambiente  implements Serializable{
  	@Column(name = "idambiente", updatable = false, nullable = false)
 	private int idAmbiente;
 	
-	@Column(name = "nombreambiente")
+	@Column(name = "nombreambiente") 
 	private String nomAmbiente;
 	
 	@ManyToOne
