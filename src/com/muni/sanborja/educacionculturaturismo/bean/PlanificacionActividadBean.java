@@ -312,7 +312,7 @@ public class PlanificacionActividadBean implements Serializable {
 	
 	public String planificarPlan(){
 		
-		log.info("INICIA CON LA ASIGNACIÓN DE PLANIFICACIÓN [*].....");
+		log.info("INICIA CON LA ASIGNACIÓN DE PLANIFICACIÓN [*] .....");
 		log.info("Captura id_Planificacion: " +selectedPlan.getIdPlanificacion());
 		
 
