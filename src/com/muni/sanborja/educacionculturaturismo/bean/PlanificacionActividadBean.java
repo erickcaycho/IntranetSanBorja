@@ -294,7 +294,7 @@ public class PlanificacionActividadBean implements Serializable {
 	}
 	
 	public List<SelectItem> getListaSedes() {
-		log.info("*---OBTENER SEDES---*");
+		log.info("*---OBTENER SEDES---");
 		SedeDao sedeDao = new SedeDaoImpl();
 		List<Sede> s = sedeDao.listarSede();
 		
@@ -312,14 +312,12 @@ public class PlanificacionActividadBean implements Serializable {
 	
 	public String planificarPlan(){
 		
-		log.info("INICIA CON LA ASIGNACIÓN DE PLANIFICACIÓN [*] .....");
+		log.info("INICIA CON LA ASIGNACIÓN DE PLANIFICACIÓN  .....");
 		log.info("Captura id_Planificacion: " +selectedPlan.getIdPlanificacion());
 		
 
 		planificacion.setIdPlanificacion(selectedPlan.getIdPlanificacion());	
 				
-		
-		
 		return "planificarPlanActividad?faces-redirect=true";
 		
 	}
