@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:pe="http://primefaces.org/ui/extensions">
+
+
+
+					<h:form id="form1">
+
+
+					<p:fieldset legend="Ingresar Tarea	" style="margin-bottom:20px">
+					
+						<div style="line-height:40px;" >
+						
+							<p:outputLabel >Tarea</p:outputLabel>       <p:inputText id="tarea" value="#{cronogramaBean.cronograma.tarea}"> </p:inputText>
+							<p:outputLabel>Descripción</p:outputLabel>  <p:inputText id="descrip" value="#{cronogramaBean.cronograma.descripcion}"> </p:inputText>
+							<br/>
+							<p:outputLabel>Responsable</p:outputLabel> 
+							<p:selectOneMenu id="codEmpleado" value="#{cronogramaBean.cronograma.empleado.codEmpleado}" required="true" style="width:150px;heigth:50px;">
+								<f:selectItem itemLabel=" Seleccione " itemValue="" />
+								<f:selectItems value="#{empleadoBean.listaEmpleados}"  var="p" itemValue="#{p.codEmpleado}"  />
+							</p:selectOneMenu>
+							<br/>
+							<p:outputLabel>Fecha Inicio</p:outputLabel>  
+       						<p:calendar id="cal1" value="#{cronogramaBean.cronograma.fechaInicio}" showOn="button" />
+							<p:outputLabel>Fecha Fin</p:outputLabel>     
+       						<p:calendar id="cal2" value="#{cronogramaBean.cronograma.fechaFin}" showOn="button" />
+       						
+							<p:commandButton value="Agregar" icon="fa fa-plus"
+								 actionListener="#{cronogramaBean.crearCronograma}"  update="form2:tbCronograma">
+							</p:commandButton>
+							
+						</div>
+						
+					</p:fieldset>
+					
+					</h:form>
+					
+					
+					<h:form id="form2">
+						 
+						<p:dataTable id="tbCronograma" 
+								var="crono" 
+								value="#{cronogramaBean.listaCronogramas}"  
+								selection="#{cronogramaBean.cronograma}" 
+								rowKey="#{crono.idCronograma}" 
+								emptyMessage="No se encontraron registros">
+
+								<p:column headerText="Código Cronograma"
+									style="text-align:center;">
+									<h:outputText value="#{crono.idCronograma}" />
+								</p:column>
+
+								<p:column headerText="Tarea" style="text-align:center;">
+									<h:outputText value="#{crono.tarea}" />
+								</p:column>
+								
+								<p:column headerText="Descripcion" style="text-align:center;">
+									<h:outputText value="#{crono.descripcion}" />
+								</p:column>
+
+								<p:column headerText="Responsable" style="text-align:center;">
+									<h:outputText value="#{crono.empleado.nombre}" />
+								</p:column>
+								<p:column headerText="Fecha Inicio"
+									style="text-align:center;">
+									<h:outputText value="#{crono.fechaInicio}" />
+								</p:column>
+								<p:column headerText="Fecha Fin"
+									style="text-align:center;">
+									<h:outputText value="#{crono.fechaFin}" />
+								</p:column>
+								<p:column headerText="Seleccionar" selectionMode="single" style="text-align:center" />
+							</p:dataTable>
+						 
+						
+					
+					
+					
+					
+					
+	
+					</h:form>
+	
+</html>

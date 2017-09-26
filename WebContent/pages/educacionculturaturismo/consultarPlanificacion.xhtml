@@ -110,11 +110,28 @@
 							<p:commandButton value="Planificar" action="#{planificacionActividadBean.planificarPlan}" icon="fa fa-check-circle"/>
 							<p:commandButton value="Eliminar" actionListener="#{planificacionActividadBean.eliminarPlan}"  update=":frmLista:tbPlanificacion" icon="fa fa-trash">
 							</p:commandButton>
+							
+							
+							<p:commandButton value="Cronograma" icon="fa fa-thumbs-o-up"
+								onclick="PF('Cronograma').show()" >
+							</p:commandButton>
+							
+							
 						</div>
 						
 						</h:form>
 					</div>
 				</p:panel>
+				
+				
+				<!-- closable="false" -->
+				<p:dialog widgetVar="Cronograma" header="Pantalla Cronograma" width="700" height="400" 
+						  modal="true" showEffect="fade" hideEffect="fade"  resizable="false">
+
+				    <ui:include src="cronograma.xhtml" />
+				</p:dialog>
+				
+				
 				
 			</div>
 		</div>
