@@ -317,7 +317,10 @@ public class PlanificacionActividadBean implements Serializable {
 		
 
 		planificacion.setIdPlanificacion(selectedPlan.getIdPlanificacion());	
-				
+		
+		log.info("obtener nombre de actividad: " + selectedPlan.getNomActividad());
+		
+		
 		return "planificarPlanActividad?faces-redirect=true";
 		
 	}
