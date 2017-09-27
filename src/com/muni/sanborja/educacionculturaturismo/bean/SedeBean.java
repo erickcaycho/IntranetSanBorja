@@ -37,14 +37,6 @@ public class SedeBean implements Serializable {
 		this.sede=new Sede();
 		
 	}
-	
-	public int getIdambiente() {
-		return idambiente;
-	}
-
-	public void setIdambiente(int idambiente) {
-		this.idambiente = idambiente;
-	}
 
 	public int getIdsede() {
 		return idsede;

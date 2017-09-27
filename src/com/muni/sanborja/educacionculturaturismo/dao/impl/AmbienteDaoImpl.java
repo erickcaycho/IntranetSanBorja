@@ -6,7 +6,6 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
 import com.muni.sanborja.educacionculturaturismo.dao.AmbienteDao;
 import com.muni.sanborja.educacionculturaturismo.modelo.Ambiente;
 import com.muni.sanborja.educacionculturaturismo.util.HibernateSessionFactory;

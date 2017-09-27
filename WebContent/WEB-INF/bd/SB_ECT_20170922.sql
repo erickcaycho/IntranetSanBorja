@@ -154,10 +154,11 @@ CREATE TABLE `horario` (
   `vacantemax` int(11) DEFAULT NULL,
   `precio` decimal(11,2) DEFAULT NULL,
   `idambiente` int(11) DEFAULT NULL,
+  `idplanificacion` int(11) NOT NULL,
   PRIMARY KEY (`idhorario`),
-  KEY `fk_ambiente_horario_idx` (`idambiente`),
-  CONSTRAINT `fk_ambiente_horario` FOREIGN KEY (`idambiente`) REFERENCES `ambiente` (`idambiente`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ;
+  FOREIGN KEY `fk_ambiente_horario`  (idambiente) REFERENCES ambiente(idambiente),
+  FOREIGN KEY `fk_planificacion_horario`  (idplanificacion) REFERENCES planificacion(idplanificacion)
+  );
 
 
 --

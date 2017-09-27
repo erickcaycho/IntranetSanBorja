@@ -31,12 +31,12 @@
 
 													<h:panelGrid columns="4" cellpadding="5">
 														<p:outputLabel value="Fecha Inicio" />
-														<p:calendar id="fecinicio" value="#{calendarView.date3}"
-															showOn="button" />
+														<p:calendar id="fecinicio" value="#{calendarView.date3}" pattern="dd/MM/yyyy" 
+															showOn="button" mindate="#{planificacionActividadBean.todayDate}" />
 
 														<p:outputLabel value="Fecha Fin" />
-														<p:calendar id="fecfin" value="#{calendarView.date3}"
-															showOn="button" />
+														<p:calendar id="fecfin" value="#{calendarView.date3}" pattern="dd/MM/yyyy"
+															showOn="button" mindate="#{planificacionActividadBean.todayDate}" />
 
 														<p:outputLabel value="Seleccione Sede" />
 														<p:selectOneMenu style="width:165px!important"

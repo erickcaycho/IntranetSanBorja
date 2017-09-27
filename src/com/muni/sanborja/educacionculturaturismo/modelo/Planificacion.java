@@ -2,6 +2,7 @@ package com.muni.sanborja.educacionculturaturismo.modelo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -50,7 +52,10 @@ public class Planificacion  implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="idperiodo")
 	private Periodo periodo;
-
+	
+	@OneToMany
+	private Set<Horario> horario;
+	
 	public Planificacion(){
 	}
 
@@ -134,4 +139,12 @@ public class Planificacion  implements Serializable{
 		this.periodo = periodo;
 	}
 	
+	public Set<Horario> getHorario() {
+		return horario;
+	}
+
+	public void setHorario(Set<Horario> horario) {
+		this.horario = horario;
+	}
+
 }
