@@ -19,15 +19,24 @@ import com.muni.sanborja.educacionculturaturismo.modelo.Sede;
 
 @ManagedBean(name = "sedeBean")
 @SessionScoped
-public class SedeBean implements Serializable{
+public class SedeBean implements Serializable {
+	
+	private static final long serialVersionUID = 3558653004795076773L;
 
 	public static Logger log = Logger.getLogger(PlanificacionActividadBean.class);
+
 	private List<SelectItem> listaSede;
 	private List<SelectItem> listaAmbiente;
-
+	
 	private Sede sede;
 	private int idsede;
 	private int idambiente;
+	
+	
+	public SedeBean(){
+		this.sede=new Sede();
+		
+	}
 	
 	public int getIdambiente() {
 		return idambiente;
@@ -45,8 +54,12 @@ public class SedeBean implements Serializable{
 		this.idsede = idsede;
 	}
 
-	public SedeBean(){
-		this.sede=new Sede();
+	public int getIdambiente() {
+		return idambiente;
+	}
+
+	public void setIdambiente(int idambiente) {
+		this.idambiente = idambiente;
 	}
 
 	public List<SelectItem> getListaSede() {

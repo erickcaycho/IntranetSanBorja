@@ -16,6 +16,7 @@ public class AmbienteDaoImpl implements Serializable,AmbienteDao {
 	public static Logger log = Logger.getLogger(AmbienteDaoImpl.class);
 	private static final long serialVersionUID = 3558653004795076773L;
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Ambiente> listarAmbiente(int idSede) {
 		List<Ambiente> listaAmbiente = null;
