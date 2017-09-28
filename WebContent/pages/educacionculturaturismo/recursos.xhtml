@@ -48,11 +48,9 @@
 					<p:column headerText="Seleccionar" selectionMode="single" style="text-align:center" />
 				</p:dataTable>
 			</p:outputPanel>
-		</h:form>
 		
 		<br></br>
 		
-		<h:form id="frmCantidad">
 			<p:fieldset style="margin-bottom:20px">
 				<div style="line-height:40px;" >
 					<h:panelGrid columns="6" cellpadding="5">												
@@ -66,7 +64,7 @@
 			</p:fieldset>
 			
 			<p:outputPanel id="resursosContainer">
-				<p:dataTable id="tbMateriales" 
+				<p:dataTable id="tbRecursos" 
 					var="recurso" 
 					value="#{recursoBean.listaRecurso}"  
 					paginator="true"

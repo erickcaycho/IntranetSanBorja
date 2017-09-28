@@ -32,6 +32,7 @@ public class RecursoBean implements Serializable{
 
 	@PostConstruct
 	public void init() {
+		recurso = new Recurso();
 		material = new Material();
 	}
 	
