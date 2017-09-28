@@ -32,7 +32,7 @@ import com.muni.sanborja.educacionculturaturismo.modelo.Sede;
 import com.muni.sanborja.educacionculturaturismo.modelo.TipoActividad;
 
 @ManagedBean(name = "planificacionActividadBean")
-@SessionScoped
+@SessionScoped 
 public class PlanificacionActividadBean implements Serializable {
 	
 	public static Logger log = Logger.getLogger(PlanificacionActividadBean.class);

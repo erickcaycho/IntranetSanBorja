@@ -38,6 +38,7 @@ public class HorarioBean implements Serializable{
 	
 	private List<Horario> listaHorario;
 	private Horario horario,selectedHorario;
+	private Planificacion planificacion = new Planificacion();
 	private String msg;
 	private Date todayDate = new Date();
 	private int idambiente;
@@ -55,12 +56,23 @@ public class HorarioBean implements Serializable{
 	@PostConstruct
 	public void init() {
 		horario = new Horario();
+		planificacion = new Planificacion();
+		horario.setPlanificacion(new Planificacion());
 	}
 	
 	public Date getTodayDate() {
 	    return todayDate;
 	}
 
+	public Planificacion getPlanificacion() {
+		return planificacion;
+	}
+
+	public void setPlanificacion(Planificacion planificacion) {
+		this.planificacion = planificacion;
+	}
+
+	
 	public int getIdsede() {
 		return idsede;
 	}
@@ -117,16 +129,20 @@ public class HorarioBean implements Serializable{
 	}
 	public void crearHorario(){
 		try {
-			Planificacion planificacion = new Planificacion();
-			log.info("PLANIFICACION ****  "+planificacionBean.getSelectedPlan().getNomActividad()+ "  ID "+ planificacionBean.getSelectedPlan().getIdPlanificacion());
-			//log.info("PLANIFICACION ****  "+planificacionBean.getPlanificacion().getActividad().getNomActividad());
-			//horario.setPlanificacion(planificacionBean.getPlanificacion());
-			PlanificacionDao plan = new PlanificacionDaoImpl();
-			planificacion = plan.buscar(planificacionBean.getSelectedPlan().getIdPlanificacion());
-			horario.setPlanificacion(planificacion);
+			//Planificacion planificacion = new Planificacion();
+			//log.info("PLANIFICACION ****  "+planificacionBean.getSelectedPlan().getNomActividad()+ "  ID "+ planificacionBean.getSelectedPlan().getIdPlanificacion());
+			
+			//PlanificacionDao plan = new PlanificacionDaoImpl();
+			//planificacion = plan.buscar(planificacionBean.getSelectedPlan().getIdPlanificacion());
+			//horario.setPlanificacion(planificacion);
+			
+			log.info("[] Capturado ID Planificacion: " + planificacionBean.getPlanificacion().getIdPlanificacion());
+			horario.getPlanificacion().setIdPlanificacion(planificacionBean.getPlanificacion().getIdPlanificacion());
+			
 			AmbienteDao a= new AmbienteDaoImpl();
 			horario.setAmbiente(a.buscar(idambiente));
 			log.info("Creado correctamente" + horario.getVacantemax());
+			
 			HorarioDao horarioDao = new HorarioDaoImpl();
 			horarioDao.createHorario(horario);
 			msg ="Se creó correctamente el Horario";
