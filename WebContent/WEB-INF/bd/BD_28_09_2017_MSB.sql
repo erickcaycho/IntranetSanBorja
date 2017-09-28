@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `educacionculturaturismosb`.`actividad` (
   `nomactividad` VARCHAR(200) NULL,
   `descripcion` VARCHAR(300) NULL,
   `imagen` VARCHAR(70) NULL,
-  `objetivos` VARCHAR(250) NULL,
+  `objetivo` VARCHAR(250) NULL,
   `idtipoactividad` INT NOT NULL,
   PRIMARY KEY (`idactividad`),
   INDEX `fk_actividad_tipoactividad_idx` (`idtipoactividad` ASC),
@@ -104,7 +104,7 @@ DROP TABLE IF EXISTS `educacionculturaturismosb`.`sede` ;
 
 CREATE TABLE IF NOT EXISTS `educacionculturaturismosb`.`sede` (
   `idsede` INT NOT NULL AUTO_INCREMENT,
-  `nomsede` VARCHAR(100) NULL,
+  `nombresede` VARCHAR(100) NULL,
   `direccion` VARCHAR(200) NULL,
   PRIMARY KEY (`idsede`))
 ENGINE = InnoDB;
@@ -354,6 +354,223 @@ CREATE TABLE IF NOT EXISTS `educacionculturaturismosb`.`detalle_horario_empleado
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+
+INSERT INTO `periodo` VALUES (1,'2017-1'),(2,'2017-2'),(3,'2017-3'),(4,'2017-4');
+INSERT INTO `actividad` VALUES (1,'Arte country','Elaboración de muñecos, pintura en madera, en tela u otros materiales con acabados campestres','  ','  ',1),(2,'Ballet','El ballet es una composición de danzas que expresa una idea poética, cuyos elementos están relacionados por medio de la pantomima; con vestuarios, escenografía y música de acompañamiento.','  ','  ',1),(3,'Guitarra','Instrumento más utilizado en géneros como blues, rock y flamenco, y bastante frecuente en cantautores. También es utilizada en géneros tales como el tango, rancheras y gruperas, además del folclore de varios países.','  ','  ',1),(4,'Joyería artesanal','Elaboración de joyas con material de alpaca, plata, cobre, pitas, cueros u otro material.','  ','  ',1),(5,'Marinera norteña','La marinera es un baile de pareja suelto, el más conocido de la costa del Perú. Se caracteriza por el uso de pañuelos. Es un baile muestra del mestizaje hispano-amerindio-africano, entre otros.','  ','  ',1),(6,'Pintura en tela ','  ','  ','  ',1),(7,'Reciclado y manualidades','Nada es basura hasta que la botas, te invitamos a nuestro taller de reciclado donde no solo aprenderás a convertir todo lo que piensas que ya no sirve en cosas decorativas, útiles; y lo más importante contribuimos con el MEDIO AMBIENTE! Cómo? Reciclando.. te esperamos!','  ','  ',1),(8,'Teatro','Teatro es una rama del arte escénico relacionada con la actuación, donde se representan historias frente a la audiencia. Este arte combina discurso, gestos, sonidos, música y escenografía.','  ','  ',1),(9,'Yoga','Se refiere a una tradicional disciplina física y mental que se originó en la India. La palabra se asocia con prácticas de meditación en el hinduismo y el budismo.','  ','  ',1),(10,'Aprestamiento y psicomotricidad','Las actividades de aprestamiento tienen como objetivo estimular, incrementar y desarrollar las habilidades cognitivas, perceptivas y psicomotoras de niños y niñas en edad pre â€“ escolar.','  ','  ',1),(11,'Arte francés (manualidades) ','  ','  ','  ',1),(12,'Atención y concentración ','  ','  ','  ',1),(13,'Baile moderno','La combinación de los diferentes ritmos salsa, danza árabe, samba, axe, merengue, hip-hop, coreografías de moda.','  ','  ',1),(14,'Bailes de salón ','  ','  ','  ',1),(15,'Bomberitos ','  ','  ','  ',1),(16,'Cajón','  ','  ','  ',1),(17,'Canto','Desarrollar, reforzar mantener y mejorar tu voz cantada utilizando una técnica de fácil asimilación y resultados sorprendentes.','  ','  ',1),(18,'Cerámica al frio','La cerámica en frío es una masa dócil, limpia y de una suave textura. Las piezas tienen un acabado similar a la porcelana horneada pero no necesitan cocción ya que se endurece con el sólo contacto con el aire.','  ','  ',1),(19,'Comunicación efectiva ','  ','  ','  ',1),(20,'Danza árabe','Mucho más que un movimiento de caderas, esta danza es la unión entre el cuerpo y el alma. Bajo este concepto muchas mujeres están optando por este baile para reencontrarse con sí mismas.','  ','  ',1),(21,'Danzas afroperuanas ','  ','  ','  ',1),(22,'Danzas andinas y afro ','  ','  ','  ',1),(23,'Danzas españolas y flamenco ','  ','  ','  ',1),(24,'Danzas folkloricas ','  ','  ','  ',1),(25,'Decoración de tortas ','  ','  ','  ',1),(26,'Dibujo y pintura','El dibujo es una forma de expresión gráfica, plasmando imágenes sobre un espacio plano, por lo que forma parte de la bella arte conocida como pintura.','  ','  ',1),(27,'El arte de crecer ','  ','  ','  ',1),(28,'Estimulación del aprendizaje ','  ','  ','  ',1),(29,'Estimulación musical ','  ','  ','  ',1),(30,'Expresión oral y oratoria','La expresión oral es útil para comunicarse mejor. Usted tendrá ventaja sobre los demás al desarrollar esta destreza. Con mayor claridad y precisión se abrirá camino en la vida con mayor rapidez, porque el arte de hablar es el arte de persuadir.','  ','  ',1),(31,'Filigrana en papel (manualidades) ','  ','  ','  ',1),(32,'Tango','El tango es un género musical tradicional de Argentina y Uruguay, nacido de la fusión cultural entre emigrantes europeos, descendientes de esclavos africanos y de los nativos de la región del Río de la Plata.','  ','  ',1),(33,'Salsa','Es una música y concepto popular, una reconciliación musical de nuestra naturaleza como latinoamericanos, un poquito de todo reunirse y sentir una masa latina. Era como romper caderas.','  ','  ',1),(34,'Bijuotería','Se denomina bijuotería a la industria que produce objetos o materiales de adorno que imitan a la joyería pero que están hechos de materiales no preciosos.','  ','  ',1),(35,'Minichef','Divertidas clases de cocina 100% prácticas para el engreído de la casa. Les permitirá a los chicos que loguen satisfacer una necesidad básica como la alimentación jugando y aprendiendo comidas nutritivas y así puedan demostrar el amor a sus seres queridos mediante su obra.','  ','  ',1),(36,'Milonga','El baile de milonga se basa en movimientos similares a los del tango, pero es bailado más rápido y con movimientos más relajados. Por lo tanto, el tango y la milonga están fuertemente relacionados el uno con el otro.','  ','  ',1),(37,'Teatro Mimo Clown','Teatro es una rama del arte escénico relacionada con la actuación, donde se representan historias frente a la audiencia. Este arte combina discurso, gestos, sonidos, música y escenografía.','  ','  ',1),(38,'Cuadro texturado','Desarrollo de diversas técnicas de pintado básico, texturas, técnicas mixtas (oleo y acrílico), técnicas de espacios acabados; tratando de obtener combinaciones rusticas con lo moderno.','  ','  ',1),(39,'Pintura en madera','Se desarrollan diversas técnicas para pintar aplicaciones de resina, flotado, decoupaje, aplicaciones; decorando salas, dormitorios u oficinas.','  ','  ',1),(40,'Mamá chef','Es una idea fantástica para ayudar a mama este verano para que se entretenga y aprenda nuevos platos que hagan disfrutar a su familia.','  ','  ',1),(41,'Hip hop','Sin reglas. Fusiones musicales. Se reincorpora sonidos eléctricos, etéreos, densos, y a la vez que se une con la fuerza, la explosividad y las distorsiones de un rock más duro, evolucionando tanto lírica como musicalmente.','  ','  ',1),(42,'Caritas pintadas','Caracterización, maquillaje artístico, maquillaje infantil y maquillaje de fantasía.','  ','  ',1),(43,'Magia','Talleres de magia para niños con el objetivo de introducirles en el maravilloso arte de la magia, los niños aprenderán diversos trucos explicados por un mago profesional que hará que todos los niños disfruten, se diviertan y aprenderán.','  ','  ',1),(44,'Manicure y Diseño de Uñas','Aprende a realizar Manicure Profesional, uñas Acrilicas, Gel y con estas clases aprenderás a dejarlas preciosas y muy duraderas, y unas manos lindas y muy femeninas','  ',' ',1),(45,'Mini Pasteleritos','Los niños aprenderán a elaborar diferentes tipos de pasteles, tortas que los motivaran a su sensibilidad y curiosidad hacia la cocina en general para su propio desarrollo.','  ','  ',1),(46,'Matemáticas','Utilizar sus conocimientos matemáticos y su capacidad de razonamiento en un ambiente próximo a la vida cotidiana, para resolver situaciones y problemas reales y/o lúdicos.','  ','  ',1),(47,'Baile de salón','El ballroom dance (o bailes de salón) es un conjunto bailes en parejas que se realizan de manera coordinada y al ritmo de múscas seleccionadas practicados social y competitivamente por todo el mundo.','  ','  ',1),(48,'Scrapbooking','El scrapbook o scrapbooking consiste en multitud de procesos creativos como el recorte, pegado o collage para crear una composicion de memorias y recuerdos mediante tus fotografias.','  ','  ',1),(49,'Arte y Juego Samikay','Esta basado en el arte en todas sus expresiones, acompañado de actividades ludicas recreativas que se sostienen fundamentalmente en la corriente holistica, destacando la importancia y necesidad de la musicoterapia, cromoterapia, aromaterapia y danza terapia por excelencia.','  ','  ',1),(50,'Circuito Nro. 1: Casa Kallpa Wasi (Casa de energía) - Planta biofísica de tratamiento de agua - Huaca San Borja	 ','  ','  ','  ',2),(51,'Circuito Nro. 2: Huaca San Borja - Museo de la Nación - Biblioteca Nacional del Perú	 ','  ','  ','  ',2),(52,'Circuito Nro. 3: Gran Teatro Nacional - Museo de la Nación - Huaca San Borja	 ','  ','  ','  ',2),(53,'Circuito Nro. 4: Museo de la Nación - Gran Teatro Nacional - Biblioteca Nacional del Perú	 ','  ','  ','  ',2),(54,'Circuito Nro. 5: Huaca San Borja - Museo de la Nación - Gran Teatro Nacional - Biblioteca Nacional del Perú	 ','  ','  ','  ',2),(55,'Clases de Inglés ',' ',' ',' ',4),(56,'Programa de Ciegos con Visión, Computación Adaptada ',' ',' ',' ',4),(57,'Clases de Computación ',' ',' ',' ',4),(58,'Programa Lee, San Borja Lee ',' ',' ',' ',4),(59,'Cine Club para Invidentes ',' ',' ',' ',4),(60,'	\"Bridge en el Tambo\"	 ','  ','  ','  ',5),(61,'	Cine en el Tambo \"Semana Santa\"	 ','  ','  ','  ',5),(62,'	Cine en el Tambo \"Invictus\"	 ','  ','  ','  ',5),(63,'	Teatro para Niños \"La gallina sembradora\"	 ','  ','  ','  ',5),(64,'	Cine en el Tambo \"Los tuyos, los míos, los nuestros\"	 ','  ','  ','  ',5),(65,'	Cine en el Tambo \"Conversaciones con mamá\"	 ','  ','  ','  ',5),(66,'	\"Actualización Pedagógicas sobre el Sistema de Gestión de la Calidad rumbo a la Acreditación\" dirigida a Instituciones Educativas del Distrito	 ','  ','  ','  ',3);
+INSERT INTO `tipoactividad` VALUES (1,'Taller','Posicionarnos en la comunidad como la mejor opción de talleres artísticos y culturales, obteniendo un crecimiento sostenido con el tiempo'),(2,'Visita Turística','El objetivo de los circuitos es promocionar los atractivos turísticos con los que cuenta el distrito de San Borja, lograr que el distrito no solo sea conocido por sus parques verdes sino también porque tiene turismo para ofrecer y apoyar.'),(3,'Charla','Fomentar la cultura a los vecinos de San Borja'),(4,'Programa Extensión Bibliotecaria','Fomentar la educación, arte y cultura a los vecinos de San Borja'),(5,'Evento cultural','Fomentar la educación, arte y cultura a los vecinos de San Borja');
+INSERT INTO `planificacion` VALUES (1,'2017-09-19',NULL,NULL,NULL,1,4,NULL,1,NULL),(2,'2017-09-19',NULL,NULL,NULL,2,6,NULL,1,NULL),(3,'2017-09-19',NULL,NULL,NULL,1,66,NULL,1,NULL),(4,'2017-09-19',NULL,NULL,NULL,1,66,NULL,1,NULL),(5,'2017-09-19',NULL,NULL,NULL,2,51,NULL,1,NULL),(6,'2017-09-19',NULL,NULL,NULL,4,53,NULL,1,NULL),(7,'2017-09-19',NULL,NULL,NULL,2,66,NULL,1,NULL),(8,'2017-09-19',NULL,NULL,NULL,3,2,NULL,1,NULL),(9,'2017-09-19',NULL,NULL,NULL,4,45,NULL,1,NULL),(10,'2017-09-19',NULL,NULL,NULL,4,43,NULL,1,NULL),(11,'2017-09-19',NULL,NULL,NULL,4,43,NULL,1,NULL),(12,'2017-09-19',NULL,NULL,NULL,4,43,NULL,1,NULL),(13,'2017-09-20',NULL,NULL,NULL,2,3,NULL,1,NULL),(14,'2017-09-20',NULL,NULL,NULL,2,3,NULL,1,NULL),(15,'2017-09-20',NULL,NULL,NULL,2,3,NULL,1,NULL),(16,'2017-09-20',NULL,NULL,NULL,2,3,NULL,1,NULL),(17,'2017-09-20',NULL,NULL,NULL,2,3,NULL,1,NULL),(18,'2017-09-20',NULL,NULL,NULL,2,3,NULL,1,NULL),(19,'2017-09-20',NULL,NULL,NULL,2,3,NULL,1,NULL),(20,'2017-09-20',NULL,NULL,NULL,2,3,NULL,1,NULL),(21,'2017-09-20',NULL,NULL,NULL,2,3,NULL,1,NULL),(22,'2017-09-20',NULL,NULL,NULL,2,3,NULL,1,NULL),(23,'2017-09-20',NULL,NULL,NULL,2,3,NULL,1,NULL),(24,'2017-09-20',NULL,NULL,NULL,2,3,NULL,1,NULL),(25,'2017-09-20',NULL,NULL,NULL,2,3,NULL,1,NULL),(26,'2017-09-20',NULL,NULL,NULL,2,3,NULL,1,NULL),(27,'2017-09-20',NULL,NULL,NULL,2,3,NULL,1,NULL),(28,'2017-09-20',NULL,NULL,NULL,2,3,NULL,1,NULL),(29,'2017-09-20',NULL,NULL,NULL,2,3,NULL,1,NULL),(30,'2017-09-20',NULL,NULL,NULL,2,3,NULL,1,NULL),(31,'2017-09-20',NULL,NULL,NULL,2,3,NULL,1,NULL),(32,'2017-09-20',NULL,NULL,NULL,2,3,NULL,1,NULL),(33,'2017-09-20',NULL,NULL,NULL,2,3,NULL,1,NULL),(34,'2017-09-20',NULL,NULL,NULL,2,3,NULL,1,NULL),(35,'2017-09-21',NULL,NULL,NULL,1,50,NULL,1,NULL),(36,'2017-09-22',NULL,NULL,NULL,2,1,NULL,1,NULL),(37,'2017-09-22',NULL,NULL,NULL,2,1,NULL,1,NULL),(38,'2017-09-22',NULL,NULL,NULL,2,1,NULL,1,NULL),(39,'2017-09-22',NULL,NULL,NULL,2,1,NULL,1,NULL),(40,'2017-09-22',NULL,NULL,NULL,2,1,NULL,1,NULL),(41,'2017-09-22',NULL,NULL,NULL,2,1,NULL,1,NULL),(42,'2017-09-22',NULL,NULL,NULL,2,1,NULL,1,NULL),(43,'2017-09-22',NULL,NULL,NULL,2,1,NULL,1,NULL),(44,'2017-09-22',NULL,NULL,NULL,2,1,NULL,1,NULL),(45,'2017-09-22',NULL,NULL,NULL,2,1,NULL,1,NULL),(46,'2017-09-22',NULL,NULL,NULL,2,1,NULL,1,NULL),(47,'2017-09-22',NULL,NULL,NULL,2,1,NULL,1,NULL),(48,'2017-09-22',NULL,NULL,NULL,2,1,NULL,1,NULL),(49,'2017-09-22',NULL,NULL,NULL,2,4,NULL,1,NULL),(50,'2017-09-22',NULL,NULL,NULL,2,56,NULL,1,NULL),(51,'2017-09-22',NULL,NULL,NULL,2,1,NULL,1,NULL),(52,'2017-09-22',NULL,NULL,NULL,2,1,NULL,1,NULL),(53,'2017-09-22',NULL,NULL,NULL,2,33,NULL,1,NULL),(54,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(55,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(56,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(57,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(58,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(59,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(60,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(61,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(62,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(63,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(64,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(65,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(66,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(67,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(68,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(69,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(70,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(71,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(72,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(73,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(74,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(75,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(76,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(77,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(78,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(79,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(80,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(81,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(82,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(83,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(84,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(85,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(86,'2017-09-22',NULL,NULL,NULL,2,50,NULL,1,NULL),(87,'2017-09-22',NULL,NULL,NULL,2,51,NULL,1,NULL),(88,'2017-09-22',NULL,NULL,NULL,2,54,NULL,1,NULL),(89,'2017-09-22',NULL,NULL,NULL,1,1,NULL,1,NULL),(90,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(91,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(92,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(93,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(94,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(95,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(96,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(97,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(98,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(99,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(100,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(101,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(102,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(103,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(104,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(105,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(106,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(107,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(108,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(109,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(110,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(111,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(112,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(113,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(114,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(115,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(116,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(117,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(118,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(119,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(120,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(121,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(122,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(123,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(124,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(125,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(126,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(127,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(128,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(129,'2017-09-22',NULL,NULL,NULL,1,2,NULL,1,NULL),(130,'2017-09-22',NULL,NULL,NULL,1,59,NULL,1,NULL),(131,'2017-09-22',NULL,NULL,NULL,1,59,NULL,1,NULL),(132,'2017-09-22',NULL,NULL,NULL,1,59,NULL,1,NULL),(133,'2017-09-22',NULL,NULL,NULL,1,66,NULL,1,NULL),(134,'2017-09-22',NULL,NULL,NULL,1,66,NULL,1,NULL),(135,'2017-09-22',NULL,NULL,NULL,1,66,NULL,1,NULL),(136,'2017-09-22',NULL,NULL,NULL,1,26,NULL,1,NULL),(137,'2017-09-22',NULL,NULL,NULL,1,24,NULL,1,NULL),(138,'2017-09-22',NULL,NULL,NULL,1,27,NULL,1,NULL),(139,'2017-09-22',NULL,NULL,NULL,1,51,NULL,1,NULL),(140,'2017-09-22',NULL,NULL,NULL,1,53,NULL,1,NULL);
+
+
+
+INSERT INTO `educacionculturaturismosb`.`empleado`  (`nombre`,`apellipaterno`,`apellimaterno`,`dni`,`telefono`,`celular`,`direccion`,`correo`)VALUES ('Juan','Pech','Bellido',60786835,6783456,658794123,'Mz L San Luis, Lima', 'jpech@gmail.com');
+INSERT INTO `educacionculturaturismosb`.`empleado`  (`nombre`,`apellipaterno`,`apellimaterno`,`dni`,`telefono`,`celular`,`direccion`,`correo`)VALUES ('Vanessa','Vargas','Ayala',65457824,5678903,998403895,'Dpto. 23 Miraflores, Lima','vvargas@gmail.com');
+INSERT INTO `educacionculturaturismosb`.`empleado`  (`nombre`,`apellipaterno`,`apellimaterno`,`dni`,`telefono`,`celular`,`direccion`,`correo`)VALUES ('Pepe','Quintana','Ayala',87659402,657832,994567012,'Piso 13 Santiago de Surco, Lima','pquintana@gmail.com');
+
+
+INSERT INTO `SEDE` (`nombresede`,`direccion`) VALUES('Oficina Cultura ' ,'Calle Claudio Galeno cdra 2 S/N San Borja ' );
+INSERT INTO `SEDE` (`nombresede`,`direccion`) VALUES('Centro Cultural ' ,'Ca. Claude Monteverdi N°145 - San Borja, Altura de la Cdra. 24 de la Av. San Luis, Espaldas de Tiendas Tottus ' );
+INSERT INTO `SEDE` (`nombresede`,`direccion`) VALUES('Cuna Municipal de San Borja ' ,'Jr. Eduardo Ordóñez Nº 402 San Borja ' );
+INSERT INTO `SEDE` (`nombresede`,`direccion`) VALUES('Club Loreto ' ,'Av. Joaquín Madrid Nro. 441 ' );
+INSERT INTO `SEDE` (`nombresede`,`direccion`) VALUES('Parques San Borja ' ,'Parques públicos de San Borja ' );
+
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Aula OC - 01 - PISO 1	 ' ,	40	 ,	1	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Aula OC - 02 - PISO 1	 ' ,	40	 ,	1	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Aula OC - 03 - PISO 1	 ' ,	40	 ,	1	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Aula OC - 04 - PISO 1	 ' ,	40	 ,	1	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Aula OC - 05 - PISO 1	 ' ,	30	 ,	1	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Aula OC - 06 - PISO 1	 ' ,	30	 ,	1	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Aula OC - 07 - PISO 1	 ' ,	30	 ,	1	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Aula OC - 08 - PISO 1	 ' ,	40	 ,	1	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Aula OC - 09 - PISO 1	 ' ,	40	 ,	1	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Aula OC - 10 - PISO 1	 ' ,	30	 ,	1	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Aula OC - 11 - PISO 2	 ' ,	40	 ,	1	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Aula OC - 12 - PISO 2	 ' ,	40	 ,	1	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Aula OC - 13 - PISO 2	 ' ,	40	 ,	1	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Aula OC - 14 - PISO 2	 ' ,	30	 ,	1	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Aula OC - 15 - PISO 2	 ' ,	30	 ,	1	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Aula OC - 16 - PISO 2	 ' ,	30	 ,	1	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Aula OC - 17 - PISO 2	 ' ,	40	 ,	1	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Aula OC - 18 - PISO 2	 ' ,	30	 ,	1	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Aula OC - 19 - PISO 2	 ' ,	30	 ,	1	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Aula OC - 20 - PISO 2	 ' ,	40	 ,	1	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	OC Auditorio A - PISO 1	 ' ,	100	 ,	1	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	OC Auditorio B - PISO 2	 ' ,	120	 ,	1	);
+
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES		('	CC Auditorio A - PISO 1	 ' ,	120	 ,	2	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES		('	CC Cafeteria - PISO 1	 ' ,	40	 ,	2	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES		('	CC Salas Idiomas - A - PISO 1	 ' ,	40	 ,	2	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES		('	CC Sala Tareas - 01 - PISO 1	 ' ,	40	 ,	2	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES		('	CC Sala Tareas - 02 - PISO 1	 ' ,	30	 ,	2	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES		('	CC Sala Tareas - 03 - PISO 1	 ' ,	30	 ,	2	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES		('	CC Sala Tareas - 04 - PISO 2	 ' ,	30	 ,	2	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES		('	CC Sala Taller  - 01 - PISO 1	 ' ,	60	 ,	2	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES		('	CC Sala Taller  - 02 - PISO 1	 ' ,	50	 ,	2	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES		('	CC Sala Taller  - 03 - PISO 2	 ' ,	60	 ,	2	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES		('	CC Sala Taller  - 04 - PISO 2	 ' ,	50	 ,	2	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES		('	CC Sala Taller  - 05 - PISO 2	 ' ,	60	 ,	2	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES		('	CC Sala Idiomas - B - PISO 1	 ' ,	40	 ,	2	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES		('	Telecentro - PISO 1	 ' ,	30	 ,	2	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES		('	CC Auditorio B - PISO 2	 ' ,	100	 ,	2	);
+
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Aula CM - 01 - PISO 1	 ' ,	20	 ,	3	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Aula CM - 02 - PISO 1	 ' ,	20	 ,	3	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Aula CM - 03 - PISO 1	 ' ,	20	 ,	3	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Aula CM - 04 - PISO 1	 ' ,	20	 ,	3	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Aula CM - 05 - PISO 1	 ' ,	20	 ,	3	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Aula CM - 06 - PISO 1	 ' ,	20	 ,	3	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Aula CM - 07 - PISO 1	 ' ,	20	 ,	3	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Aula CM - 08 - PISO 1	 ' ,	20	 ,	3	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Aula CM - 09 - PISO 1	 ' ,	20	 ,	3	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Aula CM - 10 - PISO 2	 ' ,	30	 ,	3	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Aula CM - 11 - PISO 2	 ' ,	30	 ,	3	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Aula CM - 12 - PISO 2	 ' ,	30	 ,	3	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Aula CM - 13 - PISO 2	 ' ,	30	 ,	3	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Aula CM - 14 - PISO 2	 ' ,	30	 ,	3	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Aula CM - 15 - PISO 2	 ' ,	30	 ,	3	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Aula CM - 16 - PISO 2	 ' ,	30	 ,	3	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Aula CM - 17 - PISO 2	 ' ,	30	 ,	3	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Aula CM - 18 - PISO 2	 ' ,	30	 ,	3	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Aula CM - 19 - PISO 2	 ' ,	30	 ,	3	);
+
+
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	AULA CL -01	 ' ,	40	 ,	4	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	AULA CL -02	 ' ,	40	 ,	4	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	AULA CL -03	 ' ,	40	 ,	4	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	AULA CL -04	 ' ,	40	 ,	4	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	AULA CL -05	 ' ,	40	 ,	4	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	AULA CL -06	 ' ,	40	 ,	4	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	AULA CL -07	 ' ,	40	 ,	4	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	AULA CL -08	 ' ,	40	 ,	4	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	AULA CL -09	 ' ,	40	 ,	4	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	AULA CL -10	 ' ,	30	 ,	4	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	AULA CL -11	 ' ,	30	 ,	4	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	AULA CL -12	 ' ,	30	 ,	4	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	AULA CL -13	 ' ,	30	 ,	4	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	AULA CL -14	 ' ,	30	 ,	4	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	AULA CL -15	 ' ,	30	 ,	4	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	AULA CL -16	 ' ,	30	 ,	4	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	AULA CL -17	 ' ,	30	 ,	4	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	AULA CL -18	 ' ,	30	 ,	4	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	AUDITORIO CL - A	 ' ,	90	 ,	4	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	AUDITORIO CL - B	 ' ,	90	 ,	4	);
+
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Parque Cáceres	 ' ,	0	 ,	5	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Parque de la Amistad (Jacaranda)	 ' ,	0	 ,	5	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Madre Teresa de la Cruz (Candamo)	 ' ,	0	 ,	5	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Alameda Ciro Alegría con Av. Guardia Civil (Torres de San Borja)	 ' ,	0	 ,	5	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Parque Mariano Santos (San Borja Norte)	 ' ,	0	 ,	5	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Parque Libertador San Martín	 ' ,	0	 ,	5	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Parque de la Mujer	 ' ,	0	 ,	5	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Parque Javier Prado Nro. 2	 ' ,	0	 ,	5	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Parque Virgen Milagrosa	 ' ,	0	 ,	5	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Parque El Periodista	 ' ,	0	 ,	5	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Parque Almirante Miguel Grau	 ' ,	0	 ,	5	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Parque Strauss	 ' ,	0	 ,	5	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Parque Donatello	 ' ,	0	 ,	5	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Parque Pallardelli	 ' ,	0	 ,	5	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Parque de la Juventud	 ' ,	0	 ,	5	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Parque Renacimiento	 ' ,	0	 ,	5	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Parque 09 de Julio	 ' ,	0	 ,	5	);
+INSERT INTO `AMBIENTE`  (`nombreambiente`,`capacidad`,`idsede`) VALUES ('	Pentagonito	 ' ,	0	 ,	5	);
+
+
+
+INSERT INTO `educacionculturaturismosb`.`cronograma` (`idhorario`,`tarea`,`descripcion`,`fechainicio`,`fechafin`,`fechaejecucion`,`idempleado`)VALUES (2,'tarea 1','recolectar nose que cosas','2017-09-19','2017-09-20',null,1);
+
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerPlanificacionXPeriodoXActividad`(IN Val_idperiodo INT, IN Val_estado INT)
+    DETERMINISTIC
+BEGIN
+			IF (Val_idperiodo !=0) AND (Val_estado !=0)  THEN
+			
+				Select pl.idplanificacion as idplanificacion,
+					p.nomperiodo as nomperiodo,
+					pl.fechacreacion as fechacreacion,
+					pl.fechaplanificacion as fechaplanificacion,
+					pl.fechaaprobacion as fechaaprobacion,
+					pl.fecharechazo as fecharechazo,
+					pl.fechaanulacion as fechaanulacion,
+					pl.fechaejecucion as fechaejecucion,
+					a.nomactividad as nomactividad,
+					ta.nomtipoactividad as nomtipoactividad, 
+					case pl.estado 
+					when 1 then "Pendiente" 
+					when 2 then "Planificado"
+					when 3 then "Aprobado"
+					when 4 then "Rechazado"
+					when 5 then "Ejecutado"
+					when 6 then "Anulado"
+					end  as estado
+					
+					from planificacion pl inner join periodo p on pl.idperiodo=p.idperiodo
+					inner join actividad a on pl.idactividad=a.idactividad
+					inner join tipoactividad ta on a.idtipoactividad = ta.idtipoactividad
+					
+					 WHERE p.idperiodo=Val_idperiodo and pl.estado=Val_estado;
+			ELSE 
+				  
+					Select pl.idplanificacion as idplanificacion,
+					p.nomperiodo as nomperiodo,
+					pl.fechacreacion as fechacreacion,
+					pl.fechaplanificacion as fechaplanificacion,
+					pl.fechaaprobacion as fechaaprobacion,
+					pl.fecharechazo as fecharechazo,
+					pl.fechaanulacion as fechaanulacion,
+					pl.fechaejecucion as fechaejecucion,
+					a.nomactividad as nomactividad,
+					ta.nomtipoactividad as nomtipoactividad, 
+					case pl.estado 
+					when 1 then "Pendiente" 
+					when 2 then "Planificado"
+					when 3 then "Aprobado"
+					when 4 then "Rechazado"
+					when 5 then "Ejecutado"
+					when 6 then "Anulado"
+					end  as estado
+					
+					from planificacion pl inner join periodo p on pl.idperiodo=p.idperiodo
+					inner join actividad a on pl.idactividad=a.idactividad
+					inner join tipoactividad ta on a.idtipoactividad = ta.idtipoactividad;
+					
+			END IF;
+        END ;;
+DELIMITER ;
+
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `validarActividadPorPeriodo`(IN Val_idperiodo INT, IN Val_idtipoactividad INT, IN Val_idactividad INT)
+    DETERMINISTIC
+BEGIN
+			Select count(pl.idplanificacion) as flagactividadperiodo
+			from planificacion pl inner join periodo p on pl.idperiodo=p.idperiodo and p.idperiodo=Val_idperiodo
+			inner join actividad a on pl.idactividad=a.idactividad and a.idactividad=Val_idactividad
+			inner join tipoactividad ta on a.idtipoactividad = ta.idtipoactividad and ta.idtipoactividad=Val_idtipoactividad;
+			 
+        END ;;
+DELIMITER ;
+
+DELIMITER ;;
+CREATE PROCEDURE `ConsultarCronograma`(IN idHorario int(11), IN idCronograma int(11))
+BEGIN
+
+	DECLARE V_WHERE VARCHAR(50) default '';
+
+	IF(idCronograma>0) THEN
+		SET V_WHERE = CONCAT(' AND idcronograma=', idCronograma);
+    END IF;
+    
+    
+	/*SET @sql = CONCAT('SELECT COUNT(*) FROM ', tab_name);*/
+    SET @sql = CONCAT('SELECT TB1.idcronograma,TB1.tarea,TB1.descripcion,TB2.nombre,TB2.apellipaterno,
+					   TB1.fechainicio,TB1.fechafin
+                       FROM educacionculturaturismosb.cronograma TB1
+					   LEFT JOIN educacionculturaturismosb.empleado TB2
+                       ON TB1.idempleado = TB2.idempleado
+					   WHERE idhorario =',idHorario,V_WHERE);
+	PREPARE stmt FROM @sql;
+	EXECUTE stmt;
+	DEALLOCATE PREPARE stmt;
+ END ;;
+DELIMITER ;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
