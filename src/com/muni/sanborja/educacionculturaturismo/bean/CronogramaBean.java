@@ -25,7 +25,7 @@ public class CronogramaBean implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public static Logger log = Logger.getLogger(PlanificacionActividadBean.class);
+	public static Logger log = Logger.getLogger(CronogramaBean.class);
 
 	private List<Cronograma> listaCronogramas;
 	private Cronograma cronograma ;

@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -28,7 +29,11 @@ public class HorarioBean implements Serializable{
 	private Horario horario,selectedHorario;
 	private String msg;
 	private Date todayDate = new Date();
-
+	
+	FacesContext context = FacesContext.getCurrentInstance();
+	Application application = context.getApplication();
+	PlanificacionActividadBean planificacionBean = application.evaluateExpressionGet(context, "#{planificacionActividadBean}", PlanificacionActividadBean.class);
+	
 	@PostConstruct
 	public void init() {
 		horario = new Horario();
@@ -40,7 +45,9 @@ public class HorarioBean implements Serializable{
 	
 	public void crearHorario(){
 		try {
-			
+			log.info("PLANIFICACION ****  "+planificacionBean.getSelectedPlan().getNomActividad()+ "  ID "+ planificacionBean.getSelectedPlan().getIdPlanificacion());
+			//log.info("PLANIFICACION ****  "+planificacionBean.getPlanificacion().getActividad().getNomActividad());
+			//horario.setPlanificacion(planificacionBean.getPlanificacion());
 			log.info("Creado correctamente" + horario.getVacantemax());
 			HorarioDao horarioDao = new HorarioDaoImpl();
 			horarioDao.createHorario(horario);
