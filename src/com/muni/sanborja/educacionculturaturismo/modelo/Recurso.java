@@ -5,7 +5,7 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -13,16 +13,40 @@ import javax.persistence.Table;
 public class Recurso implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	/*
-	@OneToMany
-	@JoinColumn(name="idmaterial")
-	private Material idMaterial;
 	
-	@OneToMany
+	@ManyToOne
+	@JoinColumn(name="idmaterial")
+	private Material material;
+	
+	@ManyToOne
 	@JoinColumn(name="idhorario")
-	private Horario idHorario;
+	private Horario horario;
 	
 	@Column(name = "cantidad_usar")
 	private int cantidadUsar;
-	*/
+
+	public Material getMaterial() {
+		return material;
+	}
+
+	public void setMaterial(Material material) {
+		this.material = material;
+	}
+
+	public Horario getHorario() {
+		return horario;
+	}
+
+	public void setHorario(Horario horario) {
+		this.horario = horario;
+	}
+
+	public int getCantidadUsar() {
+		return cantidadUsar;
+	}
+
+	public void setCantidadUsar(int cantidadUsar) {
+		this.cantidadUsar = cantidadUsar;
+	}
+	
 }

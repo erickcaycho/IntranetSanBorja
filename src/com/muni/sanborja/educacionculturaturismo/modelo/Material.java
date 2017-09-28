@@ -7,7 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -26,6 +26,9 @@ public class Material implements Serializable{
 	
 	@Column(name = "cantidad_disponible")
 	private int cantidadDisponible;
+	
+	@OneToMany
+	private Set<Recurso> recurso;
 
 	public int getIdMaterial() {
 		return idMaterial;
@@ -53,10 +56,13 @@ public class Material implements Serializable{
 
 	public Material() {
 	}
-	
-	//@ManyToOne
-	//private Set<Recurso> recurso;
-	
-	
+
+	public Set<Recurso> getRecurso() {
+		return recurso;
+	}
+
+	public void setRecurso(Set<Recurso> recurso) {
+		this.recurso = recurso;
+	}
 	
 }
