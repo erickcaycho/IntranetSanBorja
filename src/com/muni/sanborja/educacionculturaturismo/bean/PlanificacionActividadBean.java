@@ -52,6 +52,7 @@ public class PlanificacionActividadBean implements Serializable {
 	private int idtipoactividad;
 	private int idactividad;
 	private int estado;
+	private int idplanificacion;
 	
 	private List<SelectItem> listaSedes;
 	
@@ -316,6 +317,7 @@ public class PlanificacionActividadBean implements Serializable {
 		log.info("INICIA CON LA ASIGNACIÓN DE PLANIFICACIÓN  .....");
 		log.info("Captura id_Planificacion: " +selectedPlan.getIdPlanificacion());
 		
+		idplanificacion = selectedPlan.getIdPlanificacion();
 
 		planificacion.setIdPlanificacion(selectedPlan.getIdPlanificacion());	
 		

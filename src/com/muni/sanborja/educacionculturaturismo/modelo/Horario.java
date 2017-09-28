@@ -27,8 +27,8 @@ public class Horario implements Serializable {
 	@Column(name = "fechainicio")
 	private Date fechaInicio;
 	
-	@Column(name = "fechaFin")
-	private Date fechafin;
+	@Column(name = "fechafin")
+	private Date fechaFin;
 	
 	@Column(name = "edadmin")
 	private int edadMin;
@@ -83,12 +83,12 @@ public class Horario implements Serializable {
 		this.fechaInicio = fechaInicio;
 	}
 
-	public Date getFechafin() {
-		return fechafin;
+	public Date getFechaFin() {
+		return fechaFin;
 	}
 
-	public void setFechafin(Date fechafin) {
-		this.fechafin = fechafin;
+	public void setFechaFin(Date fechaFin) {
+		this.fechaFin = fechaFin;
 	}
 
 	public int getEdadMin() {
