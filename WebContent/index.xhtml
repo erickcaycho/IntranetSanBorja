@@ -1,50 +1,150 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <meta name="description" content=""/>
-    <meta name="author" content=""/>
+
+    <meta charset="utf-8"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
+    <meta name="description" content=""></meta>
+    <meta name="author" content=""></meta>
 
     <title>San Borja</title>
 
-    <link href="https://v4-alpha.getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <!-- Bootstrap core CSS -->
+    <link href="https://blackrockdigital.github.io/startbootstrap-business-frontpage/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"></link>
 
-    <style type="text/css">
-      body{
-        margin-top: 100px;
-        margin-left: 30%;
-      }
-      .cuadrado {
-           width: 200px; 
-           height: 200px; 
-           border: 1px solid #555;
-           background: #32e706;
-           margin-left: 5px;
-           margin-top: 5px;
-           text-align: center;
-           line-height: 200px;
-           color: black;
-           text-decoration:none !important;
-           font-size: 12px;
-      }
-    </style>
+    <!-- Custom styles for this template -->
+    <link href="https://blackrockdigital.github.io/startbootstrap-business-frontpage/css/business-frontpage.css" rel="stylesheet"></link>
+	<style>
+
+	
+	body {
+    padding-top: 54px;
+}
+
+@media (min-width: 992px) {
+    body {
+        padding-top: 56px;
+    }
+}
+
+.business-header {
+    height: 50vh;
+    min-height: 300px;
+    background: url('http://www.munisanborja.gob.pe/templates/newtheme/images/fondo2.jpg') center center no-repeat scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+.card {
+    height: 100%;
+}
+	.cl_header{
+		background-color: #459e00!important;
+	}
+	
+	h4{
+		text-align: center;
+	}
+	
+	.btn-primary {
+    color: #fff;
+    background-color: #2aab1d!important;
+    border-color: #27bd15!important;
+}
+
+	</style>
   </head>
 
   <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top cl_header">
+      <div class="container">
+        <a class="navbar-brand" href="">
+        <IMG alt="" src="http://www.munisanborja.gob.pe/templates/newtheme/images/logo.png" />
+        </a>
+      </div>
+    </nav>
+
+    <!-- Header with Background Image -->
+    <header class="business-header">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <h1 class="display-3 text-center text-white mt-4"></h1>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Page Content -->
     <div class="container">
+      <!-- /.row -->
 
       <div class="row">
-        <a class="cuadrado" href="https://prueba.com" style="text-decoration:none;">SERVICIOS MUNICIPALES</a>
-        <a class="cuadrado" href="pages/licencias/manteSolicitud.xhtml">LICENCIAS E INSPECCIONES</a>
+        <div class="col-sm-3 my-4">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">SERVICIOS MUNICIPALES</h4>
+            </div>
+            <div class="card-footer" style="text-align: center!important;">
+              <a href="#" class="btn btn-primary">Ingresar</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3 my-4">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">LICENCIAS E INSPECCIONES</h4>
+            </div>
+            <div class="card-footer" style="text-align: center!important;">
+              <a href="#" class="btn btn-primary">Ingresar</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3 my-4">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">LOGÍSTICA E INVENTARIOS</h4>
+            </div>
+            <div class="card-footer" style="text-align: center!important;">
+              <a href="#" class="btn btn-primary">Ingresar</a>
+            </div>
+          </div>
+        </div>
+		<div class="col-sm-3 my-4">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">EDUCACIÓN, CULTURA Y TURISMO</h4>
+            </div>
+            <div class="card-footer" style="text-align: center!important;">
+              <a href="pages/educacionculturaturismo/moduloEducacionCulturaTurismo.xhtml" class="btn btn-primary">Ingresar</a>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="row">
-        <a class="cuadrado" href="https://prueba.com">LOGÍSTICA E INVENTARIOS</a>
-        <a class="cuadrado" href="pages/educacionculturaturismo/crearPlanificacion.xhtml">EDUCACIÓN, CULTURA Y TURISMO</a>
+      <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright Municipalidad de San Borja - 2017</p>
       </div>
+      <!-- /.container -->
+    </footer>
 
-    </div> <!-- /container -->
+    <!-- Bootstrap core JavaScript -->
+    <script src="https://blackrockdigital.github.io/startbootstrap-business-frontpage/vendor/jquery/jquery.min.js"></script>
+    <script src="https://blackrockdigital.github.io/startbootstrap-business-frontpage/vendor/popper/popper.min.js"></script>
+    <script src="https://blackrockdigital.github.io/startbootstrap-business-frontpage/vendor/bootstrap/js/bootstrap.min.js"></script>
 
-    <script src="https://v4-alpha.getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
+
 </html>
