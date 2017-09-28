@@ -54,6 +54,18 @@ public class Horario implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="idplanificacion")
 	private Planificacion planificacion;
+	
+	@ManyToOne
+	@JoinColumn(name="idambiente")
+	private Ambiente ambiente;
+
+	public Ambiente getAmbiente() {
+		return ambiente;
+	}
+
+	public void setAmbiente(Ambiente ambiente) {
+		this.ambiente = ambiente;
+	}
 
 	public int getIdHorario() {
 		return idHorario;

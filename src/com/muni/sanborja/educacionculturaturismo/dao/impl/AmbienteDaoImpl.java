@@ -45,5 +45,20 @@ public class AmbienteDaoImpl implements Serializable,AmbienteDao {
 		
 		return listaAmbiente;
 	}
-
+	
+	@Override
+	public Ambiente buscar(int idAmbiente) {
+		Ambiente ambiente = null;
+		 Session session = HibernateSessionFactory.getSessionFactory().openSession();
+			
+	       try {
+	    	   ambiente = (Ambiente) session.get(Ambiente.class, idAmbiente); 
+	        } catch (Exception e) {
+				session.beginTransaction().rollback();
+				
+				log.error("error " +e.getMessage());
+				  e.getMessage();
+			}
+	      return ambiente; 
+	 }
 }

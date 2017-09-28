@@ -7,5 +7,5 @@ import com.muni.sanborja.educacionculturaturismo.modelo.Ambiente;
 public interface AmbienteDao {
 
 	public List<Ambiente>listarAmbiente(int idSede);
-	
+	public Ambiente buscar(int idAmbiente);
 }

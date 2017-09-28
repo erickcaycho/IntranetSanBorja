@@ -160,5 +160,20 @@ public class PlanificacionDaoImpl implements PlanificacionDao, Serializable {
 		
 		return flag;
 	}
+	
+	 public Planificacion buscar(int idPlanificacion) {
+		 Planificacion planificacion = null;
+		 Session session = HibernateSessionFactory.getSessionFactory().openSession();
+			
+	       try {
+	    	   planificacion = (Planificacion) session.get(Planificacion.class, idPlanificacion); 
+	        } catch (Exception e) {
+				session.beginTransaction().rollback();
+				
+				log.error("error " +e.getMessage());
+				  e.getMessage();
+			}
+	        return planificacion; 
+	    }
 
 }
