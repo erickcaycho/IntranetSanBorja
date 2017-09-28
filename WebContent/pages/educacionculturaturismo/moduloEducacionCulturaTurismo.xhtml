@@ -1,0 +1,123 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<h:head>
+	<title><ui:insert name="title">San Borja</ui:insert></title>
+	<h:outputScript library="js" name="planificacion.js"></h:outputScript>
+	<STYLE type="text/css">
+body {
+	font-size:11px;	 
+	background: url("#{facesContext.externalContext.requestContextPath}/images/fondo2.jpg") no-repeat center center fixed;
+	background-size: cover;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default,
+	.ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover,
+	html .ui-button.ui-state-disabled:active {
+	text-align: left;
+}
+
+.ui-g.bl-creada {
+	height: 100px;
+}
+
+.ui-g.bl-busqueda {
+	height: 80px;
+	
+}
+
+label {
+	padding: 10px;
+}
+
+.bl-consultar {
+	text-align: right;
+}
+
+.tb-titulo {
+	text-align: center;
+}
+
+.bienvenida {
+	padding: 20px;
+}
+.ui-menu{
+	width: 95%;
+}
+
+.bl-horario{
+	height: 250px;
+}
+
+</STYLE>
+
+
+</h:head>
+
+<body>
+	<div id="header">
+		<div class="ui-g" style="background-color: #459e00;">
+		<div class="ui-g-12 ui-md-6 ui-lg-2">
+			<p:graphicImage value="/images/logo.png" />
+		</div>
+		<div class="ui-g-12 ui-md-6 ui-lg-8" style="width: 50%;margin: auto;">
+			<h:form>
+				<p:menubar>
+					<p:submenu label="">
+					</p:submenu>
+				</p:menubar>
+			</h:form>
+		</div>
+	<div class="ui-g-12 ui-md-6 ui-lg-2">
+			<p:graphicImage value="/images/logo2.png" style="width:105px;" />
+		</div>
+	</div>
+ 
+	<div class="ui-g">
+		<div class="bienvenida">
+			<p:outputLabel>Bienvenido: Erick Caycho Ponce - Coordinador </p:outputLabel>	
+		</div>
+		
+	</div>
+	</div>
+	<div class="ui-g-12">
+		<div class="ui-g">
+			<div class="ui-g-12 ui-md-2">
+				<h:form>
+					<p:panel header="Módulo de Educación, Cultura y Turismo">
+						<p:menu>
+							<p:submenu label="Inicio">
+								<p:menuitem value="Planificación de Actividades"
+									outcome="/pages/educacionculturaturismo/crearPlanificacion.xhtml"
+									 />
+								<p:menuitem value="Aprobar de Planificación de Actividad"
+									outcome="/pages/educacionculturaturismo/consultarPlanificacion.xhtml"
+									 />
+								<p:menuitem value="Salir"
+									outcome="/pages/educacionculturaturismo/consultarPlanificacion.xhtml"
+									 />
+							</p:submenu>
+						</p:menu>
+					</p:panel>
+				</h:form>
+			</div>
+			<div class="ui-g-12 ui-md-10">
+				<div class="ui-g-12 ui-g-nopad">
+					<div class="ui-g">
+					</div>
+			</div>
+		</div>
+	</div>
+	</div>
+
+	<div id="footer">
+		 
+	</div>
+
+</body>
+
+</html>
