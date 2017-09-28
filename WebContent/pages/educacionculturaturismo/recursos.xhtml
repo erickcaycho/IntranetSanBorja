@@ -10,28 +10,23 @@
 
 	<h:form id="frmBusquedaMaterial">
 		<p:fieldset legend="Asignar Recursos" style="margin-bottom:20px">
-		
 			<div style="line-height:40px;" >
-			
 				<h:panelGrid columns="6" cellpadding="5">												
 					<p:outputLabel value="Material" />
-					<p:inputText id="material" value="#{cronogramaBean.cronograma.tarea}"> </p:inputText>
-					<p:commandButton ajax="false" actionListener="#{planificacionActividadBean.consultarPlan}"
-							value="Consultar" icon="fa fa-search"></p:commandButton>
+					<p:inputText id="material" value="#{recursoBean.material.nombre}"> </p:inputText>
+					<p:commandButton value="Consultar" icon="fa fa-search" ajax="true">
+							<p:ajax update="materialesContainer" listener="#{recursoBean.consultarMaterial}"/>
+					</p:commandButton>
 				</h:panelGrid>
 			</div>
-			
 		</p:fieldset>
 		
-		</h:form>
-		
-		<h:form id="frmListaMaterial">
 			<p:outputPanel id="materialesContainer">
 				<p:dataTable id="tbMateriales" 
-					var="plan" 
-					value="#{planificacionActividadBean.listaPlanificacion}"  
-					selection="#{planificacionActividadBean.selectedPlan}" 
-					rowKey="#{plan.idPlanificacion}" 
+					var="material" 
+					value="#{recursoBean.listaMaterial}"  
+					selection="#{recursoBean.selectedMaterial}" 
+					rowKey="#{material.idMaterial}" 
 					paginator="true"
 					rows="5" 
 					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -40,15 +35,15 @@
 
 					<p:column headerText="Código Material"
 						style="text-align:center;">
-						<h:outputText value="#{plan.idPlanificacion}" />
+						<h:outputText value="#{material.idMaterial}" />
 					</p:column>
 					<p:column headerText="Material"
 						style="text-align:center;">
-						<h:outputText value="#{plan.idPlanificacion}" />
+						<h:outputText value="#{material.nombre}" />
 					</p:column>
 					<p:column headerText="Cantidad disponible"
 						style="text-align:center;">
-						<h:outputText value="#{plan.idPlanificacion}" />
+						<h:outputText value="#{material.cantidadDisponible}" />
 					</p:column>
 					<p:column headerText="Seleccionar" selectionMode="single" style="text-align:center" />
 				</p:dataTable>
@@ -62,37 +57,29 @@
 				<div style="line-height:40px;" >
 					<h:panelGrid columns="6" cellpadding="5">												
 						<p:outputLabel>Cantidad a usar</p:outputLabel>     
-						<p:inputNumber id="cantidad"> </p:inputNumber>
+						<p:inputNumber id="cantidad" value="#{recursoBean.recurso.cantidadUsar}"> </p:inputNumber>
 						<p:commandButton value="Agregar material" icon="fa fa-plus"
-							 actionListener="#{cronogramaBean.crearCronograma}"  update="form2:tbCronograma">
+							 actionListener="#{recursoBean.guardarRecurso}"  update="resursosContainer">
 						</p:commandButton>
 					</h:panelGrid>
 				</div>
 			</p:fieldset>
-		</h:form>
-		
-		<h:form id="frmListaRecursos">
-			<p:outputPanel id="materialesContainer">
+			
+			<p:outputPanel id="resursosContainer">
 				<p:dataTable id="tbMateriales" 
-					var="plan" 
-					value="#{planificacionActividadBean.listaPlanificacion}"  
-					selection="#{planificacionActividadBean.selectedPlan}" 
-					rowKey="#{plan.idPlanificacion}" 
+					var="recurso" 
+					value="#{recursoBean.listaRecurso}"  
 					paginator="true"
 					rows="5" 
 					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 					resizableColumns="true" rowsPerPageTemplate="5,10,15"
 					emptyMessage="No se encontraron registros">
 
-					
-					<p:column headerText="Código Recurso" style="text-align:center;">
-						<h:outputText value="#{plan.nomTipoActividad}" />
-					</p:column>
 					<p:column headerText="Material" style="text-align:center;">
-						<h:outputText value="#{plan.nomActividad}" />
+						<h:outputText value="#{recurso.material.nombre}" />
 					</p:column>
 					<p:column headerText="Cantidad Usar" style="text-align:center;">
-						<h:outputText value="#{plan.estado}" />
+						<h:outputText value="#{recurso.cantidadUsar}" />
 					</p:column>
 					<p:column headerText="Seleccionar" selectionMode="single" style="text-align:center" />
 				</p:dataTable>
