@@ -25,9 +25,9 @@
 							</p:selectOneMenu>
 							<br/>
 							<p:outputLabel>Fecha Inicio</p:outputLabel>  
-       						<p:calendar id="cal1" value="#{cronogramaBean.cronograma.fechaInicio}" showOn="button" />
+       						<p:calendar id="cal1" value="#{cronogramaBean.cronograma.fechaInicio}" showOn="button" mindate="today" />
 							<p:outputLabel>Fecha Fin</p:outputLabel>     
-       						<p:calendar id="cal2" value="#{cronogramaBean.cronograma.fechaFin}" showOn="button" />
+       						<p:calendar id="cal2" value="#{cronogramaBean.cronograma.fechaFin}" showOn="button" mindate="today" />
        						
 							<p:commandButton value="Agregar" icon="fa fa-plus"
 								 actionListener="#{cronogramaBean.crearCronograma}"  update="form2:tbCronograma">

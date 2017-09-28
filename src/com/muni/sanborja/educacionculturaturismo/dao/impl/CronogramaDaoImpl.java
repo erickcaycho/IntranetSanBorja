@@ -80,11 +80,15 @@ public class CronogramaDaoImpl implements Serializable,CronogramaDao{
 				c.setIdCronograma((Integer)aux[0]);
 				c.setTarea((String)aux[1]);
 				c.setDescripcion((String)aux[2]);
-				//c.getEmpleado().setApellidoPat((String)aux[3]);
-				//c.setEmpleado(new Empleado().setApellidoPat(''););
-				c.setFechaInicio((Date)aux[5]);
-				c.setFechaFin((Date)aux[5]);
 				
+				Empleado emp = new Empleado();
+			    emp.setIdEmpleado((Integer)aux[3]);;
+				emp.setNombre((String)aux[4]+" "+ (String)aux[5]);
+				c.setEmpleado(emp);
+				
+				//c.setEmpleado(new Empleado().setApellidoPat(''););
+				c.setFechaInicio((Date)aux[6]);
+				c.setFechaFin((Date)aux[7]);
 				
 				listaCronograma.add(c);
 			}
