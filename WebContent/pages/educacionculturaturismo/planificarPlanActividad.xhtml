@@ -34,7 +34,7 @@
 															showOn="button" mindate="#{horarioBean.todayDate}" />
 
 														<p:outputLabel value="Fecha Fin" />
-														<p:calendar id="fecfin" value="#{horarioBean.horario.fechafin}" pattern="dd/MM/yyyy"
+														<p:calendar id="fecfin" value="#{horarioBean.horario.fechaFin}" pattern="dd/MM/yyyy"
 															showOn="button" mindate="#{horarioBean.todayDate}" />
 
 														<p:outputLabel value="Seleccione Sede" />
@@ -106,7 +106,7 @@
 									<h:outputText value="#{h.fechaInicio}" />
 								</p:column>
 								<p:column headerText="Fecha Fin" style="text-align:center;">
-									<h:outputText value="#{h.fechafin}" />
+									<h:outputText value="#{h.fechaFin}" />
 								</p:column>
 								<p:column headerText="Seleccionar" selectionMode="single" style="text-align:center" />
 							</p:dataTable>
