@@ -49,7 +49,7 @@
 				</p:dataTable>
 			</p:outputPanel>
 		
-		<br></br>
+			<br></br>
 		
 			<p:fieldset style="margin-bottom:20px">
 				<div style="line-height:40px;" >
@@ -67,6 +67,8 @@
 				<p:dataTable id="tbRecursos" 
 					var="recurso" 
 					value="#{recursoBean.listaRecurso}"  
+					selection="#{recursoBean.selectedRecurso}" 
+					rowKey="#{recurso.material.idMaterial}" 
 					paginator="true"
 					rows="5" 
 					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
