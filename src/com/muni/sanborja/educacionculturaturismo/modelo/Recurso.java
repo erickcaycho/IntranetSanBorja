@@ -13,7 +13,7 @@ import javax.persistence.Table;
 public class Recurso implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	
+	/*
 	@OneToMany
 	@JoinColumn(name="idmaterial")
 	private Material idMaterial;
@@ -24,5 +24,5 @@ public class Recurso implements Serializable{
 	
 	@Column(name = "cantidad_usar")
 	private int cantidadUsar;
-	
+	*/
 }

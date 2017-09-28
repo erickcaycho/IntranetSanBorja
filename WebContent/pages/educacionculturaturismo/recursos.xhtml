@@ -15,8 +15,8 @@
 			
 				<h:panelGrid columns="6" cellpadding="5">												
 					<p:outputLabel value="Material" />
-					<p:inputText id="material" value="#{cronogramaBean.cronograma.tarea}"> </p:inputText>
-					<p:commandButton ajax="false" actionListener="#{planificacionActividadBean.consultarPlan}"
+					<p:inputText id="material" value="#{materialBean.material.nombre}"> </p:inputText>
+					<p:commandButton ajax="false" actionListener="#{materialBean.consultarMaterial}"
 							value="Consultar" icon="fa fa-search"></p:commandButton>
 				</h:panelGrid>
 			</div>
@@ -28,10 +28,10 @@
 		<h:form id="frmListaMaterial">
 			<p:outputPanel id="materialesContainer">
 				<p:dataTable id="tbMateriales" 
-					var="plan" 
-					value="#{planificacionActividadBean.listaPlanificacion}"  
-					selection="#{planificacionActividadBean.selectedPlan}" 
-					rowKey="#{plan.idPlanificacion}" 
+					var="material" 
+					value="#{materialBean.listaMaterial}"  
+					selection="#{materialBean.selectedMaterial}" 
+					rowKey="#{material.idMaterial}" 
 					paginator="true"
 					rows="5" 
 					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -40,15 +40,15 @@
 
 					<p:column headerText="Código Material"
 						style="text-align:center;">
-						<h:outputText value="#{plan.idPlanificacion}" />
+						<h:outputText value="#{material.idMaterial}" />
 					</p:column>
 					<p:column headerText="Material"
 						style="text-align:center;">
-						<h:outputText value="#{plan.idPlanificacion}" />
+						<h:outputText value="#{material.nombre}" />
 					</p:column>
 					<p:column headerText="Cantidad disponible"
 						style="text-align:center;">
-						<h:outputText value="#{plan.idPlanificacion}" />
+						<h:outputText value="#{material.cantidadUsar}" />
 					</p:column>
 					<p:column headerText="Seleccionar" selectionMode="single" style="text-align:center" />
 				</p:dataTable>

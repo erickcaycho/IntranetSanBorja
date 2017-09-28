@@ -26,8 +26,37 @@ public class Material implements Serializable{
 	
 	@Column(name = "cantidad_disponible")
 	private int cantidadDisponible;
+
+	public int getIdMaterial() {
+		return idMaterial;
+	}
+
+	public void setIdMaterial(int idMaterial) {
+		this.idMaterial = idMaterial;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public int getCantidadDisponible() {
+		return cantidadDisponible;
+	}
+
+	public void setCantidadDisponible(int cantidadDisponible) {
+		this.cantidadDisponible = cantidadDisponible;
+	}
+
+	public Material() {
+	}
 	
-	@ManyToOne
-	private Set<Recurso> recurso;
+	//@ManyToOne
+	//private Set<Recurso> recurso;
+	
+	
 	
 }
