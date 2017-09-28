@@ -20,23 +20,23 @@
 							<h:outputLabel value="#{planificacionActividadBean.selectedPlan.nomActividad}"></h:outputLabel>
 							<h:inputHidden value="#{planificacionActividadBean.planificacion.idPlanificacion}" id="hiddenIdPlanificacion" />
 						</h:panelGrid>
-						<p:tabView activeIndex="#{tabViewManagedBean.index}">
+						<p:tabView >
 							<p:tab title="Horario#1">
 								<p:fieldset legend="Registrar Horario"
 									style="margin-bottom:20px">
-									<h:form>
+									<h:form id="frmHorario">
 										<div class="ui-g bl-horario">
 											<div class="ui-g-12">
 												<div class="ui-g">
 
 													<h:panelGrid columns="4" cellpadding="5">
 														<p:outputLabel value="Fecha Inicio" />
-														<p:calendar id="fecinicio" value="#{calendarView.date3}" pattern="dd/MM/yyyy" 
-															showOn="button" mindate="#{planificacionActividadBean.todayDate}" />
+														<p:calendar id="fecinicio" value="#{horarioBean.horario.fechaInicio}" pattern="dd/MM/yyyy" 
+															showOn="button" mindate="#{horarioBean.todayDate}" />
 
 														<p:outputLabel value="Fecha Fin" />
-														<p:calendar id="fecfin" value="#{calendarView.date3}" pattern="dd/MM/yyyy"
-															showOn="button" mindate="#{planificacionActividadBean.todayDate}" />
+														<p:calendar id="fecfin" value="#{horarioBean.horario.fechafin}" pattern="dd/MM/yyyy"
+															showOn="button" mindate="#{horarioBean.todayDate}" />
 
 														<p:outputLabel value="Seleccione Sede" />
 														<p:selectOneMenu style="width:165px!important"
@@ -46,7 +46,7 @@
 																itemValue="#{p.idSede}" />
 															<p:ajax update="ambiente" />
 														</p:selectOneMenu>
-
+														
 														<p:outputLabel value="Seleccione Ambiente" />
 														<p:selectOneMenu id="ambiente"
 															style="width:165px!important" required="true"
@@ -57,54 +57,65 @@
 														</p:selectOneMenu>
 
 														<p:outputLabel value="Dirigido desde "></p:outputLabel>
-														<p:selectOneMenu style="width:165px!important"
-															required="true">
-														</p:selectOneMenu>
+														<p:spinner id="minEdad" value="#{horarioBean.horario.edadMin}" min="0" max="100" />
 
 														<p:outputLabel value="hasta "></p:outputLabel>
-														<p:selectOneMenu style="width:165px!important"
-															required="true">
-														</p:selectOneMenu>
+														<p:spinner id="maxEdad" value="#{horarioBean.horario.edadMax}" min="0" max="100" />
 
 														<p:outputLabel value="Cant. de sesiones"></p:outputLabel>
-														<p:inputText type="number" required="true"
-															style="width:180px!important;">
-															<f:validateLongRange minimum="0" maximum="10" />
-														</p:inputText>
+														<p:spinner id="cantSesion" value="#{horarioBean.horario.cantsesion}" min="0" max="100" />
 
 														<p:outputLabel value="Horas/Sesión"></p:outputLabel>
-														<p:inputText type="number" required="true"
-															style="width:180px!important;">
-															<f:validateLongRange minimum="0" maximum="10" />
-														</p:inputText>
+														<p:spinner id="horasXSesion" value="#{horarioBean.horario.horassesion}" min="0" max="100" />
 
 														<p:outputLabel value="Vacantes mínimas:"></p:outputLabel>
-														<p:inputText type="number" required="true"
-															style="width:180px!important;">
-															<f:validateLongRange minimum="0" maximum="10" />
-														</p:inputText>
+														<p:spinner id="vacanteMin" value="#{horarioBean.horario.vacantemin}" min="0" max="100" />
 
 														<p:outputLabel value="Vacantes máximas:"></p:outputLabel>
-														<p:inputText type="number" required="true"
-															style="width:180px!important;">
-															<f:validateLongRange minimum="0" maximum="10" />
-														</p:inputText>
+														<p:spinner id="vacanteMax" value="#{horarioBean.horario.vacantemax}" min="0" max="100" />
 
 														<p:outputLabel value="Precio"></p:outputLabel>
-														<p:inputNumber required="true" decimalPlaces="2"
-															style="width:180px!important;" />
+														 <p:spinner id="precio" value="#{horarioBean.horario.precio}" prefix="$" min="0" />
 
-														<p:commandButton ajax="false" value="Agregar"
-															icon="fa fa-search"></p:commandButton>
+														<p:commandButton value="Agregar" actionListener="#{horarioBean.crearHorario}"
+															icon="fa-save" update="frmHorario" />
 													</h:panelGrid>
 
 												</div>
 											</div>
 										</div>
 									</h:form>
-								</p:fieldset>
-							</p:tab>
+									<h:form id="form2">
+									<p:dataTable id="tbHorariosXPlanificacion" 
+								var="h" value="#{horarioBean.listaHorario}"  
+								selection="#{horarioBean.selectedHorario}" 
+								rowKey="#{p.idHorario}" 
+								emptyMessage="No se encontraron registros">
 
+								<p:column headerText="Código Horario"
+									style="text-align:center;">
+									<h:outputText value="#{h.idHorario}" />
+								</p:column>
+
+								<p:column headerText="Edad Mínima" style="text-align:center;">
+									<h:outputText value="#{h.edadMin}" />
+								</p:column>
+								
+								<p:column headerText="Edad Máxima" style="text-align:center;">
+									<h:outputText value="#{h.edadMax}" />
+								</p:column>
+								<p:column headerText="Fecha Inicio" style="text-align:center;">
+									<h:outputText value="#{h.fechaInicio}" />
+								</p:column>
+								<p:column headerText="Fecha Fin" style="text-align:center;">
+									<h:outputText value="#{h.fechafin}" />
+								</p:column>
+								<p:column headerText="Seleccionar" selectionMode="single" style="text-align:center" />
+							</p:dataTable>
+							</h:form>
+							</p:fieldset>
+							</p:tab>
+							
 							<p:tab title="Publicidad#2">
 								<p:fieldset legend="Registrar Publicidad"
 									style="margin-bottom:20px">

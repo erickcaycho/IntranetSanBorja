@@ -1,11 +1,9 @@
 package com.muni.sanborja.educacionculturaturismo.dao.impl;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.hibernate.Query;
 import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
 
@@ -45,8 +43,7 @@ public class HorarioDaoImpl implements Serializable,HorarioDao{
 		
 		return flag;
 	}
-
-
+	
 	@Override
 	public List<Horario> listarHorario(int idPlanificacion) {
 		List<Horario> listaHorario = null;
@@ -54,31 +51,12 @@ public class HorarioDaoImpl implements Serializable,HorarioDao{
 		Session session = HibernateSessionFactory.getSessionFactory().openSession();
 		Transaction ts = session.beginTransaction();
 		
-		String hql="FROM Horario  WHERE idplanificacion = :idplanificacion";
-		
-		Query query = session.createSQLQuery("CALL ConsultarHorario(:idPlanificacion)").
-					setParameter("idPlanificacion",idPlanificacion);
-		
 		try {
 			log.info("Listar Horario");
-			
-			List<Object[]> objs  = query.list();
-			
-			listaHorario = new ArrayList<Horario>();
-			for (Object[] o : objs) {
-				Object[] aux = o;
-				Horario h = new Horario();
-				/*h.setIdHorario((Integer)aux[0]);
-				h.setEdadMax(edadMax);
-				h.setEdadMin(edadMin);
-				h.setFechaInicio(fechaInicio);
-				h.setFechafin(fechafin);
-				h.setHorassesion(horassesion);
-				h.setVacantemax(vacantemax);
-				h.setVacantemin(vacantemin);
-				h.setCantsesion(cantsesion);*/
-				listaHorario.add(h);
-			}
+			//Query query  
+			listaHorario = session.createQuery("FROM Horario  WHERE idplanificacion = :idplanificacion").
+				setParameter("idplanificacion",idPlanificacion).list();
+			//listaHorario = query.list();
 			
 			log.info("Registros encontrados PlanificacionPeriodoActividad: "  + listaHorario.size());
 			

@@ -2,7 +2,6 @@ package com.muni.sanborja.educacionculturaturismo.bean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -56,7 +55,6 @@ public class PlanificacionActividadBean implements Serializable {
 	
 	private List<SelectItem> listaSedes;
 	
-	private Date todayDate = new Date();
 	
 	@PostConstruct
 	public void init() {
@@ -64,13 +62,6 @@ public class PlanificacionActividadBean implements Serializable {
 	    planificacion.setPeriodo(new Periodo());
 	    planificacion.setActividad(new Actividad());
 	    
-	}
-	public Date getTodayDate() {
-	    return todayDate;
-	}
-	public Date getToday() {
-		   Calendar c = Calendar.getInstance(); 
-		   return c.getTime();
 	}
 	
 	public int getIdactividad() {
