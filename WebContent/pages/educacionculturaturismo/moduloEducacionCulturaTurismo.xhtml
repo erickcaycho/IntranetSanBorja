@@ -97,11 +97,11 @@ label {
 								<p:menuitem value="Aprobar de Planificación de Actividad"
 									outcome="/pages/educacionculturaturismo/consultarPlanificacion.xhtml"
 									 />
-								<p:menuitem value="Salir"
-									outcome="/pages/educacionculturaturismo/consultarPlanificacion.xhtml"
-									 />
 							</p:submenu>
 						</p:menu>
+						<p:commandButton value="Salir" icon="fa fa-arrow-left"
+							onclick="PF('Salir').show()">
+						</p:commandButton>
 					</p:panel>
 				</h:form>
 			</div>
@@ -109,6 +109,17 @@ label {
 				<div class="ui-g-12 ui-g-nopad">
 					<div class="ui-g">
 					</div>
+					<p:dialog widgetVar="Salir" header="Mensaje de Sistema" width="300" height="120" 
+							  modal="true" showEffect="fade" hideEffect="fade"  resizable="false">
+							  	<h:panelGrid columns="2" cellpadding="5">
+							  		<p:outputLabel value="¿Desea salir del módulo de Educación, Cultura y Turismo?"></p:outputLabel>
+								</h:panelGrid>						  
+								  <h:panelGrid columns="2" cellpadding="5">
+								  		<p:commandButton value="Aceptar"  action="index?faces-redirect=true" ></p:commandButton>
+								  		 
+								  		<p:commandButton value="Cancelar" onclick="PF('Salir').hide()"></p:commandButton>
+								  </h:panelGrid>
+					</p:dialog>
 			</div>
 		</div>
 	</div>
