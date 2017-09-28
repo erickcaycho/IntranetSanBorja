@@ -16,26 +16,25 @@ public class Empleado  implements Serializable{
 
 	@Id
 	@GeneratedValue
-	@Column(name = "codEmpleado", updatable = false, nullable = false)
-	private int codEmpleado;
+	@Column(name = "idEmpleado", updatable = false, nullable = false)
+	private int idEmpleado;
 
 
 	@Column(name = "nombre")
 	private String nombre;
 	
-	@Column(name = "apellidoPat")
+	@Column(name = "apelliPaterno")
 	private String apellidoPat;
 
-	@Column(name = "apellidoMat")
+	@Column(name = "apelliMaterno")
 	private String apellidoMat;
 	
-
-	public int getCodEmpleado() {
-		return codEmpleado;
+	public int getIdEmpleado() {
+		return idEmpleado;
 	}
 
-	public void setCodEmpleado(int codEmpleado) {
-		this.codEmpleado = codEmpleado;
+	public void setIdEmpleado(int idEmpleado) {
+		this.idEmpleado = idEmpleado;
 	}
 
 	public String getNombre() {

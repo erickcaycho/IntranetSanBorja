@@ -19,9 +19,9 @@
 							<p:outputLabel>Descripción</p:outputLabel>  <p:inputText id="descrip" value="#{cronogramaBean.cronograma.descripcion}"> </p:inputText>
 							<br/>
 							<p:outputLabel>Responsable</p:outputLabel> 
-							<p:selectOneMenu id="codEmpleado" value="#{cronogramaBean.cronograma.empleado.codEmpleado}" required="true" style="width:150px;heigth:50px;">
+							<p:selectOneMenu id="codEmpleado" value="#{cronogramaBean.cronograma.empleado.idEmpleado}" required="true" style="width:150px;heigth:50px;">
 								<f:selectItem itemLabel=" Seleccione " itemValue="" />
-								<f:selectItems value="#{empleadoBean.listaEmpleados}"  var="p" itemValue="#{p.codEmpleado}"  />
+								<f:selectItems value="#{empleadoBean.listaEmpleados}"  var="p" itemValue="#{p.idEmpleado}"  />
 							</p:selectOneMenu>
 							<br/>
 							<p:outputLabel>Fecha Inicio</p:outputLabel>  

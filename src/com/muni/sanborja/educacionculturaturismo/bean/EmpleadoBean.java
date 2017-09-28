@@ -27,7 +27,7 @@ public class EmpleadoBean {
 		listaEmpleados.clear();
 		
 		for(Empleado empleado : e){
-			SelectItem periodoItem = new SelectItem(empleado.getCodEmpleado(), empleado.getNombre());
+			SelectItem periodoItem = new SelectItem(empleado.getIdEmpleado(), empleado.getNombre());
 			this.listaEmpleados.add(periodoItem);
 		}
 		

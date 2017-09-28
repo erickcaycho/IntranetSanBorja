@@ -40,7 +40,7 @@ public class Cronograma implements Serializable{
 	
 	
 	@OneToOne
-	@JoinColumn(name = "codEmpleado")
+	@JoinColumn(name = "idEmpleado")
 	private Empleado empleado;
 	
 
