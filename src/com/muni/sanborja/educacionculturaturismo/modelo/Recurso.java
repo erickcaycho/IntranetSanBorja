@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -14,10 +15,12 @@ public class Recurso implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
+	@Id
 	@ManyToOne
 	@JoinColumn(name="idmaterial")
 	private Material material;
 	
+	@Id
 	@ManyToOne
 	@JoinColumn(name="idhorario")
 	private Horario horario;

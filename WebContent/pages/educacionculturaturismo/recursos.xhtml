@@ -57,7 +57,7 @@
 				<div style="line-height:40px;" >
 					<h:panelGrid columns="6" cellpadding="5">												
 						<p:outputLabel>Cantidad a usar</p:outputLabel>     
-						<p:inputNumber id="cantidad"> </p:inputNumber>
+						<p:inputNumber id="cantidad" value="#{recursoBean.recurso.cantidadUsar}"> </p:inputNumber>
 						<p:commandButton value="Agregar material" icon="fa fa-plus"
 							 actionListener="#{recursoBean.guardarRecurso}"  update="resursosContainer">
 						</p:commandButton>
