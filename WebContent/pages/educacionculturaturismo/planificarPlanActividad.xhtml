@@ -136,19 +136,19 @@
 														style="text-align:center" />
 												</p:dataTable>
 											</p:outputPanel>
-											<div class="ui-g-12 bl-consultar">
-												<p:commandButton value="Cronograma" icon="fa fa-thumbs-o-up"
-													onclick="PF('Cronograma').show()">
-												</p:commandButton>
-
-												<p:commandButton value="Recursos" icon="fa fa-thumbs-o-up"
-													onclick="PF('Recurso').show()">
-												</p:commandButton>
-
-											</div>
  
 										</h:form>
 									</h:form>
+									<div class="ui-g-12 bl-consultar">
+										<p:commandButton value="Cronograma" icon="fa fa-thumbs-o-up"
+											onclick="PF('Cronograma').show()">
+										</p:commandButton>
+
+										<p:commandButton value="Recursos" icon="fa fa-thumbs-o-up"
+											onclick="PF('Recurso').show()">
+										</p:commandButton>
+
+									</div>
 								</p:fieldset>
 							</p:tab>
 
@@ -172,6 +172,22 @@
 							</p:tab>
 						</p:tabView>
 					</h:form>
+					
+					
+					<!-- closable="false" -->
+					<p:dialog widgetVar="Cronograma" header="Pantalla Cronograma" width="700" height="400" 
+							  modal="true" showEffect="fade" hideEffect="fade"  resizable="false">
+	
+					    <ui:include src="cronograma.xhtml" />
+					</p:dialog>
+					
+					<p:dialog widgetVar="Recurso" header="Pantalla Recurso" width="700" height="400" 
+							  modal="true" showEffect="fade" hideEffect="fade"  resizable="false">
+	
+					    <ui:include src="recursos.xhtml" />
+					</p:dialog>
+					
+					
 				</p:panel>
 
 			</div>
