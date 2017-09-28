@@ -183,9 +183,21 @@
 										<div class="ui-g bl-horario">
 											<div class="ui-g-12">
 												<div class="ui-g">
-
-													<!-- Codigo de Publicidad -->
-
+													 <p:growl id="messages" showDetail="true" />
+													 <p:outputLabel value="Adjuntar Plan Publicitario" />
+													 <p:fileUpload label="Seleccionar Documento Relacionado" value="#{planificacionActividadBean.file}" mode="simple" skinSimple="true"/>																								 
+												</div>
+												<div class="ui-g">
+													  <p:outputLabel value="Descripción:" />
+													  <p:inputTextarea rows="5" cols="30" maxlength="250" counterTemplate="{0} caracteres restantes." autoResize="false" 
+													   style="width: 80%;height: 100%;" value="#{planificacionActividadBean.planPublicitario.descripcion}" />
+												    												    	
+												</div>
+												<br></br>
+												<div class="ui-g-12 bl-consultar">
+												
+													<p:commandButton process="@this" value="Guardar" actionListener="#{planificacionActividadBean.crearPlanPublicitario}"/>
+													
 												</div>
 											</div>
 										</div>

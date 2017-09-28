@@ -1,5 +1,8 @@
 package com.muni.sanborja.educacionculturaturismo.bean;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,19 +16,23 @@ import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 
 import org.apache.log4j.Logger;
+import org.primefaces.model.UploadedFile;
 
 import com.muni.sanborja.educacionculturaturismo.dao.ActividadDao;
 import com.muni.sanborja.educacionculturaturismo.dao.PeriodoDao;
+import com.muni.sanborja.educacionculturaturismo.dao.PlanPublicitarioDao;
 import com.muni.sanborja.educacionculturaturismo.dao.PlanificacionDao;
 import com.muni.sanborja.educacionculturaturismo.dao.SedeDao;
 import com.muni.sanborja.educacionculturaturismo.dao.TipoActividadDao;
 import com.muni.sanborja.educacionculturaturismo.dao.impl.ActividadDaoImpl;
 import com.muni.sanborja.educacionculturaturismo.dao.impl.PeriodoDaoImpl;
+import com.muni.sanborja.educacionculturaturismo.dao.impl.PlanPublicitarioDaoImpl;
 import com.muni.sanborja.educacionculturaturismo.dao.impl.PlanificacionDaoImpl;
 import com.muni.sanborja.educacionculturaturismo.dao.impl.SedeDaoImpl;
 import com.muni.sanborja.educacionculturaturismo.dao.impl.TipoActividadDaoImpl;
 import com.muni.sanborja.educacionculturaturismo.modelo.Actividad;
 import com.muni.sanborja.educacionculturaturismo.modelo.Periodo;
+import com.muni.sanborja.educacionculturaturismo.modelo.PlanPublicitario;
 import com.muni.sanborja.educacionculturaturismo.modelo.Planificacion;
 import com.muni.sanborja.educacionculturaturismo.modelo.PlanificacionPeriodoActividad;
 import com.muni.sanborja.educacionculturaturismo.modelo.Sede;
@@ -56,6 +63,8 @@ public class PlanificacionActividadBean implements Serializable {
 	
 	private List<SelectItem> listaSedes;
 	
+	private PlanPublicitario planPublicitario ;
+	private UploadedFile file;
 	
 	@PostConstruct
 	public void init() {
@@ -175,6 +184,29 @@ public class PlanificacionActividadBean implements Serializable {
 	public void setPlanificacion(Planificacion planificacion) {
 		this.planificacion = planificacion;
 	}
+	
+	public PlanPublicitario getPlanPublicitario() {
+		
+		PlanPublicitarioDao planPublicitarioDao = new PlanPublicitarioDaoImpl();
+		planPublicitario = planPublicitarioDao.obtener(planificacion.getIdPlanificacion());
+		
+		if(planPublicitario == null){
+			planPublicitario = new PlanPublicitario();
+			planPublicitario.setPlanificacion(planificacion);		
+		}
+		return planPublicitario;
+	}
+	public void setPlanPublicitario(PlanPublicitario planPublicitario) {
+		this.planPublicitario = planPublicitario;
+	}
+
+	public UploadedFile getFile() {
+		return file;
+	}
+
+	public void setFile(UploadedFile file) {
+		this.file = file;
+	}	
 	
 	
 	public List<PlanificacionPeriodoActividad> getListaPlanificacion() {
@@ -326,6 +358,56 @@ public class PlanificacionActividadBean implements Serializable {
 		
 		return "planificarPlanActividad?faces-redirect=true";
 		
+	}
+	
+	public void crearPlanPublicitario(){
+		try {
+			UploadedFile uploadedPhoto=getFile();
+//			UploadedFile uploadedFile = event.getFile();
+//		    String fileName = uploadedFile.getFileName();
+//		    String contentType = uploadedFile.getContentType();
+//		    byte[] contents = uploadedFile.getContents(); // Or getInputStream()
+//		    // ... Save it, now!
+			File archivo = new File("/tmp/muni/uploads/" + file.getFileName());
+			
+			OutputStream out = new FileOutputStream(archivo);
+		    out.write(file.getContents());
+		    out.close();
+		    
+		    FacesContext.getCurrentInstance().addMessage(
+		               null, new FacesMessage("Upload completo", 
+		               "O arquivo " + uploadedPhoto.getFileName() + " foi salvo!"));
+		    
+			 if(file != null) {
+				 
+		            FacesMessage message = new FacesMessage("Succesful", file.getFileName() + " is uploaded.");
+		            FacesContext.getCurrentInstance().addMessage(null, message);
+		        }
+			
+			PlanPublicitarioDao planPublicitarioDao = new PlanPublicitarioDaoImpl();
+			
+			String msg;
+			if(planPublicitarioDao.createPlanPublicitario(planPublicitario)){
+				msg ="Se creó correctamente el plan publicitario";
+				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,msg,null);
+				FacesContext.getCurrentInstance().addMessage(null, message);
+				
+				log.info("Creado correctamente");
+				
+				
+			}else{
+				msg ="Ha ocurrido un inconveniente con la creación del plan publicitario. Si el problema persiste, reportar el error al siguiente correo: soporte.sanborja@munisanborja.edu.pe";
+				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,msg,null);
+				FacesContext.getCurrentInstance().addMessage(null, message);
+				
+				log.error("Error al crear");
+			}
+			
+			
+		} catch (Exception e) {
+			log.error("Error:" + e.getMessage());
+			log.error(e.getStackTrace());
+		}
 	}
 	
 }
