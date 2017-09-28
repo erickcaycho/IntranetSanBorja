@@ -105,9 +105,10 @@
 										</div>
 										<h:form id="tableHorarioLista">
 											<p:outputPanel id="horarioContainer">
-												<p:dataTable id="tbHorariosXPlanificacion" var="h"
-													value="#{horarioBean.listaHorario}"
-													selection="#{horarioBean.selectedHorario}"
+												<p:dataTable id="tbHorariosXPlanificacion" 
+													var="h"
+													value="#{horarioBean.listaHorario2}"
+													selection="#{horarioBean.selectedHorario2}"
 													rowKey="#{h.idHorario}"
 													emptyMessage="No se encontraron registros">
 
@@ -115,15 +116,38 @@
 														style="text-align:center;">
 														<h:outputText value="#{h.idHorario}" />
 													</p:column>
-
-													<p:column headerText="Edad Mínima"
+													
+													<p:column headerText="Sede"
 														style="text-align:center;">
-														<h:outputText value="#{h.edadMin}" />
+														<h:outputText value="#{h.nombreSede}" />
 													</p:column>
-
-													<p:column headerText="Edad Máxima"
+													<p:column headerText="Ambiente"
 														style="text-align:center;">
-														<h:outputText value="#{h.edadMax}" />
+														<h:outputText value="#{h.nombreAmbiente}" />
+													</p:column>
+													<p:column headerText="Dirigido a"
+														style="text-align:center;">
+														<h:outputText value="#{h.dirigido}" />
+													</p:column>
+													<p:column headerText="Cant. Sesiones"
+														style="text-align:center;">
+														<h:outputText value="#{h.cantidadSesion}" />
+													</p:column>
+													<p:column headerText="Horas/Sesión"
+														style="text-align:center;">
+														<h:outputText value="#{h.horaSesion}" />
+													</p:column>
+													<p:column headerText="Vacantes Min."
+														style="text-align:center;">
+														<h:outputText value="#{h.vacanteMin}" />
+													</p:column>
+													<p:column headerText="Vacantes Max."
+														style="text-align:center;">
+														<h:outputText value="#{h.vacanteMax}" />
+													</p:column>
+													<p:column headerText="Precio"
+														style="text-align:center;">
+														<h:outputText value="#{h.precio}" />
 													</p:column>
 													<p:column headerText="Fecha Inicio"
 														style="text-align:center;">

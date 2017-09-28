@@ -25,6 +25,7 @@ import com.muni.sanborja.educacionculturaturismo.dao.impl.PlanificacionDaoImpl;
 import com.muni.sanborja.educacionculturaturismo.dao.impl.SedeDaoImpl;
 import com.muni.sanborja.educacionculturaturismo.modelo.Ambiente;
 import com.muni.sanborja.educacionculturaturismo.modelo.Horario;
+import com.muni.sanborja.educacionculturaturismo.modelo.HorarioPlanificacionActividad;
 import com.muni.sanborja.educacionculturaturismo.modelo.Planificacion;
 import com.muni.sanborja.educacionculturaturismo.modelo.Sede;
 
@@ -45,6 +46,8 @@ public class HorarioBean implements Serializable{
 	
 	private List<SelectItem> listaSede;
 	private List<SelectItem> listaAmbiente;
+	private List<HorarioPlanificacionActividad> listaHorario2;
+	private HorarioPlanificacionActividad selectedHorario2;
 	
 	private Sede sede;
 	private int idsede;
@@ -154,7 +157,28 @@ public class HorarioBean implements Serializable{
 		catch (Exception e) {
 		log.error("Error:" + e.getMessage());
 		log.error(e.getStackTrace());
+		}
 	}
+	
+	
+	public List<HorarioPlanificacionActividad> getListaHorario2() {
+		
+		HorarioDao horarioDao = new HorarioDaoImpl();
+		listaHorario2 = horarioDao.listarHorarioPlanificacionActividad();
+
+		return listaHorario2;
+	}
+
+	public void setListaHorario2(List<HorarioPlanificacionActividad> listaHorario2) {
+		this.listaHorario2 = listaHorario2;
+	}
+
+	public HorarioPlanificacionActividad getSelectedHorario2() {
+		return selectedHorario2;
+	}
+
+	public void setSelectedHorario2(HorarioPlanificacionActividad selectedHorario2) {
+		this.selectedHorario2 = selectedHorario2;
 	}
 
 	public Horario getSelectedHorario() {
