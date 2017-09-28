@@ -171,7 +171,14 @@
 										<p:commandButton value="Recursos" icon="fa fa-cubes"
 											onclick="PF('Recurso').show()">
 										</p:commandButton>
-
+										
+										<p:commandButton value="Encargados" icon="fa fa-user-plus"
+											onclick="PF('Encargados').show()">
+										</p:commandButton>
+										
+										<p:commandButton value="Días" icon="fa fa-check-square"
+											onclick="PF('Días').show()">
+										</p:commandButton>
 									</div>
 								</p:fieldset>
 							</p:tab>
@@ -223,6 +230,13 @@
 					    <ui:include src="recursos.xhtml" />
 					</p:dialog>
 					
+					<p:dialog widgetVar="Encargados" header="Pantalla Encargados" width="700" height="400" 
+							  modal="true" showEffect="fade" hideEffect="fade"  resizable="false">
+					</p:dialog>
+					
+					<p:dialog widgetVar="Días" header="Pantalla Días" width="700" height="400" 
+							  modal="true" showEffect="fade" hideEffect="fade"  resizable="false">
+					</p:dialog>
 					
 				</p:panel>
 
