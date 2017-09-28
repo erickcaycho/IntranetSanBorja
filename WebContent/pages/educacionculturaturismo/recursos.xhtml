@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:pe="http://primefaces.org/ui/extensions">
+
+
+
+	<h:form id="frmBusquedaMaterial">
+		<p:fieldset legend="Asignar Recursos" style="margin-bottom:20px">
+		
+			<div style="line-height:40px;" >
+			
+				<h:panelGrid columns="6" cellpadding="5">												
+					<p:outputLabel value="Material" />
+					<p:inputText id="material" value="#{cronogramaBean.cronograma.tarea}"> </p:inputText>
+					<p:commandButton ajax="false" actionListener="#{planificacionActividadBean.consultarPlan}"
+							value="Consultar" icon="fa fa-search"></p:commandButton>
+				</h:panelGrid>
+			</div>
+			
+		</p:fieldset>
+		
+		</h:form>
+		
+		<h:form id="frmListaMaterial">
+			<p:outputPanel id="materialesContainer">
+				<p:dataTable id="tbMateriales" 
+					var="plan" 
+					value="#{planificacionActividadBean.listaPlanificacion}"  
+					selection="#{planificacionActividadBean.selectedPlan}" 
+					rowKey="#{plan.idPlanificacion}" 
+					paginator="true"
+					rows="5" 
+					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					resizableColumns="true" rowsPerPageTemplate="5,10,15"
+					emptyMessage="No se encontraron registros">
+
+					<p:column headerText="Código Material"
+						style="text-align:center;">
+						<h:outputText value="#{plan.idPlanificacion}" />
+					</p:column>
+					<p:column headerText="Material"
+						style="text-align:center;">
+						<h:outputText value="#{plan.idPlanificacion}" />
+					</p:column>
+					<p:column headerText="Cantidad disponible"
+						style="text-align:center;">
+						<h:outputText value="#{plan.idPlanificacion}" />
+					</p:column>
+					<p:column headerText="Seleccionar" selectionMode="single" style="text-align:center" />
+				</p:dataTable>
+			</p:outputPanel>
+		</h:form>
+		
+		<br></br>
+		
+		<h:form id="frmCantidad">
+			<p:fieldset style="margin-bottom:20px">
+				<div style="line-height:40px;" >
+					<h:panelGrid columns="6" cellpadding="5">												
+						<p:outputLabel>Cantidad a usar</p:outputLabel>     
+						<p:inputNumber id="cantidad"> </p:inputNumber>
+						<p:commandButton value="Agregar material" icon="fa fa-plus"
+							 actionListener="#{cronogramaBean.crearCronograma}"  update="form2:tbCronograma">
+						</p:commandButton>
+					</h:panelGrid>
+				</div>
+			</p:fieldset>
+		</h:form>
+		
+		<h:form id="frmListaRecursos">
+			<p:outputPanel id="materialesContainer">
+				<p:dataTable id="tbMateriales" 
+					var="plan" 
+					value="#{planificacionActividadBean.listaPlanificacion}"  
+					selection="#{planificacionActividadBean.selectedPlan}" 
+					rowKey="#{plan.idPlanificacion}" 
+					paginator="true"
+					rows="5" 
+					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					resizableColumns="true" rowsPerPageTemplate="5,10,15"
+					emptyMessage="No se encontraron registros">
+
+					
+					<p:column headerText="Código Recurso" style="text-align:center;">
+						<h:outputText value="#{plan.nomTipoActividad}" />
+					</p:column>
+					<p:column headerText="Material" style="text-align:center;">
+						<h:outputText value="#{plan.nomActividad}" />
+					</p:column>
+					<p:column headerText="Cantidad Usar" style="text-align:center;">
+						<h:outputText value="#{plan.estado}" />
+					</p:column>
+					<p:column headerText="Seleccionar" selectionMode="single" style="text-align:center" />
+				</p:dataTable>
+			</p:outputPanel>
+			
+			<div class="ui-g-12 bl-consultar">
+				<p:commandButton value="Eliminar" actionListener="#{planificacionActividadBean.eliminarPlan}"  update=":frmLista:tbPlanificacion" icon="fa fa-trash">
+				</p:commandButton>
+			</div>
+		</h:form>
+	
+</html>

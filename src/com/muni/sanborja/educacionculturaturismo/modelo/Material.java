@@ -7,7 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -21,46 +21,13 @@ public class Material implements Serializable{
 	@Column(name = "idmaterial", updatable = false, nullable = false)
 	private int idMaterial;
 	
-	@Column(name = "nommaterial")
-	private String nomMaterial;
+	@Column(name = "nombre")
+	private String nombre;
 	
-	@Column(name = "cantdisponible")
-	private int cantDisponible;
+	@Column(name = "cantidad_disponible")
+	private int cantidadDisponible;
 	
-	@OneToMany
+	@ManyToOne
 	private Set<Recurso> recurso;
-
-	public int getIdMaterial() {
-		return idMaterial;
-	}
-
-	public void setIdMaterial(int idMaterial) {
-		this.idMaterial = idMaterial;
-	}
-
-	public String getNomMaterial() {
-		return nomMaterial;
-	}
-
-	public void setNomMaterial(String nomMaterial) {
-		this.nomMaterial = nomMaterial;
-	}
-
-	public int getCantDisponible() {
-		return cantDisponible;
-	}
-
-	public void setCantDisponible(int cantDisponible) {
-		this.cantDisponible = cantDisponible;
-	}
-
-	public Set<Recurso> getRecurso() {
-		return recurso;
-	}
-
-	public void setRecurso(Set<Recurso> recurso) {
-		this.recurso = recurso;
-	}
-
 	
 }

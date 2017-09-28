@@ -116,6 +116,9 @@
 								onclick="PF('Cronograma').show()" >
 							</p:commandButton>
 							
+							<p:commandButton value="Recursos" icon="fa fa-thumbs-o-up"
+								onclick="PF('Recurso').show()" >
+							</p:commandButton>
 							
 						</div>
 						
@@ -131,7 +134,11 @@
 				    <ui:include src="cronograma.xhtml" />
 				</p:dialog>
 				
-				
+				<p:dialog widgetVar="Recurso" header="Pantalla Recurso" width="700" height="400" 
+						  modal="true" showEffect="fade" hideEffect="fade"  resizable="false">
+
+				    <ui:include src="recursos.xhtml" />
+				</p:dialog>
 				
 			</div>
 		</div>
