@@ -14,25 +14,25 @@
 					<p:fieldset legend="Ingresar Tarea	" style="margin-bottom:20px">
 					
 						<div style="line-height:40px;" >
-						
-							<p:outputLabel >Tarea</p:outputLabel>       <p:inputText id="tarea" value="#{cronogramaBean.cronograma.tarea}"> </p:inputText>
-							<p:outputLabel>Descripción</p:outputLabel>  <p:inputText id="descrip" value="#{cronogramaBean.cronograma.descripcion}"> </p:inputText>
-							<br/>
-							<p:outputLabel>Responsable</p:outputLabel> 
-							<p:selectOneMenu id="codEmpleado" value="#{cronogramaBean.cronograma.empleado.idEmpleado}" required="true" style="width:150px;heigth:50px;">
-								<f:selectItem itemLabel=" Seleccione " itemValue="" />
-								<f:selectItems value="#{empleadoBean.listaEmpleados}"  var="p" itemValue="#{p.idEmpleado}"  />
-							</p:selectOneMenu> 
-							<br/>
+						<h:panelGrid columns="4" cellpadding="5">
+							<p:outputLabel >Tarea</p:outputLabel> 
+							<p:inputText id="tarea" value="#{cronogramaBean.cronograma.tarea}"> </p:inputText>
+							<p:outputLabel>Descripción</p:outputLabel>
+							<p:inputText id="descrip" value="#{cronogramaBean.cronograma.descripcion}"> </p:inputText>
+							 
 							<p:outputLabel>Fecha Inicio</p:outputLabel>  
        						<p:calendar id="cal1" value="#{cronogramaBean.cronograma.fechaInicio}" showOn="button" mindate="today" />
 							<p:outputLabel>Fecha Fin</p:outputLabel>     
        						<p:calendar id="cal2" value="#{cronogramaBean.cronograma.fechaFin}" showOn="button" mindate="today" />
-       						
+       						<p:outputLabel>Responsable</p:outputLabel> 
+							<p:selectOneMenu id="codEmpleado" value="#{cronogramaBean.cronograma.empleado.idEmpleado}" required="true" style="width:150px;heigth:50px;">
+								<f:selectItem itemLabel=" Seleccione " itemValue="" />
+								<f:selectItems value="#{empleadoBean.listaEmpleados}"  var="p" itemValue="#{p.idEmpleado}"  />
+							</p:selectOneMenu>
 							<p:commandButton value="Agregar" icon="fa fa-plus"
 								 actionListener="#{cronogramaBean.crearCronograma}"  update="form2:tbCronograma">
 							</p:commandButton>
-							
+						</h:panelGrid>
 						</div>
 						
 					</p:fieldset>
