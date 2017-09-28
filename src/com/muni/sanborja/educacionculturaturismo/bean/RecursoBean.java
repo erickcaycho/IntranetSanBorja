@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -28,10 +29,15 @@ public class RecursoBean implements Serializable{
 	private List<Material> listaMaterial;
 	private List<Recurso> listaRecurso = new ArrayList<Recurso>();
 	private Material material, selectedMaterial;
-	private Recurso recurso;
+	private Recurso recurso, selectedRecurso;
+	
+	FacesContext context = FacesContext.getCurrentInstance();
+	Application application = context.getApplication();
+	HorarioBean horarioBean = application.evaluateExpressionGet(context, "#{horarioBean}", HorarioBean.class);
 
 	@PostConstruct
 	public void init() {
+		recurso = new Recurso();
 		material = new Material();
 	}
 	
@@ -86,8 +92,7 @@ public class RecursoBean implements Serializable{
 		try {
 			
 			recurso.setMaterial(selectedMaterial);
-			recurso.setCantidadUsar(recurso.getCantidadUsar());
-			recurso.setHorario(new Horario());
+			recurso.setHorario(horarioBean.getSelectedHorario());
 			
 			RecursoDao recursoDao = new RecursoDaoImpl();
 			
@@ -131,6 +136,14 @@ public class RecursoBean implements Serializable{
 			log.error("Error:" + e.getMessage());
 			log.error(e.getStackTrace());
 		}
+	}
+
+	public Recurso getSelectedRecurso() {
+		return selectedRecurso;
+	}
+
+	public void setSelectedRecurso(Recurso selectedRecurso) {
+		this.selectedRecurso = selectedRecurso;
 	}
 
 }
