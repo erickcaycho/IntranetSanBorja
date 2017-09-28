@@ -17,7 +17,7 @@
 						<h:panelGrid columns="2" cellpadding="5">
 							<h:outputLabel>Nombre de Actividad: </h:outputLabel>
 							<h:outputLabel value="#{planificacionActividadBean.selectedPlan.nomActividad}"></h:outputLabel>
-							
+							<h:inputHidden value="#{planificacionActividadBean.planificacion.idPlanificacion}" id="hiddenIdPlanificacion" />
 						</h:panelGrid>
 						<p:tabView >
 							<p:tab title="Horario#1">
@@ -27,14 +27,14 @@
 										<div class="ui-g bl-horario">
 											<div class="ui-g-12">
 												<div class="ui-g">
-													<h:inputHidden value="#{planificacionActividadBean.planificacion.idPlanificacion}" id="hiddenIdPlanificacion" />
+
 													<h:panelGrid columns="4" cellpadding="5">
 														<p:outputLabel value="Fecha Inicio" />
 														<p:calendar id="fecinicio" value="#{horarioBean.horario.fechaInicio}" pattern="dd/MM/yyyy" 
 															showOn="button" mindate="#{horarioBean.todayDate}" />
 
 														<p:outputLabel value="Fecha Fin" />
-														<p:calendar id="fecfin" value="#{horarioBean.horario.fechaFin}" pattern="dd/MM/yyyy"
+														<p:calendar id="fecfin" value="#{horarioBean.horario.fechafin}" pattern="dd/MM/yyyy"
 															showOn="button" mindate="#{horarioBean.todayDate}" />
 
 														<p:outputLabel value="Seleccione Sede" />
@@ -74,21 +74,20 @@
 														<p:spinner id="vacanteMax" value="#{horarioBean.horario.vacantemax}" min="0" max="100" />
 
 														<p:outputLabel value="Precio"></p:outputLabel>
-														 <p:spinner id="precio" value="#{horarioBean.horario.precio}" prefix="S/ ." min="0" />
+														 <p:spinner id="precio" value="#{horarioBean.horario.precio}" prefix="S/." min="0" />
 
 														<p:commandButton value="Agregar" actionListener="#{horarioBean.crearHorario}"
-															icon="fa-save" update="frmHorario" />
+															icon="fa-save" update="tbHorariosXPlanificacion" />
 													</h:panelGrid>
 
 												</div>
 											</div>
 										</div>
-									</h:form>
-									<h:form id="form2">
+									
 									<p:dataTable id="tbHorariosXPlanificacion" 
 								var="h" value="#{horarioBean.listaHorario}"  
 								selection="#{horarioBean.selectedHorario}" 
-								rowKey="#{p.idHorario}" 
+								rowKey="#{h.idHorario}" 
 								emptyMessage="No se encontraron registros">
 
 								<p:column headerText="Código Horario"

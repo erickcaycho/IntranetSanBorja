@@ -58,7 +58,7 @@ public class HorarioDaoImpl implements Serializable,HorarioDao{
 				setParameter("idplanificacion",idPlanificacion).list();
 			//listaHorario = query.list();
 			
-			log.info("Registros encontrados PlanificacionPeriodoActividad: "  + listaHorario.size());
+			log.info("Registros encontrados Horario: "  + listaHorario.size());
 			
 			ts.commit();
 			session.close();

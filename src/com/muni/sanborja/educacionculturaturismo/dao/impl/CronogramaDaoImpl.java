@@ -93,7 +93,7 @@ public class CronogramaDaoImpl implements Serializable,CronogramaDao{
 				listaCronograma.add(c);
 			}
 			
-			log.info("Registros encontrados PlanificacionPeriodoActividad: "  + listaCronograma.size());
+			log.info("Registros encontrados Cronograma: "  + listaCronograma.size());
 			
 			
 			ts.commit();

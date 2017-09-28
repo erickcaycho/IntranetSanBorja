@@ -83,7 +83,7 @@ public class PlanificacionDaoImpl implements PlanificacionDao, Serializable {
 				plan.add(p);
 			}
 			
-			log.info("Registros encontrados PlanificacionPeriodoActividad: "  + plan.size());
+			log.info("Registros encontrados PlanificacionPeriodoActividad *: "  + plan.size());
 			
 			
 			ts.commit();

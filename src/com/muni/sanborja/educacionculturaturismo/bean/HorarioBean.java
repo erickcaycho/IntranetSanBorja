@@ -108,6 +108,7 @@ public class HorarioBean implements Serializable{
 	}
 	
 	public List<SelectItem> getListaAmbiente() {
+		
 		this.listaAmbiente = new ArrayList<SelectItem>();
 		AmbienteDao ambienteDao = new AmbienteDaoImpl();
 		
@@ -165,7 +166,12 @@ public class HorarioBean implements Serializable{
 	}
 
 	public List<Horario> getListaHorario() {
+		log.info("******************************** " + planificacionBean.getSelectedPlan().getIdPlanificacion());
+		HorarioDao horarioDao = new HorarioDaoImpl();
+		log.info("******************************** " + planificacionBean.getSelectedPlan().getIdPlanificacion());
 		
+		listaHorario = horarioDao.listarHorario(planificacionBean.getSelectedPlan().getIdPlanificacion());
+		log.info("******************************** " + planificacionBean.getSelectedPlan().getIdPlanificacion());
 		
 		return listaHorario;
 	}
