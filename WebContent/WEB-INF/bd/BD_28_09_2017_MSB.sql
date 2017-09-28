@@ -560,7 +560,7 @@ BEGIN
     
     
 	/*SET @sql = CONCAT('SELECT COUNT(*) FROM ', tab_name);*/
-    SET @sql = CONCAT('SELECT TB1.idcronograma,TB1.tarea,TB1.descripcion,TB2.nombre,TB2.apellipaterno,
+    SET @sql = CONCAT('SELECT TB1.idcronograma,TB1.tarea,TB1.descripcion,TB2.idEmpleado,TB2.nombre,TB2.apellipaterno,
 					   TB1.fechainicio,TB1.fechafin
                        FROM educacionculturaturismosb.cronograma TB1
 					   LEFT JOIN educacionculturaturismosb.empleado TB2

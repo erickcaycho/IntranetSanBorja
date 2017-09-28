@@ -37,6 +37,9 @@ public class CronogramaBean implements Serializable{
 	    
 	}
 
+	public void remove(Cronograma cronograma){
+		
+	}
 	
 	public List<Cronograma> getListaCronogramas() {
 		

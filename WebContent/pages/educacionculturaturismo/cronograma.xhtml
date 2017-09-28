@@ -74,11 +74,16 @@
 									<h:outputText value="#{crono.fechaFin}" />
 								</p:column>
 								<p:column headerText="Seleccionar" selectionMode="single" style="text-align:center" />
+						
+				                <p:column>
+				                    <p:commandButton icon="ui-icon-trash"
+				                        title="Delete this actor"
+				                        ajax="false" />
+				                </p:column>
+				                        <!-- actionListener="#{cronogramaBeans.remove(crono)}"-->
 							</p:dataTable>
 						 
-						
-					
-					
+								
 					
 					
 					
