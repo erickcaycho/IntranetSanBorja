@@ -1,11 +1,7 @@
 package com.muni.sanborja.educacionculturaturismo.bean;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
+import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -16,27 +12,31 @@ import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 
 import org.apache.log4j.Logger;
+import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
-import com.muni.sanborja.educacionculturaturismo.dao.ActividadDao;
-import com.muni.sanborja.educacionculturaturismo.dao.PeriodoDao;
-import com.muni.sanborja.educacionculturaturismo.dao.PlanPublicitarioDao;
-import com.muni.sanborja.educacionculturaturismo.dao.PlanificacionDao;
-import com.muni.sanborja.educacionculturaturismo.dao.SedeDao;
-import com.muni.sanborja.educacionculturaturismo.dao.TipoActividadDao;
-import com.muni.sanborja.educacionculturaturismo.dao.impl.ActividadDaoImpl;
-import com.muni.sanborja.educacionculturaturismo.dao.impl.PeriodoDaoImpl;
-import com.muni.sanborja.educacionculturaturismo.dao.impl.PlanPublicitarioDaoImpl;
-import com.muni.sanborja.educacionculturaturismo.dao.impl.PlanificacionDaoImpl;
-import com.muni.sanborja.educacionculturaturismo.dao.impl.SedeDaoImpl;
-import com.muni.sanborja.educacionculturaturismo.dao.impl.TipoActividadDaoImpl;
+import resources.Constants;
+import resources.FechaUtil;
+import resources.Util;
+
 import com.muni.sanborja.educacionculturaturismo.modelo.Actividad;
 import com.muni.sanborja.educacionculturaturismo.modelo.Periodo;
 import com.muni.sanborja.educacionculturaturismo.modelo.PlanPublicitario;
 import com.muni.sanborja.educacionculturaturismo.modelo.Planificacion;
 import com.muni.sanborja.educacionculturaturismo.modelo.PlanificacionPeriodoActividad;
-import com.muni.sanborja.educacionculturaturismo.modelo.Sede;
 import com.muni.sanborja.educacionculturaturismo.modelo.TipoActividad;
+import com.muni.sanborja.educacionculturaturismo.service.ActividadService;
+import com.muni.sanborja.educacionculturaturismo.service.PeriodoService;
+import com.muni.sanborja.educacionculturaturismo.service.PlanPublicitarioService;
+import com.muni.sanborja.educacionculturaturismo.service.PlanificacionService;
+import com.muni.sanborja.educacionculturaturismo.service.SedeService;
+import com.muni.sanborja.educacionculturaturismo.service.TipoActividadService;
+import com.muni.sanborja.educacionculturaturismo.service.impl.ActividadServiceImpl;
+import com.muni.sanborja.educacionculturaturismo.service.impl.PeriodoServiceImpl;
+import com.muni.sanborja.educacionculturaturismo.service.impl.PlanPublicitarioServiceImpl;
+import com.muni.sanborja.educacionculturaturismo.service.impl.PlanificacionServiceImpl;
+import com.muni.sanborja.educacionculturaturismo.service.impl.SedeServiceImpl;
+import com.muni.sanborja.educacionculturaturismo.service.impl.TipoActividadServiceImpl;
 
 @ManagedBean(name = "planificacionActividadBean")
 @SessionScoped 
@@ -59,19 +59,25 @@ public class PlanificacionActividadBean implements Serializable {
 	private int idtipoactividad;
 	private int idactividad;
 	private int estado;
-	private int idplanificacion;
-	
-	private List<SelectItem> listaSedes;
-	
+	private int idplanificacion;	
+	private List<SelectItem> listaSedes;	
 	private PlanPublicitario planPublicitario ;
 	private UploadedFile file;
-	
+	private String destination="D:\\tmp\\";	   
+	private byte [] imagenPlanPublicitario;
+	   
+	PlanPublicitarioService planPublicitarioService = new PlanPublicitarioServiceImpl();
+	SedeService sedeService = new SedeServiceImpl();
+	PlanificacionService planificacionService = new PlanificacionServiceImpl();
+	ActividadService actividadService = new ActividadServiceImpl();
+	TipoActividadService tipoActividadService = new TipoActividadServiceImpl();
+	PeriodoService periodoService = new PeriodoServiceImpl();
+		   
 	@PostConstruct
 	public void init() {
 	    planificacion = new Planificacion();
 	    planificacion.setPeriodo(new Periodo());
-	    planificacion.setActividad(new Actividad());
-	    
+	    planificacion.setActividad(new Actividad());	    
 	}
 	
 	public int getIdactividad() {
@@ -115,16 +121,7 @@ public class PlanificacionActividadBean implements Serializable {
 	}
 
 	public List<SelectItem> getListaPeriodos() {
-		this.listaPeriodos = new ArrayList<SelectItem>();
-		PeriodoDao periodoDao = new PeriodoDaoImpl();
-		List<Periodo> p = periodoDao.listarPeriodo();
-		listaPeriodos.clear();
-		
-		for(Periodo periodo : p){
-			SelectItem periodoItem = new SelectItem(periodo.getIdPeriodo(), periodo.getNomPeriodo());
-			this.listaPeriodos.add(periodoItem);
-		}
-		
+		this.listaPeriodos = periodoService.listarPeriodo();
 		return listaPeriodos;
 	}
 
@@ -133,36 +130,15 @@ public class PlanificacionActividadBean implements Serializable {
 	}
 	
 	public List<SelectItem> getListaTipoActividades() {
-		this.listaTipoActividades = new ArrayList<SelectItem>();
-		TipoActividadDao tipoActvidadDao = new TipoActividadDaoImpl();
-		List<TipoActividad> t = tipoActvidadDao.listarTipoActividad();
-		listaTipoActividades.clear();
-		
-		for(TipoActividad tipoActividad : t){
-			SelectItem tipoActividadItem = new SelectItem(tipoActividad.getIdTipoActividad(),tipoActividad.getNomTipoActividad());
-			this.listaTipoActividades.add(tipoActividadItem);
-		}
-		
+		this.listaTipoActividades = tipoActividadService.listarTipoActividad();
 		return listaTipoActividades;
 	}
 	public void setListaTipoActividades(List<SelectItem> listaTipoActividades) {
 		this.listaTipoActividades = listaTipoActividades;
 	}
 	
-	public List<SelectItem> getListaActividades() {
-		this.listaActividades = new ArrayList<SelectItem>();
-		ActividadDao actividadDao = new ActividadDaoImpl();
-		
-		log.info("Codigo capturado = " + idtipoactividad);
-		
-		List<Actividad> a = actividadDao.listarActividad(idtipoactividad);
-		listaActividades.clear();
-		
-		for(Actividad actividad : a){
-			SelectItem actividadItem = new SelectItem(actividad.getIdActividad(), actividad.getNomActividad());
-			this.listaActividades.add(actividadItem);
-		}
-		
+	public List<SelectItem> getListaActividades() {		
+		this.listaActividades = actividadService.listarActividad(idtipoactividad);		
 		return listaActividades;
 	}
 	
@@ -185,17 +161,15 @@ public class PlanificacionActividadBean implements Serializable {
 		this.planificacion = planificacion;
 	}
 	
-	public PlanPublicitario getPlanPublicitario() {
-		
-		PlanPublicitarioDao planPublicitarioDao = new PlanPublicitarioDaoImpl();
-		planPublicitario = planPublicitarioDao.obtener(planificacion.getIdPlanificacion());
-		
+	public PlanPublicitario getPlanPublicitario() {		
+		planPublicitario = planPublicitarioService.obtener(planificacion.getIdPlanificacion());		
 		if(planPublicitario == null){
 			planPublicitario = new PlanPublicitario();
 			planPublicitario.setPlanificacion(planificacion);		
 		}
 		return planPublicitario;
 	}
+	
 	public void setPlanPublicitario(PlanPublicitario planPublicitario) {
 		this.planPublicitario = planPublicitario;
 	}
@@ -207,14 +181,17 @@ public class PlanificacionActividadBean implements Serializable {
 	public void setFile(UploadedFile file) {
 		this.file = file;
 	}	
-	
-	
-	public List<PlanificacionPeriodoActividad> getListaPlanificacion() {
 		
-		PlanificacionDao planificacionDao = new PlanificacionDaoImpl();
-				
-		listaPlanificacion = planificacionDao.listarPlanificacionPeriodoActividad(planificacion.getPeriodo().getIdPeriodo(),planificacion.getEstado());
-		
+	public byte[] getImagenPlanPublicitario() {
+		return imagenPlanPublicitario;
+	}
+
+	public void setImagenPlanPublicitario(byte[] imagenPlanPublicitario) {
+		this.imagenPlanPublicitario = imagenPlanPublicitario;
+	}
+
+	public List<PlanificacionPeriodoActividad> getListaPlanificacion() {				
+		listaPlanificacion = planificacionService.listarPlanificacionPeriodoActividad(planificacion.getPeriodo().getIdPeriodo(),planificacion.getEstado());		
 		return listaPlanificacion;
 	}
 
@@ -222,31 +199,33 @@ public class PlanificacionActividadBean implements Serializable {
 		this.listaPlanificacion = listaPlanificacion;
 	}
 	
-	
-	
+	public List<SelectItem> getListaSedes() {		
+		this.listaSedes = sedeService.listarSede();		
+		return listaSedes;
+	}
 
+	public void setListaSedes(List<SelectItem> listaSedes) {
+		this.listaSedes = listaSedes;
+	}
+	
 	public void crearPlan(){
 		try {
 			
-			Date date = new Date();
-			planificacion.setFechaCreacion(new java.sql.Date(date.getTime()));
-			planificacion.setEstado(1);
-			
-			PlanificacionDao planificacionDao = new PlanificacionDaoImpl();
+			planificacion.setFechaCreacion(new java.sql.Date(FechaUtil.ahora().getTime()));
+			planificacion.setEstado(Constants.ESTADO_PENDIENTE);
 			
 			log.info("Captura id_actividad: " +planificacion.getActividad().getIdActividad());
 			log.info("Captura id_tipoactividad: " + idtipoactividad);
-			log.info("Captura id_periodo: " + planificacion.getPeriodo().getIdPeriodo());
-			
-			log.info(" CAPTURA REAL: " + planificacionDao.validarActividadPorPeriodo(planificacion.getPeriodo().getIdPeriodo(), idtipoactividad, planificacion.getActividad().getIdActividad()));
+			log.info("Captura id_periodo: " + planificacion.getPeriodo().getIdPeriodo());			
+			log.info(" CAPTURA REAL: " + planificacionService.validarActividadPorPeriodo(planificacion.getPeriodo().getIdPeriodo(), idtipoactividad, planificacion.getActividad().getIdActividad()));
 			
 			String msg;
 			
-			if(planificacionDao.validarActividadPorPeriodo(planificacion.getPeriodo().getIdPeriodo(), idtipoactividad, planificacion.getActividad().getIdActividad())){
+			if(planificacionService.validarActividadPorPeriodo(planificacion.getPeriodo().getIdPeriodo(), idtipoactividad, planificacion.getActividad().getIdActividad())){
 				
-				if(planificacionDao.create(planificacion)){
+				if(planificacionService.create(planificacion)){
 					
-					planificacionDao.listarPlanificacionPeriodoActividad(planificacion.getPeriodo().getIdPeriodo(),planificacion.getEstado());
+					planificacionService.listarPlanificacionPeriodoActividad(planificacion.getPeriodo().getIdPeriodo(),planificacion.getEstado());
 					
 					msg ="Se creó correctamente la planificación";
 					FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,msg,null);
@@ -275,37 +254,22 @@ public class PlanificacionActividadBean implements Serializable {
 			log.error(e.getStackTrace());
 		}
 	}
-	
-	
-	public void consultarPlan(){
-		log.info("---CONSULTAR ---");
-		log.info("idPeriodo_capturado: " +planificacion.getPeriodo().getIdPeriodo());
-		log.info("Estado_capturado: " +planificacion.getEstado());
 		
-		PlanificacionDao planificacionDao = new PlanificacionDaoImpl();
-		planificacionDao.listarPlanificacionPeriodoActividad(planificacion.getPeriodo().getIdPeriodo(),planificacion.getEstado());
-		
-		log.info("Tam actual: " + listaPlanificacion.size());
-		
+	public void consultarPlan(){		
+		planificacionService.listarPlanificacionPeriodoActividad(planificacion.getPeriodo().getIdPeriodo(),planificacion.getEstado());		
 	}
 	
 	public void eliminarPlan() {
 		try {
-			
-			log.info("---ELIMINAR PLAN SELECCIONADO---");
-			
-			PlanificacionDao planificacionDao = new PlanificacionDaoImpl();
-			log.info("Captura id_Planificacion: " +selectedPlan.getIdPlanificacion());
-			
 			
 			Planificacion objPlanificacion = new Planificacion();
 			objPlanificacion.setIdPlanificacion(selectedPlan.getIdPlanificacion());			
 	
 			String msg;
 				
-			if(planificacionDao.delete(objPlanificacion)){
+			if(planificacionService.delete(objPlanificacion)){
 				
-				planificacionDao.listarPlanificacionPeriodoActividad(planificacion.getPeriodo().getIdPeriodo(),planificacion.getEstado());
+				planificacionService.listarPlanificacionPeriodoActividad(planificacion.getPeriodo().getIdPeriodo(),planificacion.getEstado());
 				
 				msg ="Se eliminó correctamente la planificación";
 				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,msg,null);
@@ -327,67 +291,24 @@ public class PlanificacionActividadBean implements Serializable {
 		}
 	}
 	
-	public List<SelectItem> getListaSedes() {
-		log.info("*---OBTENER SEDES---");
-		SedeDao sedeDao = new SedeDaoImpl();
-		List<Sede> s = sedeDao.listarSede();
-		
-		for(Sede sede : s){
-			SelectItem sedeItem = new SelectItem(sede.getIdSede(), sede.getNombreSede());
-			this.listaSedes.add(sedeItem);
-		}
-		
-		return listaSedes;
-	}
-
-	public void setListaSedes(List<SelectItem> listaSedes) {
-		this.listaSedes = listaSedes;
-	}
-	
 	public String planificarPlan(){
 		
 		log.info("INICIA CON LA ASIGNACIÓN DE PLANIFICACIÓN  .....");
 		log.info("Captura id_Planificacion: " +selectedPlan.getIdPlanificacion());
 		
 		idplanificacion = selectedPlan.getIdPlanificacion();
-
-		planificacion.setIdPlanificacion(selectedPlan.getIdPlanificacion());	
+		planificacion.setIdPlanificacion(selectedPlan.getIdPlanificacion());
 		
-		log.info("obtener nombre de actividad: " + selectedPlan.getNomActividad());
-		
+		log.info("obtener nombre de actividad: " + selectedPlan.getNomActividad());				
 		
 		return "planificarPlanActividad?faces-redirect=true";
 		
 	}
 	
 	public void crearPlanPublicitario(){
-		try {
-			UploadedFile uploadedPhoto=getFile();
-//			UploadedFile uploadedFile = event.getFile();
-//		    String fileName = uploadedFile.getFileName();
-//		    String contentType = uploadedFile.getContentType();
-//		    byte[] contents = uploadedFile.getContents(); // Or getInputStream()
-//		    // ... Save it, now!
-			File archivo = new File("/tmp/muni/uploads/" + file.getFileName());
-			
-			OutputStream out = new FileOutputStream(archivo);
-		    out.write(file.getContents());
-		    out.close();
-		    
-		    FacesContext.getCurrentInstance().addMessage(
-		               null, new FacesMessage("Upload completo", 
-		               "O arquivo " + uploadedPhoto.getFileName() + " foi salvo!"));
-		    
-			 if(file != null) {
-				 
-		            FacesMessage message = new FacesMessage("Succesful", file.getFileName() + " is uploaded.");
-		            FacesContext.getCurrentInstance().addMessage(null, message);
-		        }
-			
-			PlanPublicitarioDao planPublicitarioDao = new PlanPublicitarioDaoImpl();
-			
+		try {						
 			String msg;
-			if(planPublicitarioDao.createPlanPublicitario(planPublicitario)){
+			if(planPublicitarioService.createPlanPublicitario(planPublicitario)){
 				msg ="Se creó correctamente el plan publicitario";
 				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,msg,null);
 				FacesContext.getCurrentInstance().addMessage(null, message);
@@ -409,6 +330,18 @@ public class PlanificacionActividadBean implements Serializable {
 			log.error(e.getStackTrace());
 		}
 	}
+	
+	public void upload(FileUploadEvent event) {  
+        FacesMessage msg = new FacesMessage("Success! ", event.getFile().getFileName() + " is uploaded.");  
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        // Do what you want with the file        
+        try {
+            Util.copyFile(event.getFile().getFileName(), event.getFile().getInputstream(),destination);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+ 
+    }  	
 	
 }
  

@@ -215,7 +215,12 @@
 							</p:tab>
 						</p:tabView>
 					</h:form>
-					
+					<h:form id="form" >
+ 
+        <p:fileUpload id="filImaPro" fileUploadListener="#{planificacionActividadBean.upload}"  mode="single" 
+        update="graImagPro"  sizeLimit="512000"  />
+ 		<p:graphicImage id="graImagPro" value="#{planificacionActividadBean.imagenPlanPublicitario}" width="150" height="120"></p:graphicImage>
+    </h:form>
 					
 					<!-- closable="false" -->
 					<p:dialog widgetVar="Cronograma" header="Pantalla Cronograma" width="700" height="400" 

@@ -9,5 +9,6 @@ package resources;
 public class Constants {
 	
 	public static final String PLANIFICAR_ACTIVIDAD_PAGE = "PlanificarActividad";
+	public static final int ESTADO_PENDIENTE = 1;
 	
 }

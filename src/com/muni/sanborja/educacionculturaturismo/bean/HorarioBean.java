@@ -1,7 +1,6 @@
 package com.muni.sanborja.educacionculturaturismo.bean;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -15,19 +14,16 @@ import javax.faces.model.SelectItem;
 
 import org.apache.log4j.Logger;
 
-import com.muni.sanborja.educacionculturaturismo.dao.AmbienteDao;
-import com.muni.sanborja.educacionculturaturismo.dao.HorarioDao;
-import com.muni.sanborja.educacionculturaturismo.dao.PlanificacionDao;
-import com.muni.sanborja.educacionculturaturismo.dao.SedeDao;
-import com.muni.sanborja.educacionculturaturismo.dao.impl.AmbienteDaoImpl;
-import com.muni.sanborja.educacionculturaturismo.dao.impl.HorarioDaoImpl;
-import com.muni.sanborja.educacionculturaturismo.dao.impl.PlanificacionDaoImpl;
-import com.muni.sanborja.educacionculturaturismo.dao.impl.SedeDaoImpl;
-import com.muni.sanborja.educacionculturaturismo.modelo.Ambiente;
 import com.muni.sanborja.educacionculturaturismo.modelo.Horario;
 import com.muni.sanborja.educacionculturaturismo.modelo.HorarioPlanificacionActividad;
 import com.muni.sanborja.educacionculturaturismo.modelo.Planificacion;
 import com.muni.sanborja.educacionculturaturismo.modelo.Sede;
+import com.muni.sanborja.educacionculturaturismo.service.AmbienteService;
+import com.muni.sanborja.educacionculturaturismo.service.HorarioService;
+import com.muni.sanborja.educacionculturaturismo.service.SedeService;
+import com.muni.sanborja.educacionculturaturismo.service.impl.AmbienteServiceImpl;
+import com.muni.sanborja.educacionculturaturismo.service.impl.HorarioServiceImpl;
+import com.muni.sanborja.educacionculturaturismo.service.impl.SedeServiceImpl;
 
 @ManagedBean(name = "horarioBean")
 @SessionScoped
@@ -55,7 +51,11 @@ public class HorarioBean implements Serializable{
 	FacesContext context = FacesContext.getCurrentInstance();
 	Application application = context.getApplication();
 	PlanificacionActividadBean planificacionBean = application.evaluateExpressionGet(context, "#{planificacionActividadBean}", PlanificacionActividadBean.class);
-
+	
+	SedeService sedeService = new SedeServiceImpl();
+	HorarioService horarioService = new HorarioServiceImpl();
+	AmbienteService ambienteService = new AmbienteServiceImpl();
+	
 	@PostConstruct
 	public void init() {
 		horario = new Horario();
@@ -74,7 +74,6 @@ public class HorarioBean implements Serializable{
 	public void setPlanificacion(Planificacion planificacion) {
 		this.planificacion = planificacion;
 	}
-
 	
 	public int getIdsede() {
 		return idsede;
@@ -85,16 +84,7 @@ public class HorarioBean implements Serializable{
 	}
 
 	public List<SelectItem> getListaSede() {
-		this.listaSede = new ArrayList<SelectItem>();
-		SedeDao sedeDao = new SedeDaoImpl();
-		List<Sede> p = sedeDao.listarSede();
-		listaSede.clear();
-		
-		for(Sede sede : p){
-			SelectItem sedeItem = new SelectItem(sede.getIdSede(), sede.getNombreSede());
-			this.listaSede.add(sedeItem);
-		}
-		
+		this.listaSede = sedeService.listarSede();		
 		return listaSede;
 	}
 
@@ -110,62 +100,17 @@ public class HorarioBean implements Serializable{
 		this.sede = sede;
 	}
 	
-	public List<SelectItem> getListaAmbiente() {
-		
-		this.listaAmbiente = new ArrayList<SelectItem>();
-		AmbienteDao ambienteDao = new AmbienteDaoImpl();
-		
-		log.info("Codigo capturado = " + idsede);
-		
-		List<Ambiente> a = ambienteDao.listarAmbiente(idsede);
-		listaAmbiente.clear();
-		
-		for(Ambiente ambiente : a){
-			SelectItem actividadItem = new SelectItem(ambiente.getIdAmbiente(), ambiente.getNomAmbiente());
-			this.listaAmbiente.add(actividadItem);
-		}
-		
+	public List<SelectItem> getListaAmbiente() {		
+		this.listaAmbiente = ambienteService.listarAmbiente(idsede);		
 		return listaAmbiente;
 	}
 
 	public void setListaAmbiente(List<SelectItem> listaAmbiente) {
 		this.listaAmbiente = listaAmbiente;
 	}
-	public void crearHorario(){
-		try {
-			//Planificacion planificacion = new Planificacion();
-			//log.info("PLANIFICACION ****  "+planificacionBean.getSelectedPlan().getNomActividad()+ "  ID "+ planificacionBean.getSelectedPlan().getIdPlanificacion());
-			
-			//PlanificacionDao plan = new PlanificacionDaoImpl();
-			//planificacion = plan.buscar(planificacionBean.getSelectedPlan().getIdPlanificacion());
-			//horario.setPlanificacion(planificacion);
-			
-			log.info("[] Capturado ID Planificacion: " + planificacionBean.getPlanificacion().getIdPlanificacion());
-			horario.getPlanificacion().setIdPlanificacion(planificacionBean.getPlanificacion().getIdPlanificacion());
-			
-			AmbienteDao a= new AmbienteDaoImpl();
-			horario.setAmbiente(a.buscar(idambiente));
-			log.info("Creado correctamente" + horario.getVacantemax());
-			
-			HorarioDao horarioDao = new HorarioDaoImpl();
-			horarioDao.createHorario(horario);
-			msg ="Se creó correctamente el Horario";
-			
-			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,msg,null);
-			FacesContext.getCurrentInstance().addMessage(null, message);
-		}
-		catch (Exception e) {
-		log.error("Error:" + e.getMessage());
-		log.error(e.getStackTrace());
-		}
-	}
-	
 	
 	public List<HorarioPlanificacionActividad> getListaHorario2() {
-		
-		HorarioDao horarioDao = new HorarioDaoImpl();
-		listaHorario2 = horarioDao.listarHorarioPlanificacionActividad();
-
+		listaHorario2 = horarioService.listarHorarioPlanificacionActividad();
 		return listaHorario2;
 	}
 
@@ -190,13 +135,9 @@ public class HorarioBean implements Serializable{
 	}
 
 	public List<Horario> getListaHorario() {
-		log.info("******************************** " + planificacionBean.getSelectedPlan().getIdPlanificacion());
-		HorarioDao horarioDao = new HorarioDaoImpl();
-		log.info("******************************** " + planificacionBean.getSelectedPlan().getIdPlanificacion());
-		
-		listaHorario = horarioDao.listarHorario(planificacionBean.getSelectedPlan().getIdPlanificacion());
-		log.info("******************************** " + planificacionBean.getSelectedPlan().getIdPlanificacion());
-		
+		log.info("******************************** " + planificacionBean.getSelectedPlan().getIdPlanificacion());		
+		listaHorario = horarioService.listarHorario(planificacionBean.getSelectedPlan().getIdPlanificacion());
+		log.info("******************************** " + planificacionBean.getSelectedPlan().getIdPlanificacion());		
 		return listaHorario;
 	}
 
@@ -218,6 +159,33 @@ public class HorarioBean implements Serializable{
 
 	public void setIdambiente(int idambiente) {
 		this.idambiente = idambiente;
+	}
+	
+	public void crearHorario(){
+		try {
+			//Planificacion planificacion = new Planificacion();
+			//log.info("PLANIFICACION ****  "+planificacionBean.getSelectedPlan().getNomActividad()+ "  ID "+ planificacionBean.getSelectedPlan().getIdPlanificacion());
+			
+			//PlanificacionDao plan = new PlanificacionDaoImpl();
+			//planificacion = plan.buscar(planificacionBean.getSelectedPlan().getIdPlanificacion());
+			//horario.setPlanificacion(planificacion);
+			
+			log.info("[] Capturado ID Planificacion: " + planificacionBean.getPlanificacion().getIdPlanificacion());
+			horario.getPlanificacion().setIdPlanificacion(planificacionBean.getPlanificacion().getIdPlanificacion());
+			
+			horario.setAmbiente(ambienteService.buscar(idambiente));
+			log.info("Creado correctamente" + horario.getVacantemax());
+			
+			horarioService.createHorario(horario);
+			msg ="Se creó correctamente el Horario";
+			
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,msg,null);
+			FacesContext.getCurrentInstance().addMessage(null, message);
+		}
+		catch (Exception e) {
+		log.error("Error:" + e.getMessage());
+		log.error(e.getStackTrace());
+		}
 	}
 
 }

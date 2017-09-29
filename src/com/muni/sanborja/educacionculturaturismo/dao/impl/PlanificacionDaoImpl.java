@@ -51,7 +51,12 @@ public class PlanificacionDaoImpl implements PlanificacionDao, Serializable {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<PlanificacionPeriodoActividad> listarPlanificacionPeriodoActividad(int idperiodo, int estado) {
+	public List<PlanificacionPeriodoActividad> listarPlanificacionPeriodoActividad(int idperiodo, int estado) {		
+
+		log.info("---CONSULTAR ---");
+		log.info("idPeriodo_capturado: " +idperiodo);
+		log.info("Estado_capturado: " +estado);
+		
 		List<PlanificacionPeriodoActividad> plan  = null;
 		
 		Session session = HibernateSessionFactory.getSessionFactory().openSession();
@@ -94,6 +99,7 @@ public class PlanificacionDaoImpl implements PlanificacionDao, Serializable {
 			  e.getMessage();
 		}
 		
+		log.info("Tam actual: " + plan.size());
 		return plan;
 	}
 
@@ -135,14 +141,14 @@ public class PlanificacionDaoImpl implements PlanificacionDao, Serializable {
 
 	public boolean delete(Planificacion planificacion) {
 		
+		log.info("---ELIMINAR PLAN SELECCIONADO---");
+		log.info("Captura id_Planificacion: " +planificacion.getIdPlanificacion());
+		
 		boolean flag;
 		Session session = HibernateSessionFactory.getSessionFactory().openSession();
 		
 		try {
 			session.beginTransaction();
-			if(planificacion == null)
-				log.info("Id de Planificación is null");
-			
 			session.delete(planificacion);
 			session.beginTransaction().commit();
 			log.info("Eliminado correctamente");

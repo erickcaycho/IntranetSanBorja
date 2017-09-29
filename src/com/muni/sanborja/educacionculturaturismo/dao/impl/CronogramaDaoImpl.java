@@ -17,11 +17,8 @@ import com.muni.sanborja.educacionculturaturismo.util.HibernateSessionFactory;
 
 public class CronogramaDaoImpl implements Serializable,CronogramaDao{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	public static Logger log = Logger.getLogger(PeriodoDaoImpl.class);
+	public static Logger log = Logger.getLogger(CronogramaDaoImpl.class);
 
 	@Override
 	public boolean createCronograma(Cronograma cronograma) {
@@ -106,6 +103,36 @@ public class CronogramaDaoImpl implements Serializable,CronogramaDao{
 		
 		
 		return listaCronograma;
+	}
+
+	@Override
+	public boolean delete(Cronograma cronograma) {
+
+		
+		log.info("---ELIMINAR CRONOGRAMA SELECCIONADO---");
+		log.info("Captura id_Cronograma: " +cronograma.getIdCronograma());
+		
+		boolean flag;
+		Session session = HibernateSessionFactory.getSessionFactory().openSession();
+		
+		try {
+			session.beginTransaction();
+			session.delete(cronograma);
+			session.beginTransaction().commit();
+			log.info("Eliminado correctamente");
+			session.close();
+			
+			flag=true;
+			
+		} catch (Exception e) {
+			flag=false;
+			session.beginTransaction().rollback();
+			
+			log.error("error " +e.getMessage());
+			  e.getMessage();
+		}
+		
+		return flag;
 	}
 	
 	/*
