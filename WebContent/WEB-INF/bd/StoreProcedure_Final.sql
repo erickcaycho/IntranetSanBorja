@@ -1,5 +1,5 @@
  DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ConsultarCronograma`(IN idHorario int(11), IN idCronograma int(11))
+alter DEFINER=`root`@`localhost` PROCEDURE `ConsultarCronograma`(IN idHorario int(11), IN idCronograma int(11))
 BEGIN
 
 	DECLARE V_WHERE VARCHAR(50) default '';
@@ -10,7 +10,7 @@ BEGIN
     
     
 	/*SET @sql = CONCAT('SELECT COUNT(*) FROM ', tab_name);*/
-    SET @sql = CONCAT('SELECT TB1.idCronograma,TB1.tarea,TB1.descripcion,TB2.nombre,TB2.apellidoPat,
+    SET @sql = CONCAT('SELECT TB1.idCronograma,TB1.tarea,TB1.descripcion,TB2.nombre,TB2.apellipaterno,
 					   TB1.fechaInicio,TB1.fechaFin
                        FROM educacionculturaturismosb.cronograma TB1
 					   LEFT JOIN educacionculturaturismosb.empleado TB2

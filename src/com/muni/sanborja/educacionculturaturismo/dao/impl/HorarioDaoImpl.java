@@ -30,7 +30,7 @@ public class HorarioDaoImpl implements Serializable,HorarioDao{
 		try {
 			session.beginTransaction();
 			if(horario == null) {
-				log.info("cronograma es null");
+				log.info("Horario es null");
 			}else {
 				session.save(horario);
 				session.beginTransaction().commit();
@@ -56,7 +56,7 @@ public class HorarioDaoImpl implements Serializable,HorarioDao{
 		Transaction ts = session.beginTransaction();
 		
 		try {
-			log.info("Listar Horario");
+			log.info("Listar Horario "+idPlanificacion);
 			//Query query  
 			listaHorario = session.createQuery("FROM Horario  WHERE idplanificacion = :idplanificacion").
 				setParameter("idplanificacion",idPlanificacion).list();
@@ -118,32 +118,6 @@ public class HorarioDaoImpl implements Serializable,HorarioDao{
 		}
 		return horario;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 }

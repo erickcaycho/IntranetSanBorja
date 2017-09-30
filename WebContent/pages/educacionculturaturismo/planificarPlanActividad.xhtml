@@ -11,9 +11,9 @@
 	<ui:define name="content"> 
 		<div class="ui-g-12 ui-g-nopad">
 			<div class="ui-g">
-				<p:panel header="Planificar Actividad"
+				<p:panel id="panel"  header="Planificar Actividad"
 					style="text-align:center; width:100%">
-					<h:form>
+					<h:form id="frmHorario" >
 						<h:panelGrid columns="2" cellpadding="5">
 							<h:outputLabel>Nombre de Actividad: </h:outputLabel>
 							<h:outputLabel
@@ -27,6 +27,7 @@
 								<p:fieldset legend="Registrar Horario"
 									style="margin-bottom:20px">
 									<h:form id="frmHorario">
+									<p:growl id="msg" showDetail="true" />
 										<div class="ui-g bl-horario">
 											<div class="ui-g-12">
 												<div class="ui-g">
@@ -39,7 +40,7 @@
 															mindate="#{horarioBean.todayDate}" />
 
 														<p:outputLabel value="Fecha Fin" />
-														<p:calendar id="fecfin"
+														<p:calendar id="fecfin" readonly="true"
 															value="#{horarioBean.horario.fechaFin}"
 															pattern="dd/MM/yyyy" showOn="button"
 															mindate="#{horarioBean.todayDate}" />
@@ -97,9 +98,8 @@
 
 														<p:commandButton value="Agregar"
 															actionListener="#{horarioBean.crearHorario}"
-															icon="fa-save" update="tableHorarioLista" />
+															icon="fa-save" update="msg" />
 													</h:panelGrid>
-
 												</div>
 											</div>
 										</div>
@@ -107,8 +107,8 @@
 											<p:outputPanel id="horarioContainer">
 												<p:dataTable id="tbHorariosXPlanificacion" 
 													var="h"
-													value="#{horarioBean.listaHorario2}"
-													selection="#{horarioBean.selectedHorario2}"
+													value="#{horarioBean.listaHorario}"
+													selection="#{horarioBean.selectedHorario}"
 													rowKey="#{h.idHorario}"
 													emptyMessage="No se encontraron registros">
 
@@ -116,34 +116,33 @@
 														style="text-align:center;">
 														<h:outputText value="#{h.idHorario}" />
 													</p:column>
-													
-													<p:column headerText="Sede"
-														style="text-align:center;">
-														<h:outputText value="#{h.nombreSede}" />
-													</p:column>
 													<p:column headerText="Ambiente"
 														style="text-align:center;">
-														<h:outputText value="#{h.nombreAmbiente}" />
+														<h:outputText value="#{h.ambiente.nomAmbiente}" />
+													</p:column>
+													<p:column headerText="Sede"
+														style="text-align:center;">
+														<h:outputText value="#{h.ambiente.sede.nombreSede}" />
 													</p:column>
 													<p:column headerText="Dirigido a"
 														style="text-align:center;">
-														<h:outputText value="#{h.dirigido}" />
+														<h:outputText value="#{h.edadMax}" />
 													</p:column>
 													<p:column headerText="Cant. Sesiones"
 														style="text-align:center;">
-														<h:outputText value="#{h.cantidadSesion}" />
+														<h:outputText value="#{h.cantsesion}" />
 													</p:column>
 													<p:column headerText="Horas/Sesión"
 														style="text-align:center;">
-														<h:outputText value="#{h.horaSesion}" />
+														<h:outputText value="#{h.horassesion}" />
 													</p:column>
 													<p:column headerText="Vacantes Min."
 														style="text-align:center;">
-														<h:outputText value="#{h.vacanteMin}" />
+														<h:outputText value="#{h.vacantemin}" />
 													</p:column>
 													<p:column headerText="Vacantes Max."
 														style="text-align:center;">
-														<h:outputText value="#{h.vacanteMax}" />
+														<h:outputText value="#{h.vacantemax}" />
 													</p:column>
 													<p:column headerText="Precio"
 														style="text-align:center;">
@@ -223,7 +222,7 @@
     </h:form>
 					
 					<!-- closable="false" -->
-					<p:dialog widgetVar="Cronograma" header="Pantalla Cronograma" width="700" height="400" 
+					<p:dialog widgetVar="Cronograma" header="Cronograma" width="700" height="400" 
 							  modal="true" showEffect="fade" hideEffect="fade"  resizable="false">
 	
 					    <ui:include src="cronograma.xhtml" />

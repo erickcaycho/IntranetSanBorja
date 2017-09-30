@@ -23,10 +23,10 @@ public class Empleado  implements Serializable{
 	@Column(name = "nombre")
 	private String nombre;
 	
-	@Column(name = "apelliPaterno")
+	@Column(name = "apellipaterno")
 	private String apellidoPat;
 
-	@Column(name = "apelliMaterno")
+	@Column(name = "apellimaterno")
 	private String apellidoMat;
 	
 	public int getIdEmpleado() {
