@@ -6,30 +6,31 @@
 	  xmlns:p="http://primefaces.org/ui"
 	  xmlns:pe="http://primefaces.org/ui/extensions">
 
-					<h:form id="form1">
+					<h:form id="formCrono">
 
 					<p:fieldset legend="Ingresar Tarea	" style="margin-bottom:20px">
 					
 						<div style="line-height:40px;" >
 						<h:panelGrid columns="4" cellpadding="5">
-							<p:outputLabel >Tarea</p:outputLabel> 
-							<p:inputText id="tarea" value="#{cronogramaBean.cronograma.tarea}"> </p:inputText>
-							<p:outputLabel>Descripción</p:outputLabel>
-							<p:inputText id="descrip" value="#{cronogramaBean.cronograma.descripcion}"> </p:inputText>
+							<p:outputLabel value="Tarea" /> 
+							<p:inputText id="tarea" value="#{cronogramaBean.cronograma.tarea}" maxlength="45" > </p:inputText>
+							<p:outputLabel value="Descripción" />
+							<p:inputText id="descrip" value="#{cronogramaBean.cronograma.descripcion}" maxlength="250"> </p:inputText>
 							 
-							<p:outputLabel>Fecha Inicio</p:outputLabel>  
-       						<p:calendar id="cal1" value="#{cronogramaBean.cronograma.fechaInicio}" showOn="button" mindate="today" />
-							<p:outputLabel>Fecha Fin</p:outputLabel>     
-       						<p:calendar id="cal2" value="#{cronogramaBean.cronograma.fechaFin}" showOn="button" mindate="today" />
-       						<p:outputLabel>Responsable</p:outputLabel> 
+							<p:outputLabel value="Fecha Inicio" /> 
+       						<p:calendar id="cal1" value="#{cronogramaBean.cronograma.fechaInicio}" showOn="button" mindate="today" pattern="dd/MM/yyyy" />
+							<p:outputLabel  value="Fecha Fin" />
+       						<p:calendar id="cal2" value="#{cronogramaBean.cronograma.fechaFin}" showOn="button" mindate="today" pattern="dd/MM/yyyy"/>
+       						<p:outputLabel value="Responsable" /> 
 							<p:selectOneMenu id="codEmpleado" value="#{cronogramaBean.cronograma.empleado.idEmpleado}" required="true" style="width:150px;heigth:50px;">
 								<f:selectItem itemLabel=" Seleccione " itemValue="" />
 								<f:selectItems value="#{empleadoBean.listaEmpleados}"  var="p" itemValue="#{p.idEmpleado}"  />
 							</p:selectOneMenu>
-							<p:commandButton value="Agregar" icon="fa fa-plus"
+						</h:panelGrid>
+						
+							<p:commandButton value="Agregar" icon="fa fa-plus" style="text-align:center;"
 								 actionListener="#{cronogramaBean.crearCronograma}"  update="form2:tbCronograma">
 							</p:commandButton>
-						</h:panelGrid>
 						</div>
 						
 					</p:fieldset>
@@ -55,7 +56,7 @@
 									<h:outputText value="#{crono.tarea}" />
 								</p:column>
 								
-								<p:column headerText="Descripcion" style="text-align:center;">
+								<p:column headerText="Descripción" style="text-align:center;">
 									<h:outputText value="#{crono.descripcion}" />
 								</p:column>
 

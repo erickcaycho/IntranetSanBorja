@@ -23,7 +23,7 @@
 								id="hiddenIdPlanificacion" />
 						</h:panelGrid>
 						<p:tabView>
-							<p:tab title="Horario#1">
+							<p:tab title="Horario">
 								<p:fieldset legend="Registrar Horario"
 									style="margin-bottom:20px">
 									<h:form id="frmHorario">
@@ -40,7 +40,7 @@
 															mindate="#{horarioBean.todayDate}" />
 
 														<p:outputLabel value="Fecha Fin" />
-														<p:calendar id="fecfin" readonly="true"
+														<p:calendar id="fecfin" 
 															value="#{horarioBean.horario.fechaFin}"
 															pattern="dd/MM/yyyy" showOn="button"
 															mindate="#{horarioBean.todayDate}" />
@@ -182,7 +182,7 @@
 								</p:fieldset>
 							</p:tab>
 
-							<p:tab title="Publicidad#2">
+							<p:tab title="Publicidad">
 								<p:fieldset legend="Registrar Publicidad"
 									style="margin-bottom:20px">
 									<h:form>
@@ -220,8 +220,8 @@
         update="graImagPro"  sizeLimit="512000"  />
  		<p:graphicImage id="graImagPro" value="#{planificacionActividadBean.imagenPlanPublicitario}" width="150" height="120"></p:graphicImage>
     </h:form>
-					
-					<!-- closable="false" -->
+				</p:panel>
+<!-- closable="false" -->
 					<p:dialog widgetVar="Cronograma" header="Cronograma" width="700" height="400" 
 							  modal="true" showEffect="fade" hideEffect="fade"  resizable="false">
 	
@@ -242,8 +242,6 @@
 							  modal="true" showEffect="fade" hideEffect="fade"  resizable="false">
 					</p:dialog>
 					
-				</p:panel>
-
 			</div>
 		</div>
 	</ui:define>
