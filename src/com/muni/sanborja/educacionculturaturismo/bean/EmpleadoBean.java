@@ -87,7 +87,7 @@ public class EmpleadoBean implements Serializable{
 	
 	public void asignarEncargados() {
 
-		log.info("Codigo PTMTTTTTTT----------------> = " + empleado.getIdEmpleado());
+		log.info("asignarEncargados-------------> = " );
 		/*try {
 			String msg;
 			if (empleadoService.asignarEncargados(empleado)) {
