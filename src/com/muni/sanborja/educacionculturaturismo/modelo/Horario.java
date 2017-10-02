@@ -2,6 +2,7 @@ package com.muni.sanborja.educacionculturaturismo.modelo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -16,6 +17,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cascade;
 
 @Entity
 @Table(name = "Horario")
@@ -66,8 +69,8 @@ public class Horario implements Serializable {
 	@JoinColumn(name="idambiente")
 	private Ambiente ambiente;
 	
-	@OneToMany
-	private Set<Recurso> recurso;
+	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="primaryKey.horario")
+	private Set<Recurso> recurso = new HashSet<Recurso>();
 	
 	@ManyToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="horarios")
 	private List<Empleado> empleados;

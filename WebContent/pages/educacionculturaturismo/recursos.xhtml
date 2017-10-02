@@ -14,8 +14,8 @@
 				<h:panelGrid columns="6" cellpadding="5">												
 					<p:outputLabel value="Material" />
 					<p:inputText id="material" value="#{recursoBean.material.nombre}"> </p:inputText>
-					<p:commandButton value="Consultar" icon="fa fa-search" ajax="true">
-							<p:ajax update="materialesContainer" listener="#{recursoBean.consultarMaterial}"/>
+					<p:commandButton value="Consultar" icon="fa fa-search" actionListener="#{recursoBean.consultarMaterial}"  update="materialesContainer">
+							
 					</p:commandButton>
 				</h:panelGrid>
 			</div>

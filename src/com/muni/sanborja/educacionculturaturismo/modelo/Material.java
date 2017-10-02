@@ -1,10 +1,13 @@
 package com.muni.sanborja.educacionculturaturismo.modelo;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -27,8 +30,8 @@ public class Material implements Serializable{
 	@Column(name = "cantidad_disponible")
 	private int cantidadDisponible;
 	
-	@OneToMany
-	private Set<Recurso> recurso;
+	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="primaryKey.material")
+	private Set<Recurso> recurso = new HashSet<Recurso>();
 
 	public int getIdMaterial() {
 		return idMaterial;
