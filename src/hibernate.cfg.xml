@@ -24,5 +24,6 @@
 		<mapping class="com.muni.sanborja.educacionculturaturismo.modelo.Material"/>
 		<mapping class="com.muni.sanborja.educacionculturaturismo.modelo.Recurso"/>
 		<mapping class="com.muni.sanborja.educacionculturaturismo.modelo.PlanPublicitario"/>
+		<mapping class="com.muni.sanborja.educacionculturaturismo.modelo.Rol"/>
 	</session-factory>
 </hibernate-configuration>

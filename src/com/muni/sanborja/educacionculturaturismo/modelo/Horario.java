@@ -2,13 +2,17 @@ package com.muni.sanborja.educacionculturaturismo.modelo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -64,7 +68,10 @@ public class Horario implements Serializable {
 	
 	@OneToMany
 	private Set<Recurso> recurso;
-
+	
+	@ManyToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="horarios")
+	private List<Empleado> empleados;
+	
 	public Ambiente getAmbiente() {
 		return ambiente;
 	}
@@ -168,6 +175,15 @@ public class Horario implements Serializable {
 	public void setRecurso(Set<Recurso> recurso) {
 		this.recurso = recurso;
 	}
+
+	public List<Empleado> getEmpleados() {
+		return empleados;
+	}
+
+	public void setEmpleados(List<Empleado> empleados) {
+		this.empleados = empleados;
+	}
+	
 	
 	
 }
