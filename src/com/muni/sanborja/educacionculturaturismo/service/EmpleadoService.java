@@ -9,6 +9,6 @@ import com.muni.sanborja.educacionculturaturismo.modelo.Empleado;
 public interface EmpleadoService {
 
 	public List<SelectItem> listarEmpleado();
-	public List<SelectItem> listarEmpleadoByRol(int idrol);
+	public List<Empleado> listarEmpleadoByRol(int idrol);
 	public boolean asignarEncargados(Empleado empleado);
 }

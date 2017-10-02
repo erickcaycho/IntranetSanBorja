@@ -8,7 +8,7 @@
 
 
 
-					<h:form >
+					<h:form id="formEncargadosAdd">
 					
 						<div style="line-height:40px;" >
 						<h:panelGrid columns="4" cellpadding="5">
@@ -20,9 +20,10 @@
 							</p:selectOneMenu>
 							
 							
-							<p:selectOneMenu id="comboEmpleado" value="#{empleadoBean.empleado}" required="true" style="width:150px;heigth:50px;">
+							<p:selectOneMenu id="comboEmpleado" value="#{empleadoBean.idempleado2}" required="true" style="width:150px;heigth:50px;">
 								<f:selectItem itemLabel=" Seleccione " itemValue="" />
-								<f:selectItems value="#{empleadoBean.listaEmpleadosByRol}"  var="e" itemValue="#{e.idEmpleado}"/>
+								<f:selectItems  value="#{empleadoBean.listaEmpleadosByRol}"  var="p" 
+												itemLabel="#{p.nombre}" itemValue="#{p.idEmpleado}"/>
 							</p:selectOneMenu>
 							
 						</h:panelGrid>

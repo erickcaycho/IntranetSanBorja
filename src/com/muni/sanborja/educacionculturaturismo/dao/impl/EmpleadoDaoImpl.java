@@ -1,6 +1,7 @@
 package com.muni.sanborja.educacionculturaturismo.dao.impl;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -100,7 +101,7 @@ public class EmpleadoDaoImpl implements Serializable,EmpleadoDao{
 
 		Horario horario = new Horario();
 		horario.setIdHorario(90);
-		List<Horario> lstHorario = null;
+		List<Horario> lstHorario = new ArrayList<Horario>();
 		lstHorario.add(horario);
 		empleado.setHorarios(lstHorario);
 		

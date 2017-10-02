@@ -36,19 +36,12 @@ public class EmpleadoServiceImpl implements Serializable, EmpleadoService {
 
 	
 	@Override
-	public List<SelectItem> listarEmpleadoByRol(int idrol) {
+	public List<Empleado> listarEmpleadoByRol(int idrol) {
 		
-		List<SelectItem>  listaEmpleadosRol = new ArrayList<SelectItem>();
-		if(idrol > 0){
-			 List<Empleado> e = empleadoDao.listarEmpleadoByRol(idrol);
+		List<Empleado> lstempleado = empleadoDao.listarEmpleadoByRol(idrol);
 		
-			for (Empleado empleado : e) {
-				SelectItem periodoItem = new SelectItem(empleado.getIdEmpleado(),
-						empleado.getNombre());
-				listaEmpleadosRol.add(periodoItem);
-			}
-		}
-		return listaEmpleadosRol;
+		
+		return lstempleado;
 	}
 
 
