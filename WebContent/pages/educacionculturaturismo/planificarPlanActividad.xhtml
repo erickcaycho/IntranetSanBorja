@@ -8,12 +8,12 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:pe="http://primefaces.org/ui/extensions">
 <ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
-	<ui:define name="content"> 
+	<ui:define name="content">
 		<div class="ui-g-12 ui-g-nopad">
 			<div class="ui-g">
-				<p:panel id="panel"  header="Planificar Actividad"
+				<p:panel id="panel" header="Planificar Actividad"
 					style="text-align:center; width:100%">
-					<h:form id="frmHorario" >
+					<h:form>
 						<h:panelGrid columns="2" cellpadding="5">
 							<h:outputLabel>Nombre de Actividad: </h:outputLabel>
 							<h:outputLabel
@@ -26,8 +26,8 @@
 							<p:tab title="Horario">
 								<p:fieldset legend="Registrar Horario"
 									style="margin-bottom:20px">
-									<h:form id="frmHorario">
 									<p:growl id="msg" showDetail="true" />
+									<h:form>
 										<div class="ui-g bl-horario">
 											<div class="ui-g-12">
 												<div class="ui-g">
@@ -40,7 +40,7 @@
 															mindate="#{horarioBean.todayDate}" />
 
 														<p:outputLabel value="Fecha Fin" />
-														<p:calendar id="fecfin" 
+														<p:calendar id="fecfin"
 															value="#{horarioBean.horario.fechaFin}"
 															pattern="dd/MM/yyyy" showOn="button"
 															mindate="#{horarioBean.todayDate}" />
@@ -57,9 +57,9 @@
 														<p:outputLabel value="Seleccione Ambiente" />
 														<p:selectOneMenu id="ambiente"
 															style="width:165px!important" required="true"
-															value="#{horarioBean.idambiente}">
+															value="#{horarioBean.horario.ambiente.idAmbiente}">
 															<f:selectItem itemLabel="-- Seleccione --" itemValue="" />
-															<f:selectItems value="#{horarioBean.listaAmbiente}" 
+															<f:selectItems value="#{horarioBean.listaAmbiente}"
 																var="p" itemValue="#{p.idAmbiente}" />
 														</p:selectOneMenu>
 
@@ -95,94 +95,91 @@
 														<p:spinner id="precio"
 															value="#{horarioBean.horario.precio}" prefix="S/. "
 															min="0" />
-
-														<p:commandButton value="Agregar"  process="@this"
+														<p:commandButton
 															actionListener="#{horarioBean.crearHorario}"
-															icon="fa-save" update="msg,tbHorariosXPlanificacion" />
+															value="Crear" icon="fa fa-plus">
+														</p:commandButton>
 													</h:panelGrid>
 												</div>
 											</div>
 										</div>
-										
-												<p:dataTable id="tbHorariosXPlanificacion" 
-													var="h"
-													value="#{horarioBean.listaHorario}"
-													selection="#{horarioBean.selectedHorario}"
-													rowKey="#{h.idHorario}"
-													emptyMessage="No se encontraron registros">
+									</h:form>
+								</p:fieldset>
 
-													<p:column headerText="Código Horario"
-														style="text-align:center;">
-														<h:outputText value="#{h.idHorario}" />
-													</p:column>
-													<p:column headerText="Ambiente"
-														style="text-align:center;">
-														<h:outputText value="#{h.ambiente.nomAmbiente}" />
-													</p:column>
-													<p:column headerText="Sede"
-														style="text-align:center;">
-														<h:outputText value="#{h.ambiente.sede.nombreSede}" />
-													</p:column>
-													<p:column headerText="Dirigido a"
-														style="text-align:center;">
-														<h:outputText value="#{h.edadMax}" />
-													</p:column>
-													<p:column headerText="Cant. Sesiones"
-														style="text-align:center;">
-														<h:outputText value="#{h.cantsesion}" />
-													</p:column>
-													<p:column headerText="Horas/Sesión"
-														style="text-align:center;">
-														<h:outputText value="#{h.horassesion}" />
-													</p:column>
-													<p:column headerText="Vacantes Min."
-														style="text-align:center;">
-														<h:outputText value="#{h.vacantemin}" />
-													</p:column>
-													<p:column headerText="Vacantes Max."
-														style="text-align:center;">
-														<h:outputText value="#{h.vacantemax}" />
-													</p:column>
-													<p:column headerText="Precio"
-														style="text-align:center;">
-														<h:outputText value="#{h.precio}" />
-													</p:column>
-													<p:column headerText="Fecha Inicio"
-														style="text-align:center;">
-														<h:outputText value="#{h.fechaInicio}" />
-													</p:column>
-													<p:column headerText="Fecha Fin" style="text-align:center;">
-														<h:outputText value="#{h.fechaFin}" />
-													</p:column>
-													<p:column headerText="Seleccionar" selectionMode="single"
-														style="text-align:center" />
-												<f:facet name="footer">
-													<p:commandButton update=":formCrono" value="Cronograma" action="#{horarioBean.CrearCronograma}" process="@this" oncomplete="PF('Cronograma').show()" icon="fa fa-calendar-o" >
+								<h:form>
+									<p:outputPanel id="horarioContainer">
+										<p:dataTable id="tbHorariosXPlanificacion" var="h"
+											value="#{horarioBean.listaHorario}"
+											selection="#{horarioBean.selectedHorario}"
+											rowKey="#{h.idHorario}"
+											emptyMessage="No se encontraron registros">
+
+											<p:column headerText="Código Horario"
+												style="text-align:center;">
+												<h:outputText value="#{h.idHorario}" />
+											</p:column>
+											<p:column headerText="Ambiente" style="text-align:center;">
+												<h:outputText value="#{h.ambiente.nomAmbiente}" />
+											</p:column>
+											<p:column headerText="Sede" style="text-align:center;">
+												<h:outputText value="#{h.ambiente.sede.nombreSede}" />
+											</p:column>
+											<p:column headerText="Dirigido a" style="text-align:center;">
+												<h:outputText value="#{h.edadMax}" />
+											</p:column>
+											<p:column headerText="Cant. Sesiones"
+												style="text-align:center;">
+												<h:outputText value="#{h.cantsesion}" />
+											</p:column>
+											<p:column headerText="Horas/Sesión"
+												style="text-align:center;">
+												<h:outputText value="#{h.horassesion}" />
+											</p:column>
+											<p:column headerText="Vacantes Min."
+												style="text-align:center;">
+												<h:outputText value="#{h.vacantemin}" />
+											</p:column>
+											<p:column headerText="Vacantes Max."
+												style="text-align:center;">
+												<h:outputText value="#{h.vacantemax}" />
+											</p:column>
+											<p:column headerText="Precio" style="text-align:center;">
+												<h:outputText value="#{h.precio}" />
+											</p:column>
+											<p:column headerText="Fecha Inicio"
+												style="text-align:center;">
+												<h:outputText value="#{h.fechaInicio}" />
+											</p:column>
+											<p:column headerText="Fecha Fin" style="text-align:center;">
+												<h:outputText value="#{h.fechaFin}" />
+											</p:column>
+											<p:column headerText="Seleccionar" selectionMode="single"
+												style="text-align:center" />
+										</p:dataTable>
+									</p:outputPanel>
+
+									<div class="ui-g-12 bl-consultar">
+										<p:commandButton value="XXX y"
+											actionListener="#{horarioBean.crearRecursoPrueba}"
+											icon="fa fa-check-circle" />
+											
+										<p:commandButton value="Recursos 2" icon="fa fa-cubes" action="#{horarioBean.crearRecursos2}" onclick="PF('Recurso').show()">
 													<f:setPropertyActionListener value="#{h}" target="#{cronogramaBean.selectedHorario}" />
 													</p:commandButton>
-												</f:facet>
-												</p:dataTable>
- 
-										</h:form>
-									
-									<div class="ui-g-12 bl-consultar">
-										<p:commandButton  value="Cronograma" icon="fa fa-calendar-o"
+
+										<p:commandButton value="Cronograma" icon="fa fa-calendar-o"
 											onclick="PF('Cronograma').show()">
 										</p:commandButton>
-
-										<p:commandButton value="Recursos" icon="fa fa-cubes"
-											onclick="PF('Recurso').show()">
-										</p:commandButton>
-										
 										<p:commandButton value="Encargados" icon="fa fa-user-plus"
 											onclick="PF('Encargados').show()">
 										</p:commandButton>
-										
 										<p:commandButton value="Días" icon="fa fa-check-square"
 											onclick="PF('Días').show()">
 										</p:commandButton>
 									</div>
-								</p:fieldset>
+								</h:form>
+
+
 							</p:tab>
 
 							<p:tab title="Publicidad">
@@ -192,21 +189,26 @@
 										<div class="ui-g bl-horario">
 											<div class="ui-g-12">
 												<div class="ui-g">
-													 <p:growl id="messages" showDetail="true" />
-													 <p:outputLabel value="Adjuntar Plan Publicitario" />
-													 <p:fileUpload label="Seleccionar Documento Relacionado" value="#{planificacionActividadBean.file}" mode="simple" skinSimple="true"/>																								 
+													<p:growl id="messages" showDetail="true" />
+													<p:outputLabel value="Adjuntar Plan Publicitario" />
+													<p:fileUpload label="Seleccionar Documento Relacionado"
+														value="#{planificacionActividadBean.file}" mode="simple"
+														skinSimple="true" />
 												</div>
 												<div class="ui-g">
-													  <p:outputLabel value="Descripción:" />
-													  <p:inputTextarea rows="5" cols="30" maxlength="250" counterTemplate="{0} caracteres restantes." autoResize="false" 
-													   style="width: 80%;height: 100%;" value="#{planificacionActividadBean.planPublicitario.descripcion}" />
-												    												    	
+													<p:outputLabel value="Descripción:" />
+													<p:inputTextarea rows="5" cols="30" maxlength="250"
+														counterTemplate="{0} caracteres restantes."
+														autoResize="false" style="width: 80%;height: 100%;"
+														value="#{planificacionActividadBean.planPublicitario.descripcion}" />
+
 												</div>
 												<br></br>
 												<div class="ui-g-12 bl-consultar">
-												
-													<p:commandButton process="@this" value="Guardar" actionListener="#{planificacionActividadBean.crearPlanPublicitario}"/>
-													
+
+													<p:commandButton process="@this" value="Guardar"
+														actionListener="#{planificacionActividadBean.crearPlanPublicitario}" />
+
 												</div>
 											</div>
 										</div>
@@ -217,36 +219,34 @@
 							</p:tab>
 						</p:tabView>
 					</h:form>
-					<h:form id="form" >
- 
-        <p:fileUpload id="filImaPro" fileUploadListener="#{planificacionActividadBean.upload}"  mode="single" 
-        update="graImagPro"  sizeLimit="512000"  />
- 		<p:graphicImage id="graImagPro" value="#{planificacionActividadBean.imagenPlanPublicitario}" width="150" height="120"></p:graphicImage>
-    </h:form>
 				</p:panel>
-<!-- closable="false" -->
+				<!-- closable="false" -->
 
-					<p:dialog widgetVar="Cronograma" header="Cronograma" width="700" height="400" 
-							  modal="true" showEffect="fade" hideEffect="fade"  resizable="false">
-	
-					    <ui:include src="cronograma.xhtml" />
-					</p:dialog>
-					
-					<p:dialog widgetVar="Recurso" header="Pantalla Recurso" width="700" height="400" 
-							  modal="true" showEffect="fade" hideEffect="fade"  resizable="false">
-	
-					    <ui:include src="recursos.xhtml" />
-					</p:dialog>
-					
-					<p:dialog widgetVar="Encargados" header="Pantalla Encargados" width="700" height="400" 
-							  modal="true" showEffect="fade" hideEffect="fade"  resizable="false">
-					    <ui:include src="encargados.xhtml" />
-					</p:dialog>
-					
-					<p:dialog widgetVar="Días" header="Pantalla Días" width="700" height="400" 
-							  modal="true" showEffect="fade" hideEffect="fade"  resizable="false">
-					</p:dialog>
-					
+				<p:dialog widgetVar="Cronograma" header="Cronograma" width="700"
+					height="400" modal="true" showEffect="fade" hideEffect="fade"
+					resizable="false">
+
+					<ui:include src="cronograma.xhtml" />
+				</p:dialog>
+
+				<p:dialog widgetVar="Recurso" header="Pantalla Recurso" width="700"
+					height="400" modal="true" showEffect="fade" hideEffect="fade"
+					resizable="false">
+
+					<ui:include src="recursos.xhtml" />
+				</p:dialog>
+
+				<p:dialog widgetVar="Encargados" header="Pantalla Encargados"
+					width="700" height="400" modal="true" showEffect="fade"
+					hideEffect="fade" resizable="false">
+					<ui:include src="encargados.xhtml" />
+				</p:dialog>
+
+				<p:dialog widgetVar="Días" header="Pantalla Días" width="700"
+					height="400" modal="true" showEffect="fade" hideEffect="fade"
+					resizable="false">
+				</p:dialog>
+
 			</div>
 		</div>
 	</ui:define>

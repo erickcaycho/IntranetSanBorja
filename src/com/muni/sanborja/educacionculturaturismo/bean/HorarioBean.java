@@ -39,13 +39,15 @@ public class HorarioBean implements Serializable{
 	public static Logger log = Logger.getLogger(HorarioBean.class);
 	
 	private List<Horario> listaHorario;
-	private Horario horario,selectedHorario;
+	private Horario horario = new Horario();
 	private Planificacion planificacion = new Planificacion();
 	private Date todayDate = new Date();
 	private int idambiente;
 	private boolean ver;
 	private List<SelectItem> listaSede;
 	private List<SelectItem> listaAmbiente;
+	
+	private Horario selectedHorario;
 	
 	private Sede sede;
 	private int idsede;
@@ -56,13 +58,66 @@ public class HorarioBean implements Serializable{
 
 	@PostConstruct
 	public void init() {
-		
 		horario = new Horario();
-		//selectedHorario = new Horario();
 		planificacion = new Planificacion();
-		//horario.setPlanificacion(new Planificacion());
+		horario.setPlanificacion(new Planificacion());
+		horario.setAmbiente(new Ambiente());
 	}
 	
+	public Horario getHorario() {
+		return horario;
+	}
+
+	public void setHorario(Horario horario) {
+		this.horario = horario;
+	}
+
+/** */
+ 	public Horario getSelectedHorario() {
+		return selectedHorario;
+	}
+
+	public void setSelectedHorario(Horario selectedHorario) {
+		this.selectedHorario = selectedHorario;
+	}
+ 
+
+	public int getIdambiente() {
+		return idambiente;
+	}
+
+	public void setIdambiente(int idambiente) {
+		this.idambiente = idambiente;
+	}
+
+	public boolean isVer() {
+		return ver;
+	}
+
+	public void setVer(boolean ver) {
+		this.ver = ver;
+	}
+
+	public Sede getSede() {
+		return sede;
+	}
+
+	public void setSede(Sede sede) {
+		this.sede = sede;
+	}
+
+	public PlanificacionActividadBean getPlanificacionBean() {
+		return planificacionBean;
+	}
+
+	public void setPlanificacionBean(PlanificacionActividadBean planificacionBean) {
+		this.planificacionBean = planificacionBean;
+	}
+
+	public void setTodayDate(Date todayDate) {
+		this.todayDate = todayDate;
+	}
+
 	public Date getTodayDate() {
 	    return todayDate;
 	}
@@ -75,7 +130,6 @@ public class HorarioBean implements Serializable{
 		this.planificacion = planificacion;
 	}
 
-	
 	public int getIdsede() {
 		return idsede;
 	}
@@ -102,13 +156,6 @@ public class HorarioBean implements Serializable{
 		this.listaSede = listaSede;
 	}
 
-	public Sede getSede() {
-		return sede;
-	}
-
-	public void setSede(Sede sede) {
-		this.sede = sede;
-	}
 	
 	public List<SelectItem> getListaAmbiente() {
 		
@@ -132,27 +179,29 @@ public class HorarioBean implements Serializable{
 		this.listaAmbiente = listaAmbiente;
 	}
 	
+	
 	public void crearHorario(){
 		try {
-			log.info(" ID "+ planificacionBean.getSelectedPlan().getIdPlanificacion());
+			log.info("CrearHorario Planificacion[] Inicio ");
 			
-			PlanificacionDao plan = new PlanificacionDaoImpl();
-			planificacion = plan.buscar(planificacionBean.getSelectedPlan().getIdPlanificacion());
-			horario.setPlanificacion(planificacion);
 			String msg;
-			log.info("FECHA FIN  " + horario.getFechaFin()+"  FECHA INI  " +horario.getFechaInicio());
-			if(horario.getFechaFin().before(horario.getFechaInicio())){
+		/*
+		 * 	if(horario.getFechaFin().before(horario.getFechaInicio())){
 				msg ="Fecha fin no puede ser menor a la fecha inicio";
 				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,msg,null);
 				FacesContext.getCurrentInstance().addMessage(null, message);
 			}
 				
 			else{
+				
+		 * */
+			
+				log.info("Capturado ID Planificacion: " + planificacionBean.getPlanificacion().getIdPlanificacion());
 				horario.getPlanificacion().setIdPlanificacion(planificacionBean.getPlanificacion().getIdPlanificacion());
 				
-				AmbienteDao a= new AmbienteDaoImpl();
-				horario.setAmbiente(a.buscar(idambiente));
-				log.info("Creado correctamente" + horario.getVacantemax());
+				int idambientehorario = horario.getAmbiente().getIdAmbiente();
+				
+				log.info("id_ambiente: " + idambientehorario);
 				
 				HorarioDao horarioDao = new HorarioDaoImpl();
 				horarioDao.createHorario(horario);
@@ -161,66 +210,36 @@ public class HorarioBean implements Serializable{
 				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,msg,null);
 				FacesContext.getCurrentInstance().addMessage(null, message);
 
-			}
-			
+			//}
 		}
+		
 		catch (Exception e) {
 		log.error("Error:" + e.getMessage());
 		log.error(e.getStackTrace());
 		}
 	}
 	
-	public Horario getSelectedHorario() {
-		return selectedHorario;
-	}
-
-	public void setSelectedHorario(Horario selectedHorario) {
-		log.error("SETEANDO HORARIO:::::::::::::::  2   id  " + selectedHorario.getIdHorario());
-		this.selectedHorario = selectedHorario;
-	}
-
+	
 	public List<Horario> getListaHorario() {
 		HorarioDao horarioDao = new HorarioDaoImpl();
 		listaHorario = horarioDao.listarHorario(planificacionBean.getSelectedPlan().getIdPlanificacion());
-		//selectedHorario =null;
+		
 		return listaHorario;
 	}
-	
-	public void CrearCronograma(){
 		
-		log.info("***** INICIA CON LA ASIGNACIÓN DE CRONOGRAMA AL HORARIO  .....");
-		//log.info("Captura id_Planificacion: " +selectedHorario.getIdHorario());
-		
-	}
-	
 	public void setListaHorario(List<Horario> listaHorario) {
 		this.listaHorario = listaHorario;
 	}
 
-	public Horario getHorario() {
-		return horario;
-	}
 
-	public void setHorario(Horario horario) {
-		log.error("SETEANDO HORARIO:");
-		log.error("SETEANDO HORARIO:"+horario.getCantsesion());
-		this.horario = horario;
-	}
+	
+ 	public void crearRecursoPrueba(){
 
-	public int getIdambiente() {
-		return idambiente;
+		log.info("INICIA CON LA ASIGNACIÓN DE HORARIO  .....");
+		log.info("Captura id_Planificacion: " +selectedHorario.getIdHorario());
+	
+		log.info("obtener nombre de actividad: " + selectedHorario.getCantsesion());				
+		
 	}
-
-	public void setIdambiente(int idambiente) {
-		this.idambiente = idambiente;
-	}
-
-	public boolean isVer() {
-		return ver;
-	}
-
-	public void setVer(boolean ver) {
-		this.ver = ver;
-	}
-
+ 
 }

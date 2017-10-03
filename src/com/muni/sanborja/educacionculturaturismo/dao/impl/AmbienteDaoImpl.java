@@ -53,6 +53,8 @@ public class AmbienteDaoImpl implements Serializable,AmbienteDao {
 			
 	       try {
 	    	   ambiente = (Ambiente) session.get(Ambiente.class, idAmbiente); 
+	    	   session.close();
+	    	   
 	        } catch (Exception e) {
 				session.beginTransaction().rollback();
 				
