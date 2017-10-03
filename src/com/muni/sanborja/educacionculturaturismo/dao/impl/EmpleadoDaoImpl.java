@@ -64,7 +64,8 @@ public class EmpleadoDaoImpl implements Serializable,EmpleadoDao{
 		
 		Session session = HibernateSessionFactory.getSessionFactory().openSession();
 		Transaction ts = session.beginTransaction();
-		String hql="FROM Empleado AS EMP INNER JOIN fetch EMP.roles AS DET WHERE DET.idrol = " +v_idrol ;
+		String hql="SELECT DISTINCT EMP FROM Empleado EMP INNER JOIN"
+				+ " EMP.roles DET WHERE DET.idrol = " +v_idrol;
 		
 		try {
 			

@@ -69,9 +69,6 @@ public class EmpleadoBean implements Serializable{
 	public void setIdrol(int idrol) {
 		this.idrol = idrol;
 	}
-	
-	
-
 
 	public int getIdempleado2() {
 		return idempleado2;
