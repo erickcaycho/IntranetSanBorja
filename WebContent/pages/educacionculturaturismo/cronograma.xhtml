@@ -22,23 +22,18 @@
 							<p:outputLabel  value="Fecha Fin" />
        						<p:calendar id="cal2" value="#{cronogramaBean.cronograma.fechaFin}" showOn="button" mindate="today" pattern="dd/MM/yyyy"/>
        						<p:outputLabel value="Responsable" /> 
-							<p:selectOneMenu id="codEmpleado" value="#{cronogramaBean.cronograma.empleado.idEmpleado}" required="true" style="width:150px;heigth:50px;">
+							<p:selectOneMenu id="codEmpleado" value="#{cronogramaBean.idEmpleado}" style="width:150px;heigth:50px;">
 								<f:selectItem itemLabel=" Seleccione " itemValue="" />
-								<f:selectItems value="#{empleadoBean.listaEmpleados}"  var="p" itemValue="#{p.idEmpleado}"  />
+								<f:selectItems value="#{cronogramaBean.listaEmpleados}"  var="p" itemValue="#{p.idEmpleado}"  itemLabel="#{p.nombreCompletoEmpleado}" />
 							</p:selectOneMenu>
 						</h:panelGrid>
 						
-							<p:commandButton value="Agregar" icon="fa fa-plus" style="text-align:center;"
-								 actionListener="#{cronogramaBean.crearCronograma}"  update="form2:tbCronograma">
+							<p:commandButton value="Agregar" icon="fa fa-plus" style="text-align:center;" 
+								 actionListener="#{cronogramaBean.crearCronograma}"  update="tbCronograma">
 							</p:commandButton>
 						</div>
 						
 					</p:fieldset>
-					
-					</h:form>
-					
-					
-					<h:form id="form2">
 						 
 						<p:dataTable id="tbCronograma" 
 								var="crono" 
@@ -81,11 +76,6 @@
 				                        <!-- actionListener="#{cronogramaBeans.remove(crono)}"-->
 							</p:dataTable>
 						 
-								
-					
-					
-					
-	
 					</h:form>
 	
 </html>

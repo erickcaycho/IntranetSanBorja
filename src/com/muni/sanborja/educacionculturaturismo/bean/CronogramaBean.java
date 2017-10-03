@@ -1,6 +1,7 @@
 package com.muni.sanborja.educacionculturaturismo.bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -8,11 +9,18 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 
 import org.apache.log4j.Logger;
 
+import com.muni.sanborja.educacionculturaturismo.dao.AmbienteDao;
+import com.muni.sanborja.educacionculturaturismo.dao.EmpleadoDao;
+import com.muni.sanborja.educacionculturaturismo.dao.impl.AmbienteDaoImpl;
+import com.muni.sanborja.educacionculturaturismo.dao.impl.EmpleadoDaoImpl;
+import com.muni.sanborja.educacionculturaturismo.modelo.Ambiente;
 import com.muni.sanborja.educacionculturaturismo.modelo.Cronograma;
 import com.muni.sanborja.educacionculturaturismo.modelo.Empleado;
+import com.muni.sanborja.educacionculturaturismo.modelo.Horario;
 import com.muni.sanborja.educacionculturaturismo.service.CronogramaService;
 import com.muni.sanborja.educacionculturaturismo.service.impl.CronogramaServiceImpl;
 
@@ -27,6 +35,9 @@ public class CronogramaBean implements Serializable {
 	private List<Cronograma> listaCronogramas;
 	private Cronograma cronograma;
 	CronogramaService cronogramaService = new CronogramaServiceImpl();
+	private Horario selectedHorario;
+	private int idEmpleado;
+	private List<Empleado> listaEmpleados;
 
 	@PostConstruct
 	public void init() {
@@ -51,13 +62,17 @@ public class CronogramaBean implements Serializable {
 	}
 
 	public List<Cronograma> getListaCronogramas() {
-		// listaCronogramas = cronogramaDao.listarCronograma(cronograma.getIdHorario(), cronograma.getIdCronograma());
-		listaCronogramas = cronogramaService.listarCronograma(2, 1);
+		log.info("::::::::::LISTA DE CRONOGRAMA ::::::::::");
 		return listaCronogramas;
 	}
 
 	public void crearCronograma() {
 		try {
+			log.info(":::::::::::::::::::: horario para el crongorama  ");
+			log.info(":::::::::::::::::::: horario para el crongorama  " + idEmpleado);
+			cronograma.setHorario(selectedHorario);
+			EmpleadoDao empleado= new EmpleadoDaoImpl();
+			cronograma.setEmpleado(empleado.buscar(idEmpleado));
 			String msg;
 			if (cronogramaService.createCronograma(cronograma)) {
 				msg = "Se creó correctamente la planificación";
@@ -80,5 +95,36 @@ public class CronogramaBean implements Serializable {
 			log.error("Error:" + e.getMessage());
 			log.error(e.getStackTrace());
 		}
+	}
+
+	public Horario getSelectedHorario() {
+		log.info(":::::::::set HORARIO EN CRONOGRAMA ::::::::::");
+		return selectedHorario;
+	}
+
+	public void setSelectedHorario(Horario selectedHorario) {
+		log.info(":::::::::Get HORARIO EN CRONOGRAMA ::::::::::");
+		this.selectedHorario = selectedHorario;
+	}
+
+	public int getIdEmpleado() {
+		return idEmpleado;
+	}
+
+	public void setIdEmpleado(int idEmpleado) {
+		this.idEmpleado = idEmpleado;
+	}
+
+	public List<Empleado> getListaEmpleados() {
+		this.listaEmpleados = new ArrayList<Empleado>();
+		EmpleadoDao empleadoDao = new EmpleadoDaoImpl();
+		
+		listaEmpleados = empleadoDao.listarEmpleado();
+		
+		return listaEmpleados;
+	}
+
+	public void setListaEmpleados(List<Empleado> listaEmpleados) {
+		this.listaEmpleados = listaEmpleados;
 	}
 }

@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="Empleado")
@@ -21,10 +22,9 @@ public class Empleado  implements Serializable{
 
 	@Id
 	@GeneratedValue
-	@Column(name = "idEmpleado", updatable = false, nullable = false)
+	@Column(name = "idempleado", updatable = false, nullable = false)
 	private int idEmpleado;
-
-
+	
 	@Column(name = "nombre")
 	private String nombre;
 	
@@ -33,6 +33,10 @@ public class Empleado  implements Serializable{
 
 	@Column(name = "apellimaterno")
 	private String apellidoMat;
+	
+	
+	@Transient
+	private String nombreCompletoEmpleado;
 	
 
 	@ManyToMany(fetch = FetchType.LAZY)
@@ -54,10 +58,6 @@ public class Empleado  implements Serializable{
 	public String toString() {
 		return "Nombre : "+ nombre +" "+ apellidoPat +" "+ apellidoMat;
 	}
-	
-	
-	
-	
 	
 	public int getIdEmpleado() {
 		return idEmpleado;
@@ -89,6 +89,15 @@ public class Empleado  implements Serializable{
 
 	public void setApellidoMat(String apellidoMat) {
 		this.apellidoMat = apellidoMat;
+	}
+
+	public String getNombreCompletoEmpleado() {
+		nombreCompletoEmpleado = nombre+" "+apellidoPat+" "+apellidoMat;
+		return nombreCompletoEmpleado;
+	}
+
+	public void setNombreCompletoEmpleado(String nombreCompletoEmpleado) {
+		this.nombreCompletoEmpleado = nombreCompletoEmpleado;
 	}
 
 	public List<Horario> getHorarios() {

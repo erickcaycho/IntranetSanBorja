@@ -1,8 +1,6 @@
 package com.muni.sanborja.educacionculturaturismo.dao.impl;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -12,7 +10,7 @@ import org.hibernate.classic.Session;
 
 import com.muni.sanborja.educacionculturaturismo.dao.CronogramaDao;
 import com.muni.sanborja.educacionculturaturismo.modelo.Cronograma;
-import com.muni.sanborja.educacionculturaturismo.modelo.Empleado;
+import com.muni.sanborja.educacionculturaturismo.modelo.Horario;
 import com.muni.sanborja.educacionculturaturismo.util.HibernateSessionFactory;
 
 public class CronogramaDaoImpl implements Serializable,CronogramaDao{
@@ -46,65 +44,7 @@ public class CronogramaDaoImpl implements Serializable,CronogramaDao{
 		
 		return flag;
 	}
-
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Cronograma> listarCronograma(int idHorario,int idCronograma) {
-		// TODO Auto-generated method stub
-		
-		List<Cronograma> listaCronograma = null;
-		
-		Session session = HibernateSessionFactory.getSessionFactory().openSession();
-		Transaction ts = session.beginTransaction();
-		
-		
-		String hql="FROM Cronograma  WHERE idHorario = :idHorario"; 
-		
-		try {
-			log.info("inicia Listar Cronograma");
-			Query query = session.createSQLQuery("CALL ConsultarCronograma(:idHorario,:idCronograma)").
-					setParameter("idHorario", idHorario).setParameter("idCronograma", idCronograma);
-			/*Query query = session.createSQLQuery("CALL obtenerPlanificacionXPeriodoXActividad(:val_idperiodo,:val_estado)").addEntity(Cronograma.class).
-					setParameter("idHorario", idHorario).setParameter("val_estado", idHorario);*/
-			List<Object[]> objs  = query.list();
-			
-			listaCronograma = new ArrayList<Cronograma>();
-			for (Object[] o : objs) {
-				Object[] aux = o;
-				Cronograma c = new Cronograma();
-
-				c.setIdCronograma((Integer)aux[0]);
-				c.setTarea((String)aux[1]);
-				c.setDescripcion((String)aux[2]);
-				
-				Empleado emp = new Empleado();
-			    emp.setIdEmpleado((Integer)aux[3]);;
-				emp.setNombre((String)aux[4]+" "+ (String)aux[5]);
-				c.setEmpleado(emp);
-				
-				//c.setEmpleado(new Empleado().setApellidoPat(''););
-				c.setFechaInicio((Date)aux[6]); 
-				c.setFechaFin((Date)aux[7]);
-				
-				listaCronograma.add(c);
-			}
-			
-			log.info("Registros encontrados Cronograma: "  + listaCronograma.size());
-			
-			
-			ts.commit();
-			session.close();
-		} catch (Exception e) {
-			log.error("error " +e.getMessage());
-			  e.getMessage();
-		}
-		
-		
-		
-		return listaCronograma;
-	}
-
+	
 	@Override
 	public boolean delete(Cronograma cronograma) {
 
@@ -135,20 +75,18 @@ public class CronogramaDaoImpl implements Serializable,CronogramaDao{
 		return flag;
 	}
 	
-	/*
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Cronograma> listarCronograma(int idHorario) {
-		// TODO Auto-generated method stub
-		
 		List<Cronograma> listaCronograma = null;
 		
 		Session session = HibernateSessionFactory.getSessionFactory().openSession();
 		Transaction ts = session.beginTransaction();
-		String hql="FROM Cronograma  WHERE idHorario = :idHorario"; 
+		log.info("Listar Horario "+ idHorario);
 		
 		try {
-			listaCronograma = session.createSQLQuery(hql).list();
+			
+			listaCronograma = session.createSQLQuery("FROM Cronograma  WHERE idHorario = :idHorario").
+					setParameter("idHorario",idHorario).list();
 			if(listaCronograma == null) {
 				log.info("Data not found");
 			}else {
@@ -160,13 +98,7 @@ public class CronogramaDaoImpl implements Serializable,CronogramaDao{
 			log.error("error " +e.getMessage());
 			  e.getMessage();
 		}
-		
-		
-		
 		return listaCronograma;
-	}*/
-
-	
-	
+	}
 	
 }

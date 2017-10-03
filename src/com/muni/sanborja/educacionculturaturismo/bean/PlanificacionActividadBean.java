@@ -301,7 +301,7 @@ public class PlanificacionActividadBean implements Serializable {
 		
 		log.info("obtener nombre de actividad: " + selectedPlan.getNomActividad());				
 		
-		return "planificarPlanActividad?faces-redirect=true";
+		return Constants.PLANIFICAR_ACTIVIDAD_PAGE;
 		
 	}
 	

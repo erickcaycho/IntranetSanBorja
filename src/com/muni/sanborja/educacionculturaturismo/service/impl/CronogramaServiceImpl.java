@@ -25,22 +25,13 @@ public class CronogramaServiceImpl implements Serializable,CronogramaService{
 	}
 
 	@Override
-	public List<Cronograma> listarCronograma(int idHorario,int idCronograma) {
-		return cronogramaDao.listarCronograma(idHorario, idCronograma);
+	public List<Cronograma> listarCronograma(int idHorario) {
+		return cronogramaDao.listarCronograma(idHorario);
 	}
 
 	@Override
 	public boolean delete(Cronograma cronograma) {
 		return cronogramaDao.delete(cronograma);
 	}
-	
-	/*
-	@Override
-	public List<Cronograma> listarCronograma(int idHorario) {
-		return cronogramaDao.listarCronograma(idHorario);
-	}*/
-
-	
-	
 	
 }

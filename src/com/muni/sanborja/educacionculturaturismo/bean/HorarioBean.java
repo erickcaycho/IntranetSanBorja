@@ -28,6 +28,8 @@ import com.muni.sanborja.educacionculturaturismo.modelo.Horario;
 import com.muni.sanborja.educacionculturaturismo.modelo.Planificacion;
 import com.muni.sanborja.educacionculturaturismo.modelo.Sede;
 
+import resources.Constants;
+
 @ManagedBean(name = "horarioBean")
 @SessionScoped
 public class HorarioBean implements Serializable{
@@ -41,7 +43,7 @@ public class HorarioBean implements Serializable{
 	private Planificacion planificacion = new Planificacion();
 	private Date todayDate = new Date();
 	private int idambiente;
-	
+	private boolean ver;
 	private List<SelectItem> listaSede;
 	private List<SelectItem> listaAmbiente;
 	
@@ -54,10 +56,11 @@ public class HorarioBean implements Serializable{
 
 	@PostConstruct
 	public void init() {
+		
 		horario = new Horario();
-		selectedHorario = new Horario();
+		//selectedHorario = new Horario();
 		planificacion = new Planificacion();
-		horario.setPlanificacion(new Planificacion());
+		//horario.setPlanificacion(new Planificacion());
 	}
 	
 	public Date getTodayDate() {
@@ -128,6 +131,7 @@ public class HorarioBean implements Serializable{
 	public void setListaAmbiente(List<SelectItem> listaAmbiente) {
 		this.listaAmbiente = listaAmbiente;
 	}
+	
 	public void crearHorario(){
 		try {
 			log.info(" ID "+ planificacionBean.getSelectedPlan().getIdPlanificacion());
@@ -136,7 +140,7 @@ public class HorarioBean implements Serializable{
 			planificacion = plan.buscar(planificacionBean.getSelectedPlan().getIdPlanificacion());
 			horario.setPlanificacion(planificacion);
 			String msg;
-			
+			log.info("FECHA FIN  " + horario.getFechaFin()+"  FECHA INI  " +horario.getFechaInicio());
 			if(horario.getFechaFin().before(horario.getFechaInicio())){
 				msg ="Fecha fin no puede ser menor a la fecha inicio";
 				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,msg,null);
@@ -171,15 +175,24 @@ public class HorarioBean implements Serializable{
 	}
 
 	public void setSelectedHorario(Horario selectedHorario) {
+		log.error("SETEANDO HORARIO:::::::::::::::  2   id  " + selectedHorario.getIdHorario());
 		this.selectedHorario = selectedHorario;
 	}
 
 	public List<Horario> getListaHorario() {
 		HorarioDao horarioDao = new HorarioDaoImpl();
 		listaHorario = horarioDao.listarHorario(planificacionBean.getSelectedPlan().getIdPlanificacion());
+		//selectedHorario =null;
 		return listaHorario;
 	}
-
+	
+	public void CrearCronograma(){
+		
+		log.info("***** INICIA CON LA ASIGNACIÓN DE CRONOGRAMA AL HORARIO  .....");
+		//log.info("Captura id_Planificacion: " +selectedHorario.getIdHorario());
+		
+	}
+	
 	public void setListaHorario(List<Horario> listaHorario) {
 		this.listaHorario = listaHorario;
 	}
@@ -189,6 +202,8 @@ public class HorarioBean implements Serializable{
 	}
 
 	public void setHorario(Horario horario) {
+		log.error("SETEANDO HORARIO:");
+		log.error("SETEANDO HORARIO:"+horario.getCantsesion());
 		this.horario = horario;
 	}
 
@@ -198,6 +213,14 @@ public class HorarioBean implements Serializable{
 
 	public void setIdambiente(int idambiente) {
 		this.idambiente = idambiente;
+	}
+
+	public boolean isVer() {
+		return ver;
+	}
+
+	public void setVer(boolean ver) {
+		this.ver = ver;
 	}
 
 }

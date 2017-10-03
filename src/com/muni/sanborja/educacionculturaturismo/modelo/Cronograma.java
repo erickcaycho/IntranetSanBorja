@@ -38,40 +38,13 @@ public class Cronograma implements Serializable{
 	@Column(name = "fechaEjecucion")
 	private Date fechaEjecucion;
 	
-	
 	@OneToOne
 	@JoinColumn(name = "idEmpleado")
 	private Empleado empleado;
 	
-
-	@Column(name = "idHorario")
-	private int idHorario;
-	
-    /*@Id
-    // If the join column is not define, it will default to class+id column (HELLO_WORLD_ID)
-    // and you will get a  ORA-00904  invalid identifier
-    // JoinColumn defines the name of the column in the table Hello_Cat
-    @JoinColumn(name= "idHorario")
-    private Horario horario;
-    
-    
-    
-	public Cronograma() {
-    }
-	
-    
-    public Cronograma(Horario horario) {
-        this.setHorario(horario);
-    }
-    
-    public Horario getHorario) {
-        return horario;
-    }
- 
-    public void setHorario(Horario horario) {
-        this.horario = horario;
-    }
-    */
+	@OneToOne
+	@JoinColumn(name = "idhorario")
+	private Horario horario;
 	
 	public Cronograma() {
     }
@@ -131,28 +104,13 @@ public class Cronograma implements Serializable{
 	public int getIdCronograma() {
 		return idCronograma;
 	}
-
-	public int getIdHorario() {
-		return idHorario;
+	
+	public Horario getHorario() {
+		return horario;
 	}
 
-	public void setIdHorario(int idHorario) {
-		this.idHorario = idHorario;
+	public void setHorario(Horario horario) {
+		this.horario = horario;
 	}
-	
-	
-	
-	
-	/*
-  `codDetalleCronograma` int(11) NOT NULL AUTO_INCREMENT,
-  `idHorario` int(11) NOT NULL,
-  `tarea` varchar(40) NOT NULL,
-  `descripcion` varchar(60) NOT NULL,
-  `fechaInicio` date NOT NULL,
-  `fechaFin` date NOT NULL,
-  `fechaEjecucion` date DEFAULT NULL,
-  `codEmpleado` int(11) NOT NULL,
-  PRIMARY KEY (`codDetalleCronograma`),
-  FOREIGN KEY `FKcodEmpleado_id`  (codEmpleado) REFERENCES empleados(codEmpleado)*/
-	
+
 }

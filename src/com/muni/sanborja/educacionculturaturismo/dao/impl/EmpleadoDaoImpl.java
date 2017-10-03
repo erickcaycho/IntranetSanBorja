@@ -23,7 +23,6 @@ public class EmpleadoDaoImpl implements Serializable,EmpleadoDao{
 	private static final long serialVersionUID = 1L;
 	public static Logger log = Logger.getLogger(PeriodoDaoImpl.class);
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Empleado> listarEmpleado() {
 		// TODO Auto-generated method stub
@@ -128,6 +127,22 @@ public class EmpleadoDaoImpl implements Serializable,EmpleadoDao{
 		return flag;
 	}
 
+	
+	@Override
+	public Empleado buscar(int idEmpleado) {
+		Empleado empleado = null;
+		Session session = HibernateSessionFactory.getSessionFactory().openSession();
+			
+	       try {
+	    	   empleado = (Empleado) session.get(Empleado.class, idEmpleado); 
+	        } catch (Exception e) {
+				session.beginTransaction().rollback();
+				
+				log.error("error " +e.getMessage());
+				  e.getMessage();
+			}
+	      return empleado; 
+	 }
 	
 	
 	
