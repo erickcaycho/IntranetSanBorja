@@ -11,7 +11,7 @@
 					<h:form id="formEncargadosAdd">
 					
 						<div style="line-height:40px;" >
-						<h:panelGrid columns="4" cellpadding="5">
+						<h:panelGrid id="panelEncargados" columns="3" cellpadding="5">
        						<p:outputLabel value="Rol" /> 
 							<p:selectOneMenu id="idrol" value="#{empleadoBean.idrol}" required="true" style="width:150px;heigth:50px;">
 								<f:selectItem itemLabel=" Seleccione " itemValue="" />
@@ -19,7 +19,7 @@
 								<p:ajax update="comboEmpleado" />
 							</p:selectOneMenu>
 							
-							<p:selectOneMenu id="comboEmpleado" value="#{empleadoBean.idempleado2}" required="true" style="width:150px;heigth:50px;">
+							<p:selectOneMenu id="comboEmpleado" value="#{empleadoBean.idempleado}" required="true" style="width:150px;heigth:50px;">
 								<f:selectItem itemLabel=" Seleccione " itemValue="" />
 								<f:selectItems  value="#{empleadoBean.listaEmpleadosByRol}"  var="p" 
 												itemLabel="#{p.nombre}" itemValue="#{p.idEmpleado}"/>
@@ -29,13 +29,13 @@
 						
 						</div>
 						
+							<p:commandButton value="Asignar" icon="fa fa-plus" style="text-align:center;"
+								 actionListener="#{empleadoBean.asignarEncargados}"  >
+							</p:commandButton>
 
 					</h:form>
 					
 					
-							<p:commandButton value="Asignar" icon="fa fa-plus" style="text-align:center;"
-								 actionListener="#{empleadoBean.asignarEncargados}"  >
-							</p:commandButton>
 							
 							
 </html>

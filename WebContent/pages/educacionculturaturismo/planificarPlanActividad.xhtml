@@ -170,8 +170,8 @@
 										<p:commandButton value="Cronograma" icon="fa fa-calendar-o"
 											onclick="PF('Cronograma').show()">
 										</p:commandButton>
-										<p:commandButton value="Encargados" icon="fa fa-user-plus"
-											onclick="PF('Encargados').show()">
+										<p:commandButton value="Encargados" icon="fa fa-user-plus" 
+											onclick="PF('Encargados').show()" process="tbHorariosXPlanificacion" >
 										</p:commandButton>
 										<p:commandButton value="Días" icon="fa fa-check-square"
 											onclick="PF('Días').show()">
@@ -236,7 +236,7 @@
 					<ui:include src="recursos.xhtml" />
 				</p:dialog>
 
-				<p:dialog widgetVar="Encargados" header="Pantalla Encargados"
+				<p:dialog widgetVar="Encargados" header="Pantalla Encargados"  position="top" 
 					width="700" height="400" modal="true" showEffect="fade"
 					hideEffect="fade" resizable="false">
 					<ui:include src="encargados.xhtml" />

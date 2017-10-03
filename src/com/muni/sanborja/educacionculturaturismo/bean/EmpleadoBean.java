@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.Application;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 
 import org.apache.log4j.Logger;
@@ -28,11 +30,19 @@ public class EmpleadoBean implements Serializable{
 	
 
 	private int idrol;
-	private int idempleado2;
+	private int idempleado;
 	private List<SelectItem> listaEmpleados;
 	private List<Empleado> listaEmpleadosByRol;
 	//private List<Empleado> listaEncargados;
 	private Empleado empleado;
+
+
+	FacesContext context = FacesContext.getCurrentInstance();
+	Application application = context.getApplication();
+	HorarioBean horarioBean = application.evaluateExpressionGet(context,"#{horarioBean}", HorarioBean.class);
+	
+	
+	
 	EmpleadoService empleadoService = new EmpleadoServiceImpl();
 
 
@@ -41,6 +51,14 @@ public class EmpleadoBean implements Serializable{
 		empleado = new Empleado();
 	}
 	
+	public HorarioBean getHorarioBean() {
+		return horarioBean;
+	}
+
+	public void setHorarioBean(HorarioBean horarioBean) {
+		this.horarioBean = horarioBean;
+	}
+
 	public void setListaEmpleados(List<SelectItem> listaEmpleados) {
 		this.listaEmpleados = listaEmpleados;
 	}
@@ -70,34 +88,24 @@ public class EmpleadoBean implements Serializable{
 		this.idrol = idrol;
 	}
 
-	public int getIdempleado2() {
-		return idempleado2;
+
+	public int getIdempleado() {
+		return idempleado;
 	}
 
-	public void setIdempleado2(int idempleado2) {
-		this.idempleado2 = idempleado2;
+	public void setIdempleado(int idempleado) {
+		this.idempleado = idempleado;
 	}
 
 	public List<Empleado> getListaEmpleadosByRol() {
-		log.info("Codigo capturadooo By Rol----------------> = " + idrol);
-		
 		this.listaEmpleadosByRol = new ArrayList<Empleado>();
 		
 		if(idrol>0) {
 			listaEmpleadosByRol.clear();
 			listaEmpleadosByRol = empleadoService.listarEmpleadoByRol(idrol);
 			
-			
-			/*for (Empleado comboEmpleado : emp) {
-				SelectItem empItem = new SelectItem(comboEmpleado.getIdEmpleado(),
-						comboEmpleado.getNombre());
-				this.listaEmpleadosByRol.add(empItem);
-			}*/
 		}
 			
-
-		
-		
 		return listaEmpleadosByRol;
 	}
 
@@ -119,10 +127,21 @@ public class EmpleadoBean implements Serializable{
 
 	
 	public void asignarEncargados() {
-		log.info("asignarEncargados cod emp-------------> = " +idempleado2);
+		log.info("entro -asignarEncargados------------> = " );
+		log.info("asignarEncargados cod horario-------------> = " + horarioBean.getSelectedHorario().getIdHorario());
+		
+/*
 		try {
 			String msg;
-			/*if (empleadoService.asignarEncargados(empleado)) {
+			List<Horario> lstHorario = new ArrayList<Horario>();
+			
+			/*lstHorario.add(horarioBean.getSelectedHorario());--
+			Horario ho = new Horario();
+			ho.setIdHorario(2);
+			lstHorario.add(ho);
+			empleado.setIdEmpleado(idempleado);
+			empleado.setHorarios(lstHorario);
+			if (empleadoService.asignarEncargados(empleado)) {
 				msg = "Se asigno Encargado Correctamente";
 				FacesMessage message = new FacesMessage(
 						FacesMessage.SEVERITY_INFO, msg, null);
@@ -137,12 +156,12 @@ public class EmpleadoBean implements Serializable{
 				FacesContext.getCurrentInstance().addMessage(null, message);
 
 				log.error("Error al crear");
-			}*/
+			}
 
 		} catch (Exception e) {
 			log.error("Error:" + e.getMessage());
 			log.error(e.getStackTrace());
-		}
+		}*/
 	}
 	
 }
