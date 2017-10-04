@@ -17,18 +17,14 @@ import org.apache.log4j.Logger;
 
 import com.muni.sanborja.educacionculturaturismo.dao.AmbienteDao;
 import com.muni.sanborja.educacionculturaturismo.dao.HorarioDao;
-import com.muni.sanborja.educacionculturaturismo.dao.PlanificacionDao;
 import com.muni.sanborja.educacionculturaturismo.dao.SedeDao;
 import com.muni.sanborja.educacionculturaturismo.dao.impl.AmbienteDaoImpl;
 import com.muni.sanborja.educacionculturaturismo.dao.impl.HorarioDaoImpl;
-import com.muni.sanborja.educacionculturaturismo.dao.impl.PlanificacionDaoImpl;
 import com.muni.sanborja.educacionculturaturismo.dao.impl.SedeDaoImpl;
 import com.muni.sanborja.educacionculturaturismo.modelo.Ambiente;
 import com.muni.sanborja.educacionculturaturismo.modelo.Horario;
 import com.muni.sanborja.educacionculturaturismo.modelo.Planificacion;
 import com.muni.sanborja.educacionculturaturismo.modelo.Sede;
-
-import resources.Constants;
 
 @ManagedBean(name = "horarioBean")
 @SessionScoped

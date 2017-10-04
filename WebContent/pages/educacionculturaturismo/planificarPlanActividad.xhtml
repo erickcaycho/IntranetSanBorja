@@ -163,9 +163,9 @@
 											actionListener="#{horarioBean.crearRecursoPrueba}"
 											icon="fa fa-check-circle" />
 											
-										<p:commandButton value="Recursos 2" icon="fa fa-cubes" action="#{horarioBean.crearRecursos2}" onclick="PF('Recurso').show()">
-													<f:setPropertyActionListener value="#{h}" target="#{cronogramaBean.selectedHorario}" />
-													</p:commandButton>
+										<p:commandButton value="Recursos" icon="fa fa-cubes" 
+											onclick="PF('Recurso').show()" process="tbHorariosXPlanificacion" >
+										</p:commandButton>
 
 										<p:commandButton value="Cronograma" icon="fa fa-calendar-o"
 											onclick="PF('Cronograma').show()">
@@ -229,14 +229,13 @@
 					<ui:include src="cronograma.xhtml" />
 				</p:dialog>
 
-				<p:dialog widgetVar="Recurso" header="Pantalla Recurso" width="700"
-					height="400" modal="true" showEffect="fade" hideEffect="fade"
-					resizable="false">
-
+				<p:dialog widgetVar="Recurso" header="Pantalla Recurso" 
+					width="700" height="400" modal="true" showEffect="fade" 
+					hideEffect="fade" resizable="false">
 					<ui:include src="recursos.xhtml" />
 				</p:dialog>
 
-				<p:dialog widgetVar="Encargados" header="Pantalla Encargados"  position="top" 
+				<p:dialog widgetVar="Encargados" header="Pantalla Encargados"  
 					width="700" height="400" modal="true" showEffect="fade"
 					hideEffect="fade" resizable="false">
 					<ui:include src="encargados.xhtml" />

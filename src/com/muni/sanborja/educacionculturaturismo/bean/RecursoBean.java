@@ -96,6 +96,8 @@ public class RecursoBean implements Serializable {
 	}
 
 	public void guardarRecurso() {
+		log.info("entro -asignarEncargados------------> = " );
+		log.info("asignarEncargados cod horario-------------> = " + horarioBean.getSelectedHorario().getIdHorario());
 		String msg;
 		
 		try {
