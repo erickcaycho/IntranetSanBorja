@@ -53,9 +53,11 @@ public class Planificacion  implements Serializable{
 	@JoinColumn(name="idperiodo")
 	private Periodo periodo;
 
-	@OneToMany
+	/*
+	 * @OneToMany
 	private Set<Horario> horario;
 	
+	 * */
 	
 	public Planificacion(){
 	}
@@ -140,7 +142,8 @@ public class Planificacion  implements Serializable{
 		this.periodo = periodo;
 	}
 	
-	public Set<Horario> getHorario() {
+	/*
+	 * public Set<Horario> getHorario() {
 		return horario;
 	}
 
@@ -148,6 +151,7 @@ public class Planificacion  implements Serializable{
 		this.horario = horario;
 	}
 	
+	 * */
 	
 
 }

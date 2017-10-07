@@ -82,6 +82,7 @@ public class EmpleadoDaoImpl implements Serializable,EmpleadoDao{
 			session.close();
 			
 		} catch (Exception e) {
+			session.close();
 			log.error("error " +e.getMessage());
 			  e.getMessage();
 		 
@@ -120,7 +121,7 @@ public class EmpleadoDaoImpl implements Serializable,EmpleadoDao{
 			
 		} catch (Exception e) {
 			session.beginTransaction().rollback();
-			
+			session.close();
 			log.error("error " +e.getMessage());
 		    e.getMessage();
 		}
@@ -138,7 +139,7 @@ public class EmpleadoDaoImpl implements Serializable,EmpleadoDao{
 	    	   empleado = (Empleado) session.get(Empleado.class, idEmpleado); 
 	        } catch (Exception e) {
 				session.beginTransaction().rollback();
-				
+				session.close();
 				log.error("error " +e.getMessage());
 				  e.getMessage();
 			}

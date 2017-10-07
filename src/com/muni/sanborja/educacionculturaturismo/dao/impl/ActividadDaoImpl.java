@@ -40,8 +40,10 @@ public class ActividadDaoImpl implements Serializable,ActividadDao {
 			session.close();
 			
 		} catch (Exception e) {
+			
+			session.close();
 			log.error("error " +e.getMessage());
-			  e.getMessage();
+			e.getMessage();
 		}
 		
 		return listaActividades;

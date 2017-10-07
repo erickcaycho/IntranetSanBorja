@@ -37,7 +37,7 @@ public class CronogramaDaoImpl implements Serializable,CronogramaDao{
 			
 		} catch (Exception e) {
 			session.beginTransaction().rollback();
-			
+			session.close();
 			log.error("error " +e.getMessage());
 		    e.getMessage();
 		}
@@ -67,7 +67,7 @@ public class CronogramaDaoImpl implements Serializable,CronogramaDao{
 		} catch (Exception e) {
 			flag=false;
 			session.beginTransaction().rollback();
-			
+			session.close();
 			log.error("error " +e.getMessage());
 			  e.getMessage();
 		}
@@ -95,6 +95,7 @@ public class CronogramaDaoImpl implements Serializable,CronogramaDao{
 			ts.commit();
 			session.close();
 		} catch (Exception e) {
+			session.close();
 			log.error("error " +e.getMessage());
 			  e.getMessage();
 		}

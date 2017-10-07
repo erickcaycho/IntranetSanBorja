@@ -27,19 +27,22 @@ public class HorarioDaoImpl implements Serializable,HorarioDao{
 	public boolean createHorario(Horario horario) {
 		boolean flag = false;
 		Session session = HibernateSessionFactory.getSessionFactory().openSession();
+		
 		try {
 			session.beginTransaction();
-			if(horario == null) {
+			if(horario == null)
 				log.info("Horario es null");
-			}else {
+
 				session.save(horario);
 				session.beginTransaction().commit();
 				log.info("Guardado correctamente");
 				session.close();
 				flag=true;
-			}
+
 		} catch (Exception e) {
+			flag=false;
 			session.beginTransaction().rollback();
+			session.close();
 			
 			log.error("error " +e.getMessage());
 		    e.getMessage();

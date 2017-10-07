@@ -39,6 +39,7 @@ public class AmbienteDaoImpl implements Serializable,AmbienteDao {
 			session.close();
 			
 		} catch (Exception e) {
+			session.close();
 			log.error("error " +e.getMessage());
 			  e.getMessage();
 		}
@@ -57,7 +58,7 @@ public class AmbienteDaoImpl implements Serializable,AmbienteDao {
 	    	   
 	        } catch (Exception e) {
 				session.beginTransaction().rollback();
-				
+				session.close();
 				log.error("error " +e.getMessage());
 				  e.getMessage();
 			}

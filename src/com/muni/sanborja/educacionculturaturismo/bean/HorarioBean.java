@@ -25,6 +25,7 @@ import com.muni.sanborja.educacionculturaturismo.modelo.Ambiente;
 import com.muni.sanborja.educacionculturaturismo.modelo.Horario;
 import com.muni.sanborja.educacionculturaturismo.modelo.Planificacion;
 import com.muni.sanborja.educacionculturaturismo.modelo.Sede;
+import org.primefaces.context.RequestContext;
 
 @ManagedBean(name = "horarioBean")
 @SessionScoped
@@ -51,6 +52,7 @@ public class HorarioBean implements Serializable{
 	FacesContext context = FacesContext.getCurrentInstance();
 	Application application = context.getApplication();
 	PlanificacionActividadBean planificacionBean = application.evaluateExpressionGet(context, "#{planificacionActividadBean}", PlanificacionActividadBean.class);
+	
 
 	@PostConstruct
 	public void init() {
@@ -181,32 +183,42 @@ public class HorarioBean implements Serializable{
 			log.info("CrearHorario Planificacion[] Inicio ");
 			
 			String msg;
-		/*
-		 * 	if(horario.getFechaFin().before(horario.getFechaInicio())){
-				msg ="Fecha fin no puede ser menor a la fecha inicio";
-				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,msg,null);
-				FacesContext.getCurrentInstance().addMessage(null, message);
-			}
-				
-			else{
-				
-		 * */
 			
-				log.info("Capturado ID Planificacion: " + planificacionBean.getPlanificacion().getIdPlanificacion());
-				horario.getPlanificacion().setIdPlanificacion(planificacionBean.getPlanificacion().getIdPlanificacion());
-				
-				int idambientehorario = horario.getAmbiente().getIdAmbiente();
-				
-				log.info("id_ambiente: " + idambientehorario);
-				
-				HorarioDao horarioDao = new HorarioDaoImpl();
-				horarioDao.createHorario(horario);
-				msg ="Se creó correctamente el Horario";
-				
-				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,msg,null);
-				FacesContext.getCurrentInstance().addMessage(null, message);
-
-			//}
+			log.info(horario.getFechaInicio());
+			log.info(horario.getFechaFin());
+			
+			log.info(horario.getEdadMin());
+			log.info(horario.getEdadMax());
+			
+			
+			
+				if(horario.getFechaFin().before(horario.getFechaInicio())){
+					
+					msg ="Fecha fin no puede ser menor a la fecha inicio";
+					FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,msg,null);
+					FacesContext.getCurrentInstance().addMessage(null, message);
+					
+				}else if(horario.getEdadMin() >= horario.getEdadMax()){
+					
+					msg ="La edad mínima no debe ser mayor a la edad máxima";
+					FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,msg,null);
+					FacesContext.getCurrentInstance().addMessage(null, message);
+					
+				}else{
+					
+					log.info("Capturado ID Planificacion: " + planificacionBean.getPlanificacion().getIdPlanificacion());
+					
+					horario.getPlanificacion().setIdPlanificacion(planificacionBean.getPlanificacion().getIdPlanificacion());
+					horario.getAmbiente().getIdAmbiente();
+					
+					HorarioDao horarioDao = new HorarioDaoImpl();
+					horarioDao.createHorario(horario);
+					
+					msg ="Se creó correctamente el Horario";
+					
+					FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,msg,null);
+					FacesContext.getCurrentInstance().addMessage(null, message);
+				}
 		}
 		
 		catch (Exception e) {
@@ -215,6 +227,9 @@ public class HorarioBean implements Serializable{
 		}
 	}
 	
+	public void reset(){
+		log.info("Intentando resetear valores");
+	}
 	
 	public List<Horario> getListaHorario() {
 		HorarioDao horarioDao = new HorarioDaoImpl();
