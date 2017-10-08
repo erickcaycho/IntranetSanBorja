@@ -13,6 +13,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -71,8 +72,12 @@ public class Horario implements Serializable {
 	
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="primaryKey.horario")
 	private Set<Recurso> recurso = new HashSet<Recurso>();
-	
-	@ManyToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="horarios")
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name="detalle_horario_empleado",
+			   joinColumns=@JoinColumn(name="idHorario",referencedColumnName="idhorario"),
+			   inverseJoinColumns=@JoinColumn(name="idEmpleado",referencedColumnName="idempleado")
+			   )
 	private List<Empleado> empleados;
 	
 	public Ambiente getAmbiente() {

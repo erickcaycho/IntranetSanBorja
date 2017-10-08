@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.Application;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -14,6 +15,7 @@ import javax.faces.model.SelectItem;
 import org.apache.log4j.Logger;
 
 import com.muni.sanborja.educacionculturaturismo.modelo.Empleado;
+import com.muni.sanborja.educacionculturaturismo.modelo.Horario;
 import com.muni.sanborja.educacionculturaturismo.service.EmpleadoService;
 import com.muni.sanborja.educacionculturaturismo.service.impl.EmpleadoServiceImpl;
 
@@ -35,6 +37,8 @@ public class EmpleadoBean implements Serializable{
 	private List<Empleado> listaEmpleadosByRol;
 	//private List<Empleado> listaEncargados;
 	private Empleado empleado;
+	private Empleado selectedEncargado;
+	private List<Empleado> lstEncargados ;
 
 
 	FacesContext context = FacesContext.getCurrentInstance();
@@ -112,36 +116,74 @@ public class EmpleadoBean implements Serializable{
 	public void setListaEmpleadosByRol(List<Empleado> listaEmpleadosByRol) {
 		this.listaEmpleadosByRol = listaEmpleadosByRol;
 	}
+	
+	public List<Empleado> getLstEncargados() {
+		this.lstEncargados = new ArrayList();
+		if(horarioBean.getSelectedHorario()!=null) {
+			lstEncargados.clear();
+			int idhorario = horarioBean.getSelectedHorario().getIdHorario();
+			
+			List lstTemp = empleadoService.listarEncargados(idhorario);
 
-/*
-	public List<Empleado> getListaEncargados() {
-		Empleado emp = new Empleado();
-		empleado.setIdEmpleado(2);
-		listaEncargados.add(emp);
-		return listaEncargados;
+			Empleado emp = new Empleado();
+	        for (int j=0; j<lstTemp.size(); j++){
+		        
+				Object objeto = lstTemp.get(j);
+				String[] datos =objeto.toString().replace("[", "").replace("]", "").split(",");
+				
+				emp = new Empleado();
+				emp.setIdEmpleado(Integer.parseInt(datos[0]));
+				emp.setNombre(datos[1]);
+				emp.setNombreRol(datos[2]);
+				lstEncargados.add(emp);
+	        }
+			
+			//lstEncargados = empleadoService.listarEncargados(idhorario);
+		}
+		
+		return lstEncargados;
 	}
 
-	public void setListaEncargados(List<Empleado> listaEncargados) {
-		this.listaEncargados = listaEncargados;
-	}*/
+	public void setLstEncargados(List<Empleado> lstEncargados) {
+		this.lstEncargados = lstEncargados;
+	}
 
 	
-	public void asignarEncargados() {
-		log.info("entro -asignarEncargados------------> = " );
-		log.info("asignarEncargados cod horario-------------> = " + horarioBean.getSelectedHorario().getIdHorario());
+	public Empleado getSelectedEncargado() {
+		return selectedEncargado;
+	}
+
+	public void setSelectedEncargado(Empleado selectedEncargado) {
+		this.selectedEncargado = selectedEncargado;
+	}
+
+	public void asignarEncargados(String opc) {
+		log.info("asignarEncargados-------opcion: "+ opc );
+		int idhorario = horarioBean.getSelectedHorario().getIdHorario();
+		Horario horario = horarioBean.getSelectedHorario();
 		
-/*
+		
+		List<Empleado> lstEmp= new ArrayList<Empleado>();
+		Empleado emp = new Empleado();
+        for (int j=0; j<lstEncargados.size(); j++){
+	        
+			Empleado obj = (Empleado)lstEncargados.get(j);
+			
+			emp = new Empleado();
+			emp.setIdEmpleado(obj.getIdEmpleado());
+			lstEmp.add(emp);
+        }
+        if(idempleado>0 && opc.equals("")) {
+			emp = new Empleado();
+			emp.setIdEmpleado(idempleado);
+			lstEmp.add(emp);
+        }
+			
+			
+			
 		try {
 			String msg;
-			List<Horario> lstHorario = new ArrayList<Horario>();
-			
-			/*lstHorario.add(horarioBean.getSelectedHorario());--
-			Horario ho = new Horario();
-			ho.setIdHorario(2);
-			lstHorario.add(ho);
-			empleado.setIdEmpleado(idempleado);
-			empleado.setHorarios(lstHorario);
-			if (empleadoService.asignarEncargados(empleado)) {
+			if (empleadoService.asignarEncargados(horario,lstEmp)) {
 				msg = "Se asigno Encargado Correctamente";
 				FacesMessage message = new FacesMessage(
 						FacesMessage.SEVERITY_INFO, msg, null);
@@ -150,7 +192,7 @@ public class EmpleadoBean implements Serializable{
 				log.info("Creado correctamente");
 
 			} else {
-				msg = "Ha ocurrido un inconveniente con la asignacion de Encargados. Si el problema persiste, reportar el error al siguiente correo: soporte.sanborja@munisanborja.edu.pe";
+				msg = "Empleado ya se encuentra asignado para este Horario";
 				FacesMessage message = new FacesMessage(
 						FacesMessage.SEVERITY_ERROR, msg, null);
 				FacesContext.getCurrentInstance().addMessage(null, message);
@@ -161,7 +203,26 @@ public class EmpleadoBean implements Serializable{
 		} catch (Exception e) {
 			log.error("Error:" + e.getMessage());
 			log.error(e.getStackTrace());
-		}*/
+		}
+	}
+	
+	
+
+	public void eliminarEncargado(Empleado em) {
+
+		log.info(" eliminarEncargado()-------------------" );
+		
+
+		Empleado empleado = new Empleado();
+
+        for (int j=0; j<lstEncargados.size(); j++){
+        	empleado = lstEncargados.get(j);
+        	if(empleado.getIdEmpleado() == em.getIdEmpleado()) {
+        		lstEncargados.remove(j);
+        	}
+        }
+		log.info(" Se elimino()-------------------" );
+		asignarEncargados("D");
 	}
 	
 }

@@ -1,7 +1,6 @@
 package com.muni.sanborja.educacionculturaturismo.dao.impl;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -44,12 +43,12 @@ public class EmpleadoDaoImpl implements Serializable,EmpleadoDao{
 			}
 			
 			ts.commit();
-			session.close();
 			
 		} catch (Exception e) {
 			log.error("error " +e.getMessage());
 			  e.getMessage();
-		 
+		}finally {
+			session.close();
 		}
 		
 		
@@ -79,13 +78,12 @@ public class EmpleadoDaoImpl implements Serializable,EmpleadoDao{
 			}
 			
 			ts.commit();
-			session.close();
 			
 		} catch (Exception e) {
-			session.close();
 			log.error("error " +e.getMessage());
 			  e.getMessage();
-		 
+		}finally {
+			session.close();
 		}
 		
 		
@@ -93,37 +91,40 @@ public class EmpleadoDaoImpl implements Serializable,EmpleadoDao{
 	}
 
 	@Override
-	public boolean asignarEncargados(Empleado empleado) {
+	public boolean asignarEncargados(Horario horario, List<Empleado> lstEmpleado) {
 		// TODO Auto-generated method stub
 		boolean flag = false;
 		Session session = HibernateSessionFactory.getSessionFactory().openSession();
 		
 
-
-		Horario horario = new Horario();
-		horario.setIdHorario(90);
-		List<Horario> lstHorario = new ArrayList<Horario>();
-		lstHorario.add(horario);
-		empleado.setHorarios(lstHorario);
+		
 		
 		try {
+			
 			session.beginTransaction();
-			if(empleado == null) {
-				log.info("empleado es null");
+			if(horario == null || lstEmpleado == null ) {
+				log.info("horario es null");
 			}else {
-				session.save(empleado);
+				
+				horario.setEmpleados(lstEmpleado);
+				
+				
+				
+				session.update(horario);
 				session.beginTransaction().commit();
+				
 				log.info("Guardado correctamente");
-				session.close();
 				flag=true;
 			}
 
 			
 		} catch (Exception e) {
 			session.beginTransaction().rollback();
-			session.close();
+			
 			log.error("error " +e.getMessage());
 		    e.getMessage();
+		}finally {
+			session.close();
 		}
 		
 		return flag;
@@ -139,12 +140,52 @@ public class EmpleadoDaoImpl implements Serializable,EmpleadoDao{
 	    	   empleado = (Empleado) session.get(Empleado.class, idEmpleado); 
 	        } catch (Exception e) {
 				session.beginTransaction().rollback();
-				session.close();
+				
 				log.error("error " +e.getMessage());
 				  e.getMessage();
+			}finally {
+				session.close();
 			}
 	      return empleado; 
 	 }
+
+	@Override
+	public List listarEncargados(int idHorario) {
+		// TODO Auto-generated method stub
+		List lista = null;
+		
+		Session session = HibernateSessionFactory.getSessionFactory().openSession();
+		Transaction ts = session.beginTransaction();
+		
+		String hql="SELECT new 	list(e.idEmpleado,concat(e.nombre, ' ', e.apellidoPat, ' ', e.apellidoMat) ,r.nombrerol) FROM Empleado e " + 
+		"inner join  e.horarios h " + 
+		"inner join  e.roles r " + 
+		" where h.idHorario=" +idHorario;
+		
+		
+		try {
+			lista  = session.createQuery(hql).list();
+			
+			if (lista == null) {
+				log.info("No hay Encargados para el Horario seleccionado");
+				
+			} else {
+				log.info("Se encontro " + lista.size());
+			}
+			
+			ts.commit();
+			
+		} catch (Exception e) {
+			log.error("error " +e.getMessage());
+			  e.getMessage();
+		 
+		}finally {
+			session.close();
+		}
+		
+		
+		return lista;
+	}
 	
 	
 	

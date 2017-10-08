@@ -3,6 +3,7 @@ package com.muni.sanborja.educacionculturaturismo.modelo;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -37,13 +38,11 @@ public class Empleado  implements Serializable{
 	
 	@Transient
 	private String nombreCompletoEmpleado;
+	@Transient
+	private String nombreRol;
 	
 
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name="detalle_horario_empleado",
-			   joinColumns=@JoinColumn(name="idEmpleado",referencedColumnName="idempleado"),
-			   inverseJoinColumns=@JoinColumn(name="idHorario",referencedColumnName="idhorario")
-			   )
+	@ManyToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="empleados")
 	private List<Horario> horarios;
 	
 	
@@ -98,6 +97,14 @@ public class Empleado  implements Serializable{
 
 	public void setNombreCompletoEmpleado(String nombreCompletoEmpleado) {
 		this.nombreCompletoEmpleado = nombreCompletoEmpleado;
+	}
+
+	public String getNombreRol() {
+		return nombreRol;
+	}
+
+	public void setNombreRol(String nombreRol) {
+		this.nombreRol = nombreRol;
 	}
 
 	public List<Horario> getHorarios() {

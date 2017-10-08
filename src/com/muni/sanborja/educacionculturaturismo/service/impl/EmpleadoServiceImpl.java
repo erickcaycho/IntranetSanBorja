@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 import com.muni.sanborja.educacionculturaturismo.dao.EmpleadoDao;
 import com.muni.sanborja.educacionculturaturismo.dao.impl.EmpleadoDaoImpl;
 import com.muni.sanborja.educacionculturaturismo.modelo.Empleado;
+import com.muni.sanborja.educacionculturaturismo.modelo.Horario;
 import com.muni.sanborja.educacionculturaturismo.service.EmpleadoService;
 
 public class EmpleadoServiceImpl implements Serializable, EmpleadoService {
@@ -46,9 +47,16 @@ public class EmpleadoServiceImpl implements Serializable, EmpleadoService {
 
 
 	@Override
-	public boolean asignarEncargados(Empleado empleado) {
+	public boolean asignarEncargados(Horario horario,  List<Empleado> lstEmpleado) {
 		// TODO Auto-generated method stub
-		return empleadoDao.asignarEncargados(empleado);
+		return empleadoDao.asignarEncargados(horario,lstEmpleado);
+	}
+
+
+	@Override
+	public List listarEncargados(int idHorario) {
+		// TODO Auto-generated method stub
+		return empleadoDao.listarEncargados(idHorario);
 	}
 
 }
