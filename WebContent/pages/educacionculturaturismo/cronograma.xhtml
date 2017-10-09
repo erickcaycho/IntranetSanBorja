@@ -5,38 +5,39 @@
       xmlns:h="http://java.sun.com/jsf/html"
 	  xmlns:p="http://primefaces.org/ui"
 	  xmlns:pe="http://primefaces.org/ui/extensions">
-
+	 <p:ajax event="close" listener="#{cronogramaBean.Close}" update=":formCrono:panelCronograma"/>
 					<p:growl id="msgCronograma" showDetail="true" />
 					<h:form id="formCrono">
 
 						<p:fieldset legend="Ingresar Tarea	" style="margin-bottom:20px">
 						
-							<div style="line-height:40px;" >
-								<h:panelGrid id="panelCronograma" columns="5" cellpadding="5" >
+							<p:panel id="panelCronograma">
+								<h:panelGrid columns="5" cellpadding="5" >
 									<p:outputLabel value="Tarea" /> 
-									<p:inputText id="tarea" value="#{cronogramaBean.cronograma.tarea}" maxlength="45" > </p:inputText>
+									<p:inputText  id="tarea" value="#{cronogramaBean.cronograma.tarea}" maxlength="45"  required="true" requiredMessage="Elija un nombre para la tarea"> </p:inputText>
 									<p:outputLabel value="Descripción" />
-									<p:inputText id="descrip" value="#{cronogramaBean.cronograma.descripcion}" maxlength="250"> </p:inputText>
+									<p:inputText id="descrip" value="#{cronogramaBean.cronograma.descripcion}" maxlength="250"  required="true" requiredMessage="Ingrese una descripción para la tarea"> </p:inputText>
 									 <p:spacer  />
 									 
 		       						<p:outputLabel value="Responsable" /> 
-									<p:selectOneMenu id="codEmpleado" value="#{cronogramaBean.idEmpleado}" style="width:150px;heigth:50px;">
-										<f:selectItem itemLabel=" Seleccione " itemValue="" />
+									<p:selectOneMenu id="codEmpleado" value="#{cronogramaBean.idEmpleado}" style="width:150px;heigth:50px;" required="true" requiredMessage="Seleccione un Responsable" >
+										<f:selectItem itemLabel=" Seleccione " itemValue=""  />
 										<f:selectItems value="#{cronogramaBean.listaEmpleados}"  var="p" itemValue="#{p.idEmpleado}"  itemLabel="#{p.nombreCompletoEmpleado}" />
 									</p:selectOneMenu> 
 									<p:spacer  /> <p:spacer /> <p:spacer  />
 									
 									<p:outputLabel value="Fecha Inicio" /> 
-		       						<p:calendar id="cal1" value="#{cronogramaBean.cronograma.fechaInicio}" showOn="button" mindate="today" pattern="dd/MM/yyyy" />
+		       						<p:calendar id="cal1" value="#{cronogramaBean.cronograma.fechaInicio}" showOn="button" mindate="today" pattern="dd/MM/yyyy" required="true" requiredMessage="Elija una fecha de inicio">
+					                    <p:ajax event="dateSelect" update="cal2"/>
+					                </p:calendar>
 									<p:outputLabel  value="Fecha Fin" />
-		       						<p:calendar id="cal2" value="#{cronogramaBean.cronograma.fechaFin}" showOn="button" mindate="today" pattern="dd/MM/yyyy"/>
+		       						<p:calendar id="cal2" value="#{cronogramaBean.cronograma.fechaFin}" showOn="button" mindate="#{cronogramaBean.cronograma.fechaInicio}" pattern="dd/MM/yyyy" required="true" requiredMessage="Elija una fecha fin"/>
 									
 									<p:commandButton value="Agregar" icon="fa fa-plus" style="text-align:center;" 
-										 actionListener="#{cronogramaBean.crearCronograma}"  update="formTbCronograma:tbCronograma msgCronograma panelCronograma">
+										 actionListener="#{cronogramaBean.crearCronograma}"  update="formTbCronograma:tbCronograma msgCronograma :formCrono:panelCronograma" >
 									</p:commandButton>
 								</h:panelGrid>
-							</div>
-							
+							</p:panel>
 						</p:fieldset>
 					
 					</h:form>

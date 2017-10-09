@@ -13,6 +13,7 @@ import javax.faces.context.FacesContext;
 
 import org.apache.log4j.Logger;
 import org.primefaces.event.RowEditEvent;
+import org.primefaces.context.RequestContext;
 import org.primefaces.event.CellEditEvent;
 
 import com.muni.sanborja.educacionculturaturismo.dao.EmpleadoDao;
@@ -222,12 +223,17 @@ public class CronogramaBean implements Serializable {
 
 	
 
-    /*
-    public void reset() {
-		log.info(" reset()-------------------" );
-        RequestContext.getCurrentInstance().reset(":formCrono:panelCronograma");
+    
+    public void ClearFields() {
+		cronograma = new Cronograma();
+		/*log.info(" reset()-------------------" );
+        RequestContext.getCurrentInstance().reset("formCrono:panelCronograma");*/
     }
-	*/
+
+    public void Close() {
+    	log.info(" Close()-------------------" );
+    	ClearFields();
+    }
     
     
     
