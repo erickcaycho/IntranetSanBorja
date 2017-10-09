@@ -21,4 +21,8 @@ INSERT INTO `planificacion` VALUES (1,'2017-09-19',NULL,NULL,NULL,1,4,NULL,1,NUL
 INSERT INTO `sede` VALUES (1,'Oficina Cultura ','Calle Claudio Galeno cdra 2 S/N San Borja '),(2,'Centro Cultural ','Ca. Claude Monteverdi N°145 - San Borja, Altura de la Cdra. 24 de la Av. San Luis, Espaldas de Tiendas Tottus '),(3,'Cuna Municipal de San Borja ','Jr. Eduardo Ordóñez Nº 402 San Borja '),(4,'Club Loreto ','Av. Joaquín Madrid Nro. 441 '),(5,'Parques San Borja ','Parques públicos de San Borja ');
   
 INSERT INTO `tipoactividad` VALUES (1,'Taller','Posicionarnos en la comunidad como la mejor opción de talleres artísticos y culturales, obteniendo un crecimiento sostenido con el tiempo'),(2,'Visita Turística','El objetivo de los circuitos es promocionar los atractivos turísticos con los que cuenta el distrito de San Borja, lograr que el distrito no solo sea conocido por sus parques verdes sino también porque tiene turismo para ofrecer y apoyar.'),(3,'Charla','Fomentar la cultura a los vecinos de San Borja'),(4,'Programa Extensión Bibliotecaria','Fomentar la educación, arte y cultura a los vecinos de San Borja'),(5,'Evento cultural','Fomentar la educación, arte y cultura a los vecinos de San Borja');
+
  
+INSERT INTO `motivoRechazo` VALUES (1,'Motivo Rechazo 1'),(2,'Motivo Rechazo 2'),(3,'Motivo Rechazo 3'),(4,'Motivo Rechazo 4');
+ 
+

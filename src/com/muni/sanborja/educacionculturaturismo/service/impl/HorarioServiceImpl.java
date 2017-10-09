@@ -8,7 +8,6 @@ import org.apache.log4j.Logger;
 import com.muni.sanborja.educacionculturaturismo.dao.HorarioDao;
 import com.muni.sanborja.educacionculturaturismo.dao.impl.HorarioDaoImpl;
 import com.muni.sanborja.educacionculturaturismo.modelo.Horario;
-import com.muni.sanborja.educacionculturaturismo.modelo.HorarioPlanificacionActividad;
 import com.muni.sanborja.educacionculturaturismo.service.HorarioService;
 
 public class HorarioServiceImpl implements Serializable,HorarioService{
@@ -26,37 +25,5 @@ public class HorarioServiceImpl implements Serializable,HorarioService{
 	public List<Horario> listarHorario(int idPlanificacion) {
 		return horarioDao.listarHorario(idPlanificacion);
 	}
-
-	@Override
-	public List<HorarioPlanificacionActividad> listarHorarioPlanificacionActividad() {
-		return horarioDao.listarHorarioPlanificacionActividad();
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }

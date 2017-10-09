@@ -12,6 +12,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.muni.sanborja.educacionculturaturismo.dao.PlanificacionDao;
+import com.muni.sanborja.educacionculturaturismo.modelo.Ambiente;
+import com.muni.sanborja.educacionculturaturismo.modelo.Periodo;
 import com.muni.sanborja.educacionculturaturismo.modelo.Planificacion;
 import com.muni.sanborja.educacionculturaturismo.modelo.PlanificacionPeriodoActividad;
 import com.muni.sanborja.educacionculturaturismo.util.HibernateSessionFactory;
@@ -181,5 +183,45 @@ public class PlanificacionDaoImpl implements PlanificacionDao, Serializable {
 			}
 	        return planificacion; 
 	    }
-
+	
+	@Override
+	public List<Planificacion> listarPlanificacion(int idperiodo, int idestado, int idtipoActividad, int idactividad) {
+		List<Planificacion> listaPlanificacion = null;
+		Session session = HibernateSessionFactory.getSessionFactory().openSession();
+		Transaction ts = session.beginTransaction();
+		String hql="FROM Planificacion WHERE ";
+				if(idperiodo!=0){
+					hql+=" idperiodo = :idperiodo "; 
+				}
+				if(idestado!=0){
+					hql+=" and estado = :idestado "; 
+				}
+				if(idtipoActividad!=0){
+					hql+=" and actividad.tipoActividad.idTipoActividad = :idtipoActividad "; 
+				}
+				if(idactividad!=0){
+					hql+=" and actividad.idActividad = :idactividad  "; 
+				}
+		try {
+			
+			listaPlanificacion = session.createQuery(hql)
+					.setParameter("idperiodo",idperiodo).
+					setParameter("idestado",idestado).
+					setParameter("idtipoActividad",idtipoActividad).
+					setParameter("idactividad",idactividad).list();
+			if (listaPlanificacion == null) {
+				log.info("No hay Planificaciones");
+			} else {
+				log.info("[Planificacion] Se encontro " + listaPlanificacion.size());
+			}
+			ts.commit();
+			session.close();
+			
+		} catch (Exception e) {
+			session.close();
+			log.error("error " +e.getMessage());
+			e.getMessage();
+		}
+			return listaPlanificacion;
+	}
 }

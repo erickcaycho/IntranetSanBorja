@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "Planificacion")
@@ -52,6 +53,9 @@ public class Planificacion  implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="idperiodo")
 	private Periodo periodo;
+	
+	@Transient
+	private String estadodetalle;
 
 	/*
 	 * @OneToMany
@@ -140,6 +144,27 @@ public class Planificacion  implements Serializable{
 
 	public void setPeriodo(Periodo periodo) {
 		this.periodo = periodo;
+	}
+
+	public String getEstadodetalle() {
+		if(this.estado==1){
+			estadodetalle="Pendiente";
+		}else if(this.estado==2){
+			estadodetalle="Planificado";
+		}else if(this.estado==3){
+			estadodetalle="Aprobado";
+		}else if(this.estado==4){
+			estadodetalle="Rechazado";
+		}else if(this.estado==5){
+			estadodetalle="Ejecutado";
+		}else if(this.estado==6){
+			estadodetalle="Anulado";
+		}
+		return estadodetalle;
+	}
+
+	public void setEstadodetalle(String estadodetalle) {
+		this.estadodetalle = estadodetalle;
 	}
 	
 	/*

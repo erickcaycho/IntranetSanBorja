@@ -331,6 +331,46 @@ CREATE TABLE IF NOT EXISTS `educacionculturaturismosb`.`detalle_horario_empleado
 ENGINE = InnoDB;
 
 
+-- -----------------------------------------------------
+-- Table `educacionculturaturismosb`.`motivoRechazo`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `educacionculturaturismosb`.`motivoRechazo` ;
+
+CREATE TABLE IF NOT EXISTS `educacionculturaturismosb`.`motivoRechazo` (
+  `idmotivo` INT NOT NULL,
+  `descMotivo` VARCHAR(45) NULL,
+  PRIMARY KEY (`idmotivo`))
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `educacionculturaturismosb`.`detalle_rechazo_plan`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `educacionculturaturismosb`.`detalle_rechazo_plan` ;
+
+CREATE TABLE IF NOT EXISTS `educacionculturaturismosb`.`detalle_rechazo_plan` (
+  `idrechazoplan` INT NOT NULL,
+  `idmotivo` INT NOT NULL,
+  `idplanificacion` INT NOT NULL,
+  `fecharechazo` DATE NULL,
+  `observacion` VARCHAR(45) NULL, 
+  `cantidad_usar` INT NULL,
+  PRIMARY KEY (`idrechazoplan`),
+  INDEX `fk_planificacion_has_motivo_motivo1_idx` (`idmotivo` ASC),
+  INDEX `fk_planificacion_has_motivo_planificacion1_idx` (`idplanificacion` ASC),
+  CONSTRAINT `fk_planificacion_has_motivo_planificacion1`
+    FOREIGN KEY (`idplanificacion`)
+    REFERENCES `educacionculturaturismosb`.`planificacion` (`idplanificacion`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_planificacion_has_motivo_motivo1`
+    FOREIGN KEY (`idmotivo`)
+    REFERENCES `educacionculturaturismosb`.`motivoRechazo` (`idmotivo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
