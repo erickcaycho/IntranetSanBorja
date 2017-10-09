@@ -48,15 +48,14 @@
 								var="crono" 
 								value="#{cronogramaBean.listaCronogramas}"  
 								rowKey="#{crono.idCronograma}" 
-								emptyMessage="No se encontraron registros" style="text-align:center; width: 860px;" editable="true">
+								emptyMessage="No se encontraron registros" rowIndexVar="index" style="text-align:center; width: 860px;" editable="true">
 
  
 						       <p:ajax event="rowEdit" listener="#{cronogramaBean.onRowEdit}" update="msgCronograma" />
 						       <p:ajax event="rowEditCancel" listener="#{cronogramaBean.onRowCancel}" update="msgCronograma " />
-								<p:column headerText="Código" 
-									style="text-align:center; width: 40px;">
-									<h:outputText value="#{crono.idCronograma}" />
-								</p:column>
+								<p:column headerText="Item" style="text-align:center; width: 40px;">
+							        #{index + 1}
+							    </p:column>
 
 								<p:column headerText="Tarea" style="text-align:center; width: 100px;">
 						           <!-- <h:outputText value="#{crono.tarea}" /> -->
