@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+<ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
+	<ui:define name="content">
+		<div class="ui-g-12 ui-g-nopad">
+			<div class="ui-g">
+				<p:panel header="Aprobar Planificación de Actividad"
+					style="text-align:center; width:100%">
+					<p:fieldset legend="Búsqueda" style="margin-bottom:20px">
+						<h:form>
+							<div >
+								<div class="ui-g-12">
+									<div class="ui-g">
+										<div class="ui-g-10">
+											<h:panelGrid columns="4" cellpadding="5">
+												<p:outputLabel value="Seleccione Periodo" />
+												<p:selectOneMenu value="#{aprobarPlanBean.idperiodo}" required="true">
+													<f:selectItem itemLabel="-- Seleccione --" itemValue="" />
+													<f:selectItems value="#{aprobarPlanBean.listaPeriodos}"  var="p" itemValue="#{p.idPeriodo}"  />
+												</p:selectOneMenu>
+												
+												<p:outputLabel value="Seleccione Estado" />
+												<p:selectOneMenu value="#{aprobarPlanBean.idestado}" required="true">
+													<f:selectItem itemLabel="-- Seleccione --" itemValue="" />
+													<f:selectItem itemLabel="Planificado" itemValue="2" />
+													<f:selectItem itemLabel="Rechazado" itemValue="4" />
+												</p:selectOneMenu>
+												
+												<p:outputLabel value="Tipo Actividad" />
+												<p:selectOneMenu value="#{aprobarPlanBean.idtipoactividad}" required="true">
+													<f:selectItem itemLabel="-- Seleccione --" itemValue="" />
+													<f:selectItems value="#{aprobarPlanBean.listaTipoActividades}"  var="p" itemValue="#{p.idTipoActividad}"/>
+													<p:ajax update="actividad" />
+												</p:selectOneMenu>
+												
+												<p:outputLabel value="Actividad" />
+												<p:selectOneMenu id="actividad" value="#{aprobarPlanBean.idactividad}" required="true">
+													<f:selectItem itemLabel="-- Seleccione --" itemValue="" />
+													<f:selectItems value="#{aprobarPlanBean.listaActividades}"  var="p" itemValue="#{p.idActividad}"  />
+												</p:selectOneMenu>
+												<tr/>
+												<tr/>
+												<td/><td/>
+												<p:commandButton actionListener="#{aprobarPlanBean.consultarPlan}"
+														value="Consultar" icon="fa fa-search" update="tbPlanificacion"/>
+											</h:panelGrid>
+										</div>
+									</div>
+								</div>
+							</div>
+						
+					<div class="ui-g-12">
+						<p:outputPanel id="planificacionContainer">
+							<p:dataTable id="tbPlanificacion" 
+								var="plan" 
+								value="#{aprobarPlanBean.listaPlanificacion}"  
+								selection="#{aprobarPlanBean.selectedPlan}" 
+								rowKey="#{plan.idPlanificacion}"
+								paginator="true"
+								rows="5" 
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								resizableColumns="true" rowsPerPageTemplate="5,10,15"
+								emptyMessage="No se encontraron registros">
+
+								<p:column headerText="Código Planificación"
+									style="text-align:center;">
+									<h:outputText value="#{plan.idPlanificacion}" />
+								</p:column>
+
+								<p:column headerText="Periodo" style="text-align:center;">
+									<h:outputText value="#{plan.periodo.nomPeriodo}" />
+								</p:column>
+
+								<p:column headerText="Fecha Creación" style="text-align:center;">
+									<h:outputText value="#{plan.fechaCreacion}" />
+								</p:column>
+
+								<p:column headerText="Fecha Planificación"
+									style="text-align:center;">
+									<h:outputText value="#{plan.fechaPlanificacion}" />
+								</p:column>
+								<p:column headerText="Fecha Aprobación"
+									style="text-align:center;">
+									<h:outputText value="#{plan.fechaAprobacion}" />
+								</p:column>
+								<p:column headerText="Fecha Rechazo" style="text-align:center;">
+									<h:outputText value="#{plan.fechaRechazo}" />
+								</p:column>
+								<p:column headerText="Tipo Actividad" style="text-align:center;">
+									<h:outputText value="#{plan.actividad.tipoActividad.nomTipoActividad}" />
+								</p:column>
+								<p:column headerText="Actividad" style="text-align:center;">
+									<h:outputText value="#{plan.actividad.nomActividad}" />
+								</p:column>
+								<p:column headerText="Estado" style="text-align:center;">
+									<h:outputText value="#{plan.estadodetalle}" />
+								</p:column>
+								<p:column headerText="Seleccionar" selectionMode="single" style="text-align:center" />
+							</p:dataTable>
+						</p:outputPanel>
+						<div>
+						<p:commandButton action="#{aprobarPlanBean.consultarDetallePlan}"
+							value="Ver Detalle" icon="fa fa-search"/>
+						</div>
+						
+					</div>
+					</h:form>
+					</p:fieldset>
+					
+				</p:panel>				
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>
