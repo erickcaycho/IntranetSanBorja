@@ -9,5 +9,6 @@ public interface CronogramaService {
 	public boolean createCronograma(Cronograma cronograma);
 	public List<Cronograma> listarCronograma(int idHorario);
 	public boolean delete(Cronograma cronograma);
+	public boolean update(Cronograma cronograma);
 	
 }

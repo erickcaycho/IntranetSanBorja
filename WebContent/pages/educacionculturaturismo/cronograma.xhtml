@@ -6,76 +6,97 @@
 	  xmlns:p="http://primefaces.org/ui"
 	  xmlns:pe="http://primefaces.org/ui/extensions">
 
+					<p:growl id="msgCronograma" showDetail="true" />
 					<h:form id="formCrono">
 
-					<p:fieldset legend="Ingresar Tarea	" style="margin-bottom:20px">
+						<p:fieldset legend="Ingresar Tarea	" style="margin-bottom:20px">
+						
+							<div style="line-height:40px;" >
+								<h:panelGrid id="panelCronograma" columns="5" cellpadding="5" >
+									<p:outputLabel value="Tarea" /> 
+									<p:inputText id="tarea" value="#{cronogramaBean.cronograma.tarea}" maxlength="45" > </p:inputText>
+									<p:outputLabel value="Descripción" />
+									<p:inputText id="descrip" value="#{cronogramaBean.cronograma.descripcion}" maxlength="250"> </p:inputText>
+									 <p:spacer  />
+									 
+		       						<p:outputLabel value="Responsable" /> 
+									<p:selectOneMenu id="codEmpleado" value="#{cronogramaBean.idEmpleado}" style="width:150px;heigth:50px;">
+										<f:selectItem itemLabel=" Seleccione " itemValue="" />
+										<f:selectItems value="#{cronogramaBean.listaEmpleados}"  var="p" itemValue="#{p.idEmpleado}"  itemLabel="#{p.nombreCompletoEmpleado}" />
+									</p:selectOneMenu> 
+									<p:spacer  /> <p:spacer /> <p:spacer  />
+									
+									<p:outputLabel value="Fecha Inicio" /> 
+		       						<p:calendar id="cal1" value="#{cronogramaBean.cronograma.fechaInicio}" showOn="button" mindate="today" pattern="dd/MM/yyyy" />
+									<p:outputLabel  value="Fecha Fin" />
+		       						<p:calendar id="cal2" value="#{cronogramaBean.cronograma.fechaFin}" showOn="button" mindate="today" pattern="dd/MM/yyyy"/>
+									
+									<p:commandButton value="Agregar" icon="fa fa-plus" style="text-align:center;" 
+										 actionListener="#{cronogramaBean.crearCronograma}"  update="formTbCronograma:tbCronograma msgCronograma panelCronograma">
+									</p:commandButton>
+								</h:panelGrid>
+							</div>
+							
+						</p:fieldset>
 					
-						<div style="line-height:40px;" >
-						<h:panelGrid columns="4" cellpadding="5">
-							<p:outputLabel value="Tarea" /> 
-							<p:inputText id="tarea" value="#{cronogramaBean.cronograma.tarea}" maxlength="45" > </p:inputText>
-							<p:outputLabel value="Descripción" />
-							<p:inputText id="descrip" value="#{cronogramaBean.cronograma.descripcion}" maxlength="250"> </p:inputText>
-							 
-							<p:outputLabel value="Fecha Inicio" /> 
-       						<p:calendar id="cal1" value="#{cronogramaBean.cronograma.fechaInicio}" showOn="button" mindate="today" pattern="dd/MM/yyyy" />
-							<p:outputLabel  value="Fecha Fin" />
-       						<p:calendar id="cal2" value="#{cronogramaBean.cronograma.fechaFin}" showOn="button" mindate="today" pattern="dd/MM/yyyy"/>
-       						<p:outputLabel value="Responsable" /> 
-							<p:selectOneMenu id="codEmpleado" value="#{cronogramaBean.idEmpleado}" style="width:150px;heigth:50px;">
-								<f:selectItem itemLabel=" Seleccione " itemValue="" />
-								<f:selectItems value="#{cronogramaBean.listaEmpleados}"  var="p" itemValue="#{p.idEmpleado}"  itemLabel="#{p.nombreCompletoEmpleado}" />
-							</p:selectOneMenu>
-						</h:panelGrid>
-						
-							<p:commandButton value="Agregar" icon="fa fa-plus" style="text-align:center;" 
-								 actionListener="#{cronogramaBean.crearCronograma}"  update="tbCronograma">
-							</p:commandButton>
-						</div>
-						
-					</p:fieldset>
+					</h:form>
 						 
+						 
+						 
+					<h:form id="formTbCronograma">
 						<p:dataTable id="tbCronograma" 
 								var="crono" 
 								value="#{cronogramaBean.listaCronogramas}"  
-								selection="#{cronogramaBean.cronograma}" 
 								rowKey="#{crono.idCronograma}" 
-								emptyMessage="No se encontraron registros">
+								emptyMessage="No se encontraron registros" style="text-align:center; width: 860px;" editable="true">
 
-								<p:column headerText="Código Cronograma"
-									style="text-align:center;">
+ 
+						       <p:ajax event="rowEdit" listener="#{cronogramaBean.onRowEdit}" update="msgCronograma" />
+						       <p:ajax event="rowEditCancel" listener="#{cronogramaBean.onRowCancel}" update="msgCronograma " />
+								<p:column headerText="Código" 
+									style="text-align:center; width: 40px;">
 									<h:outputText value="#{crono.idCronograma}" />
 								</p:column>
 
-								<p:column headerText="Tarea" style="text-align:center;">
-									<h:outputText value="#{crono.tarea}" />
+								<p:column headerText="Tarea" style="text-align:center; width: 100px;">
+						           <!-- <h:outputText value="#{crono.tarea}" /> -->
+						           <p:cellEditor>
+										<f:facet name="output"><h:outputText value="#{crono.tarea}" /></f:facet>
+               							<f:facet name="input"><p:inputText value="#{crono.tarea}" style="width:100%" label="Year"/></f:facet>
+           							</p:cellEditor>
 								</p:column>
 								
-								<p:column headerText="Descripción" style="text-align:center;">
-									<h:outputText value="#{crono.descripcion}" />
+								<p:column headerText="Descripción" style="text-align:center; width: 150px;">
+									<!-- <h:outputText value="#{crono.descripcion}" /> -->
+						           <p:cellEditor>
+										<f:facet name="output"><h:outputText value="#{crono.descripcion}" /></f:facet>
+               							<f:facet name="input"><p:inputText value="#{crono.descripcion}" style="width:100%" label="Year"/></f:facet>
+           							</p:cellEditor>
 								</p:column>
 
-								<p:column headerText="Responsable" style="text-align:center;">
-									<h:outputText value="#{crono.empleado.nombre}" />
+								<p:column headerText="Responsable" style="text-align:center; width: 150px;">
+									<h:outputText value="#{crono.empleado.nombreCompletoEmpleado}" />
 								</p:column>
 								<p:column headerText="Fecha Inicio"
-									style="text-align:center;">
+									style="text-align:center; width: 70px;">
 									<h:outputText value="#{crono.fechaInicio}" />
 								</p:column>
 								<p:column headerText="Fecha Fin"
-									style="text-align:center;">
+									style="text-align:center; width: 70px;">
 									<h:outputText value="#{crono.fechaFin}" />
 								</p:column>
-								<p:column headerText="Seleccionar" selectionMode="single" style="text-align:center" />
+								
+								<p:column headerText="Editar" >
+           							<p:rowEditor />
+								</p:column>
 						
-				                <p:column>
+				                <p:column headerText="Eliminar" > 
 				                    <p:commandButton icon="ui-icon-trash"
-				                        title="Delete this actor"
-				                        ajax="false" />
+				                        title="eliminar tarea"  actionListener="#{cronogramaBean.eliminarTarea(crono)}"  update=":formTbCronograma:tbCronograma msgCronograma" />
 				                </p:column>
 				                        <!-- actionListener="#{cronogramaBeans.remove(crono)}"-->
 							</p:dataTable>
-						 
 					</h:form>
+						 
 	
 </html>

@@ -30,16 +30,16 @@ public class CronogramaDaoImpl implements Serializable,CronogramaDao{
 				session.save(cronograma);
 				session.beginTransaction().commit();
 				log.info("Guardado correctamente");
-				session.close();
 				flag=true;
 			}
 
 			
 		} catch (Exception e) {
 			session.beginTransaction().rollback();
-			session.close();
 			log.error("error " +e.getMessage());
 		    e.getMessage();
+		}finally {
+			session.close();
 		}
 		
 		return flag;
@@ -49,9 +49,6 @@ public class CronogramaDaoImpl implements Serializable,CronogramaDao{
 	public boolean delete(Cronograma cronograma) {
 
 		
-		log.info("---ELIMINAR CRONOGRAMA SELECCIONADO---");
-		log.info("Captura id_Cronograma: " +cronograma.getIdCronograma());
-		
 		boolean flag;
 		Session session = HibernateSessionFactory.getSessionFactory().openSession();
 		
@@ -60,7 +57,6 @@ public class CronogramaDaoImpl implements Serializable,CronogramaDao{
 			session.delete(cronograma);
 			session.beginTransaction().commit();
 			log.info("Eliminado correctamente");
-			session.close();
 			
 			flag=true;
 			
@@ -70,6 +66,8 @@ public class CronogramaDaoImpl implements Serializable,CronogramaDao{
 			session.close();
 			log.error("error " +e.getMessage());
 			  e.getMessage();
+		}finally {
+			session.close();
 		}
 		
 		return flag;
@@ -85,7 +83,7 @@ public class CronogramaDaoImpl implements Serializable,CronogramaDao{
 		
 		try {
 			
-			listaCronograma = session.createSQLQuery("FROM Cronograma  WHERE idHorario = :idHorario").
+			listaCronograma = session.createQuery("FROM Cronograma  WHERE idHorario = :idHorario").
 					setParameter("idHorario",idHorario).list();
 			if(listaCronograma == null) {
 				log.info("Data not found");
@@ -93,13 +91,42 @@ public class CronogramaDaoImpl implements Serializable,CronogramaDao{
 				log.info("Tareas de Cronograma "+listaCronograma.size());
 			}
 			ts.commit();
-			session.close();
 		} catch (Exception e) {
 			session.close();
 			log.error("error " +e.getMessage());
 			  e.getMessage();
+		}finally {
+			session.close();
 		}
 		return listaCronograma;
+	}
+	
+	@Override
+	public boolean update(Cronograma cronograma) {
+
+		
+		boolean flag;
+		Session session = HibernateSessionFactory.getSessionFactory().openSession();
+		
+		try {
+			session.beginTransaction();
+			session.update(cronograma);
+			session.beginTransaction().commit();
+			log.info("Actualizado correctamente");
+			
+			flag=true;
+			
+		} catch (Exception e) {
+			flag=false;
+			session.beginTransaction().rollback();
+			session.close();
+			log.error("error " +e.getMessage());
+			  e.getMessage();
+		}finally {
+			session.close();
+		}
+		
+		return flag;
 	}
 	
 }

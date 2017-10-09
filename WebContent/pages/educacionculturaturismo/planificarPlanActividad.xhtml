@@ -198,7 +198,7 @@
 										</p:commandButton>
 
 										<p:commandButton value="Cronograma" icon="fa fa-calendar-o"
-											onclick="PF('Cronograma').show()">
+											onclick="PF('Cronograma').show()" process="tbHorariosXPlanificacion" update=":formTbCronograma:tbCronograma" >
 										</p:commandButton>
 										<p:commandButton value="Encargados" icon="fa fa-user-plus" 
 											onclick="PF('Encargados').show()" process="tbHorariosXPlanificacion" update=":form_tbEncargados:tbEncargados" >
@@ -252,8 +252,8 @@
 				</p:panel>
 				<!-- closable="false" -->
 
-				<p:dialog widgetVar="Cronograma" header="Cronograma" width="700"
-					height="400" modal="true" showEffect="fade" hideEffect="fade"
+				<p:dialog widgetVar="Cronograma" header="Cronograma" width="900"
+					style="position:absolute;"  height="400" modal="true" showEffect="fade" hideEffect="fade"
 					resizable="false">
 
 					<ui:include src="cronograma.xhtml" />

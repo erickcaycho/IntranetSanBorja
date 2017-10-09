@@ -33,5 +33,10 @@ public class CronogramaServiceImpl implements Serializable,CronogramaService{
 	public boolean delete(Cronograma cronograma) {
 		return cronogramaDao.delete(cronograma);
 	}
-	
+
+	@Override
+	public boolean update(Cronograma cronograma) {
+		// TODO Auto-generated method stub
+		return cronogramaDao.update(cronograma);
+	}
 }

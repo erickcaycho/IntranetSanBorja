@@ -9,6 +9,7 @@ public interface CronogramaDao {
 	public boolean createCronograma(Cronograma cronograma);
 	public List<Cronograma> listarCronograma(int idHorario);
 	public boolean delete(Cronograma cronograma);
+	public boolean update(Cronograma cronograma);
 
 	/*public boolean create(Planificacion planificacion);
 	public List<PlanificacionPeriodoActividad> listarPlanificacionPeriodoActividad(int idperiodo, int estado);*/
