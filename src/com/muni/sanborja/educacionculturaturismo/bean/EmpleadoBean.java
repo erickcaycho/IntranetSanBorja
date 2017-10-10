@@ -31,6 +31,7 @@ public class EmpleadoBean implements Serializable{
 	
 	
 
+	String infoAlert="Información Encargados";
 	private int idrol;
 	private int idempleado;
 	private List<SelectItem> listaEmpleados;
@@ -186,7 +187,7 @@ public class EmpleadoBean implements Serializable{
 			if (empleadoService.asignarEncargados(horario,lstEmp)) {
 				msg = "Se asigno Encargado Correctamente";
 				FacesMessage message = new FacesMessage(
-						FacesMessage.SEVERITY_INFO, msg, null);
+						FacesMessage.SEVERITY_INFO, infoAlert, msg);
 				FacesContext.getCurrentInstance().addMessage(null, message);
 
 				log.info("Creado correctamente");
@@ -194,7 +195,7 @@ public class EmpleadoBean implements Serializable{
 			} else {
 				msg = "Empleado ya se encuentra asignado para este Horario";
 				FacesMessage message = new FacesMessage(
-						FacesMessage.SEVERITY_ERROR, msg, null);
+						FacesMessage.SEVERITY_ERROR, infoAlert, msg);
 				FacesContext.getCurrentInstance().addMessage(null, message);
 
 				log.error("Error al crear");
