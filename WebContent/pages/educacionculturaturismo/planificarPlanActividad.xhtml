@@ -7,7 +7,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:pe="http://primefaces.org/ui/extensions">
-<ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
+	<ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
 	<ui:define name="content">
 		<div class="ui-g-12 ui-g-nopad">
 			<div class="ui-g">
@@ -213,7 +213,7 @@
 												update=":form_tbEncargados:tbEncargados">
 											</p:commandButton>
 											<p:commandButton value="Días" icon="fa fa-check-square"
-												onclick="PF('Días').show()">
+												onclick="PF('Dias').show()">
 											</p:commandButton>
 										</div>
 									</h:form>
@@ -271,7 +271,6 @@
 				<p:dialog widgetVar="Cronograma" header="Cronograma" width="900"
 					style="position:absolute;" height="400" modal="true"
 					showEffect="fade" hideEffect="fade" resizable="false">
-
 					<ui:include src="cronograma.xhtml" />
 				</p:dialog>
 
@@ -287,11 +286,11 @@
 					<ui:include src="encargados.xhtml" />
 				</p:dialog>
 
-				<p:dialog widgetVar="Días" header="Pantalla Días" width="700"
-					height="400" modal="true" showEffect="fade" hideEffect="fade"
-					resizable="false">
+				<p:dialog widgetVar="Dias" header="Pantalla Dias"
+					style="position:absolute;" width="700" height="400" modal="true"
+					showEffect="fade" hideEffect="fade" resizable="false">
+					<ui:include src="dias.xhtml" />
 				</p:dialog>
-
 			</div>
 		</div>
 

@@ -5,69 +5,61 @@
       xmlns:h="http://java.sun.com/jsf/html"
 	  xmlns:p="http://primefaces.org/ui"
 	  xmlns:pe="http://primefaces.org/ui/extensions">
-	 <p:ajax event="close" update=":formEncargadosAdd:panelEncargados"/>
 
-					<p:growl id="msgcargados" showDetail="true" />
-					<h:form id="formEncargadosAdd" >
-					 
-						<p:panel id="panelEncargados">
-							<h:panelGrid  columns="4" cellpadding="5"  >
-				                
-	       						<p:outputLabel value="Rol" /> 
-								<p:selectOneMenu id="idrol"  value="#{empleadoBean.idrol}" style="width:150px;heigth:50px;"  required="true" requiredMessage="Seleccione un Rol">
-									<f:selectItem itemLabel=" Seleccione " itemValue="" />
-									<f:selectItems value="#{rolBean.listaRoles}"  var="r" itemValue="#{r.idrol}"/>
-									<p:ajax update="comboEmpleado"    />
-								</p:selectOneMenu>
-								
-								<p:selectOneMenu id="comboEmpleado" value="#{empleadoBean.idempleado}" style="width:150px;heigth:50px;"  required="true" requiredMessage="Seleccione un Encargado">
-									<f:selectItem itemLabel=" Seleccione " itemValue="" />
-									<f:selectItems  value="#{empleadoBean.listaEmpleadosByRol}"  var="p" 
-													itemLabel="#{p.nombreCompletoEmpleado}" itemValue="#{p.idEmpleado}"/>
-								</p:selectOneMenu>
-								
-								<p:commandButton value=" Agregar Encargado" icon="fa fa-plus" style="text-align:center;"
-									 actionListener="#{empleadoBean.asignarEncargados('')}" update=":form_tbEncargados:tbEncargados msgcargados"  >
-								</p:commandButton>
-							</h:panelGrid>
+		
+		<h:form id="frmDias" >
+			<p:panel id="panelDias">
+				<h:panelGrid  columns="2" cellpadding="5"  >
+     						<p:outputLabel value="Día" /> 
+     						<p:selectOneMenu value="#{diaBean.dia.dia}" required="true">
+						<f:selectItem itemLabel="-- Seleccione --" itemValue="" />
+						<f:selectItem itemLabel="Lunes" itemValue="1" />
+						<f:selectItem itemLabel="Martes" itemValue="2" />
+						<f:selectItem itemLabel="Miércoles" itemValue="3" />
+						<f:selectItem itemLabel="Jueves" itemValue="4" />
+						<f:selectItem itemLabel="Viernes" itemValue="5" />
+						<f:selectItem itemLabel="Sábado" itemValue="6" />
+						<f:selectItem itemLabel="Domingo" itemValue="7" />
+					</p:selectOneMenu>
 						
-						</p:panel>
-						
-
-					</h:form>
+					<p:outputLabel value="Hora Inicio" /> 		
+<!-- 					 <pe:timePicker value="#{diaBean.dia.horaInicio}" widgetVar="spinnerTimeWidget"   -->
+<!--                 					required="true" requiredMessage="Seleccione una hora de inicio" label="Hora Inicio" -->
+<!--                 					valueChangeListener=""/>  -->
 					
-					<p:spacer width="100" height="30" /> 
+					<p:outputLabel value="Hora Fin" /> 
+<!-- 					<pe:timePicker value="#{diaBean.dia.horaFin}" widgetVar="spinnerTimeWidget"   -->
+<!--                 					required="true" requiredMessage="Seleccione una hora fin" label="Hora Fin" -->
+<!--                 					disabled="true"/>  -->
 					
+					<p:commandButton value=" Agregar" icon="fa fa-plus" style="text-align:center;"
+						 actionListener="#{diaBean.asignarDia}" update=":form_tbDias:tbDias msg"  >
+					</p:commandButton>
+				</h:panelGrid>
+			</p:panel>
+		</h:form>
+		
+		<p:spacer width="100" height="30" /> 
+		
+		<h:form id="form_tbDias">
+			<div >
+				<p:dataTable id="tbDias" 
+					var="dia" 
+					value="#{diaBean.dias}"  
+					emptyMessage="No se encontraron registros"
+					rowIndexVar="index" columnIndexVar="i" style="text-align:center; width: 550px; ">
 					
-						<h:form id="form_tbEncargados">
-						
-							<div >
-								<p:dataTable id="tbEncargados" 
-									var="enca" 
-									value="#{empleadoBean.lstEncargados}"  
-									emptyMessage="No se encontraron registros"
-									rowIndexVar="index" columnIndexVar="i" style="text-align:center; width: 550px; ">
-									
-									
-									<p:column headerText="Item" style="text-align:center; width: 50px;">
-								        #{index + 1}
-								    </p:column>
-								     <p:column headerText="Rol" style="text-align:center; width: 150px;">
-										<h:outputText value="#{enca.nombreRol}" />
-									</p:column>
-								     <p:column headerText="Nombre" style="text-align:center; width: 200px;">
-										<h:outputText value="#{enca.nombre}" />
-									</p:column>
-	        	
-					                <p:column headerText="Eliminar" style="text-align:center; width: 50px;" >
-					                    <p:commandButton icon="ui-icon-trash" 
-					                        title="Delete this actor" 
-					                         actionListener="#{empleadoBean.eliminarEncargado(enca)}"    update=":form_tbEncargados:tbEncargados" />
-					                </p:column>
-								</p:dataTable>
-							</div>
-						</h:form>
-	
-
-							
+					<p:column headerText="Día" style="text-align:center; width: 50px;">
+				       
+				    </p:column>
+				     <p:column headerText="Hora Inicio" style="text-align:center; width: 150px;">
+						<h:outputText value="#{dia.horaInicio}" />
+					</p:column>
+				     <p:column headerText="Hora Fin" style="text-align:center; width: 200px;">
+						<h:outputText value="#{dia.horaFin}" />
+					</p:column>
+     	
+				</p:dataTable>
+			</div>
+		</h:form>							
 </html>

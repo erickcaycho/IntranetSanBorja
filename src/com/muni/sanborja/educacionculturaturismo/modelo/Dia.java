@@ -75,5 +75,9 @@ public class Dia implements Serializable{
 	public void setHorario(Horario horario) {
 		this.horario = horario;
 	}
+
+	public Dia() {
+		super();
+	}
 	
 }
