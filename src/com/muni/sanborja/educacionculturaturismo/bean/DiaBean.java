@@ -1,7 +1,9 @@
 package com.muni.sanborja.educacionculturaturismo.bean;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -14,6 +16,10 @@ import javax.faces.context.FacesContext;
 
 import org.apache.log4j.Logger;
 import org.primefaces.context.RequestContext;
+
+import org.primefaces.extensions.event.BeforeShowEvent;
+import org.primefaces.extensions.event.CloseEvent;
+import org.primefaces.extensions.event.TimeSelectEvent;
 
 import com.muni.sanborja.educacionculturaturismo.modelo.Dia;
 import com.muni.sanborja.educacionculturaturismo.service.DiaService;
@@ -28,6 +34,7 @@ public class DiaBean implements Serializable{
 	
 	private Dia dia, diaSelected;
 	private Date horaInicio;
+	private Date horaFin;
 	private List<Dia> dias = new ArrayList<Dia>();
 	
 	FacesContext context = FacesContext.getCurrentInstance();
@@ -52,6 +59,18 @@ public class DiaBean implements Serializable{
 
 	public void setHoraInicio(Date horaInicio) {
 		this.horaInicio = horaInicio;
+	}
+
+
+
+	public Date getHoraFin() {
+		return horaFin;
+	}
+
+
+
+	public void setHoraFin(Date horaFin) {
+		this.horaFin = horaFin;
 	}
 
 
@@ -126,4 +145,60 @@ public class DiaBean implements Serializable{
 			log.error(e.getStackTrace());
 		}
 	}
+	
+	
+	
+	
+
+	   public void timeSelectListener(TimeSelectEvent timeSelectEvent) {  
+			log.info("timeSelectListener");
+	      FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Time select fired",  
+	               "Selected time: " + getFormattedTime(timeSelectEvent.getTime(), "HH:mm"));  
+	      FacesContext.getCurrentInstance().addMessage(null, msg);  
+	      
+
+			
+
+	      Calendar calendar = Calendar.getInstance();  
+	      
+	      calendar.set(Calendar.HOUR, 11);  
+	      calendar.set(Calendar.MINUTE, 40);  
+	      //calendar.add(Calendar.HOUR, horarioBean.getSelectedHorario().getHorassesion()); 
+	      horaFin = calendar.getTime();  
+	      
+	      
+	   }  
+	  
+	   public void beforeShowListener(BeforeShowEvent beforeShowEvent) {  
+			log.info("beforeShowListener");
+	      /*FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Before show fired",  
+	               "Component id: " + beforeShowEvent.getComponent().getId());  
+	      FacesContext.getCurrentInstance().addMessage(null, msg);  */
+	   }  
+	  
+	   public void closeListener(CloseEvent closeEvent) {  
+			log.info("closeListener");
+			
+	      Calendar calendar = Calendar.getInstance();  
+	      calendar.setTime(horaInicio);
+	      /*calendar.set(Calendar.HOUR, 11);  
+	      calendar.set(Calendar.MINUTE, 40);  */
+	      calendar.add(Calendar.HOUR, horarioBean.getSelectedHorario().getHorassesion()); 
+	      horaFin = calendar.getTime();  
+
+
+	   }  
+	  
+	   private String getFormattedTime(Date time, String format) {  
+			log.info("getFormattedTime");
+	      if (time == null) {  
+	         return null;  
+	      }  
+	  
+	      SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);  
+	  
+	      return simpleDateFormat.format(time);  
+	   }  
+	
+	
 }
