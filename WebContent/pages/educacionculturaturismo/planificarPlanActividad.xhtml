@@ -226,7 +226,7 @@
 													<p:growl id="messages" showDetail="true" />
 													<p:outputLabel value="Adjuntar Plan Publicitario" />
 													<p:fileUpload label="Seleccionar Documento Relacionado"
-														value="#{planificacionActividadBean.file}" mode="simple"
+														value="#{planPublicitarioBean.file}" mode="simple"
 														skinSimple="true" />
 												</div>
 												<div class="ui-g">
@@ -234,15 +234,15 @@
 													<p:inputTextarea rows="5" cols="30" maxlength="250"
 														counterTemplate="{0} caracteres restantes."
 														autoResize="false" style="width: 80%;height: 100%;"
-														value="#{planificacionActividadBean.planPublicitario.descripcion}" />
+														value="#{planPublicitarioBean.planPublicitario.descripcion}" />
 
 												</div>
 												<br></br>
 												<div class="ui-g-12 bl-consultar">
-
-													<p:commandButton process="@this" value="Guardar"
-														actionListener="#{planificacionActividadBean.crearPlanPublicitario}" />
-
+													<p:commandButton
+															actionListener="#{planPublicitarioBean.crearPlanPublicitario}"
+															value="Guardar" icon="fa fa-plus" process="@this">
+														</p:commandButton>
 												</div>
 											</div>
 										</div>

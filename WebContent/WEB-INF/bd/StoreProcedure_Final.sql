@@ -1,5 +1,5 @@
  DELIMITER $$
-alter DEFINER=`root`@`localhost` PROCEDURE `ConsultarCronograma`(IN idHorario int(11), IN idCronograma int(11))
+create DEFINER=`root`@`localhost` PROCEDURE `ConsultarCronograma`(IN idHorario int(11), IN idCronograma int(11))
 BEGIN
 
 	DECLARE V_WHERE VARCHAR(50) default '';

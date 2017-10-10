@@ -19,10 +19,10 @@ public class PlanPublicitario implements Serializable{
 
 	@Id
  	@GeneratedValue
-	@Column(name = "idPlanPublicitario", updatable = false, nullable = false)
+	@Column(name = "idplanpublicitario", updatable = false, nullable = false)
 	private int idPlanPublicitario;
 
-	@Column(name = "archivoRuta")
+	@Column(name = "archivoruta")
 	private String archivoRuta;
 	
 	@Column(name = "descripcion")
