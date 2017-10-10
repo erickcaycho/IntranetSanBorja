@@ -30,7 +30,8 @@
 										<div class="ui-g bl-horario">
 											<div class="ui-g-12">
 												<div class="ui-g">
-													<h:form id="form">
+													<h:form id="form01">
+														<p:panel id="panel01">
 															<p:growl id="msg" showDetail="true" />
 															<h:panelGrid columns="4" cellpadding="4">
 																
@@ -123,8 +124,11 @@
 														    </h:panelGrid>
 
 															<h:panelGrid columns="4" cellpadding="5">
-																<p:commandButton actionListener="#{horarioBean.crearHorario}" update="msg" value="Crear" icon="fa fa-plus"/>
+																<p:commandButton actionListener="#{horarioBean.crearHorario}" update="panel01" value="Crear" icon="fa fa-plus"/>
 															</h:panelGrid>
+															 
+															<p:commandButton value="Reset Code" update="panel" process="@this" actionListener="#{horarioBean.reset}"  style="margin-right:20px;" />
+														</p:panel>
 													</h:form>
 												</div>
 											</div>

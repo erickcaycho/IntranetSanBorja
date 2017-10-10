@@ -198,7 +198,7 @@ public class HorarioBean implements Serializable{
 					FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,msg,null);
 					FacesContext.getCurrentInstance().addMessage(null, message);
 					
-				}else if(horario.getEdadMin() >= horario.getEdadMax()){
+				}else if(horario.getEdadMin() > horario.getEdadMax()){
 					
 					msg ="La edad mínima no debe ser mayor a la edad máxima";
 					FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,msg,null);
@@ -218,6 +218,7 @@ public class HorarioBean implements Serializable{
 					
 					FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,msg,null);
 					FacesContext.getCurrentInstance().addMessage(null, message);
+
 				}
 		}
 		
@@ -229,6 +230,8 @@ public class HorarioBean implements Serializable{
 	
 	public void reset(){
 		log.info("Intentando resetear valores");
+		RequestContext.getCurrentInstance().reset("form:panel");
+		
 	}
 	
 	public List<Horario> getListaHorario() {
