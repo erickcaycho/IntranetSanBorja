@@ -33,7 +33,7 @@ public class CronogramaBean implements Serializable {
 
 	public static Logger log = Logger.getLogger(CronogramaBean.class);
 
-	String infoCronograma="Información Cronograma";
+	String infoAlert="Información Cronograma";
 	private List<Cronograma> listaCronogramas =null;
 	private Cronograma cronograma;
 	CronogramaService cronogramaService = new CronogramaServiceImpl();
@@ -139,7 +139,7 @@ public class CronogramaBean implements Serializable {
 			if (cronogramaService.createCronograma(cronograma)) {
 				msg = "Tarea agregada al Cronograma";
 				FacesMessage message = new FacesMessage(
-						FacesMessage.SEVERITY_INFO, infoCronograma, msg);
+						FacesMessage.SEVERITY_INFO, infoAlert, msg);
 				FacesContext.getCurrentInstance().addMessage(null, message);
 
 				log.info("Tarea agregada al Cronograma");
@@ -147,7 +147,7 @@ public class CronogramaBean implements Serializable {
 			} else {
 				msg = "No se pudo agregar la tarea. Si el problema persiste, reportar el error al siguiente correo: soporte.sanborja@munisanborja.edu.pe";
 				FacesMessage message = new FacesMessage(
-						FacesMessage.SEVERITY_ERROR, infoCronograma, msg);
+						FacesMessage.SEVERITY_ERROR, infoAlert, msg);
 				FacesContext.getCurrentInstance().addMessage(null, message);
 
 				log.error("Error al crear");
@@ -168,14 +168,14 @@ public class CronogramaBean implements Serializable {
 		if(cronogramaService.delete(crono)) {
 			msg = "Se elimino tarea correctamente";
 			FacesMessage message = new FacesMessage(
-					FacesMessage.SEVERITY_INFO, infoCronograma, msg);
+					FacesMessage.SEVERITY_INFO, infoAlert, msg);
 			FacesContext.getCurrentInstance().addMessage(null, message);
 			log.info(" Se elimino()-------------------" );
 			listaCronogramas=null;
 		}else {
 			msg = "No se pudo eliminar la tarea. Si el problema persiste, reportar el error al siguiente correo: soporte.sanborja@munisanborja.edu.pe";
 			FacesMessage message = new FacesMessage(
-					FacesMessage.SEVERITY_ERROR, infoCronograma, msg);
+					FacesMessage.SEVERITY_ERROR, infoAlert, msg);
 			FacesContext.getCurrentInstance().addMessage(null, message);
 			log.error("Error al eliminar Tarea-------------------" );
 		}
@@ -192,13 +192,13 @@ public class CronogramaBean implements Serializable {
 		if(cronogramaService.update(objCrono)) {
 			msg = "Se actualizo tarea ";
 			FacesMessage message = new FacesMessage(
-					FacesMessage.SEVERITY_INFO, infoCronograma, msg);
+					FacesMessage.SEVERITY_INFO, infoAlert, msg);
 			FacesContext.getCurrentInstance().addMessage(null, message);
 			log.info(" Se elimino()-------------------" );
 		}else {
 			msg = "No se pudo actualizar la tarea. Si el problema persiste, reportar el error al siguiente correo: soporte.sanborja@munisanborja.edu.pe";
 			FacesMessage message = new FacesMessage(
-					FacesMessage.SEVERITY_ERROR, infoCronograma, msg);
+					FacesMessage.SEVERITY_ERROR, infoAlert, msg);
 			FacesContext.getCurrentInstance().addMessage(null, message);
 			log.error("Error al actualizar Tarea-------------------" );
 		}

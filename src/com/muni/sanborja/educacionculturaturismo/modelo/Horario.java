@@ -80,6 +80,9 @@ public class Horario implements Serializable {
 			   )
 	private List<Empleado> empleados;
 	
+	@OneToMany
+	private Set<Dia> dias;
+	
 	public Ambiente getAmbiente() {
 		return ambiente;
 	}
@@ -190,6 +193,14 @@ public class Horario implements Serializable {
 
 	public void setEmpleados(List<Empleado> empleados) {
 		this.empleados = empleados;
+	}
+
+	public Set<Dia> getDias() {
+		return dias;
+	}
+
+	public void setDias(Set<Dia> dias) {
+		this.dias = dias;
 	}
 	
 	

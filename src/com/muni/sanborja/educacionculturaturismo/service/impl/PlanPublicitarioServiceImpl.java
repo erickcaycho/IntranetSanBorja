@@ -1,8 +1,13 @@
 package com.muni.sanborja.educacionculturaturismo.service.impl;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
+
+import resources.Constants;
 
 import com.muni.sanborja.educacionculturaturismo.dao.PlanPublicitarioDao;
 import com.muni.sanborja.educacionculturaturismo.dao.impl.PlanPublicitarioDaoImpl;
@@ -20,29 +25,15 @@ public class PlanPublicitarioServiceImpl implements Serializable,PlanPublicitari
 	
 	@Override
 	public boolean createPlanPublicitario(PlanPublicitario planPublicitario) {
-		
-//		   String destination="D:\\tmp\\";		
-//		UploadedFile uploadedPhoto=getFile();
-////		UploadedFile uploadedFile = event.getFile();
-////	    String fileName = uploadedFile.getFileName();
-////	    String contentType = uploadedFile.getContentType();
-////	    byte[] contents = uploadedFile.getContents(); // Or getInputStream()
-////	    // ... Save it, now!
-//		File archivo = new File("/tmp/muni/uploads/" + file.getFileName());
-//		
-//		OutputStream out = new FileOutputStream(archivo);
-//	    out.write(file.getContents());
-//	    out.close();
-//	    
-//	    FacesContext.getCurrentInstance().addMessage(
-//	               null, new FacesMessage("Upload completo", 
-//	               "O arquivo " + uploadedPhoto.getFileName() + " foi salvo!"));
-//	    
-//		 if(file != null) {
-//			 
-//	            FacesMessage message = new FacesMessage("Succesful", file.getFileName() + " is uploaded.");
-//	            FacesContext.getCurrentInstance().addMessage(null, message);
-//	        }
+
+		File archivoOrigen = new File(Constants.RUTA_TEMPORAL + planPublicitario.getArchivoRuta());
+		File archivoDestino = new File(Constants.RUTA_DESTINO + planPublicitario.getArchivoRuta());
+		try {
+			if(archivoDestino.exists()) archivoDestino.delete();
+			FileUtils.moveFile(archivoOrigen, archivoDestino);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		return planPubicitarioDao.createPlanPublicitario(planPublicitario);
 	}

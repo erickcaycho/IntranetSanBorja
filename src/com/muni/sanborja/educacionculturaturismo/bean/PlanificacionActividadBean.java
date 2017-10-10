@@ -185,14 +185,14 @@ public class PlanificacionActividadBean implements Serializable {
 					
 					planificacionService.listarPlanificacionPeriodoActividad(planificacion.getPeriodo().getIdPeriodo(),planificacion.getEstado());
 					
-					msg ="Se creó correctamente la planificación";
+					msg ="Se creó correctamente el plan de actividad";
 					FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,msg,null);
 					FacesContext.getCurrentInstance().addMessage(null, message);
 					
 					log.info("Creado correctamente");
 					
 				}else{
-					msg ="Ha ocurrido un inconveniente con la creación de la planificación. Si el problema persiste, reportar el error al siguiente correo: soporte.sanborja@munisanborja.edu.pe";
+					msg ="Ha ocurrido un inconveniente con la creación del plan. Si el problema persiste, reportar el error al siguiente correo: soporte.sanborja@munisanborja.edu.pe";
 					FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,msg,null);
 					FacesContext.getCurrentInstance().addMessage(null, message);
 					
