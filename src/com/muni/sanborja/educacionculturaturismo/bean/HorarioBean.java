@@ -187,14 +187,27 @@ public class HorarioBean implements Serializable{
 			log.info(horario.getFechaInicio());
 			log.info(horario.getFechaFin());
 			
-			log.info(horario.getEdadMin());
-			log.info(horario.getEdadMax());
-			
-			
-			
-				if(horario.getFechaFin().before(horario.getFechaInicio())){
+				if(horario.getFechaInicio() == null){
+					
+					msg ="Elija fecha inicio";
+					FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,msg,null);
+					FacesContext.getCurrentInstance().addMessage(null, message);
+					
+				}else if(horario.getFechaFin() == null){
+					
+					msg ="Elija fecha fin";
+					FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,msg,null);
+					FacesContext.getCurrentInstance().addMessage(null, message);
+					
+				}else if(horario.getFechaFin().before(horario.getFechaInicio())){
 					
 					msg ="Fecha fin no puede ser menor a la fecha inicio";
+					FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,msg,null);
+					FacesContext.getCurrentInstance().addMessage(null, message);
+					
+				}else if(horario.getVacantemin() >= horario.getVacantemax()){
+					
+					msg ="La vacante mínima no debe ser mayor o igual a la vacante máxima";
 					FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,msg,null);
 					FacesContext.getCurrentInstance().addMessage(null, message);
 					
@@ -204,7 +217,20 @@ public class HorarioBean implements Serializable{
 					FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,msg,null);
 					FacesContext.getCurrentInstance().addMessage(null, message);
 					
-				}else{
+				}else if(horario.getCantsesion() == 0 ){
+					
+					msg ="La cantidad de sesiones no debe ser menor a 0";
+					FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,msg,null);
+					FacesContext.getCurrentInstance().addMessage(null, message);
+				
+				}else if(horario.getHorassesion() == 0 ){
+					
+					msg ="La cantidad de Horas/Sesiones no debe ser menor a 0";
+					FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,msg,null);
+					FacesContext.getCurrentInstance().addMessage(null, message);
+				}
+				
+				else{
 					
 					log.info("Capturado ID Planificacion: " + planificacionBean.getPlanificacion().getIdPlanificacion());
 					
@@ -219,6 +245,7 @@ public class HorarioBean implements Serializable{
 					FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,msg,null);
 					FacesContext.getCurrentInstance().addMessage(null, message);
 
+					reset();
 				}
 		}
 		
@@ -229,9 +256,10 @@ public class HorarioBean implements Serializable{
 	}
 	
 	public void reset(){
-		log.info("Intentando resetear valores");
-		RequestContext.getCurrentInstance().reset("form:panel");
 		
+		log.info("Intentando resetear valores");
+		RequestContext.getCurrentInstance().reset("j_idt37:j_idt42:form");
+
 	}
 	
 	public List<Horario> getListaHorario() {

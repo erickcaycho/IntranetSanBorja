@@ -30,13 +30,12 @@
 									<div class="ui-g bl-horario">
 										<div class="ui-g-12">
 											<div class="ui-g">
-												<h:form id="form01">
+												<h:form id="form">
 													<p:growl id="msg" showDetail="true" />
 													<h:panelGrid columns="4" cellpadding="4">
-
 														<p:outputLabel value="Seleccione Sede" />
 														<p:selectOneMenu id="sede" style="width:165px!important"
-															required="true" value="#{horarioBean.idsede}">
+															required="true" requiredMessage="Elija una sede" value="#{horarioBean.idsede}">
 															<f:selectItem itemLabel="-- Seleccione --" itemValue="" />
 															<f:selectItems value="#{horarioBean.listaSede}" var="p"
 																itemValue="#{p.idSede}" />
@@ -45,7 +44,7 @@
 
 														<p:outputLabel value="Seleccione Ambiente" />
 														<p:selectOneMenu id="ambiente"
-															style="width:165px!important" required="true"
+															style="width:165px!important" required="true" requiredMessage="Elija un ambiente"
 															value="#{horarioBean.horario.ambiente.idAmbiente}">
 															<f:selectItem itemLabel="-- Seleccione --" itemValue="" />
 															<f:selectItems value="#{horarioBean.listaAmbiente}"
@@ -53,13 +52,13 @@
 														</p:selectOneMenu>
 
 														<p:outputLabel value="Fecha Inicio" />
-														<p:calendar id="fecinicio"
+														<p:calendar id="fecinicio" readonlyInput="true" requiredMessage="Ingrese fecha de Inicio"
 															value="#{horarioBean.horario.fechaInicio}"
 															pattern="dd/MM/yyyy" showOn="button"
 															mindate="#{horarioBean.todayDate}" />
 
 														<p:outputLabel value="Fecha Fin" />
-														<p:calendar id="fecfin"
+														<p:calendar id="fecfin" readonlyInput="true"
 															value="#{horarioBean.horario.fechaFin}"
 															pattern="dd/MM/yyyy" showOn="button"
 															mindate="#{horarioBean.todayDate}" />
@@ -75,10 +74,9 @@
 															max="100" />
 
 														<p:outputLabel value="Vacantes mínimas:"></p:outputLabel>
-														<p:spinner id="vacanteMin"
+														<p:spinner id="vacanteMin" required="true" requiredMessage="Elija vacantes mínimas entre 5 a 10"
 															value="#{horarioBean.horario.vacantemin}" min="5"
 															max="10">
-															<f:validateLongRange minimum="5" maximum="10"></f:validateLongRange>
 														</p:spinner>
 
 														<p:outputLabel value="Vacantes máximas:"></p:outputLabel>
@@ -103,7 +101,7 @@
 
 															<p:outputLabel value="hasta "></p:outputLabel>
 															<p:spinner id="maxEdad"
-																value="#{horarioBean.horario.edadMax}" min="4" max="100">
+																value="#{horarioBean.horario.edadMax}" min="4" max="90">
 																<f:validateLongRange minimum="4" maximum="90"></f:validateLongRange>
 															</p:spinner>
 														</h:panelGroup>
@@ -126,10 +124,10 @@
 													</h:panelGrid>
 
 													<h:panelGrid columns="4" cellpadding="5">
-														<p:commandButton
-															actionListener="#{horarioBean.crearHorario}"
-															update="form01" value="Crear" icon="fa fa-plus" />
+														<p:commandButton actionListener="#{horarioBean.crearHorario}" value="Crear" icon="fa fa-plus" update="msg, j_idt37:j_idt42:formHorarioTabla" />
+														<p:commandButton actionListener="#{horarioBean.reset}" value="Limpiar" icon="fa-asterisk" update="form" process="@this" />
 													</h:panelGrid>
+														
 												</h:form>
 											</div>
 										</div>
@@ -139,7 +137,7 @@
 
 
 								<div class="ui-g-12">
-									<h:form>
+									<h:form id="formHorarioTabla">
 										<p:outputPanel id="horarioContainer">
 											<p:dataTable id="tbHorariosXPlanificacion" var="h"
 												value="#{horarioBean.listaHorario}"
