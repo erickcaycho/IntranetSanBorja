@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:pe="http://primefaces.org/ui/extensions">
+	 <p:ajax event="close" update=":formEncargadosAdd:panelEncargados"/>
+
+					<p:growl id="msgcargados" showDetail="true" />
+					<h:form id="formEncargadosAdd" >
+					 
+						<p:panel id="panelEncargados">
+							<h:panelGrid  columns="4" cellpadding="5"  >
+				                
+	       						<p:outputLabel value="Rol" /> 
+								<p:selectOneMenu id="idrol"  value="#{empleadoBean.idrol}" style="width:150px;heigth:50px;"  required="true" requiredMessage="Seleccione un Rol">
+									<f:selectItem itemLabel=" Seleccione " itemValue="" />
+									<f:selectItems value="#{rolBean.listaRoles}"  var="r" itemValue="#{r.idrol}"/>
+									<p:ajax update="comboEmpleado"    />
+								</p:selectOneMenu>
+								
+								<p:selectOneMenu id="comboEmpleado" value="#{empleadoBean.idempleado}" style="width:150px;heigth:50px;"  required="true" requiredMessage="Seleccione un Encargado">
+									<f:selectItem itemLabel=" Seleccione " itemValue="" />
+									<f:selectItems  value="#{empleadoBean.listaEmpleadosByRol}"  var="p" 
+													itemLabel="#{p.nombreCompletoEmpleado}" itemValue="#{p.idEmpleado}"/>
+								</p:selectOneMenu>
+								
+								<p:commandButton value=" Agregar Encargado" icon="fa fa-plus" style="text-align:center;"
+									 actionListener="#{empleadoBean.asignarEncargados('')}" update=":form_tbEncargados:tbEncargados msgcargados"  >
+								</p:commandButton>
+							</h:panelGrid>
+						
+						</p:panel>
+						
+
+					</h:form>
+					
+					<p:spacer width="100" height="30" /> 
+					
+					
+						<h:form id="form_tbEncargados">
+						
+							<div >
+								<p:dataTable id="tbEncargados" 
+									var="enca" 
+									value="#{empleadoBean.lstEncargados}"  
+									emptyMessage="No se encontraron registros"
+									rowIndexVar="index" columnIndexVar="i" style="text-align:center; width: 550px; ">
+									
+									
+									<p:column headerText="Item" style="text-align:center; width: 50px;">
+								        #{index + 1}
+								    </p:column>
+								     <p:column headerText="Rol" style="text-align:center; width: 150px;">
+										<h:outputText value="#{enca.nombreRol}" />
+									</p:column>
+								     <p:column headerText="Nombre" style="text-align:center; width: 200px;">
+										<h:outputText value="#{enca.nombre}" />
+									</p:column>
+	        	
+					                <p:column headerText="Eliminar" style="text-align:center; width: 50px;" >
+					                    <p:commandButton icon="ui-icon-trash" 
+					                        title="Delete this actor" 
+					                         actionListener="#{empleadoBean.eliminarEncargado(enca)}"    update=":form_tbEncargados:tbEncargados" />
+					                </p:column>
+								</p:dataTable>
+							</div>
+						</h:form>
+	
+
+							
+</html>
