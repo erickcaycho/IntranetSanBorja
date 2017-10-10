@@ -43,10 +43,12 @@ public class PlanPublicitarioBean implements Serializable{
 	
 	@PostConstruct
 	public void init() {
+		this.nuevoArchivo = "";
 	}
 	
 	public PlanPublicitario getPlanPublicitario() {		
 		planPublicitario = planPublicitarioService.obtener(planificacionActividadBean.getPlanificacion().getIdPlanificacion());
+		if(planPublicitario==null) planPublicitario = new PlanPublicitario();
 		return planPublicitario==null?new PlanPublicitario():planPublicitario;
 	}
 	
@@ -78,11 +80,12 @@ public class PlanPublicitarioBean implements Serializable{
 			log.info("crearPlanPublicitario id planificación-------------> = " + planificacionActividadBean.getPlanificacion().getIdPlanificacion());
 			planPublicitario.setPlanificacion(planificacionActividadBean.getPlanificacion());
 	        planPublicitario.setArchivoRuta(this.nuevoArchivo);
-						
+	        
+	        String accion = "creó";
+			if(planPublicitario.getIdPlanPublicitario()!=0) accion  = "actualizó";			
 			String msg;
 			if(planPublicitarioService.createPlanPublicitario(planPublicitario)){
-				String accion = "creó";
-				if(planPublicitario.getIdPlanPublicitario()!=0) accion  = "actualizó";
+				
 				msg ="Se " +accion + " correctamente el plan publicitario";
 				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,msg,null);
 				FacesContext.getCurrentInstance().addMessage(null, message);
