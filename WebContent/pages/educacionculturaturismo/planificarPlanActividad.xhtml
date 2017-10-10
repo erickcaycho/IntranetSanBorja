@@ -228,25 +228,32 @@
 										<div class="ui-g bl-horario">
 											<div class="ui-g-12">
 												<div class="ui-g">
-													<p:growl id="messages" showDetail="true" />
+													<p:growl id="msg" showDetail="true" />
 													<p:outputLabel value="Adjuntar Plan Publicitario" />
 													<p:fileUpload label="Seleccionar Documento Relacionado"
-														value="#{planPublicitarioBean.file}" mode="simple"
-														skinSimple="true" />
+													 fileUploadListener="#{planPublicitarioBean.upload}"
+													value="#{planPublicitarioBean.file}"
+        											multiple="false"  mode="advanced"  update="msg,nombreArchivo"
+													allowTypes="/(\.|\/)(doc|docx|xls|xlsx|pdf|ppt|pptx)$/"  />
+													
+												</div>
+												<div class="ui-g">
+													<p:outputLabel value="Archivo:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" />
+													<p:outputLabel id="nombreArchivo" 
+													value="#{planPublicitarioBean.nuevoArchivo}" />
 												</div>
 												<div class="ui-g">
 													<p:outputLabel value="Descripción:" />
-													<p:inputTextarea rows="5" cols="30" maxlength="250"
+													<p:inputTextarea rows="3" cols="30" maxlength="250"
 														counterTemplate="{0} caracteres restantes."
 														autoResize="false" style="width: 80%;height: 100%;"
 														value="#{planPublicitarioBean.planPublicitario.descripcion}" />
 
 												</div>
-												<br></br>
 												<div class="ui-g-12 bl-consultar">
 													<p:commandButton
 														actionListener="#{planPublicitarioBean.crearPlanPublicitario}"
-														value="Guardar" icon="fa fa-plus" process="@this">
+															value="Guardar" icon="fa fa-plus" process="@this" update="msg,nombreArchivo">
 													</p:commandButton>
 												</div>
 											</div>

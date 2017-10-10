@@ -176,6 +176,7 @@ CREATE TABLE IF NOT EXISTS `educacionculturaturismosb`.`planpublicitario` (
   `idplanificacion` INT NOT NULL,
   PRIMARY KEY (`idplanpublicitario`),
   INDEX `fk_planpublicitario_planificacion1_idx` (`idplanificacion` ASC),
+  UNIQUE KEY `id_publicidad` (`idplanpublicitario`,`idplanificacion`),
   CONSTRAINT `fk_planpublicitario_planificacion1`
     FOREIGN KEY (`idplanificacion`)
     REFERENCES `educacionculturaturismosb`.`planificacion` (`idplanificacion`)

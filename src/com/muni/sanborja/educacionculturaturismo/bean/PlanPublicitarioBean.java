@@ -14,6 +14,7 @@ import org.apache.log4j.Logger;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
+import resources.Constants;
 import resources.Util;
 
 import com.muni.sanborja.educacionculturaturismo.modelo.PlanPublicitario;
@@ -32,7 +33,7 @@ public class PlanPublicitarioBean implements Serializable{
 	
 	private PlanPublicitario planPublicitario = new PlanPublicitario();
 	private UploadedFile file;
-	private String destination="D:\\tmp\\";	   
+	private String nuevoArchivo;  
 	   
 	PlanPublicitarioService planPublicitarioService = new PlanPublicitarioServiceImpl();
 
@@ -42,11 +43,11 @@ public class PlanPublicitarioBean implements Serializable{
 	
 	@PostConstruct
 	public void init() {
-		planPublicitario = new PlanPublicitario();
 	}
 	
 	public PlanPublicitario getPlanPublicitario() {		
-		return planPublicitario;
+		planPublicitario = planPublicitarioService.obtener(planificacionActividadBean.getPlanificacion().getIdPlanificacion());
+		return planPublicitario==null?new PlanPublicitario():planPublicitario;
 	}
 	
 	public void setPlanPublicitario(PlanPublicitario planPublicitario) {
@@ -61,15 +62,28 @@ public class PlanPublicitarioBean implements Serializable{
 		this.file = file;
 	}	
 	
+	public String getNuevoArchivo() {
+		nuevoArchivo = planPublicitario==null?"":planPublicitario.getArchivoRuta();
+		nuevoArchivo = file==null?nuevoArchivo:file.getFileName();
+		return nuevoArchivo;
+	}
+
+	public void setNuevoArchivo(String nuevoArchivo) {
+		this.nuevoArchivo = nuevoArchivo;
+	}
+
 	public void crearPlanPublicitario(){
 		try {	
 			log.info("entro -crearPlanPublicitario------------> = " );
 			log.info("crearPlanPublicitario id planificación-------------> = " + planificacionActividadBean.getPlanificacion().getIdPlanificacion());
 			planPublicitario.setPlanificacion(planificacionActividadBean.getPlanificacion());
-			
+	        planPublicitario.setArchivoRuta(this.nuevoArchivo);
+						
 			String msg;
 			if(planPublicitarioService.createPlanPublicitario(planPublicitario)){
-				msg ="Se creó correctamente el plan publicitario";
+				String accion = "creó";
+				if(planPublicitario.getIdPlanPublicitario()!=0) accion  = "actualizó";
+				msg ="Se " +accion + " correctamente el plan publicitario";
 				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,msg,null);
 				FacesContext.getCurrentInstance().addMessage(null, message);
 				
@@ -92,11 +106,15 @@ public class PlanPublicitarioBean implements Serializable{
 	}
 	
 	public void upload(FileUploadEvent event) {  
-        FacesMessage msg = new FacesMessage("Success! ", event.getFile().getFileName() + " is uploaded.");  
+		
+        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, event.getFile().getFileName() + " se ha cargado.", null);  
         FacesContext.getCurrentInstance().addMessage(null, msg);
-        // Do what you want with the file        
+        
+        this.file = event.getFile();
+        this.nuevoArchivo = event.getFile().getFileName();
+        
         try {
-            Util.copyFile(event.getFile().getFileName(), event.getFile().getInputstream(),destination);
+            Util.copyFile(event.getFile().getFileName(), event.getFile().getInputstream(),Constants.RUTA_TEMPORAL);
         } catch (IOException e) {
             e.printStackTrace();
         }
