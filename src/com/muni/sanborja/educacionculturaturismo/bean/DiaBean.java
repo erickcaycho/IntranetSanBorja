@@ -118,6 +118,7 @@ public class DiaBean implements Serializable{
 			if(horarioBean.getSelectedHorario() != null) {
 				DateFormat df = new SimpleDateFormat("HH:mm");
 				dia.setHoraInicio(df.format(horaInicio));
+				dia.setHoraFin(df.format(horaFin));
 				dia.setHorario(horarioBean.getSelectedHorario());
 				
 				if (diaService.asignarDia(dia)) {
@@ -189,7 +190,7 @@ public class DiaBean implements Serializable{
 	      calendar.set(Calendar.MINUTE, 40);  */
 	      calendar.add(Calendar.HOUR, horarioBean.getSelectedHorario().getHorassesion()); 
 	      horaFin = calendar.getTime();  
-
+	      RequestContext.getCurrentInstance().update(":frmDias:timeHoraFin");
 
 	   }  
 	  
