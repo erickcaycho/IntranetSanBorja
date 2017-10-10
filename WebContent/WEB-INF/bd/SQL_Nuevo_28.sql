@@ -190,7 +190,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `educacionculturaturismosb`.`material` ;
 
 CREATE TABLE IF NOT EXISTS `educacionculturaturismosb`.`material` (
-  `idmaterial` INT NOT NULL,
+  `idmaterial` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NULL,
   `cantidad_disponible` INT NULL,
   PRIMARY KEY (`idmaterial`))

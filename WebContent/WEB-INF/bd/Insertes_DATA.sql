@@ -18,5 +18,7 @@ INSERT INTO `planificacion` VALUES (1,'2017-09-19',NULL,NULL,NULL,1,4,NULL,1,NUL
 
 INSERT INTO `horario` VALUES (1,40,'2017-09-29','2017-09-30',13,20,15,20,17,30,28,90),(18,34,'2017-09-29','2017-12-08',5,10,11,15,12,17,26,92),(19,34,'2017-09-29','2017-12-08',5,10,11,15,12,17,26,92),(20,6,'2017-09-30','2017-12-22',6,10,6,14,15,17,34,97);
 
+INSERT INTO `material` VALUES (1,'micrófono',20),(2,'silla',400),(3,'mesa',200),(4,'parlante',40),(5,'micrófono',20),(6,'guitarra',40),(7,'violín',40),(8,'tambor',10),(9,'flauta dulce',50),(10,'pandereta',40),(11,'saxofón',20),(12,'vestimenta marinera hombre',40),(13,'vestimenta marinera mujer',40),(14,'vestimenta negroide hombre',40),(15,'vestimenta negroide mujer',40),(16,'vestimenta festejo hombre',40),(17,'vestimenta festejo mujer',40),(18,'vestimenta selva hombre',40),(19,'vestimenta selva mujer',40),(20,'vestimenta selva hombre',40),(21,'vestimenta selva mujer',40);
+
 INSERT INTO `cronograma` VALUES (1,1,'tarea 1','recolectar nose que cosas','2017-09-19','2017-09-20',NULL,1);
  
