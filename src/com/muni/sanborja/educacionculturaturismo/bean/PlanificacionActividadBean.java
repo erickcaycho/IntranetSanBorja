@@ -261,7 +261,39 @@ public class PlanificacionActividadBean implements Serializable {
 		
 		return Constants.PLANIFICAR_ACTIVIDAD_PAGE;
 		
-	}  	
+	}
+	
+	public void actualizarEstadoPlanificado() {
+		try {
+			Planificacion objPlanificacion = new Planificacion();
+			objPlanificacion.setIdPlanificacion(selectedPlan.getIdPlanificacion());	
+			objPlanificacion.setFechaPlanificacion(new java.sql.Date(FechaUtil.ahora().getTime()));
+	
+			String msg;
+				
+			if(planificacionService.updatePlanificacion(objPlanificacion)){
+				
+				planificacionService.listarPlanificacionPeriodoActividad(planificacion.getPeriodo().getIdPeriodo(),planificacion.getEstado());
+				
+				msg ="Se guardó correctamente la planificación";
+				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,msg,null);
+				FacesContext.getCurrentInstance().addMessage(null, message);
+				
+				log.info("Guardado correctamente");
+				
+			}else{
+				msg ="Ha ocurrido un inconveniente con el guardado de la planificación. Si el problema persiste, reportar el error al siguiente correo: soporte.sanborja@munisanborja.edu.pe";
+				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,msg,null);
+				FacesContext.getCurrentInstance().addMessage(null, message);
+				
+				log.error("Error al guardar");
+			}
+			
+		} catch (Exception e) {
+			log.error("Error:" + e.getMessage());
+			log.error(e.getStackTrace());
+		}
+	}
 	
 }
  
