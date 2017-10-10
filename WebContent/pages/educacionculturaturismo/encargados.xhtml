@@ -11,7 +11,7 @@
 					<h:form id="formEncargadosAdd" >
 					 
 						<p:panel id="panelEncargados">
-							<h:panelGrid  columns="4" cellpadding="5"  >
+							<h:panelGrid  columns="2" cellpadding="5"  >
 				                
 	       						<p:outputLabel value="Rol" /> 
 								<p:selectOneMenu id="idrol"  value="#{empleadoBean.idrol}" style="width:150px;heigth:50px;"  required="true" requiredMessage="Seleccione un Rol">
@@ -20,6 +20,7 @@
 									<p:ajax update="comboEmpleado"    />
 								</p:selectOneMenu>
 								
+								<p:outputLabel value="Encargados" /> 
 								<p:selectOneMenu id="comboEmpleado" value="#{empleadoBean.idempleado}" style="width:150px;heigth:50px;"  required="true" requiredMessage="Seleccione un Encargado">
 									<f:selectItem itemLabel=" Seleccione " itemValue="" />
 									<f:selectItems  value="#{empleadoBean.listaEmpleadosByRol}"  var="p" 
