@@ -23,17 +23,18 @@
 					</p:selectOneMenu>
 						
 					<p:outputLabel value="Hora Inicio" /> 		
-<!-- 					 <pe:timePicker value="#{diaBean.dia.horaInicio}" widgetVar="spinnerTimeWidget"   -->
-<!--                 					required="true" requiredMessage="Seleccione una hora de inicio" label="Hora Inicio" -->
-<!--                 					valueChangeListener=""/>  -->
+					 <pe:timePicker id="timeHoraInicio" value="#{diaBean.horaInicio}" widgetVar="spinnerTimeWidget"  showPeriod="true"
+                					required="true" requiredMessage="Seleccione una hora de inicio" label="Hora Inicio"> 
+                					<p:ajax event="timeSelect" listener="#{diaBean.validarHoraFin}" update="timeHoraFin" immediate="true"/>  
+                	</pe:timePicker>
 					
 					<p:outputLabel value="Hora Fin" /> 
-<!-- 					<pe:timePicker value="#{diaBean.dia.horaFin}" widgetVar="spinnerTimeWidget"   -->
-<!--                 					required="true" requiredMessage="Seleccione una hora fin" label="Hora Fin" -->
-<!--                 					disabled="true"/>  -->
+					<pe:timePicker id="timeHoraFin" value="#{diaBean.dia.horaFin}" widgetVar="spinnerTimeWidget"  
+                					required="true" requiredMessage="Seleccione una hora fin" label="Hora Fin"
+                					disabled="true"/> 
 					
 					<p:commandButton value=" Agregar" icon="fa fa-plus" style="text-align:center;"
-						 actionListener="#{diaBean.asignarDia}" update=":form_tbDias:tbDias msg"  >
+						 actionListener="#{diaBean.asignarDia}" update=":form_tbDias:tbDias"  >
 					</p:commandButton>
 				</h:panelGrid>
 			</p:panel>
@@ -50,7 +51,7 @@
 					rowIndexVar="index" columnIndexVar="i" style="text-align:center; width: 550px; ">
 					
 					<p:column headerText="Día" style="text-align:center; width: 50px;">
-				       
+				       <h:outputText value="#{dia.dia}" />
 				    </p:column>
 				     <p:column headerText="Hora Inicio" style="text-align:center; width: 150px;">
 						<h:outputText value="#{dia.horaInicio}" />

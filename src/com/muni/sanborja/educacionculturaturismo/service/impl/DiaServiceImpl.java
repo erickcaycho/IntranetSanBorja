@@ -1,6 +1,7 @@
 package com.muni.sanborja.educacionculturaturismo.service.impl;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
@@ -18,6 +19,11 @@ public class DiaServiceImpl implements DiaService, Serializable{
 	@Override
 	public boolean asignarDia(Dia dia) {
 		return diaDao.asignarDia(dia);
+	}
+
+	@Override
+	public List<Dia> listaDias(int idHorario) {
+		return diaDao.listarDias(idHorario);
 	}
 
 }

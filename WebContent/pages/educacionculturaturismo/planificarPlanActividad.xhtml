@@ -201,7 +201,6 @@
 												actionListener="#{recursoBean.listaRecurso}"
 												update=":frmBusquedaMaterial:resursosContainer" ajax="true">
 											</p:commandButton>
-
 											<p:commandButton value="Cronograma" icon="fa fa-calendar-o"
 												onclick="PF('Cronograma').show()"
 												process="tbHorariosXPlanificacion"
@@ -213,7 +212,8 @@
 												update=":form_tbEncargados:tbEncargados">
 											</p:commandButton>
 											<p:commandButton value="Días" icon="fa fa-check-square"
-												onclick="PF('Dias').show()">
+												onclick="PF('Dias').show()"
+												process="tbHorariosXPlanificacion">
 											</p:commandButton>
 										</div>
 									</h:form>
