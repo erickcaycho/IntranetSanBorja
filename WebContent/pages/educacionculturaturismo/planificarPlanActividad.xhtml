@@ -211,7 +211,9 @@
 											</p:commandButton>
 											<p:commandButton value="Días" icon="fa fa-check-square"
 												onclick="PF('Dias').show()"
-												process="tbHorariosXPlanificacion">
+												process="tbHorariosXPlanificacion"
+												actionListener="#{diaBean.dias}"
+												update=":form_tbDias:tbDias" ajax="true">
 											</p:commandButton>
 										</div>
 									</h:form>

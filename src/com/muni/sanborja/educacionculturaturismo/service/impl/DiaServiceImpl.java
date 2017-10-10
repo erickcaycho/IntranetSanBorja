@@ -26,4 +26,9 @@ public class DiaServiceImpl implements DiaService, Serializable{
 		return diaDao.listarDias(idHorario);
 	}
 
+	@Override
+	public boolean eliminarRecurso(int idDia) {
+		return diaDao.eliminarRecurso(idDia);
+	}
+
 }

@@ -1,7 +1,6 @@
 package com.muni.sanborja.educacionculturaturismo.modelo;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -24,17 +23,11 @@ public class Dia implements Serializable{
 	@Column(name = "iddia", updatable = false, nullable = false)
 	private int idDia;
 	
-//	@Column(name = "horainicio")
-//	private String horaInicio;
-//	
-//	@Column(name = "horafin")
-//	private String horaFin;
-	
 	@Column(name = "horainicio")
-	private Date horaInicio;
+	private String horaInicio;
 	
 	@Column(name = "horafin")
-	private Date horaFin;
+	private String horaFin;
 	
 	@Column(name = "dia")
 	private String dia;
@@ -51,42 +44,24 @@ public class Dia implements Serializable{
 		this.idDia = idDia;
 	}
 
-//	public String getHoraInicio() {
-//		return horaInicio;
-//	}
-//
-//	public void setHoraInicio(String horaInicio) {
-//		this.horaInicio = horaInicio;
-//	}
-//
-//	public String getHoraFin() {
-//		return horaFin;
-//	}
-//
-//	public void setHoraFin(String horaFin) {
-//		this.horaFin = horaFin;
-//	}
-	
-	
-
-	public String getDia() {
-		return dia;
-	}
-
-	public Date getHoraInicio() {
+	public String getHoraInicio() {
 		return horaInicio;
 	}
 
-	public void setHoraInicio(Date horaInicio) {
+	public void setHoraInicio(String horaInicio) {
 		this.horaInicio = horaInicio;
 	}
 
-	public Date getHoraFin() {
+	public String getHoraFin() {
 		return horaFin;
 	}
 
-	public void setHoraFin(Date horaFin) {
+	public void setHoraFin(String horaFin) {
 		this.horaFin = horaFin;
+	}
+
+	public String getDia() {
+		return dia;
 	}
 
 	public void setDia(String dia) {

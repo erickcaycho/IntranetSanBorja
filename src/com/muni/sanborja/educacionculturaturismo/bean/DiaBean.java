@@ -1,6 +1,7 @@
 package com.muni.sanborja.educacionculturaturismo.bean;
 
 import java.io.Serializable;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -22,6 +23,7 @@ import org.primefaces.extensions.event.CloseEvent;
 import org.primefaces.extensions.event.TimeSelectEvent;
 
 import com.muni.sanborja.educacionculturaturismo.modelo.Dia;
+import com.muni.sanborja.educacionculturaturismo.modelo.Empleado;
 import com.muni.sanborja.educacionculturaturismo.service.DiaService;
 import com.muni.sanborja.educacionculturaturismo.service.impl.DiaServiceImpl;
 
@@ -114,7 +116,9 @@ public class DiaBean implements Serializable{
 		
 		try {
 			if(horarioBean.getSelectedHorario() != null) {
-				dia.setHorario(horarioBean.getSelectedHorario()); 
+				DateFormat df = new SimpleDateFormat("HH:mm");
+				dia.setHoraInicio(df.format(horaInicio));
+				dia.setHorario(horarioBean.getSelectedHorario());
 				
 				if (diaService.asignarDia(dia)) {
 					dias.add(dia);
@@ -198,7 +202,21 @@ public class DiaBean implements Serializable{
 	      SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);  
 	  
 	      return simpleDateFormat.format(time);  
-	   }  
+	   }
+
+	   public void eliminarDia(Dia dia) {
+		String msg;
+		
+		if(diaService.eliminarRecurso(dia.getIdDia())) {
+			dias.remove(dia);
+
+			msg = "Se eliminó correctamente el dia";
+			RequestContext.getCurrentInstance()
+							.showMessageInDialog(new FacesMessage(
+							FacesMessage.SEVERITY_INFO, "Eliminar Dia", msg));
+			log.info("Eliminado correctamente");
+		}
+	}
 	
 	
 }

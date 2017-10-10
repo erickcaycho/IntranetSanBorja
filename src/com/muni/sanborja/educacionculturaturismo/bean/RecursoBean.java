@@ -175,32 +175,25 @@ public class RecursoBean implements Serializable {
 		}
 	}
 	
-	public void eliminarRecurso() {
+	public void eliminarRecurso(Recurso recurso) {
 		String msg;
 		
-		if(selectedRecurso != null) {
-			if(recursoService.eliminarRecurso(selectedRecurso)) {
-				listaRecurso.remove(selectedRecurso);
+		if(recursoService.eliminarRecurso(recurso)) {
+			listaRecurso.remove(recurso);
 
-				msg = "Se eliminó correctamente el recurso";
-				RequestContext.getCurrentInstance()
-								.showMessageInDialog(new FacesMessage(
-								FacesMessage.SEVERITY_INFO, "Eliminar Recurso", msg));
-				log.info("Eliminado correctamente");
-
-				if (recursoService.actualizarCantidadMaterial(selectedRecurso)) {
-					listaMaterial = recursoService.listarMateriales(material.getNombre());
-					RequestContext.getCurrentInstance().update("materialesContainer");
-					log.info("Material actualizado correctamente");
-					selectedRecurso = null;
-				}
-			}
-		}else {
-			msg = "Debe seleccionar un resurso para eliminar";
+			msg = "Se eliminó correctamente el recurso";
 			RequestContext.getCurrentInstance()
 							.showMessageInDialog(new FacesMessage(
-							FacesMessage.SEVERITY_ERROR, "Seleccione Recurso", msg));
+							FacesMessage.SEVERITY_INFO, "Eliminar Recurso", msg));
+			log.info("Eliminado correctamente");
+
+			if (recursoService.actualizarCantidadMaterial(recurso)) {
+				listaMaterial = recursoService.listarMateriales(material.getNombre());
+				RequestContext.getCurrentInstance().update("materialesContainer");
+				log.info("Material actualizado correctamente");
+			}
 		}
+		
 	}
 
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -54,7 +55,7 @@ public class DiaDaoImpl implements DiaDao, Serializable{
 		List<Dia> dias = new ArrayList<Dia>();
 		Session session = HibernateSessionFactory.getSessionFactory().openSession();
 		Transaction ts = session.beginTransaction();
-		String sql="FROM Dia as dia JOIN res.horario as horario "
+		String sql="FROM Dia as dia JOIN dia.horario as horario "
 				+ "WHERE horario.idHorario = :idHorario";
 		
 		try {
@@ -82,6 +83,35 @@ public class DiaDaoImpl implements DiaDao, Serializable{
 			  e.getMessage();
 		}
 		return dias;
+	}
+
+	@Override
+	public boolean eliminarRecurso(int idDia) {
+		Session session = HibernateSessionFactory.getSessionFactory().openSession();
+		Transaction ts = session.beginTransaction();
+		boolean stateDelete = false;
+		
+		String sql ="delete Dia  WHERE idDia = :idDia";
+		
+		try {
+			
+			int result = session.createQuery(sql).setParameter("idDia", idDia).executeUpdate();
+			
+			stateDelete = result != 0;
+			
+			if (stateDelete) 
+				log.info("Se eliminó el recurso");
+			else
+				log.info("No se pudo eliminar el recurso");
+			
+			ts.commit();
+			session.close();
+			
+		} catch (Exception e) {
+			log.error("error " +e.getMessage());
+			  e.getMessage();
+		}
+		return stateDelete;
 	}
 
 }
