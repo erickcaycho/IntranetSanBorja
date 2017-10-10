@@ -34,4 +34,19 @@ public class RecursoServiceImpl implements Serializable, RecursoService{
 		return recursoDao.listarRecursos(idHorario);
 	}
 
+	@Override
+	public boolean actualizarCantidadMaterial(Material material, int cantidad) {
+		return recursoDao.actualizarCantidadMaterial(material, cantidad);
+	}
+
+	@Override
+	public boolean actualizarCantidadMaterial(Recurso recurso) {
+		return recursoDao.actualizarCantidadMaterial(recurso);
+	}
+
+	@Override
+	public boolean eliminarRecurso(Recurso recurso) {
+		return recursoDao.eliminarRecurso(recurso);
+	}
+
 }

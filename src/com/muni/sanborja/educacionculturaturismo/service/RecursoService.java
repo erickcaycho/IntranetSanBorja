@@ -10,5 +10,7 @@ public interface RecursoService {
 	public List<Material> listarMateriales(String material);
 	public List<Recurso> listaRecursos(int idHorario);
 	public boolean guardarRecurso(Recurso recurso);
-
+	public boolean actualizarCantidadMaterial(Material material, int cantidad);
+	public boolean actualizarCantidadMaterial(Recurso recurso);
+	public boolean eliminarRecurso(Recurso recurso);
 }

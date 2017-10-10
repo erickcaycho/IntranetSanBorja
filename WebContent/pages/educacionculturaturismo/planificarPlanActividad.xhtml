@@ -196,9 +196,10 @@
 									</p:outputPanel>
 
 									<div class="ui-g-12 bl-consultar">
-										 
+										 									
 										<p:commandButton value="Recursos" icon="fa fa-cubes" 
-											onclick="PF('Recurso').show()" process="tbHorariosXPlanificacion" >
+											onclick="PF('Recurso').show()" process="tbHorariosXPlanificacion" actionListener="#{recursoBean.listaRecurso}"
+											update=":frmBusquedaMaterial:resursosContainer" ajax="true">
 										</p:commandButton>
 
 										<p:commandButton value="Cronograma" icon="fa fa-calendar-o"

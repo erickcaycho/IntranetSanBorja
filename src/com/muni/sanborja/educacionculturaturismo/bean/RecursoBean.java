@@ -14,10 +14,6 @@ import javax.faces.context.FacesContext;
 import org.apache.log4j.Logger;
 import org.primefaces.context.RequestContext;
 
-import com.muni.sanborja.educacionculturaturismo.dao.HorarioDao;
-import com.muni.sanborja.educacionculturaturismo.dao.RecursoDao;
-import com.muni.sanborja.educacionculturaturismo.dao.impl.HorarioDaoImpl;
-import com.muni.sanborja.educacionculturaturismo.dao.impl.RecursoDaoImpl;
 import com.muni.sanborja.educacionculturaturismo.modelo.Material;
 import com.muni.sanborja.educacionculturaturismo.modelo.Recurso;
 import com.muni.sanborja.educacionculturaturismo.service.RecursoService;
@@ -72,8 +68,9 @@ public class RecursoBean implements Serializable {
 	}
 
 	public List<Recurso> getListaRecurso() {
-		//return listaRecurso;
-		listaRecurso = recursoService.listaRecursos(horarioBean.getHorario().getIdHorario());
+		if(horarioBean.getSelectedHorario() != null) {
+			listaRecurso = recursoService.listaRecursos(horarioBean.getSelectedHorario().getIdHorario());
+		}
 		
 		return listaRecurso;
 	}
@@ -99,6 +96,7 @@ public class RecursoBean implements Serializable {
 	}
 
 	public void consultarMaterial() {
+		selectedMaterial = null;
 		listaMaterial = recursoService.listarMateriales(material.getNombre());
 	}
 
@@ -106,21 +104,22 @@ public class RecursoBean implements Serializable {
 		log.info("entro -asignarEncargados------------> = " );
 		log.info("asignarEncargados cod horario-------------> = " + horarioBean.getSelectedHorario().getIdHorario());
 		String msg;
+		int diferenciaCantidad;
 		
 		try {
-			
-			
 			if(selectedMaterial != null) {
 				recurso.setMaterial(selectedMaterial);
 				recurso.setHorario(horarioBean.getSelectedHorario()); 
 				
 				if(recurso.getCantidadUsar() > selectedMaterial.getCantidadDisponible() || 
 						recurso.getCantidadUsar() == 0) {
-					msg = "No se pueden aplicar la cantidad a usar ingresada";
+					msg = "No se puede aplicar la cantidad a usar ingresada";
 
 					RequestContext.getCurrentInstance()
 									.showMessageInDialog(new FacesMessage(
 									FacesMessage.SEVERITY_ERROR, "Cantidad a usar inválida", msg));
+					
+					RequestContext.getCurrentInstance().update("materialesContainer");
 					log.error("Error al crear recurso: Cantidad a usar inválida");
 					return;
 				}
@@ -139,22 +138,28 @@ public class RecursoBean implements Serializable {
 				}
 				
 				if (recursoService.guardarRecurso(recurso)) {
-
 					listaRecurso.add(recurso);
 
-					msg = "Se creó correctamente la planificación";
-					FacesMessage message = new FacesMessage(
-							FacesMessage.SEVERITY_INFO, msg, null);
-					FacesContext.getCurrentInstance().addMessage(null, message);
+					msg = "Se creó correctamente el recurso";
+					RequestContext.getCurrentInstance().showMessageInDialog(new FacesMessage(
+					FacesMessage.SEVERITY_INFO, "Recurso creado", msg));
 
-					log.info("Creado correctamente");
+					log.info("Recurso creado correctamente");
+					
+					diferenciaCantidad = selectedMaterial.getCantidadDisponible() - recurso.getCantidadUsar();
+					
+					if (recursoService.actualizarCantidadMaterial(selectedMaterial, diferenciaCantidad)) {
+						listaMaterial = recursoService.listarMateriales(material.getNombre());
+						RequestContext.getCurrentInstance().update("materialesContainer");
+						
+						log.info("Material actualizado correctamente");
+					}
 
 				} else {
-					msg = "Ha ocurrido un inconveniente con la creación de la planificación. Si el problema persiste, reportar el error al siguiente correo: soporte.sanborja@munisanborja.edu.pe";
-					FacesMessage message = new FacesMessage(
-							FacesMessage.SEVERITY_ERROR, msg, null);
-					FacesContext.getCurrentInstance().addMessage(null, message);
-
+					msg = "Ha ocurrido un inconveniente con la creación del recurso. Si el problema persiste, reportar el error al siguiente correo: soporte.sanborja@munisanborja.edu.pe";
+					RequestContext.getCurrentInstance()
+									.showMessageInDialog(new FacesMessage(
+									FacesMessage.SEVERITY_ERROR, "Error al crear Recurso", msg));
 					log.error("Error al crear");
 				}
 			}else {
@@ -164,34 +169,37 @@ public class RecursoBean implements Serializable {
 								FacesMessage.SEVERITY_ERROR, "Seleccione material", msg));
 				log.error("Error al crear recurso: Cantidad a usar es mayor a cantidad disponible");
 			}
-
-			
-
-			log.info("Captura id_horario: " + recurso.getHorario().getIdHorario());
-			log.info("Captura id_material: " + recurso.getMaterial().getIdMaterial());
-			log.info("Captura cantidad usar: " + recurso.getCantidadUsar());
-
-			// log.info(" CAPTURA REAL: " +
-			// recursoDao.validarActividadPorPeriodo(planificacion.getPeriodo().getIdPeriodo(),
-			// idtipoactividad, planificacion.getActividad().getIdActividad()));
-
-			// if(recursoDao.validarActividadPorPeriodo(planificacion.getPeriodo().getIdPeriodo(),
-			// idtipoactividad, planificacion.getActividad().getIdActividad())){
-
-			
-
-			/*
-			 * }else{ msg ="Ya existe la actividad en el Periodo seleccionado";
-			 * FacesMessage message = new
-			 * FacesMessage(FacesMessage.SEVERITY_ERROR,msg,null);
-			 * FacesContext.getCurrentInstance().addMessage(null, message);
-			 * 
-			 * log.error("Error al crear"); }
-			 */
-
 		} catch (Exception e) {
 			log.error("Error:" + e.getMessage());
 			log.error(e.getStackTrace());
+		}
+	}
+	
+	public void eliminarRecurso() {
+		String msg;
+		
+		if(selectedRecurso != null) {
+			if(recursoService.eliminarRecurso(selectedRecurso)) {
+				listaRecurso.remove(selectedRecurso);
+
+				msg = "Se eliminó correctamente el recurso";
+				RequestContext.getCurrentInstance()
+								.showMessageInDialog(new FacesMessage(
+								FacesMessage.SEVERITY_INFO, "Eliminar Recurso", msg));
+				log.info("Eliminado correctamente");
+
+				if (recursoService.actualizarCantidadMaterial(selectedRecurso)) {
+					listaMaterial = recursoService.listarMateriales(material.getNombre());
+					RequestContext.getCurrentInstance().update("materialesContainer");
+					log.info("Material actualizado correctamente");
+					selectedRecurso = null;
+				}
+			}
+		}else {
+			msg = "Debe seleccionar un resurso para eliminar";
+			RequestContext.getCurrentInstance()
+							.showMessageInDialog(new FacesMessage(
+							FacesMessage.SEVERITY_ERROR, "Seleccione Recurso", msg));
 		}
 	}
 
