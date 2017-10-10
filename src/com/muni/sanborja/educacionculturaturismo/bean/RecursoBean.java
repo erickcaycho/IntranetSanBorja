@@ -14,6 +14,10 @@ import javax.faces.context.FacesContext;
 import org.apache.log4j.Logger;
 import org.primefaces.context.RequestContext;
 
+import com.muni.sanborja.educacionculturaturismo.dao.HorarioDao;
+import com.muni.sanborja.educacionculturaturismo.dao.RecursoDao;
+import com.muni.sanborja.educacionculturaturismo.dao.impl.HorarioDaoImpl;
+import com.muni.sanborja.educacionculturaturismo.dao.impl.RecursoDaoImpl;
 import com.muni.sanborja.educacionculturaturismo.modelo.Material;
 import com.muni.sanborja.educacionculturaturismo.modelo.Recurso;
 import com.muni.sanborja.educacionculturaturismo.service.RecursoService;
@@ -68,6 +72,9 @@ public class RecursoBean implements Serializable {
 	}
 
 	public List<Recurso> getListaRecurso() {
+		//return listaRecurso;
+		listaRecurso = recursoService.listaRecursos(horarioBean.getHorario().getIdHorario());
+		
 		return listaRecurso;
 	}
 
@@ -105,20 +112,30 @@ public class RecursoBean implements Serializable {
 			
 			if(selectedMaterial != null) {
 				recurso.setMaterial(selectedMaterial);
-				recurso.setHorario(horarioBean.getSelectedHorario());
+				recurso.setHorario(horarioBean.getSelectedHorario()); 
 				
 				if(recurso.getCantidadUsar() > selectedMaterial.getCantidadDisponible() || 
 						recurso.getCantidadUsar() == 0) {
 					msg = "No se pueden aplicar la cantidad a usar ingresada";
-					/*FacesMessage message = new FacesMessage(
-							FacesMessage.SEVERITY_ERROR, msg, null);
-					FacesContext.getCurrentInstance().addMessage(null, message);*/
 
 					RequestContext.getCurrentInstance()
 									.showMessageInDialog(new FacesMessage(
 									FacesMessage.SEVERITY_ERROR, "Cantidad a usar inválida", msg));
 					log.error("Error al crear recurso: Cantidad a usar inválida");
 					return;
+				}
+				
+				for (Recurso recurso : listaRecurso) {
+					if (recurso.getMaterial().getIdMaterial() == selectedMaterial.getIdMaterial()) {
+						msg = "Ya se encuentra registrado un material con el mismo nombre";
+
+						RequestContext.getCurrentInstance()
+										.showMessageInDialog(new FacesMessage(
+										FacesMessage.SEVERITY_ERROR,
+										"Duplicidad de registro", msg));
+						log.error("Ya se encuentra registrado un material con el mismo nombre");
+						return;
+					}
 				}
 				
 				if (recursoService.guardarRecurso(recurso)) {

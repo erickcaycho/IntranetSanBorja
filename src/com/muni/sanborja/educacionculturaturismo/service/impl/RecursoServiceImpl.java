@@ -29,4 +29,9 @@ public class RecursoServiceImpl implements Serializable, RecursoService{
 		
 	}
 
+	@Override
+	public List<Recurso> listaRecursos(int idHorario) {
+		return recursoDao.listarRecursos(idHorario);
+	}
+
 }

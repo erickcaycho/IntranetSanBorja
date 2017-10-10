@@ -77,4 +77,36 @@ public class RecursoDaoImpl implements Serializable, RecursoDao{
 		
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Recurso> listarRecursos(int idHorario) {
+		List<Recurso> recursos = null;
+		Session session = HibernateSessionFactory.getSessionFactory().openSession();
+		Transaction ts = session.beginTransaction();
+		String sql="FROM Recurso as res JOIN res.primaryKey.material  as mat "
+				+ "JOIN res.primaryKey.horario as hor "
+				+ "WHERE hor.idHorario = :idHorario";
+		
+		try {
+			log.info("código Horario " + idHorario);
+			
+			recursos = session.createQuery(sql).setParameter("idHorario", idHorario).list();
+			
+			if (recursos == null) {
+				log.info("No hay recursos asociados al código de horario: " + idHorario);
+				
+			} else {
+				log.info("[Recursos] Se encontró " + recursos.size());
+			}
+			
+			ts.commit();
+			session.close();
+			
+		} catch (Exception e) {
+			log.error("error " +e.getMessage());
+			  e.getMessage();
+		}
+		return null;
+	}
+
 }
