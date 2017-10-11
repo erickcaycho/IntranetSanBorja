@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:pe="http://primefaces.org/ui/extensions">
+
+	<h:form id="frmBusquedaMaterial">
+			
+			<p:outputPanel id="resursosContainer">
+				<p:dataTable id="tbRecursos" 
+					var="recurso" 
+					value="#{recursoBean.listaRecurso}"
+					style="text-align:center; width: 860px;" editable="true"
+					emptyMessage="No se encontraron registros">
+
+					<p:column headerText="Material" style="text-align:center;">
+						<h:outputText value="#{recurso.material.nombre}" />
+					</p:column>
+					<p:column headerText="Cantidad Usar" style="text-align:center;">
+						<h:outputText value="#{recurso.cantidadUsar}" />
+					</p:column>
+				</p:dataTable>
+			</p:outputPanel>
+		</h:form>
+	
+</html>

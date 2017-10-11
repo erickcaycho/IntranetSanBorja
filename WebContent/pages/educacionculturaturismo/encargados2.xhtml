@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:pe="http://primefaces.org/ui/extensions">
+			<h:form id="form_tbEncargados">
+						
+							<div >
+								<p:dataTable id="tbEncargados" 
+									var="enca" 
+									value="#{empleadoBean.lstEncargados}"  
+									emptyMessage="No se encontraron registros"
+									rowIndexVar="index" columnIndexVar="i" style="text-align:center; width: 860px;" editable="true">
+									
+									
+									<p:column headerText="Item" style="text-align:center; width: 50px;">
+								        #{index + 1}
+								    </p:column>
+								     <p:column headerText="Rol" style="text-align:center; width: 150px;">
+										<h:outputText value="#{enca.nombreRol}" />
+									</p:column>
+								     <p:column headerText="Nombre" style="text-align:center; width: 200px;">
+										<h:outputText value="#{enca.nombre}" />
+									</p:column>
+								</p:dataTable>
+							</div>
+						</h:form>
+	
+</html>

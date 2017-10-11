@@ -24,7 +24,7 @@
 						</h:panelGrid>
 								<div class="ui-g-12">
 									<p:outputPanel id="horarioContainer">
-										<p:dataTable var="h"
+										<p:dataTable  id="tbHorariosAprobacion" var="h"
 											value="#{aprobarPlanBean.listaHorario}"
 											selection="#{horarioBean.selectedHorario}"
 											rowKey="#{h.idHorario}" paginator="true" rows="5" 
@@ -71,12 +71,30 @@
 											<p:column headerText="Fecha Fin" style="text-align:center;">
 												<h:outputText value="#{h.fechaFin}" />
 											</p:column>
-											<p:column headerText="Ver Cronograma"
-												style="text-align:center" />
-											<p:column headerText="Ver Encargados"
-												style="text-align:center" />
 											<p:column headerText="Ver Recursos"
-												style="text-align:center" />
+												style="text-align:center" >
+											<p:commandButton value="Recursos" icon="fa fa-cubes"
+												onclick="PF('Recurso2').show()"
+												process="tbHorariosAprobacion"
+												
+												update=":frmBusquedaMaterial:resursosContainer" ajax="true">
+											</p:commandButton>
+											</p:column>
+											<p:column headerText="Ver Encargados"
+												style="text-align:center" >
+												<p:commandButton value="Encargados" icon="fa fa-user-plus"
+												onclick="PF('Encargados2').show()"
+												process="tbHorariosAprobacion"
+												update=":form_tbEncargados:tbEncargados">
+											</p:commandButton>
+											</p:column>
+											<p:column headerText="Ver Cronograma" style="text-align:center" >
+												<p:commandButton value="Cronograma" icon="fa fa-calendar-o"
+												onclick="PF('Cronograma2').show()"
+												process="tbHorariosAprobacion"
+												update=":formTbCronograma:tbCronograma">
+											</p:commandButton>
+												</p:column>
 										</p:dataTable>
 									</p:outputPanel>
 							</div>
@@ -88,6 +106,22 @@
 						</div>
 					</h:form>
 				</p:panel>
+					<p:dialog widgetVar="Recurso2" header="Pantalla Recurso" width="700"
+					style="position:absolute;" height="400" modal="true" showEffect="fade" hideEffect="fade"
+					resizable="false">
+					<ui:include src="recursos2.xhtml" />
+				</p:dialog>
+				<p:dialog widgetVar="Encargados2" header="Pantalla Encargados"
+					style="position:absolute;" width="700" height="400" modal="true"
+					showEffect="fade" hideEffect="fade" resizable="false">
+					<ui:include src="encargados2.xhtml" />
+				</p:dialog>
+				
+				<p:dialog widgetVar="Cronograma2" header="Cronograma" width="900"
+					style="position:absolute;" height="400" modal="true"
+					showEffect="fade" hideEffect="fade" resizable="false">
+					<ui:include src="cronograma2.xhtml" />
+				</p:dialog>
 			</div>
 		</div>
 	</ui:define>
