@@ -8,4 +8,5 @@ public interface DiaService {
 
 	public boolean asignarDia(Dia dia);
 	public List<Dia> listaDias(int idHorario);
+	public boolean eliminarRecurso(int idDia);
 }

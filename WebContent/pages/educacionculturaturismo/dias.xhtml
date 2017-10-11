@@ -10,16 +10,16 @@
 		<h:form id="frmDias" >
 			<p:panel id="panelDias">
 				<h:panelGrid  columns="2" cellpadding="5"  >
-     						<p:outputLabel value="Día" /> 
-     						<p:selectOneMenu value="#{diaBean.dia.dia}" required="true">
+					<p:outputLabel value="Día" /> 
+					<p:selectOneMenu value="#{diaBean.dia.dia}" required="true">
 						<f:selectItem itemLabel="-- Seleccione --" itemValue="" />
-						<f:selectItem itemLabel="Lunes" itemValue="1" />
-						<f:selectItem itemLabel="Martes" itemValue="2" />
-						<f:selectItem itemLabel="Miércoles" itemValue="3" />
-						<f:selectItem itemLabel="Jueves" itemValue="4" />
-						<f:selectItem itemLabel="Viernes" itemValue="5" />
-						<f:selectItem itemLabel="Sábado" itemValue="6" />
-						<f:selectItem itemLabel="Domingo" itemValue="7" />
+						<f:selectItem itemLabel="Lunes" itemValue="Lunes" />
+						<f:selectItem itemLabel="Martes" itemValue="Martes" />
+						<f:selectItem itemLabel="Miércoles" itemValue="Miercoles" />
+						<f:selectItem itemLabel="Jueves" itemValue="Jueves" />
+						<f:selectItem itemLabel="Viernes" itemValue="Viernes" />
+						<f:selectItem itemLabel="Sábado" itemValue="Sabado" />
+						<f:selectItem itemLabel="Domingo" itemValue="Domingo" />
 					</p:selectOneMenu>
 						
 					<p:outputLabel value="Hora Inicio" /> 		
@@ -58,7 +58,11 @@
 				     <p:column headerText="Hora Fin" style="text-align:center; width: 200px;">
 						<h:outputText value="#{dia.horaFin}" />
 					</p:column>
-     	
+     				 <p:column headerText="Eliminar" style="text-align:center; width: 50px;" >
+	                    <p:commandButton icon="ui-icon-trash" 
+	                        title="Delete this actor" 
+	                         actionListener="#{diaBean.eliminarDia(dia)}"    update=":form_tbDias:tbDias" />
+	                </p:column>
 				</p:dataTable>
 			</div>
 		</h:form>							

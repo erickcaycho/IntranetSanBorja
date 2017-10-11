@@ -13,6 +13,7 @@ import org.hibernate.Transaction;
 
 import com.muni.sanborja.educacionculturaturismo.dao.PlanificacionDao;
 import com.muni.sanborja.educacionculturaturismo.modelo.Ambiente;
+import com.muni.sanborja.educacionculturaturismo.modelo.Material;
 import com.muni.sanborja.educacionculturaturismo.modelo.Periodo;
 import com.muni.sanborja.educacionculturaturismo.modelo.Planificacion;
 import com.muni.sanborja.educacionculturaturismo.modelo.PlanificacionPeriodoActividad;
@@ -223,5 +224,39 @@ public class PlanificacionDaoImpl implements PlanificacionDao, Serializable {
 			e.getMessage();
 		}
 			return listaPlanificacion;
+	}
+
+	@Override
+	public boolean updatePlanificacion(Planificacion plan) {
+		Session session = HibernateSessionFactory.getSessionFactory().openSession();
+		Transaction ts = session.beginTransaction();
+		String hql;
+		boolean stateUpdate = false;
+		
+		try {
+				hql ="update Planificacion set fechaPlanificacion = :fechaPlanificacion" +
+						" where idPlanificacion = :idPlanificacion";
+				
+				Query query = session.createQuery(hql);
+				query.setParameter("fechaPlanificacion", plan.getFechaPlanificacion());
+				query.setParameter("idPlanificacion", plan.getIdPlanificacion());
+				int result = query.executeUpdate();
+				
+				stateUpdate = result != 0;
+				
+				if (stateUpdate) 
+					log.info("Se actualizó el plan con id: "+plan.getIdPlanificacion());
+				else 
+					log.info("No se pudo actualizar el plan con id: "+plan.getIdPlanificacion());
+		
+			
+			ts.commit();
+			session.close();
+			
+		} catch (Exception e) {
+			log.error("error " +e.getMessage());
+			  e.getMessage();
+		}
+		return stateUpdate;
 	}
 }

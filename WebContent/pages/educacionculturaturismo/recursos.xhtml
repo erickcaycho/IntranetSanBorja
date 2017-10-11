@@ -79,14 +79,13 @@
 					<p:column headerText="Cantidad Usar" style="text-align:center;">
 						<h:outputText value="#{recurso.cantidadUsar}" />
 					</p:column>
-					<p:column headerText="Seleccionar" selectionMode="single" style="text-align:center" />
+					<p:column headerText="Eliminar" style="text-align:center; width: 50px;" >
+	                    <p:commandButton icon="ui-icon-trash" 
+	                        title="Delete this actor" 
+	                         actionListener="#{recursoBean.eliminarRecurso(recurso)}"    update="resursosContainer" />
+	                </p:column>
 				</p:dataTable>
 			</p:outputPanel>
-			
-			<div class="ui-g-12 bl-consultar">
-				<p:commandButton value="Eliminar" actionListener="#{recursoBean.eliminarRecurso}"  icon="fa fa-trash" update="resursosContainer">
-				</p:commandButton>
-			</div>
 		</h:form>
 	
 </html>

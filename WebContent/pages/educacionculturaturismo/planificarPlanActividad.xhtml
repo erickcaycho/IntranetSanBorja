@@ -211,7 +211,9 @@
 											</p:commandButton>
 											<p:commandButton value="Días" icon="fa fa-check-square"
 												onclick="PF('Dias').show()"
-												process="tbHorariosXPlanificacion">
+												process="tbHorariosXPlanificacion"
+												actionListener="#{diaBean.dias}"
+												update=":form_tbDias:tbDias" ajax="true">
 											</p:commandButton>
 										</div>
 									</h:form>
@@ -258,10 +260,13 @@
 										</div>
 									</h:form>
 								</p:fieldset>
-
-
 							</p:tab>
 						</p:tabView>
+						
+						<p:commandButton
+								actionListener="#{planificacionActividadBean.actualizarEstadoPlanificado}"
+								value="Guardar" icon="fa fa-save" process="@this">
+							</p:commandButton>
 					</h:form>
 				</p:panel>
 				<!-- closable="false" -->
@@ -273,7 +278,7 @@
 				</p:dialog>
 
 				<p:dialog widgetVar="Recurso" header="Pantalla Recurso" width="700"
-					height="400" modal="true" showEffect="fade" hideEffect="fade"
+					style="position:absolute;" height="400" modal="true" showEffect="fade" hideEffect="fade"
 					resizable="false">
 					<ui:include src="recursos.xhtml" />
 				</p:dialog>

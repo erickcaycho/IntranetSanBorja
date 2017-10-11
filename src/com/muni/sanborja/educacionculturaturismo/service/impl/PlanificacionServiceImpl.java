@@ -40,4 +40,9 @@ public class PlanificacionServiceImpl implements PlanificacionService, Serializa
 	        return planificacionDao.buscar(idPlanificacion); 
 	    }
 
+	@Override
+	public boolean updatePlanificacion(Planificacion planificacion) {
+		return planificacionDao.updatePlanificacion(planificacion);
+	}
+
 }

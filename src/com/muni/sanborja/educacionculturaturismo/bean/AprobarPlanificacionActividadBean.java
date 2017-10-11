@@ -10,11 +10,21 @@ import javax.faces.model.SelectItem;
 
 import org.apache.log4j.Logger;
 
+import com.muni.sanborja.educacionculturaturismo.dao.CronogramaDao;
+import com.muni.sanborja.educacionculturaturismo.dao.EmpleadoDao;
 import com.muni.sanborja.educacionculturaturismo.dao.HorarioDao;
+import com.muni.sanborja.educacionculturaturismo.dao.MotivoRechazoDao;
 import com.muni.sanborja.educacionculturaturismo.dao.PlanificacionDao;
+import com.muni.sanborja.educacionculturaturismo.dao.RecursoDao;
+import com.muni.sanborja.educacionculturaturismo.dao.impl.CronogramaDaoImpl;
+import com.muni.sanborja.educacionculturaturismo.dao.impl.EmpleadoDaoImpl;
 import com.muni.sanborja.educacionculturaturismo.dao.impl.HorarioDaoImpl;
+import com.muni.sanborja.educacionculturaturismo.dao.impl.MotivoRechazoDaoImpl;
 import com.muni.sanborja.educacionculturaturismo.dao.impl.PlanificacionDaoImpl;
+import com.muni.sanborja.educacionculturaturismo.dao.impl.RecursoDaoImpl;
+import com.muni.sanborja.educacionculturaturismo.modelo.Cronograma;
 import com.muni.sanborja.educacionculturaturismo.modelo.Horario;
+import com.muni.sanborja.educacionculturaturismo.modelo.MotivoRechazo;
 import com.muni.sanborja.educacionculturaturismo.modelo.Planificacion;
 import com.muni.sanborja.educacionculturaturismo.modelo.TipoActividad;
 import com.muni.sanborja.educacionculturaturismo.service.ActividadService;
@@ -44,6 +54,7 @@ public class AprobarPlanificacionActividadBean implements Serializable {
 	private TipoActividad tipoActividad;
 
 	private Planificacion selectedPlan = new Planificacion();
+	private List<MotivoRechazo> listaMotivo;
 	
 	public Planificacion getSelectedPlan() {
 		return selectedPlan;
@@ -157,6 +168,14 @@ public class AprobarPlanificacionActividadBean implements Serializable {
 		HorarioDao horario = new HorarioDaoImpl();
 		setListaHorario(horario.listarHorario(selectedPlan.getIdPlanificacion()));				
 		
+		/*CronogramaDao crono= new CronogramaDaoImpl();
+		crono.listarCronograma(   idHorario);
+		
+		RecursoDao re = new RecursoDaoImpl();
+		re.listarRecursos(idHorario);
+		EmpleadoDao em= new  EmpleadoDaoImpl();
+		em.listarEncargados(idHorario);*/
+		
 		return Constants.APROBAR_HORARIO_ACTIVIDAD_PAGE;
 	}
 	
@@ -175,6 +194,16 @@ public class AprobarPlanificacionActividadBean implements Serializable {
 
 	public void setListaHorario(List<Horario> listaHorario) {
 		this.listaHorario = listaHorario;
+	}
+
+	public List<MotivoRechazo> getListaMotivo() {
+		return listaMotivo;
+	}
+
+	public void setListaMotivo(List<MotivoRechazo> listaMotivo) {
+		MotivoRechazoDao mo = new MotivoRechazoDaoImpl();
+		mo.listarMotivoRechazo();
+		this.listaMotivo = listaMotivo;
 	}
 	
 }

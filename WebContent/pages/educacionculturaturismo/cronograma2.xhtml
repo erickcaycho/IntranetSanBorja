@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:pe="http://primefaces.org/ui/extensions">
+					<h:form id="formTbCronograma">
+						<p:dataTable id="tbCronograma" 
+								var="crono" 
+								value="#{cronogramaBean.listaCronogramas}"  
+								rowKey="#{crono.idCronograma}" 
+								emptyMessage="No se encontraron registros" rowIndexVar="index" style="text-align:center; width: 860px;" editable="true">
+						       <p:column headerText="Item" style="text-align:center; width: 40px;">
+							        #{index + 1}
+							    </p:column>
+
+								<p:column headerText="Tarea" style="text-align:center; width: 100px;">
+						           <!-- <h:outputText value="#{crono.tarea}" /> -->
+						           <p:cellEditor>
+										<f:facet name="output"><h:outputText value="#{crono.tarea}" /></f:facet>
+               							<f:facet name="input"><p:inputText value="#{crono.tarea}" style="width:100%" label="Year"/></f:facet>
+           							</p:cellEditor>
+								</p:column>
+								
+								<p:column headerText="Descripción" style="text-align:center; width: 150px;">
+									<!-- <h:outputText value="#{crono.descripcion}" /> -->
+						           <p:cellEditor>
+										<f:facet name="output"><h:outputText value="#{crono.descripcion}" /></f:facet>
+               							<f:facet name="input"><p:inputText value="#{crono.descripcion}" style="width:100%" label="Year"/></f:facet>
+           							</p:cellEditor>
+								</p:column>
+
+								<p:column headerText="Responsable" style="text-align:center; width: 150px;">
+									<h:outputText value="#{crono.empleado.nombreCompletoEmpleado}" />
+								</p:column>
+								<p:column headerText="Fecha Inicio"
+									style="text-align:center; width: 70px;">
+									<h:outputText value="#{crono.fechaInicio}" />
+								</p:column>
+								<p:column headerText="Fecha Fin"
+									style="text-align:center; width: 70px;">
+									<h:outputText value="#{crono.fechaFin}" />
+								</p:column>
+								
+							</p:dataTable>
+					</h:form>
+	
+</html>
