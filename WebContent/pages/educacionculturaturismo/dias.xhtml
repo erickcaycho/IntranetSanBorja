@@ -23,16 +23,14 @@
 					</p:selectOneMenu>
 						
 					<p:outputLabel value="Hora Inicio" /> 		
-					 <pe:timePicker id="timeHoraInicio" value="#{diaBean.horaInicio}" showPeriod="true"
-                					required="true" requiredMessage="Seleccione una hora de inicio" label="Hora Inicio"> 
-              		         
-        							<p:ajax event="close" listener="#{diaBean.closeListener}" update="timeHoraFin"/>  
+					<pe:timePicker id="timeHoraInicio" value="#{diaBean.horaInicio}" showPeriod="true" minHour="9" minMinute="15"  
+                             maxHour="16" maxMinute="30" required="true" requiredMessage="Seleccione una hora de inicio" label="Hora Inicio"> 
+						<p:ajax event="close" listener="#{diaBean.closeListener}" update="timeHoraFin"/>  
                 	</pe:timePicker>								                
-					
+                             
 					<p:outputLabel value="Hora Fin" /> 
-					<pe:timePicker id="timeHoraFin" value="#{diaBean.horaFin}" widgetVar="spinnerTimeWidget"  
-                					required="true" requiredMessage="Seleccione una hora fin" label="Hora Fin"
-                					disabled="true"/> 
+					<pe:timePicker id="timeHoraFin" value="#{diaBean.horaFin}" showPeriod="true" minHour="9" minMinute="15"  
+                             maxHour="16" maxMinute="30" required="true" requiredMessage="Seleccione una hora fin" label="Hora Fin"/> 
 					
 					<p:commandButton value=" Agregar" icon="fa fa-plus" style="text-align:center;"
 						 actionListener="#{diaBean.asignarDia}" update=":form_tbDias:tbDias"  >

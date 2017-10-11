@@ -116,7 +116,13 @@ public class DiaBean implements Serializable{
 			if(horarioBean.getSelectedHorario() != null) {
 				dia.setHorario(horarioBean.getSelectedHorario()); 
 				
+				log.info("idHorario: " +dia.getHorario().getIdHorario());
+				log.info("getHoraInicio: " +dia.getHoraInicio());
+				log.info("getHoraFin: " +dia.getHoraFin());
+				log.info("getDia: " +dia.getDia());
+				
 				if (diaService.asignarDia(dia)) {
+					
 					dias.add(dia);
 
 					msg = "Se creó añadió correctamente el día";
@@ -137,8 +143,8 @@ public class DiaBean implements Serializable{
 				msg = "No se ha seleccionado un horario";
 				RequestContext.getCurrentInstance()
 								.showMessageInDialog(new FacesMessage(
-								FacesMessage.SEVERITY_ERROR, "Seleccione material", msg));
-				log.error("Error al crear recurso: Cantidad a usar es mayor a cantidad disponible");
+								FacesMessage.SEVERITY_ERROR, "No se ha seleccionado un horario", msg));
+				log.error("Error al obtener horario");
 			}
 		} catch (Exception e) {
 			log.error("Error:" + e.getMessage());
@@ -147,9 +153,6 @@ public class DiaBean implements Serializable{
 	}
 	
 	
-	
-	
-
 	   public void timeSelectListener(TimeSelectEvent timeSelectEvent) {  
 			log.info("timeSelectListener");
 	      FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Time select fired",  
