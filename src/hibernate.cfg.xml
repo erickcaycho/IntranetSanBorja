@@ -26,5 +26,6 @@
 		<mapping class="com.muni.sanborja.educacionculturaturismo.modelo.PlanPublicitario"/>
 		<mapping class="com.muni.sanborja.educacionculturaturismo.modelo.Rol"/>
 		<mapping class="com.muni.sanborja.educacionculturaturismo.modelo.Dia"/>
+		<mapping class="com.muni.sanborja.educacionculturaturismo.modelo.MotivoRechazo"/>
 	</session-factory>
 </hibernate-configuration>

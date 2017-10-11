@@ -102,7 +102,9 @@
 						<p:commandButton action="#{aprobarPlanBean.aprobar}"
 							value="Aprobar" icon="fa-check-circle"/>
 						<p:commandButton action="#{aprobarPlanBean.desaprobar}"
-							value="Desaprobar" icon="fa-ban"/>
+							value="Desaprobar" icon="fa-ban" onclick="PF('RechazarPlan').show()"
+							process="tbHorariosAprobacion"
+							update=":formTbMotivo:motivoContainer"/>
 						</div>
 					</h:form>
 				</p:panel>
@@ -121,6 +123,12 @@
 					style="position:absolute;" height="400" modal="true"
 					showEffect="fade" hideEffect="fade" resizable="false">
 					<ui:include src="cronograma2.xhtml" />
+				</p:dialog>
+				
+				<p:dialog widgetVar="RechazarPlan" header="Registrar Motivo de Rechazo"
+					style="position:absolute;" width="700" height="400" modal="true"
+					showEffect="fade" hideEffect="fade" resizable="false">
+					<ui:include src="motivoRechazo.xhtml" />
 				</p:dialog>
 			</div>
 		</div>

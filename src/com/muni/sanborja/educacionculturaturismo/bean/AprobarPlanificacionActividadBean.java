@@ -197,12 +197,13 @@ public class AprobarPlanificacionActividadBean implements Serializable {
 	}
 
 	public List<MotivoRechazo> getListaMotivo() {
+		MotivoRechazoDao mo = new MotivoRechazoDaoImpl();
+		listaMotivo= mo.listarMotivoRechazo();
 		return listaMotivo;
 	}
 
 	public void setListaMotivo(List<MotivoRechazo> listaMotivo) {
-		MotivoRechazoDao mo = new MotivoRechazoDaoImpl();
-		mo.listarMotivoRechazo();
+
 		this.listaMotivo = listaMotivo;
 	}
 	
