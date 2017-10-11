@@ -263,10 +263,11 @@ public class PlanificacionActividadBean implements Serializable {
 		
 	}
 	
-	public void actualizarEstadoPlanificado() {
+	public String actualizarEstadoPlanificado() {
 		try {
 			Planificacion objPlanificacion = new Planificacion();
-			objPlanificacion.setIdPlanificacion(selectedPlan.getIdPlanificacion());	
+			objPlanificacion.setIdPlanificacion(selectedPlan.getIdPlanificacion());
+			objPlanificacion.setEstado(2);
 			objPlanificacion.setFechaPlanificacion(new java.sql.Date(FechaUtil.ahora().getTime()));
 	
 			String msg;
@@ -286,13 +287,17 @@ public class PlanificacionActividadBean implements Serializable {
 				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,msg,null);
 				FacesContext.getCurrentInstance().addMessage(null, message);
 				
-				log.error("Error al guardar");
+				log.error("Error al guardar la actualización de planificación");
+				throw new Exception("Error al guardar la planificación");
+				
 			}
 			
 		} catch (Exception e) {
 			log.error("Error:" + e.getMessage());
 			log.error(e.getStackTrace());
 		}
+		
+		return Constants.PLANIFICAR_ACTIVIDAD_PAGE;
 	}
 	
 }
